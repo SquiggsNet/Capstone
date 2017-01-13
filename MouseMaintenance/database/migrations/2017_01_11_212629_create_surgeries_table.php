@@ -12,7 +12,14 @@ class CreateSurgeriesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('surgeries', function (Blueprint $table){
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable;
+            $table->foreign('user_id')->refernces('user_id')->on('users');
+            $table->date('scheduled_date');
+            $table->string('purpose');
+            $table->string('comments');
+        });
     }
 
     /**

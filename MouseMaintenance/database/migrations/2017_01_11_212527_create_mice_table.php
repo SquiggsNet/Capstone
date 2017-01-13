@@ -20,14 +20,22 @@ class CreateMiceTable extends Migration
             $table->foreign('cage_id')->references('cage_id')->on('cages');
             $table->unsignedInteger('reserved_for')->nullable;
             $table->foreign('reserved_for')->references('user_id')->on('users');
+            $table->unsignedInteger('weight_id');
+            $table->foreign('weight_id')->references('weight_id')->on('weights');
+            $table->unsignedInteger('treatment_id')->nullable;
+            $table->foreign('treatment_id')->references('treatment_id')->on('treatments');
+            $table->unsignedInteger('blood_pressure_id')->nullable;
+            $table->foreign('blood_pressure_id')->references('blood_pressure_id')->on('blood_pressures');
+            $table->unsignedInteger('tag_id')->nullable;
             $table->boolean('geno_type_a')->nullable;
             $table->boolean('geno_type_b')->nullable;
-            //pedigree needs to be added!!
+            $table->string('pedigree');
             $table->date('birth_date');
+            $table->date('wean_date')->nullable;
             $table->date('end_date')->nullable;
-            $table->decimal('weight', 4,2);
-            $table->string('cage');
-            $table->text('comments');
+            $table->string('cage')->nullable;
+            $table->boolean('sick_report');
+            $table->text('comments')->nullable;
         });
     }
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mouse_Surgery extends Model
+class MouseSurgery extends Model
 {
     //
 }

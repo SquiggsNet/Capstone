@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrivilegesTable extends Migration
+class CreateWeightsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreatePrivilegesTable extends Migration
      */
     public function up()
     {
-        Schema::create('privileges', function (Blueprint $table) {
+        Schema::create('weights', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('weight');
             $table->timestamps();
-            $table->string('name')->default(null);
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePrivilegesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('weights');
     }
 }

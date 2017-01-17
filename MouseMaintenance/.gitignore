@@ -4,5 +4,11 @@
 Homestead.yaml
 Homestead.json
 .env
-
+blade.xml
+Capstone.iml
+misc.xml
+modules.xml
+php.xml
+profiles_settings.xml
+vcs.xml
 

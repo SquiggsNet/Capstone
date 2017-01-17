@@ -26,10 +26,11 @@ class CreateMiceTable extends Migration
             $table->foreign('treatment_id')->references('treatment_id')->on('treatments');
             $table->unsignedInteger('blood_pressure_id')->nullable;
             $table->foreign('blood_pressure_id')->references('blood_pressure_id')->on('blood_pressures');
-            $table->unsignedInteger('tag_id')->nullable;
             $table->boolean('geno_type_a')->nullable;
             $table->boolean('geno_type_b')->nullable;
-            $table->string('pedigree');
+            $table->unsignedInteger('father');
+            $table->unsignedInteger('mother_one');
+            $table->unsignedInteger('mother_two');
             $table->date('birth_date');
             $table->date('wean_date')->nullable;
             $table->date('end_date')->nullable;

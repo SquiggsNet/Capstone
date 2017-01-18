@@ -48,6 +48,13 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    {{--<li><a href="{{ url('/pages') }}">Pages</a></li>--}}
+                    {{--<li><a href="{{ url('/areas') }}">Areas</a></li>--}}
+                    {{--<li><a href="{{ url('/articles') }}">Articles</a></li>--}}
+                    {{--<li><a href="{{ url('/styleTemplates') }}">Styles</a></li>--}}
+                    <li><a href="{{ url('/users') }}">Users</a></li>
+                    <li><a href="{{ url('/privileges') }}">Privileges</a></li>
+                    {{--<li><a href="{{ url('/userPrivs') }}">User Privileges</a></li>--}}
                 </ul>
 
                 <!-- Right Side Of Navbar -->

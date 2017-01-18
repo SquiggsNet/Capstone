@@ -34,7 +34,6 @@ class CreateMiceTable extends Migration
             $table->date('birth_date');
             $table->date('wean_date')->nullable;
             $table->date('end_date')->nullable;
-            $table->string('cage')->nullable;
             $table->boolean('sick_report');
             $table->text('comments')->nullable;
         });

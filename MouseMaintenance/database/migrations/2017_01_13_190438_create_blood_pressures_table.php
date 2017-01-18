@@ -14,6 +14,8 @@ class CreateBloodPressuresTable extends Migration
     {
         Schema::create('blood_pressures', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('mouse_id');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('systolic');
             $table->unsignedInteger('diastolic');
             $table->timestamps();

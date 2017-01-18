@@ -15,9 +15,9 @@ class CreateMouseSurgeriesTable extends Migration
         Schema::create('mouse_surgeries', function (Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
-            $table->foreign('mouse_id')->references('mouse_id')->on('mice');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('surgery_id');
-            $table->foreign('surgery_id')->references('surgery_id')->on('surgeries');
+            $table->foreign('surgery_id')->references('id')->on('surgeries');
         });
     }
 

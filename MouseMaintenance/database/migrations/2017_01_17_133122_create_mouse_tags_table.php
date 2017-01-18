@@ -15,9 +15,9 @@ class CreateMouseTagsTable extends Migration
         Schema::create('mouse_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
-            $table->foreign('mouse_id')->references('mouse_id')->on('mice');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('tag_id');
-            $table->foreign('tag_id')->references('tag_id')->on('tags');
+            $table->foreign('tag_id')->references('id')->on('tags');
 
         });
     }

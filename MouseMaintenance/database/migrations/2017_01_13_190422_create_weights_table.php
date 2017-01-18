@@ -14,6 +14,8 @@ class CreateWeightsTable extends Migration
     {
         Schema::create('weights', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('mouse_id');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->decimal('weight');
             $table->timestamps();
         });

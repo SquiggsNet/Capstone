@@ -14,6 +14,8 @@ class CreateTreatmentsTable extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('mouse_id');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->string('title');
             $table->decimal('drug_amount');
             $table->timestamps();

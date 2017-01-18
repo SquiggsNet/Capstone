@@ -15,9 +15,9 @@ class CreateMouseStoragesTable extends Migration
         Schema::create('mouse_storages', function (Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
-            $table->foreign('mouse_id')->references('mouse_id')->on('mice');
+            $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('storage_id');
-            $table->foreign('storage_id')->references('storage_id')->on('storages');
+            $table->foreign('storage_id')->references('id')->on('storages');
         });
     }
 

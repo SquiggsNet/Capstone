@@ -21,8 +21,11 @@ class CreateMiceTable extends Migration
             $table->boolean('geno_type_a')->nullable;
             $table->boolean('geno_type_b')->nullable;
             $table->unsignedInteger('father');
+            $table->foreign('father')->references('id')->on('mice');
             $table->unsignedInteger('mother_one');
+            $table->foreign('mother_one')->references('id')->on('mice');
             $table->unsignedInteger('mother_two');
+            $table->foreign('mother_two')->references('id')->on('mice');
             $table->date('birth_date');
             $table->date('wean_date')->nullable;
             $table->date('end_date')->nullable;

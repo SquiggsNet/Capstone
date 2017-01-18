@@ -23,4 +23,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //one-to-many relationships
+    //Mouse
+    public function mice(){
+        return $this->hasMany(Mouse::class);
+    }
+
+    //Surgery
+    public function surgeries(){
+        return $this->hasMany(Surgery::class);
+    }
+
+    //many-to-many relationships
+    //Privilege
+    public function privileges() {
+        return $this->belongsToMany(Privilege::class);
+    }
 }

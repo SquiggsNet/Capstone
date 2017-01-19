@@ -18,7 +18,6 @@ class CreateMouseTagsTable extends Migration
             $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags');
-
         });
     }
 

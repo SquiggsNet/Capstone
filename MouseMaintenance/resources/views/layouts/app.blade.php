@@ -50,6 +50,7 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/users') }}">Users</a></li>
                     <li><a href="{{ url('/privileges') }}">Privileges</a></li>
+                    <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/cages') }}">Cages</a></li>
                 </ul>
 

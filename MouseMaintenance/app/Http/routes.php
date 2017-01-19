@@ -21,5 +21,5 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('users', 'UserController');
 Route::resource('privileges', 'PrivilegeController');
+Route::resource('colonies', 'ColonyController');
 Route::resource('cages', 'CageController');
-

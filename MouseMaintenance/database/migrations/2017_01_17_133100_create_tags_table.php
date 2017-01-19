@@ -16,6 +16,7 @@ class CreateTagsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('tag_num');
             $table->boolean('lost_tag')->nullable;
+            $table->timestamps();
         });
     }
 

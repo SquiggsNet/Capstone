@@ -19,6 +19,7 @@ class CreateSurgeriesTable extends Migration
             $table->date('scheduled_date');
             $table->string('purpose');
             $table->string('comments');
+            $table->timestamps();
         });
     }
 

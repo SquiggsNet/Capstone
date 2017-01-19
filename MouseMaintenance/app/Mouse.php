@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mouse extends Model
 {
+    protected $fillable = array('colony_id', 'reserved_for', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
+                                'mother_two', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
+
     //one-to-many relationships
     //Blood pressure
     public function blood_pressures(){

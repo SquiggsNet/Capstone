@@ -66,7 +66,8 @@ class CageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cage = Cage::find($id);
+        return view('cages.edit', compact('cage'));
     }
 
     /**
@@ -78,7 +79,12 @@ class CageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cage = Cage::find($id);
+        $cage->room_num = $request['room_num'];
+        $cage->mouse_id = $request['mouse_id'];
+        $cage->breeder = $request['breeder'];
+        $cage->save();
+        return redirect()->action('CageController@index');
     }
 
     /**
@@ -89,6 +95,8 @@ class CageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cage = Cage::find($id);
+        $cage->delete();
+        return redirect()->action('CageController@index');
     }
 }

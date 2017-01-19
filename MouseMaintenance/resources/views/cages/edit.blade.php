@@ -2,36 +2,24 @@
 
 @section('content')
     <div class="container">
-        {!! Form::model($user, ['action' => ['UserController@update', $user], 'method' => 'put']) !!}
+        {!! Form::model($cage, ['action' => ['CageController@update', $cage], 'method' => 'put']) !!}
 
         <div class="form-group">
-            {!! Form::label('first_name', 'First Name') !!}
-            {!! Form::text('first_name',null ,['class'=>'form-control'])!!}
+            {!! Form::label('room_num', 'Room Number') !!}
+            {!! Form::text('room_num',null ,['class'=>'form-control'])!!}
         </div>
         <div class="form-group">
-            {!! Form::label('last_name', 'Last Name') !!}
-            {!! Form::text('last_name',null ,['class'=>'form-control'])!!}
+            {!! Form::label('mouse_id', 'Mouse ID') !!}
+            {!! Form::text('mouse_id',null ,['class'=>'form-control'])!!}
         </div>
         <div class="form-group">
-            {!! Form::label('email', 'Email') !!}
-            {!! Form::text('email',null ,['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('password', 'Password') !!}
-            {!! Form::password('password',['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('phone', 'Phone Number') !!}
-            {!! Form::text('phone',null ,['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('student_id', 'Student ID') !!}
-            {!! Form::text('student_id',null ,['class'=>'form-control']) !!}
+            {!! Form::label('breeder', 'Breeder') !!}
+            {!! Form::text('breeder',null ,['class'=>'form-control']) !!}
         </div>
         {!! Form::submit('Save Update',['class'=>'btn btn-default']) !!}
         {!! Form::close() !!}
 
-        <a href="{{ action( 'UserController@index') }}">
+        <a href="{{ action( 'CageController@index') }}">
             Go Back
         </a>
     </div>

@@ -23,3 +23,4 @@ Route::resource('users', 'UserController');
 Route::resource('privileges', 'PrivilegeController');
 Route::resource('colonies', 'ColonyController');
 Route::resource('cages', 'CageController');
+Route::resource('treatments', 'TreatmentController');

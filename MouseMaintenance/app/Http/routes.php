@@ -19,5 +19,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('privileges', 'PrivilegeController');
 Route::resource('users', 'UserController');
+Route::resource('privileges', 'PrivilegeController');
+Route::resource('cages', 'CageController');
+

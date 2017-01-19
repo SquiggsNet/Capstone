@@ -56,6 +56,7 @@
                     <li><a href="{{ url('/weights') }}">Weights</a></li>
                     <li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>
                     <li><a href="{{ url('/tags') }}">Tags</a></li>
+                    <li><a href="{{ url('/storages') }}">Storages</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

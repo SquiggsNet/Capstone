@@ -27,8 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Mouse_SurgeryTableSeeder::class);
         $this->call(Mouse_StorageTableSeeder::class);
         $this->call(Mouse_TagTableSeeder::class);
-
-//        $this->call(Mouse_ColonyTableSeeder::class);
     }
 }
 
@@ -158,11 +156,13 @@ class CageTableSeeder extends Seeder
     {
         DB::table('cages')->insert([
             'breeder' => true,
-            'room_num' => '78'
+            'room_num' => '78',
+            'mouse_id' => 1
         ]);
         DB::table('cages')->insert([
             'breeder' => false,
-            'room_num' => '78'
+            'room_num' => '78',
+            'mouse_id' => 2
         ]);
     }
 }
@@ -173,17 +173,20 @@ class TreatmentTableSeeder extends Seeder
     {
         DB::table('treatments')->insert([
             'title' => 'Ang-II',
-            'drug_amount' => '160'
+            'drug_amount' => '160',
+            'mouse_id' => 1
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'saline',
-            'drug_amount' => '245'
+            'drug_amount' => '245',
+            'mouse_id' => 2
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'Ang-II + cANF',
-            'drug_amount' => '85'
+            'drug_amount' => '85',
+            'mouse_id' => 2
         ]);
     }
 }
@@ -193,27 +196,33 @@ class WeightTableSeeder extends Seeder
     public function run()
     {
         DB::table('weights')->insert([
-            'weight' => 30.1
+            'weight' => 30.1,
+            'mouse_id' => 1
         ]);
 
         DB::table('weights')->insert([
-            'weight' => 26.4
+            'weight' => 26.4,
+            'mouse_id' => 2
         ]);
 
         DB::table('weights')->insert([
-            'weight' => 27.1
+            'weight' => 27.1,
+            'mouse_id' => 3
         ]);
 
         DB::table('weights')->insert([
-            'weight' => 24.7
+            'weight' => 24.7,
+            'mouse_id' => 1
         ]);
 
         DB::table('weights')->insert([
-            'weight' => 23
+            'weight' => 23,
+            'mouse_id' => 2
         ]);
 
         DB::table('weights')->insert([
-            'weight' => 22.6
+            'weight' => 22.6,
+            'mouse_id' => 3
         ]);
     }
 }
@@ -224,7 +233,8 @@ class Blood_PressureTableSeeder extends Seeder
     {
         DB::table('blood_pressures')->insert([
             'systolic' => '5',
-            'diastolic' => '5'
+            'diastolic' => '5',
+            'mouse_id' => 1
         ]);
     }
 }
@@ -352,11 +362,7 @@ class MouseTableSeeder extends Seeder
     {
         DB::table('mice')->insert([
             'colony_id' => 1,
-            'cage_id' => 1,
             'reserved_for' => 1,
-            'treatment_id' => 1,
-            'weight_id' => 1,
-            'blood_pressure_id' => 1,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,
@@ -371,11 +377,7 @@ class MouseTableSeeder extends Seeder
 
         DB::table('mice')->insert([
             'colony_id' => 1,
-            'cage_id' => 1,
             'reserved_for' => 1,
-            'treatment_id' => 1,
-            'weight_id' => 1,
-            'blood_pressure_id' => 1,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,
@@ -390,11 +392,7 @@ class MouseTableSeeder extends Seeder
 
         DB::table('mice')->insert([
             'colony_id' => 1,
-            'cage_id' => 1,
             'reserved_for' => 1,
-            'treatment_id' => 1,
-            'weight_id' => 1,
-            'blood_pressure_id' => 1,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,
@@ -482,12 +480,3 @@ class Mouse_TagTableSeeder extends Seeder
         ]);
     }
 }
-
-class Mouse_ColonyTableSeeder extends Seeder
-{
-    public function run()
-    {
-
-    }
-}
-

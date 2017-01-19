@@ -53,6 +53,7 @@
                     <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/cages') }}">Cages</a></li>
                     <li><a href="{{ url('/treatments') }}">Treatments</a></li>
+                    <li><a href="{{ url('/weights') }}">Weights</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

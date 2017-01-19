@@ -24,3 +24,4 @@ Route::resource('privileges', 'PrivilegeController');
 Route::resource('colonies', 'ColonyController');
 Route::resource('cages', 'CageController');
 Route::resource('treatments', 'TreatmentController');
+Route::resource('weights', 'WeightController');

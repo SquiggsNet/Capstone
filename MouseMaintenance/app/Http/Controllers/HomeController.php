@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Colony;
+use App\Storage;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,10 +14,12 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
+                    //Remove comments to re-enable authentication
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -24,6 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $colonies = Colony::all();
+        $storages = Storage::all();
+        return view('home', compact('colonies', 'storages'));
     }
 }

@@ -9,10 +9,11 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Tag</th>
                 <th>Geno Type</th>
-                <th>Father</th>
-                <th>Mother 1</th>
-                <th>Mother 2</th>
+                <th>Treatment</th>
+                <th>DOB</th>
+
             </tr>
             </thead>
             <tbody>
@@ -23,18 +24,30 @@
                             {{$mouse->id}}
                         </a>
                     </td>
+                    <td>Uncomment next line when tag relationship in place</td>
+                    {{--@foreach ($mouse->tags as $tag)--}}
+                        {{--<td>{{$tag->tag_num}}</td>--}}
+                    {{--@endforeach--}}
                     <td>({{$mouse->geno_type_a}}/{{$mouse->geno_type_b}})</td>
-                    <td>{{$mouse->father}}</td>
-                    <td>{{$mouse->mother_one}}</td>
-                    <td>{{$mouse->mother_two}}</td>
+                    @foreach ($mouse->treatments as $treatment)
+                        <td>{{$treatment->title}}</td>
+                    @endforeach
+                    <td>{{$mouse->birth_date}}</td>
                 </tr>
             @endforeach
             </tbody>
         </table>
 
+        <p>
+            <a href="{{ action( 'HomeController@index') }}">
+                Go Back to Main Menu
+            </a>
+        </p>
+        <p>
+            <a href="{{ action( 'ColonyController@index') }}">
+                Go Back to Colony Management
+            </a>
+        </p>
 
-        <a href="{{ action( 'ColonyController@index') }}">
-            Go Back
-        </a>
     </div>
 @endsection

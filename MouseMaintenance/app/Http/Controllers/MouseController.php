@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\BloodPressure;
+use App\Weight;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Mouse;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class MouseController extends Controller
 {
@@ -53,6 +57,32 @@ class MouseController extends Controller
             'comments' => $request['comments']
         ]);
         $mouse->save();
+        $newMouse = DB::table('mice')->orderBy('id', 'desc')->first();
+
+        if($request['weight_one'] or $request['weight_two']){
+
+            $mass = $request['weight_one'].'.'.$request['weight_two'];
+
+            $weight = Weight::create([
+                'weight' => $mass,
+                'mouse_id' => $newMouse->id,
+                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
+                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
+            ]);
+            $weight->save();
+        }
+
+        if($request['systolic'] and $request['diastolic']) {
+
+            $bloodPressure = BloodPressure::create([
+                'systolic' => $request['systolic'],
+                'diastolic' => $request['diastolic'],
+                'mouse_id' => $newMouse->id,
+                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
+                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
+            ]);
+            $bloodPressure->save();
+        }
         return redirect()->action('MouseController@index');
     }
 

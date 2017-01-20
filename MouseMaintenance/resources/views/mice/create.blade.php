@@ -48,6 +48,14 @@
             {!! Form::text('end_date',null ,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
+            {!! Form::label('blood_pressure', 'Blood Pressure') !!}
+            {!! Form::number('systolic') !!} / {!! Form::number('diastolic') !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('weight', 'weight') !!}
+            {!! Form::number('weight_one') !!} . {!! Form::number('weight_two') !!} gms
+        </div>
+        <div class="form-group">
             {!! Form::label('sick_report', 'Sick Report') !!}
             {!! Form::text('sick_report',null ,['class'=>'form-control']) !!}
         </div>

@@ -40,6 +40,7 @@ class MouseController extends Controller
         $mouse = Mouse::create([
             'colony_id' => $request['colony_id'],
             'reserved_for' => $request['reserved_for'],
+            'sex' => $request['sex'],
             'geno_type_a' => $request['geno_type_a'],
             'geno_type_b' => $request['geno_type_b'],
             'father' => $request['father'],
@@ -91,6 +92,7 @@ class MouseController extends Controller
         $mouse = Mouse::find($id);
         $mouse->colony_id = $request['colony_id'];
         $mouse->reserved_for = $request['reserved_for'];
+        $mouse->sex = $request['sex'];
         $mouse->geno_type_a = $request['geno_type_a'];
         $mouse->geno_type_b = $request['geno_type_b'];
         $mouse->father = $request['father'];

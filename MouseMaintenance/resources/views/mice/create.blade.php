@@ -12,12 +12,16 @@
             {!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}
         </div>
         <div class="form-group">
+            {!! Form::label('sex', 'Sex') !!}
+            {!! Form::select('sex', ['True' => 'Male', 'False' => 'Female']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('geno_type_a', 'Geno Type A') !!}
-            {!! Form::text('geno_type_a',null ,['class'=>'form-control']) !!}
+            {!! Form::select('geno_type_a', ['True' => '+', 'False' => '-'], null) !!}
         </div>
         <div class="form-group">
             {!! Form::label('geno_type_b', 'Geno Type B') !!}
-            {!! Form::text('geno_type_b',null ,['class'=>'form-control']) !!}
+            {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!}
         </div>
         <div class="form-group">
             {!! Form::label('father', 'Father') !!}

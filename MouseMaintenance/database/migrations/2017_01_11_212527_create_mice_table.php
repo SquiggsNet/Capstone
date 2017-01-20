@@ -18,6 +18,7 @@ class CreateMiceTable extends Migration
             $table->foreign('colony_id')->references('id')->on('colonies');
             $table->unsignedInteger('reserved_for')->nullable;
             $table->foreign('reserved_for')->references('id')->on('users');
+            $table->boolean('sex');
             $table->boolean('geno_type_a')->nullable;
             $table->boolean('geno_type_b')->nullable;
             $table->unsignedInteger('father');

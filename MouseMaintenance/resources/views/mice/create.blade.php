@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('sex', 'Sex') !!}
-            {!! Form::select('sex', ['True' => 'Male', 'False' => 'Female']) !!}
+            {!! Form::select('sex', ['True' => 'Male', 'False' => 'Female'], null) !!}
         </div>
         <div class="form-group">
             {!! Form::label('geno_type_a', 'Geno Type A') !!}

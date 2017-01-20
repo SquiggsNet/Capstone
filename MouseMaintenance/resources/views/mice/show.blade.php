@@ -4,6 +4,7 @@
     <div class="container">
         <h1>Mouse ID: {{$mouse->id}}</h1>
         <p>Colony ID: {{$mouse->colony_id}}</p>
+        <p>Sex: {{$mouse->sex}}</p>
         <p>Reserved For: {{$mouse->reserved_for}}</p>
         <p>Geno Type A: {{$mouse->geno_type_a}}</p>
         <p>Geno Type B: {{$mouse->geno_type_b}}</p>

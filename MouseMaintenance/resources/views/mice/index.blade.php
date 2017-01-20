@@ -6,7 +6,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>Tag</th>
             <th>Colony ID</th>
             <th>Reserved For</th>
             <th>Sex</th>
@@ -47,10 +47,9 @@
                 </a>
             </td>
             <td>
-                {{--@foreach($mouse->colonies as $colony)--}}
-                    {{--{{$colony->name}}--}}
-                {{--@endforeach--}}
-                {{$mouse->colony_id}}
+                <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
+                    {{$mouse->colony->name}}
+                </a>
             </td>
             <td>{{$mouse->reserved_for}}</td>
             <td>{{$gender}}</td>

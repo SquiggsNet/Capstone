@@ -300,6 +300,32 @@ class TagTableSeeder extends Seeder
     }
 }
 
+class TissueTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('tissues')->insert([
+            'name' => 'Ventricle'
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Apex'
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Full Atrial'
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Posterior Wall'
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Whole Heart'
+        ]);
+    }
+}
+
 class StorageTableSeeder extends Seeder
 {
     public function run()
@@ -326,32 +352,6 @@ class StorageTableSeeder extends Seeder
             'freezer' => '1',
             'compartment' => '1',
             'shelf' => '3'
-        ]);
-    }
-}
-
-class TissueTableSeeder extends Seeder
-{
-    public function run()
-    {
-        DB::table('tissues')->insert([
-            'name' => 'Ventricle'
-        ]);
-
-        DB::table('tissues')->insert([
-            'name' => 'Apex'
-        ]);
-
-        DB::table('tissues')->insert([
-            'name' => 'Full Atrial'
-        ]);
-
-        DB::table('tissues')->insert([
-            'name' => 'Posterior Wall'
-        ]);
-
-        DB::table('tissues')->insert([
-            'name' => 'Whole Heart'
         ]);
     }
 }

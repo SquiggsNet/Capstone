@@ -27,4 +27,5 @@ Route::resource('treatments', 'TreatmentController');
 Route::resource('weights', 'WeightController');
 Route::resource('bloodPressures', 'BloodPressureController');
 Route::resource('tags', 'TagController');
+Route::resource('tissues', 'TissueController');
 Route::resource('storages', 'StorageController');

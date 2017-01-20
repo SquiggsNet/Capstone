@@ -48,16 +48,16 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/users') }}">Users</a></li>
-                    <li><a href="{{ url('/privileges') }}">Privileges</a></li>
-                    <li><a href="{{ url('/colonies') }}">Colonies</a></li>
-                    <li><a href="{{ url('/cages') }}">Cages</a></li>
-                    <li><a href="{{ url('/treatments') }}">Treatments</a></li>
-                    <li><a href="{{ url('/weights') }}">Weights</a></li>
                     <li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>
+                    <li><a href="{{ url('/cages') }}">Cages</a></li>
+                    <li><a href="{{ url('/colonies') }}">Colonies</a></li>
+                    <li><a href="{{ url('/mice') }}">Mice</a></li>
+                    <li><a href="{{ url('/storages') }}">Storages</a></li>
+                    <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
                     <li><a href="{{ url('/tags') }}">Tags</a></li>
                     <li><a href="{{ url('/tissues') }}">Tissues</a></li>
-                    <li><a href="{{ url('/storages') }}">Storages</a></li>
+                    <li><a href="{{ url('/treatments') }}">Treatments</a></li>
+                    <li><a href="{{ url('/weights') }}">Weights</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -73,6 +73,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/users') }}">Users</a></li>
+                                <li><a href="{{ url('/privileges') }}">Privileges</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

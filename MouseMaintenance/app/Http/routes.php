@@ -21,11 +21,17 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('users', 'UserController');
 Route::resource('privileges', 'PrivilegeController');
-Route::resource('colonies', 'ColonyController');
-Route::resource('cages', 'CageController');
-Route::resource('treatments', 'TreatmentController');
-Route::resource('weights', 'WeightController');
+
 Route::resource('bloodPressures', 'BloodPressureController');
+Route::resource('cages', 'CageController');
+Route::resource('colonies', 'ColonyController');
+Route::resource('mice', 'MouseController');
+Route::resource('storages', 'StorageController');
+Route::resource('surgeries', 'SurgeryController');
 Route::resource('tags', 'TagController');
 Route::resource('tissues', 'TissueController');
-Route::resource('storages', 'StorageController');
+Route::resource('treatments', 'TreatmentController');
+Route::resource('weights', 'WeightController');
+
+
+

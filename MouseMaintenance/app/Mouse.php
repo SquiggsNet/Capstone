@@ -31,7 +31,7 @@ class Mouse extends Model
     }
 
     //Colony
-    public function colonies(){
+    public function colony(){
         return $this->belongsTo(Colony::class);
     }
 

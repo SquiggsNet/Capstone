@@ -435,12 +435,12 @@ class Mouse_SurgeryTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('mouse_surgeries')->insert([
+        DB::table('mouse_surgery')->insert([
             'mouse_id' => 1,
             'surgery_id' => 1
         ]);
 
-        DB::table('mouse_surgeries')->insert([
+        DB::table('mouse_surgery')->insert([
             'mouse_id' => 2,
             'surgery_id' => 2
         ]);

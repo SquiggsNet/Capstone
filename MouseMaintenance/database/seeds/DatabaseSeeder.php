@@ -363,6 +363,7 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
+            'sex' => 1,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,
@@ -378,6 +379,7 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
+            'sex' => 1,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,
@@ -393,6 +395,7 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
+            'sex' => 0,
             'geno_type_a' => '+',
             'geno_type_b' => '-',
             'father' => 1,

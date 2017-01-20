@@ -10,8 +10,7 @@
             <th>Colony ID</th>
             <th>Reserved For</th>
             <th>Sex</th>
-            <th>Geno Type A</th>
-            <th>Geno Type B</th>
+            <th>Geno Type</th>
             <th>Father</th>
             <th>Mother 1</th>
             <th>Mother 2</th>
@@ -27,19 +26,19 @@
         <tbody>
         @foreach ($mice as $mouse)
             @if($mouse->sex == 'True')
-                <?php $gender = 'Male' ?>
+                @php($gender = 'Male')
             @else
-                <?php $gender = 'Female' ?>
+                @php($gender = 'Female')
             @endif
             @if($mouse->geno_type_a == 'True')
-                <?php $geno_a = '+' ?>
+                @php($geno_a = '+')
             @else
-                <?php $geno_a = '-' ?>
+                @php($geno_a = '-')
             @endif
             @if($mouse->geno_type_b == 'True')
-                <?php $geno_b = '+' ?>
+                @php($geno_b = '+')
             @else
-                <?php $geno_b = '-' ?>
+                @php($geno_b = '-')
             @endif
         <tr>
             <td>
@@ -47,11 +46,15 @@
                     {{$mouse->id}}
                 </a>
             </td>
-            <td>{{$mouse->colony_id}}</td>
+            <td>
+                {{--@foreach($mouse->colonies as $colony)--}}
+                    {{--{{$colony->name}}--}}
+                {{--@endforeach--}}
+                {{$mouse->colony_id}}
+            </td>
             <td>{{$mouse->reserved_for}}</td>
             <td>{{$gender}}</td>
-            <td>{{$geno_a}}</td>
-            <td>{{$geno_b}}</td>
+            <td>({{$geno_a}}/{{$geno_b}})</td>
             <td>{{$mouse->father}}</td>
             <td>{{$mouse->mother_one}}</td>
             <td>{{$mouse->mother_two}}</td>

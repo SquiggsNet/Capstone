@@ -9,8 +9,7 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Geno Type A</th>
-                <th>Geno Type B</th>
+                <th>Geno Type</th>
                 <th>Father</th>
                 <th>Mother 1</th>
                 <th>Mother 2</th>
@@ -24,8 +23,7 @@
                             {{$mouse->id}}
                         </a>
                     </td>
-                    <td>{{$mouse->geno_type_a}}</td>
-                    <td>{{$mouse->geno_type_b}}</td>
+                    <td>({{$mouse->geno_type_a}}/{{$mouse->geno_type_b}})</td>
                     <td>{{$mouse->father}}</td>
                     <td>{{$mouse->mother_one}}</td>
                     <td>{{$mouse->mother_two}}</td>

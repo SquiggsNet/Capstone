@@ -9,6 +9,28 @@ class Mouse extends Model
     protected $fillable = array('colony_id', 'reserved_for', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
                                 'mother_two', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
 
+    public function getGeno($geno){
+        if($geno == 'True'){
+            return '+';
+        }else{
+            return '-';
+        }
+    }
+
+    public function getGender($sex){
+        if($sex == 'True'){
+            return 'M';
+        }else{
+            return 'F';
+        }
+    }
+
+    public function getAge($birth_date){
+        $currentDate = date("d.m.y");
+        $age = $currentDate - $birth_date;
+        return $age;
+    }
+
     //one-to-many relationships
     //Blood pressure
     public function blood_pressures(){
@@ -57,16 +79,16 @@ class Mouse extends Model
     }
 
     //recursive relationships
-    public function father(){
-        return $this->belongsTo(Mouse::class, 'id', 'father');
+    public function father_record(){
+        return $this->belongsTo(Mouse::class, 'father');
     }
 
-    public function mother_one(){
-        return $this->belongsTo(Mouse::class, 'id', 'mother_one');
+    public function mother_one_record(){
+        return $this->belongsTo(Mouse::class, 'mother_one');
     }
 
-    public function mother_two(){
-        return $this->belongsTo(Mouse::class, 'id', 'mother_two');
+    public function mother_two_record(){
+        return $this->belongsTo(Mouse::class, 'mother_two');
     }
 
     public function offspring(){

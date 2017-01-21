@@ -3,15 +3,10 @@
 @section('content')
     <div class="container">
         {!! Form::open(['action' => 'MouseController@store' ]) !!}
-
-
         <div class="form-group">
             {!! Form::label('colony_id', 'Colony ID') !!}
             {!! Form::text('colony_id',null ,['class'=>'form-control'])!!}
         </div>
-
-
-
         <div class="form-group">
             {!! Form::label('reserved_for', 'Reserved For') !!}
             {!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}

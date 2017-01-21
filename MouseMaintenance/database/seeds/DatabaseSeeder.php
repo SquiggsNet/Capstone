@@ -81,47 +81,47 @@ class Privilege_UserTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 1,
             'privilege_id' => 1,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 1,
             'privilege_id' => 2,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 1,
             'privilege_id' => 3,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 2,
             'privilege_id' => 1,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 2,
             'privilege_id' => 2,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 2,
             'privilege_id' => 3,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 3,
             'privilege_id' => 1,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 3,
             'privilege_id' => 2,
         ]);
 
-        DB::table('privilege_users')->insert([
+        DB::table('privilege_user')->insert([
             'user_id' => 3,
             'privilege_id' => 3,
         ]);
@@ -363,9 +363,9 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
-            'sex' => 1,
-            'geno_type_a' => '+',
-            'geno_type_b' => '-',
+            'sex' => 'True',
+            'geno_type_a' => 'True',
+            'geno_type_b' => 'True',
             'father' => 1,
             'mother_one' => 2,
             'mother_two' => 3,
@@ -379,9 +379,9 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
-            'sex' => 1,
-            'geno_type_a' => '+',
-            'geno_type_b' => '-',
+            'sex' => 'False',
+            'geno_type_a' => 'True',
+            'geno_type_b' => 'False',
             'father' => 1,
             'mother_one' => 2,
             'mother_two' => 3,
@@ -395,9 +395,9 @@ class MouseTableSeeder extends Seeder
         DB::table('mice')->insert([
             'colony_id' => 1,
             'reserved_for' => 1,
-            'sex' => 0,
-            'geno_type_a' => '+',
-            'geno_type_b' => '-',
+            'sex' => 'False',
+            'geno_type_a' => 'False',
+            'geno_type_b' => 'True',
             'father' => 1,
             'mother_one' => 2,
             'mother_two' => 3,
@@ -451,12 +451,12 @@ class Mouse_StorageTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('mouse_storages')->insert([
+        DB::table('mouse_storage')->insert([
             'mouse_id' => 1,
             'storage_id' => 1
         ]);
 
-        DB::table('mouse_storages')->insert([
+        DB::table('mouse_storage')->insert([
             'mouse_id' => 2,
             'storage_id' => 2
         ]);
@@ -467,17 +467,17 @@ class Mouse_TagTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('mouse_tags')->insert([
+        DB::table('mouse_tag')->insert([
             'mouse_id' => 1,
             'tag_id' => 1
         ]);
 
-        DB::table('mouse_tags')->insert([
+        DB::table('mouse_tag')->insert([
             'mouse_id' => 2,
             'tag_id' => 2
         ]);
 
-        DB::table('mouse_tags')->insert([
+        DB::table('mouse_tag')->insert([
             'mouse_id' => 3,
             'tag_id' => 3
         ]);

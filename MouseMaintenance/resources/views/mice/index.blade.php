@@ -8,16 +8,14 @@
         <tr>
             <th>Tag</th>
             <th>Colony ID</th>
-            <th>Reserved For</th>
+            <th>Pedigree</th>
             <th>Sex</th>
             <th>Geno Type</th>
-            <th>Father</th>
-            <th>Mother 1</th>
-            <th>Mother 2</th>
-            <th>Birth Date</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Blood Pressure</th>
             <th>Wean Date</th>
             <th>End Date</th>
-            <th>Sick Report</th>
             <th>Comments</th>
             <th></th>
             <th></th>
@@ -25,25 +23,10 @@
         </thead>
         <tbody>
         @foreach ($mice as $mouse)
-            @if($mouse->sex == 'True')
-                @php($gender = 'Male')
-            @else
-                @php($gender = 'Female')
-            @endif
-            @if($mouse->geno_type_a == 'True')
-                @php($geno_a = '+')
-            @else
-                @php($geno_a = '-')
-            @endif
-            @if($mouse->geno_type_b == 'True')
-                @php($geno_b = '+')
-            @else
-                @php($geno_b = '-')
-            @endif
         <tr>
             <td>
                 <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                    {{$mouse->id}}
+                    {{$mouse->tags->last()->tag_num}}
                 </a>
             </td>
             <td>
@@ -51,16 +34,34 @@
                     {{$mouse->colony->name}}
                 </a>
             </td>
-            <td>{{$mouse->reserved_for}}</td>
-            <td>{{$gender}}</td>
-            <td>({{$geno_a}}/{{$geno_b}})</td>
-            <td>{{$mouse->father}}</td>
-            <td>{{$mouse->mother_one}}</td>
-            <td>{{$mouse->mother_two}}</td>
-            <td>{{$mouse->birth_date}}</td>
+            <td>
+                {{$mouse->father_record->tags->last()->tag_num}}
+                {{$mouse->getGender($mouse->father_record->sex)}}
+                ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}
+                /{{$mouse->getGeno($mouse->father_record->geno_type_b)}}
+                )x
+                {{$mouse->mother_one_record->tags->last()->tag_num}}
+                {{$mouse->getGender($mouse->mother_one_record->sex)}}
+                ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}
+                /{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}}
+                ),
+                {{$mouse->mother_two_record->tags->last()->tag_num}}
+                {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
+                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}}
+                )
+            </td>
+            <td>{{$mouse->getGender($mouse->sex)}}</td>
+            <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
+            <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+            <td>{{$mouse->weights->last()->weight}}g</td>
+            <td>
+                {{$mouse->blood_pressures->last()->systolic}}
+                /
+                {{$mouse->blood_pressures->last()->diastolic}}
+            </td>
             <td>{{$mouse->wean_date}}</td>
             <td>{{$mouse->end_date}}</td>
-            <td>{{$mouse->sick_report}}</td>
             <td>{{$mouse->comments}}</td>
             <td>
                 {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}

@@ -12,7 +12,7 @@ class CreatePrivilegeUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('privilege_users', function (Blueprint $table) {
+        Schema::create('privilege_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('privilege_id')->unsigned();
             $table->foreign('privilege_id')->references('id')->on('privileges');

@@ -48,10 +48,11 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>
-                    <li><a href="{{ url('/cages') }}">Cages</a></li>
                     <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/mice') }}">Mice</a></li>
+
+                    <li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>
+                    <li><a href="{{ url('/cages') }}">Cages</a></li>
                     <li><a href="{{ url('/storages') }}">Storages</a></li>
                     <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
                     <li><a href="{{ url('/tags') }}">Tags</a></li>
@@ -62,6 +63,8 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url('/users') }}">Users</a></li>
+                    <li><a href="{{ url('/privileges') }}">Privileges</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
@@ -73,8 +76,6 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/users') }}">Users</a></li>
-                                <li><a href="{{ url('/privileges') }}">Privileges</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -83,8 +84,13 @@
             </div>
         </div>
     </nav>
+    <div>
 
-    @yield('content')
+    </div>
+    <div>
+        @yield('content')
+    </div>
+
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

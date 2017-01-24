@@ -46,7 +46,7 @@ class UserTableSeeder extends Seeder
             'first_name' => "Devon",
             'last_name' => "Turner",
             'email' => "devonj.turner@gmail.com",
-            'student_id' => "d0000001",
+            'student_id' => "W0204891",
             'phone' => "9028188414",
             'password' => Hash::make("password"),
         ]);
@@ -72,7 +72,7 @@ class PrivilegeTableSeeder extends Seeder
             'name' => "Technician",
         ]);
         DB::table('privileges')->insert([
-            'name' => "Student",
+            'name' => "Standard",
         ]);
     }
 }

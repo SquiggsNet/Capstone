@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Mouse extends Model
@@ -28,6 +29,8 @@ class Mouse extends Model
     public function getAge($birth_date){
         $currentDate = date("d.m.y");
         $age = $currentDate - $birth_date;
+//        $age = $currentDate - $birth_date;
+
         return $age;
     }
 

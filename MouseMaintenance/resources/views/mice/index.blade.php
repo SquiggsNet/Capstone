@@ -23,61 +23,67 @@
         </thead>
         <tbody>
         @foreach ($mice as $mouse)
-        <tr>
-            <td>
-                <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                    {{$mouse->tags->last()->tag_num}}
-                </a>
-            </td>
-            <td>
-                <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
-                    {{$mouse->colony->name}}
-                </a>
-            </td>
-            <td>
-                {{$mouse->father_record->tags->last()->tag_num}}
-                {{$mouse->getGender($mouse->father_record->sex)}}
-                ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}
-                /{{$mouse->getGeno($mouse->father_record->geno_type_b)}}
-                )x
-                {{$mouse->mother_one_record->tags->last()->tag_num}}
-                {{$mouse->getGender($mouse->mother_one_record->sex)}}
-                ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}
-                /{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}}
-                ),
-                {{$mouse->mother_two_record->tags->last()->tag_num}}
-                {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}}
-                )
-            </td>
-            <td>{{$mouse->getGender($mouse->sex)}}</td>
-            <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
-            <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
-            <td>{{$mouse->weights->last()->weight}}g</td>
-            <td>
-                {{$mouse->blood_pressures->last()->systolic}}
-                /
-                {{$mouse->blood_pressures->last()->diastolic}}
-            </td>
-            <td>{{$mouse->wean_date}}</td>
-            <td>{{$mouse->end_date}}</td>
-            <td>{{$mouse->comments}}</td>
-            <td>
-                {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
-                <button type="submit" >
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                {{ Form::close() }}
-            </td>
-            <td>
-                {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
-                <button type="submit" >
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-                {{ Form::close() }}
-            </td>
-        </tr>
+            @if($mouse->end_date)
+                <tr class="danger">
+            @elseif($mouse->surgeries->first())
+                <tr class="info">
+            @else
+                <tr>
+            @endif
+                <td>
+                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
+                        {{$mouse->tags->last()->tag_num}}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
+                        {{$mouse->colony->name}}
+                    </a>
+                </td>
+                <td>
+                    {{$mouse->father_record->tags->last()->tag_num}}
+                    {{$mouse->getGender($mouse->father_record->sex)}}
+                    ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}
+                    /{{$mouse->getGeno($mouse->father_record->geno_type_b)}}
+                    )x
+                    {{$mouse->mother_one_record->tags->last()->tag_num}}
+                    {{$mouse->getGender($mouse->mother_one_record->sex)}}
+                    ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}
+                    /{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}}
+                    ),
+                    {{$mouse->mother_two_record->tags->last()->tag_num}}
+                    {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                    ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
+                    /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}}
+                    )
+                </td>
+                <td>{{$mouse->getGender($mouse->sex)}}</td>
+                <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
+                <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                <td>{{$mouse->weights->last()->weight}}g</td>
+                <td>
+                    {{$mouse->blood_pressures->last()->systolic}}
+                    /
+                    {{$mouse->blood_pressures->last()->diastolic}}
+                </td>
+                <td>{{$mouse->wean_date}}</td>
+                <td>{{$mouse->end_date}}</td>
+                <td>{{$mouse->comments}}</td>
+                <td>
+                    {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
+                    <button type="submit" >
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    {{ Form::close() }}
+                </td>
+                <td>
+                    {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
+                    <button type="submit" >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                    {{ Form::close() }}
+                </td>
+            </tr>
         @endforeach
         </tbody>
     </table>

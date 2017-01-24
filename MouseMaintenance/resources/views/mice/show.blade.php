@@ -8,9 +8,21 @@
         <p>Reserved For: {{$mouse->reserved_for}}</p>
         <p>Geno Type A: {{$mouse->geno_type_a}}</p>
         <p>Geno Type B: {{$mouse->geno_type_b}}</p>
-        <p>Father: {{$mouse->father}}</p>
-        <p>Mother 1: {{$mouse->mother_one}}</p>
-        <p>Mother 2: {{$mouse->mother_two}}</p>
+        <p>Father:
+            <a href="{{ action( 'MouseController@show', ['id' => $mouse->father]) }}">
+                {{$mouse->father}}
+            </a>
+        </p>
+        <p>Mother 1:
+            <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_one]) }}">
+                {{$mouse->mother_one}}
+            </a>
+        </p>
+        <p>Mother 2:
+            <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_two]) }}">
+                {{$mouse->mother_two}}
+            </a>
+        </p>
         <p>Birth Date: {{$mouse->birth_date}}</p>
         <p>Wean Date: {{$mouse->wean_date}}</p>
         <p>End Date: {{$mouse->end_date}}</p>

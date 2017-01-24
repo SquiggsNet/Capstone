@@ -236,6 +236,18 @@ class Blood_PressureTableSeeder extends Seeder
             'diastolic' => '5',
             'mouse_id' => 1
         ]);
+
+        DB::table('blood_pressures')->insert([
+            'systolic' => '6',
+            'diastolic' => '10',
+            'mouse_id' => 2
+        ]);
+
+        DB::table('blood_pressures')->insert([
+            'systolic' => '4',
+            'diastolic' => '20',
+            'mouse_id' => 3
+        ]);
     }
 }
 

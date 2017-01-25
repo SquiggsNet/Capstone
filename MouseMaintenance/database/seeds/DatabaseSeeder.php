@@ -490,8 +490,33 @@ class Mouse_TagTableSeeder extends Seeder
         ]);
 
         DB::table('mouse_tag')->insert([
-            'mouse_id' => 3,
-            'tag_id' => 3
+            'mouse_id' => 4,
+            'tag_id' => 4
+        ]);
+
+        DB::table('mouse_tag')->insert([
+            'mouse_id' => 5,
+            'tag_id' => 5
+        ]);
+
+        DB::table('mouse_tag')->insert([
+            'mouse_id' => 6,
+            'tag_id' => 6
+        ]);
+
+        DB::table('mouse_tag')->insert([
+            'mouse_id' => 7,
+            'tag_id' => 7
+        ]);
+
+        DB::table('mouse_tag')->insert([
+            'mouse_id' => 8,
+            'tag_id' => 8
+        ]);
+
+        DB::table('mouse_tag')->insert([
+            'mouse_id' => 9,
+            'tag_id' => 9
         ]);
     }
 }

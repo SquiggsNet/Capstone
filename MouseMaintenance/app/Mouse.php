@@ -4,6 +4,7 @@ namespace App;
 
 use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Mouse extends Model
 {
@@ -27,9 +28,10 @@ class Mouse extends Model
     }
 
     public function getAge($birth_date){
-        $currentDate = date("d.m.y");
+        $currentDate = Carbon::now('America/Halifax')->format('Y-m-d H:i:s');
+
+//        $age = $currentDate->diffInWeeks(Carbon::parse($birth_date));
         $age = $currentDate - $birth_date;
-//        $age = $currentDate - $birth_date;
 
         return $age;
     }

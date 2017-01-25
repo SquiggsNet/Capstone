@@ -14,15 +14,15 @@
         </div>
         <div class="form-group">
             {!! Form::label('sex', 'Sex') !!}
-            {!! Form::select('sex', ['True' => 'Male', 'False' => 'Female']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('geno_type_a', 'Geno Type A') !!}
-            {!! Form::select('geno_type_a', ['True' => '+', 'False' => '-'], null) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('geno_type_b', 'Geno Type B') !!}
-            {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!}
+            {!! Form::select('sex', ['True' => 'Male', 'False' => 'Female'], null) !!}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+            {!! Form::label('geno_type_a', 'Geno Type') !!}(
+            {!! Form::select('geno_type_a', ['True' => '+', 'False' => '-'], null) !!}/
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+            {{--{!! Form::label('geno_type_b', 'Geno Type B') !!}--}}
+            {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!})
         </div>
         <div class="form-group">
             {!! Form::label('father', 'Father') !!}
@@ -38,15 +38,23 @@
         </div>
         <div class="form-group">
             {!! Form::label('birth_date', 'Birth Date') !!}
-            {!! Form::text('birth_date',null ,['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
+            {!! Form::date('birth_date') !!}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
             {!! Form::label('wean_date', 'Wean Date') !!}
-            {!! Form::text('wean_date',null ,['class'=>'form-control']) !!}
+            {!! Form::date('wean_date') !!}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+            {!! Form::label('end_date', 'End Date') !!}
+            {!! Form::date('end_date') !!}
         </div>
         <div class="form-group">
-            {!! Form::label('end_date', 'End Date') !!}
-            {!! Form::text('end_date',null ,['class'=>'form-control']) !!}
+            {!! Form::label('blood_pressure', 'Blood Pressure') !!}
+            {!! Form::number('systolic') !!} / {!! Form::number('diastolic') !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('weight', 'weight') !!}
+            {!! Form::number('weight_one') !!} . {!! Form::number('weight_two') !!} gms
         </div>
         <div class="form-group">
             {!! Form::label('blood_pressure', 'Blood Pressure') !!}
@@ -58,11 +66,11 @@
         </div>
         <div class="form-group">
             {!! Form::label('sick_report', 'Sick Report') !!}
-            {!! Form::text('sick_report',null ,['class'=>'form-control']) !!}
+            {!! Form::checkbox('sick_report', 'value') !!}
         </div>
         <div class="form-group">
             {!! Form::label('comments', 'Comments') !!}
-            {!! Form::text('comments',null ,['class'=>'form-control']) !!}
+            {!! Form::textarea('comments',null ,['class'=>'form-control', 'rows' => 3]) !!}
         </div>
         {!! Form::submit('Save Update',['class'=>'btn btn-default']) !!}
         {!! Form::close() !!}

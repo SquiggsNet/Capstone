@@ -43,6 +43,11 @@ class MouseController extends Controller
      */
     public function store(Request $request)
     {
+        $isSick = 0;
+        if($request['sick_report']){
+            $isSick = $request['sick_report'];
+        }
+
         $mouse = Mouse::create([
             'colony_id' => $request['colony_id'],
             'reserved_for' => $request['reserved_for'],
@@ -55,7 +60,7 @@ class MouseController extends Controller
             'birth_date' => $request['birth_date'],
             'wean_date' => $request['wean_date'],
             'end_date' => $request['end_date'],
-            'sick_report' => $request['sick_report'],
+            'sick_report' => $isSick,
             'comments' => $request['comments']
         ]);
         $mouse->save();
@@ -121,6 +126,11 @@ class MouseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $isSick = 0;
+        if($request['sick_report']){
+            $isSick = $request['sick_report'];
+        }
+
         $mouse = Mouse::find($id);
         $mouse->colony_id = $request['colony_id'];
         $mouse->reserved_for = $request['reserved_for'];
@@ -133,7 +143,7 @@ class MouseController extends Controller
         $mouse->birth_date = $request['birth_date'];
         $mouse->wean_date = $request['wean_date'];
         $mouse->end_date = $request['end_date'];
-        $mouse->sick_report = $request['sick_report'];
+        $mouse->sick_report = $isSick;
         $mouse->comments = $request['comments'];
         $mouse->save();
         return redirect()->action('MouseController@index');

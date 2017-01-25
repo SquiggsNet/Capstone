@@ -4,7 +4,7 @@
     <div class="container">
         {!! Form::open(['action' => 'MouseController@store' ]) !!}
         <div class="form-group">
-            {{--{!! Form::label('colony_id', 'Colony ID') !!}--}}
+            {!! Form::label('colony_id', 'Colony') !!}
             {{--{!! Form::text('colony_id',null ,['class'=>'form-control'])!!}--}}
             <select name="colony_id" id="colony_id" class="form-control">
                 @foreach($colonies as $colony)
@@ -14,7 +14,14 @@
         </div>
         <div class="form-group">
             {!! Form::label('reserved_for', 'Reserved For') !!}
-            {!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}
+            <select name="reserved_for" id="reserved_for" class="form-control">
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                @endforeach
+            </select>
+
+            {!! Form::label('reserved_for', 'Reserved For') !!}
+            {{--{!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}--}}
         </div>
         <div class="form-group">
             {!! Form::label('sex', 'Sex') !!}

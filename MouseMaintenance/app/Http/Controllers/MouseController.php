@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BloodPressure;
 use App\Colony;
+use App\User;
 use App\Weight;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class MouseController extends Controller
     public function create()
     {
         $colonies = Colony::all();
-        return view('mice.create', compact('colonies'));
+        $users = User::all();
+        return view('mice.create', compact('colonies', 'users'));
     }
 
     /**

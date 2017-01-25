@@ -4,9 +4,8 @@
     <div class="container">
         {!! Form::open(['action' => 'MouseController@store' ]) !!}
         <div class="form-group">
-            {{--{!! Form::label('colony_id', 'Colony ID') !!}--}}
-            {{--{!! Form::text('colony_id',null ,['class'=>'form-control'])!!}--}}
             <select name="colony_id" id="colony_id" class="form-control">
+                <option value="0">Select Colony...</option>
                 @foreach($colonies as $colony)
                     <option value="{{ $colony->id }}">{{ $colony->name }}</option>
                 @endforeach

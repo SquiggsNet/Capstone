@@ -291,11 +291,6 @@ class TagTableSeeder extends Seeder
         ]);
 
         DB::table('tags')->insert([
-            'tag_num' => '435',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
             'tag_num' => '436',
             'lost_tag' => false
         ]);
@@ -307,6 +302,11 @@ class TagTableSeeder extends Seeder
 
         DB::table('tags')->insert([
             'tag_num' => '438',
+            'lost_tag' => false
+        ]);
+
+        DB::table('tags')->insert([
+            'tag_num' => '439',
             'lost_tag' => false
         ]);
     }

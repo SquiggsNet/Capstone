@@ -15,13 +15,11 @@
         <div class="form-group">
             {!! Form::label('reserved_for', 'Reserved For') !!}
             <select name="reserved_for" id="reserved_for" class="form-control">
+                <option value="0">Reserve For...</option>
                 @foreach($users as $user)
                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                 @endforeach
             </select>
-
-            {!! Form::label('reserved_for', 'Reserved For') !!}
-            {{--{!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}--}}
         </div>
         <div class="form-group">
             {!! Form::label('sex', 'Sex') !!}
@@ -36,16 +34,34 @@
             {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!})
         </div>
         <div class="form-group">
-            {!! Form::label('father', 'Father') !!}
-            {!! Form::text('father',null ,['class'=>'form-control']) !!}
+            <select name="father" id="father" class="form-control">
+                <option value="0">Select Male Parent..</option>
+                @foreach($mice as $mouse)
+                    @if($mouse->sex == 'True')
+                        <option value="{{ $mouse->id }}">{{ $mouse->id }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            {!! Form::label('mother_one', 'Mother 1') !!}
-            {!! Form::text('mother_one',null ,['class'=>'form-control'])!!}
+            <select name="mother_one" id="mother_one" class="form-control">
+                <option value="0">Select Female Parent..</option>
+                @foreach($mice as $mouse)
+                    @if($mouse->sex == 'False')
+                        <option value="{{ $mouse->id }}">{{ $mouse->id }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            {!! Form::label('mother_two', 'Mother 2') !!}
-            {!! Form::text('mother_two',null ,['class'=>'form-control'])!!}
+            <select name="mother_two" id="mother_two" class="form-control">
+                <option value="0">Select Female Parent..</option>
+                @foreach($mice as $mouse)
+                    @if($mouse->sex == 'False')
+                        <option value="{{ $mouse->id }}">{{ $mouse->id }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             {!! Form::label('birth_date', 'Birth Date') !!}

@@ -32,9 +32,10 @@ class MouseController extends Controller
      */
     public function create()
     {
+        $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();
-        return view('mice.create', compact('colonies', 'users'));
+        return view('mice.create', compact('mice', 'colonies', 'users'));
     }
 
     /**

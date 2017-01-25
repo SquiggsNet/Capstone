@@ -5,8 +5,12 @@
         {!! Form::model($mouse, ['action' => ['MouseController@update', $mouse], 'method' => 'put']) !!}
 
         <div class="form-group">
-            {!! Form::label('colony_id', 'Colony ID') !!}
-            {!! Form::text('colony_id',null ,['class'=>'form-control'])!!}
+            <select name="colony_id" id="colony_id" class="form-control">
+                @foreach($colonies as $colony)
+                    <option value="{{ $colony->id }}"
+                    @if($colony->id == $mouse->colony_id) {{ 'selected' }} @endif >{{ $colony->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             {!! Form::label('reserved_for', 'Reserved For') !!}

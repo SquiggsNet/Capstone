@@ -5,6 +5,7 @@
         {!! Form::model($mouse, ['action' => ['MouseController@update', $mouse], 'method' => 'put']) !!}
 
         <div class="form-group">
+            {!! Form::label('colony_name', 'Colony') !!}
             <select name="colony_id" id="colony_id" class="form-control">
                 @foreach($colonies as $colony)
                     <option value="{{ $colony->id }}"
@@ -14,7 +15,14 @@
         </div>
         <div class="form-group">
             {!! Form::label('reserved_for', 'Reserved For') !!}
-            {!! Form::text('reserved_for',null ,['class'=>'form-control'])!!}
+            <select name="reserved_for" id="reserved_for" class="form-control">
+                <option value="0">Unreserved</option>
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}"
+                    @if($user->id == $mouse->reserved_for) {{ 'selected' }}@endif>{{ $user->first_name . ' ' . $user->last_name }}
+                    </option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             {!! Form::label('sex', 'Sex') !!}

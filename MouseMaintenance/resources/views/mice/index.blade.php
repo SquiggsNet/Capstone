@@ -31,9 +31,9 @@
                 <tr>
             @endif
                 <td>
-                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                        {{$mouse->tags->last()->tag_num}}
-                    </a>
+                    {{--<a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">--}}
+                        {{--{{$mouse->tags->last()->tag_num}}--}}
+                    {{--</a>--}}
                 </td>
                 <td>
                     <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">

@@ -105,7 +105,9 @@ class MouseController extends Controller
     public function show($id)
     {
         $mouse = Mouse::find($id);
-        return view('mice.show', compact('mouse'));
+        $user = User::where('id', $mouse->reserved_for)->get()->first();
+
+        return view('mice.show', compact('mouse', 'user'));
     }
 
     /**
@@ -118,7 +120,8 @@ class MouseController extends Controller
     {
         $colonies = Colony::all();
         $mouse = Mouse::find($id);
-        return view('mice.edit', compact('mouse', 'colonies'));
+        $users = User::all();
+        return view('mice.edit', compact('mouse', 'colonies', 'users'));
     }
 
     /**
@@ -150,6 +153,18 @@ class MouseController extends Controller
         $mouse->sick_report = $isSick;
         $mouse->comments = $request['comments'];
         $mouse->save();
+//
+//        $mass = $request['weight_one'].'.'.$request['weight_two'];
+//        $weight = Weight::create([
+//            'weight' => $mass,
+//            'mouse_id' => $newMouse->id,
+//            'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
+//            'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
+//        ]);
+//        $weight->save();
+
+
+
         return redirect()->action('MouseController@index');
     }
 

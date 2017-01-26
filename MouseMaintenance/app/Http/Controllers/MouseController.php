@@ -67,9 +67,9 @@ class MouseController extends Controller
             'father' => $request['father'],
             'mother_one' => $request['mother_one'],
             'mother_two' => $request['mother_two'],
-            'birth_date' => $b_date,
-            'wean_date' => $w_date,
-            'end_date' => $e_date,
+            'birth_date' => $request['birth_date'],
+            'wean_date' => $request['wean_date'],
+            'end_date' => $request['end_date'],
             'sick_report' => $isSick,
             'comments' => $request['comments']
         ]);

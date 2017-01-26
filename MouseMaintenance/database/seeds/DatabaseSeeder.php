@@ -212,7 +212,7 @@ class WeightTableSeeder extends Seeder
 
         DB::table('weights')->insert([
             'weight' => 24.7,
-            'mouse_id' => 1
+            'mouse_id' => 4
         ]);
 
         DB::table('weights')->insert([
@@ -247,6 +247,12 @@ class Blood_PressureTableSeeder extends Seeder
             'systolic' => '4',
             'diastolic' => '20',
             'mouse_id' => 3
+        ]);
+
+        DB::table('blood_pressures')->insert([
+            'systolic' => '10',
+            'diastolic' => '28',
+            'mouse_id' => 4
         ]);
     }
 }
@@ -405,7 +411,7 @@ class MouseTableSeeder extends Seeder
             'mother_two' => 3,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
-            'end_date' => '01/09/2012',
+            'end_date' => false,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -421,8 +427,24 @@ class MouseTableSeeder extends Seeder
             'mother_two' => 3,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
-            'end_date' => '01/09/2012',
+            'end_date' => false,
             'sick_report' => false,
+            'comments' => ""
+        ]);
+
+        DB::table('mice')->insert([
+            'colony_id' => 1,
+            'reserved_for' => 1,
+            'sex' => 'False',
+            'geno_type_a' => 'False',
+            'geno_type_b' => 'True',
+            'father' => 1,
+            'mother_one' => 2,
+            'mother_two' => 3,
+            'birth_date' => '01/02/2012',
+            'wean_date' => '01/04/2012',
+            'end_date' => false,
+            'sick_report' => true,
             'comments' => ""
         ]);
     }

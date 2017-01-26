@@ -26,6 +26,8 @@
             @if($mouse->end_date)
                 <tr class="danger">
             @elseif($mouse->surgeries->first())
+                <tr class="info">
+            @elseif($mouse->sick_report)
                 <tr class="warning">
             @else
                 <tr>

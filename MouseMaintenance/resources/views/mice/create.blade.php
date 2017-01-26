@@ -140,8 +140,7 @@
                 <div class="form-group">
                     {!! Form::label('blood_pressure', 'Blood Pressure') !!}
                     {!! Form::number('systolic') !!} / {!! Form::number('diastolic') !!}
-                </div>
-                <div class="form-group">
+
                     {!! Form::label('weight_one', 'Weight') !!}
 
                         {!! Form::number('weight_one') !!}

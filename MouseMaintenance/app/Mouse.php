@@ -33,6 +33,7 @@ class Mouse extends Model
     }
 
     public function getAge($birth_date){
+
         $currentDate = Carbon::now('America/Halifax')->format('Y-m-d H:i:s');
 
 //        $age = $currentDate->diffInWeeks(Carbon::parse($birth_date));

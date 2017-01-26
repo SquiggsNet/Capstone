@@ -127,8 +127,9 @@ class MouseController extends Controller
     {
         $colonies = Colony::all();
         $mouse = Mouse::find($id);
+        $parents = Mouse::all();
         $users = User::all();
-        return view('mice.edit', compact('mouse', 'colonies', 'users'));
+        return view('mice.edit', compact('mouse', 'colonies', 'users', 'parents'));
     }
 
     /**

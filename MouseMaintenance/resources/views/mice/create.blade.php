@@ -63,7 +63,7 @@
                                 <option value="{{ $mouse->id }}">
                                     @foreach($mouse->tags as $tag)
                                         @if($tag->lost_tag == '0')
-                                                {{ $tag->tag_num }}
+                                                {{ $mouse->tagPad($tag->tag_num) }}
                                         @endif
                                     @endforeach
                                     {{$mouse->getGender($mouse->sex)}}
@@ -82,7 +82,7 @@
                                 <option value="{{ $mouse->id }}">
                                     @foreach($mouse->tags as $tag)
                                         @if($tag->lost_tag == '0')
-                                            {{ $tag->tag_num }}
+                                            {{ $mouse->tagPad($tag->tag_num) }}
                                         @endif
                                     @endforeach
                                     {{$mouse->getGender($mouse->sex)}}
@@ -101,7 +101,7 @@
                                 <option value="{{ $mouse->id }}">
                                     @foreach($mouse->tags as $tag)
                                         @if($tag->lost_tag == '0')
-                                            {{ $tag->tag_num }}
+                                            {{ $mouse->tagPad($tag->tag_num) }}
                                         @endif
                                     @endforeach
                                     {{$mouse->getGender($mouse->sex)}}

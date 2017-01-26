@@ -24,10 +24,11 @@
                             {{$mouse->id}}
                         </a>
                     </td>
-                    <td>Uncomment next line when tag relationship in place</td>
-                    {{--@foreach ($mouse->tags as $tag)--}}
-                        {{--<td>{{$tag->tag_num}}</td>--}}
-                    {{--@endforeach--}}
+                    @foreach ($mouse->tags as $tag)
+                        @if($tag->lost_tag == 0)
+                            <td>{{ $tag->tag_num }}</td>
+                        @endif
+                    @endforeach
                     <td>({{$mouse->geno_type_a}}/{{$mouse->geno_type_b}})</td>
                     @foreach ($mouse->treatments as $treatment)
                         <td>{{$treatment->title}}</td>

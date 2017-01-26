@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMouseTagsTable extends Migration
+class CreateMouseTagTable extends Migration
 {
     /**
      * Run the migrations.

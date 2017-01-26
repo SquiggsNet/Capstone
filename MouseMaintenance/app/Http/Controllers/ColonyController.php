@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mouse;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Colony;
 use App\Http\Requests;
@@ -16,7 +18,7 @@ class ColonyController extends Controller
     public function index()
     {
         $colonies = Colony::all();
-        return view('colonies.index', compact('colonies'));
+        return view('colonies.index', compact('colonies', 'tags'));
     }
 
     /**
@@ -52,8 +54,9 @@ class ColonyController extends Controller
      */
     public function show($id)
     {
-        $colony = Colony::find($id);
-        return view('colonies.show', compact('colony'));
+        $colony = Colony::with('mice.tags')->find($id);
+
+        return view('colonies.show', compact('colony', 'mice'));
     }
 
     /**

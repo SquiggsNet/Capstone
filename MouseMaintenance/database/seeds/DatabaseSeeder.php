@@ -496,6 +496,11 @@ class Mouse_TagTableSeeder extends Seeder
         ]);
 
         DB::table('mouse_tag')->insert([
+            'mouse_id' => 3,
+            'tag_id' => 3
+        ]);
+
+        DB::table('mouse_tag')->insert([
             'mouse_id' => 4,
             'tag_id' => 4
         ]);

@@ -37,6 +37,9 @@
             {{--{!! Form::label('geno_type_b', 'Geno Type B') !!}--}}
             {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!})
         </div>
+        <div>
+            Tag Lost:  <input type="checkbox" value="true" name="lost_tag">
+        </div>
         <div class="form-group">
             {!! Form::label('father', 'Father') !!}
             <select name="father" id="father" class="form-control">

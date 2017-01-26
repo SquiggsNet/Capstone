@@ -7,7 +7,6 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Tag</th>
                 <th>Geno Type</th>
                 <th>Treatment</th>
@@ -20,15 +19,8 @@
                 <tr>
                     <td>
                         <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                            {{ $mouse->id }}
+                            {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
                         </a>
-                    </td>
-                    <td>
-                    @foreach ($mouse->tags as $tag)
-                        @if($tag->lost_tag == 0)
-                            {{ $mouse->tagPad($tag->tag_num) }}
-                        @endif
-                    @endforeach
                     </td>
                     <td>({{ $mouse->getGeno($mouse->geno_type_a) }}/{{ $mouse->getGeno($mouse->geno_type_b) }})</td>
                     <td>

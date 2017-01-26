@@ -54,10 +54,6 @@ class MouseController extends Controller
             $isSick = $request['sick_report'];
         }
 
-        $b_date = new Carbon($request['birth_date']);
-        $w_date = new Carbon($request['wean_date']);
-        $e_date = new Carbon($request['end_date']);
-
         $mouse = Mouse::create([
             'colony_id' => $request['colony_id'],
             'reserved_for' => $request['reserved_for'],
@@ -67,9 +63,9 @@ class MouseController extends Controller
             'father' => $request['father'],
             'mother_one' => $request['mother_one'],
             'mother_two' => $request['mother_two'],
-            'birth_date' => $b_date,
-            'wean_date' => $w_date,
-            'end_date' => $e_date,
+            'birth_date' => $request['birth_date'],
+            'wean_date' => $request['wean_date'],
+            'end_date' => $request['end_date'],
             'sick_report' => $isSick,
             'comments' => $request['comments']
         ]);
@@ -113,8 +109,9 @@ class MouseController extends Controller
     {
         $mouse = Mouse::find($id);
         $user = User::where('id', $mouse->reserved_for)->get()->first();
+        $colony = Colony::find($mouse->colony_id);
 
-        return view('mice.show', compact('mouse', 'user'));
+        return view('mice.show', compact('mouse', 'user', 'colony'));
     }
 
     /**

@@ -9,7 +9,6 @@
             <th>Colony Name</th>
             <th>Mice In Colony</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -19,16 +18,6 @@
                 <a href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}">
                     {{$colony->name}}
                 </a>
-            </td>
-            <td>
-                @foreach($colony->mice as $mouse)
-                    @foreach($mouse->tags as $tag)
-                        @if($tag->lost_tag == '0')
-                            {{ $mouse->tagPad($tag->tag_num) }}
-                            <br>
-                        @endif
-                    @endforeach
-                @endforeach
             </td>
             <td>
                 {{ Form::open(['action' => ['ColonyController@edit', $colony], 'method' => 'get']) }}

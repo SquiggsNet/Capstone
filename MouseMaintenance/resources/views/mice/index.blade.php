@@ -32,17 +32,10 @@
             @else
                 <tr>
             @endif
-
-                    {{--{{$mouse->tags->last()->tag_num}}--}}
-
                     <td>
                         <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                @foreach($mouse->tags as $tag)
-                    @if($tag->lost_tag == '0')
-                        {{ $mouse->tagPad($tag->tag_num) }}
-                    @endif
-                @endforeach
-                </a>
+                            {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
+                        </a>
                     </td>
                 <td>
                     <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{--    {!! HTML::style('css/lost_tag.css') !!}--}}
 @section('content')
     <div class="container">
 
@@ -38,7 +38,12 @@
             {!! Form::select('geno_type_b', ['True' => '+', 'False' => '-'], null) !!})
         </div>
         <div>
-            Tag Lost:  <input type="checkbox" value="true" name="lost_tag">
+            {!! Form::label('tag_lost', 'Lost Tag:') !!}
+            <input type="radio" name="lost_tag" id="lost_tag">
+            <div class="reveal-lost-tag">
+                <label for="new_tag">Enter new tag #</label>
+                        <input type="text" id="new_tag" name="new_tag" data-require-pair="#lost_tag">
+            </div>
         </div>
         <div class="form-group">
             {!! Form::label('father', 'Father') !!}

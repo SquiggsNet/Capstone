@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <h1>New Mouse</h1>
+        <h1>New Mouse5</h1>
 
         {!! Form::open(['action' => 'MouseController@store' ]) !!}
 

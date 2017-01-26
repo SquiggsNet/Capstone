@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMouseTagTable extends Migration
+class CreateMouseTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,6 @@ class CreateMouseTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('mouse_tags');
+        Schema::drop('mouse_tag');
     }
 }

@@ -13,6 +13,10 @@
             <div class="panel-body">
 
                 <div class="form-group">
+                    {!! Form::label('tag_id', 'Tag ID') !!}
+                    {!! Form::number('tag_num') !!}
+                </div>
+                <div class="form-group">
                     {!! Form::label('colony_id', 'Colony') !!}
                     <select name="colony_id" id="colony_id" class="form-control">
                         <option value="0">Select Colony...</option>
@@ -56,7 +60,12 @@
                         <option value="0">Select Male Parent..</option>
                         @foreach($mice as $mouse)
                             @if($mouse->sex == 'True')
-                                <option value="{{ $mouse->id }}">{{$mouse->tags->last()->tag_num}}
+                                <option value="{{ $mouse->id }}">
+                                    @foreach($mouse->tags as $tag)
+                                        @if($tag->lost_tag == '0')
+                                                {{ $tag->tag_num }}
+                                        @endif
+                                    @endforeach
                                     {{$mouse->getGender($mouse->sex)}}
                                     ({{$mouse->getGeno($mouse->geno_type_a)}}
                                     /{{$mouse->getGeno($mouse->geno_type_b)}})</option>
@@ -70,7 +79,12 @@
                         <option value="0">Select Female Parent..</option>
                         @foreach($mice as $mouse)
                             @if($mouse->sex == 'False')
-                                <option value="{{ $mouse->id }}">{{$mouse->tags->last()->tag_num}}
+                                <option value="{{ $mouse->id }}">
+                                    @foreach($mouse->tags as $tag)
+                                        @if($tag->lost_tag == '0')
+                                            {{ $tag->tag_num }}
+                                        @endif
+                                    @endforeach
                                     {{$mouse->getGender($mouse->sex)}}
                                     ({{$mouse->getGeno($mouse->geno_type_a)}}
                                     /{{$mouse->getGeno($mouse->geno_type_b)}})</option>
@@ -84,7 +98,12 @@
                         <option value="0">Select Female Parent..</option>
                         @foreach($mice as $mouse)
                             @if($mouse->sex == 'False')
-                                <option value="{{ $mouse->id }}">{{$mouse->tags->last()->tag_num}}
+                                <option value="{{ $mouse->id }}">
+                                    @foreach($mouse->tags as $tag)
+                                        @if($tag->lost_tag == '0')
+                                            {{ $tag->tag_num }}
+                                        @endif
+                                    @endforeach
                                     {{$mouse->getGender($mouse->sex)}}
                                     ({{$mouse->getGeno($mouse->geno_type_a)}}
                                     /{{$mouse->getGeno($mouse->geno_type_b)}})</option>

@@ -28,6 +28,6 @@ class CreateMouseStoragesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('mouse_storages');
+        Schema::drop('mouse_storage');
     }
 }

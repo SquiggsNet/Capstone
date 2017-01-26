@@ -43,6 +43,6 @@ class CreateMiceTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('mice');
     }
 }

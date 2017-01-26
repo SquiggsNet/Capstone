@@ -30,28 +30,33 @@
             @else
                 <tr>
             @endif
-                <td>
-                    {{--<a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">--}}
-                        {{--{{$mouse->tags->last()->tag_num}}--}}
-                    {{--</a>--}}
-                </td>
+                {{--<a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">--}}
+                    {{--{{$mouse->tags->last()->tag_num}}--}}
+                {{--</a>--}}
+                    <td>
+                @foreach($mouse->tags as $tag)
+                    @if($tag->lost_tag == '0')
+                        {{ $mouse->tagPad($tag->tag_num) }}
+                    @endif
+                @endforeach
+                    </td>
                 <td>
                     <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
                         {{$mouse->colony->name}}
                     </a>
                 </td>
                 <td>
-                    {{$mouse->father_record->tags->last()->tag_num}}
+                    {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
                     {{$mouse->getGender($mouse->father_record->sex)}}
                     ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}
                     /{{$mouse->getGeno($mouse->father_record->geno_type_b)}}
                     )x
-                    {{$mouse->mother_one_record->tags->last()->tag_num}}
+                    {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
                     {{$mouse->getGender($mouse->mother_one_record->sex)}}
                     ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}
                     /{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}}
                     ),
-                    {{$mouse->mother_two_record->tags->last()->tag_num}}
+                    {{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
                     {{$mouse->getGender($mouse->mother_two_record->sex)}}
                     ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
                     /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}}

@@ -26,6 +26,6 @@ class CreateColoniesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('colonies');
     }
 }

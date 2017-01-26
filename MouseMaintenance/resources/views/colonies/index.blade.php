@@ -6,8 +6,8 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Colony Name</th>
+            <th>Mice In Colony</th>
             <th></th>
             <th></th>
         </tr>
@@ -17,10 +17,19 @@
         <tr>
             <td>
                 <a href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}">
-                    {{$colony->id}}
+                    {{$colony->name}}
                 </a>
             </td>
-            <td>{{$colony->name}}</td>
+            <td>
+                @foreach($colony->mice as $mouse)
+                    @foreach($mouse->tags as $tag)
+                        @if($tag->lost_tag == '0')
+                            {{ $mouse->tagPad($tag->tag_num) }}
+                            <br>
+                        @endif
+                    @endforeach
+                @endforeach
+            </td>
             <td>
                 {{ Form::open(['action' => ['ColonyController@edit', $colony], 'method' => 'get']) }}
                 <button type="submit" >

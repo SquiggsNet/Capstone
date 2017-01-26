@@ -253,62 +253,68 @@ class Blood_PressureTableSeeder extends Seeder
 
 class TagTableSeeder extends Seeder
 {
+
     public function run()
     {
-        DB::table('tags')->insert([
-            'tag_num' => '429',
-            'lost_tag' => false
-        ]);
+        for($i = 0; $i < 1000; $i++) {
 
-        DB::table('tags')->insert([
-            'tag_num' => '430',
-            'lost_tag' => false
-        ]);
+            $i = str_pad($i, 3, '00', STR_PAD_LEFT);
 
-        DB::table('tags')->insert([
-            'tag_num' => '431',
-            'lost_tag' => false
-        ]);
+            DB::table('tags')->insert([
+                'tag_num' => $i,
+                'lost_tag' => false
+            ]);
+        }
 
-        DB::table('tags')->insert([
-            'tag_num' => '432',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '433',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '434',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '435',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '436',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '437',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '438',
-            'lost_tag' => false
-        ]);
-
-        DB::table('tags')->insert([
-            'tag_num' => '439',
-            'lost_tag' => false
-        ]);
+//        DB::table('tags')->insert([
+//            'tag_num' => '430',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '431',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '432',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '433',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '434',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '435',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '436',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '437',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '438',
+//            'lost_tag' => false
+//        ]);
+//
+//        DB::table('tags')->insert([
+//            'tag_num' => '439',
+//            'lost_tag' => false
+//        ]);
     }
 }
 

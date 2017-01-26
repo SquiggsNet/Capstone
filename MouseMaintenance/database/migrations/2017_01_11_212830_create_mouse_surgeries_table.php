@@ -28,6 +28,6 @@ class CreateMouseSurgeriesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('mouse_surgery');
     }
 }

@@ -28,6 +28,6 @@ class CreatePrivilegeUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('privilege_user');
     }
 }

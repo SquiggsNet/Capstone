@@ -27,6 +27,11 @@ class Mouse extends Model
         }
     }
 
+    public function  tagPad($tag_num){
+        $tagNum = str_pad($tag_num, 3, '00', STR_PAD_LEFT);
+        return $tagNum;
+    }
+
     public function getAge($birth_date){
         $currentDate = Carbon::now('America/Halifax')->format('Y-m-d H:i:s');
 

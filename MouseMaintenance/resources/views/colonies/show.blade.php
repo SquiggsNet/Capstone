@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Colony ID: {{$colony->id}}</h1>
-        <p>Name: {{$colony->name}}</p>
+        <h1>{{$colony->name}} Colony</h1>
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -21,19 +20,24 @@
                 <tr>
                     <td>
                         <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                            {{$mouse->id}}
+                            {{ $mouse->id }}
                         </a>
                     </td>
+                    <td>
                     @foreach ($mouse->tags as $tag)
                         @if($tag->lost_tag == 0)
-                            <td>{{ $tag->tag_num }}</td>
+                            {{ $mouse->tagPad($tag->tag_num) }}
                         @endif
                     @endforeach
-                    <td>({{$mouse->geno_type_a}}/{{$mouse->geno_type_b}})</td>
-                    @foreach ($mouse->treatments as $treatment)
-                        <td>{{$treatment->title}}</td>
-                    @endforeach
-                    <td>{{$mouse->birth_date}}</td>
+                    </td>
+                    <td>({{ $mouse->getGeno($mouse->geno_type_a) }}/{{ $mouse->getGeno($mouse->geno_type_b) }})</td>
+                    <td>
+                        @foreach ($mouse->treatments as $treatment)
+                            {{ $treatment->title }}
+                            <br>
+                        @endforeach
+                    </td>
+                    <td>{{ $mouse->birth_date }}</td>
                 </tr>
             @endforeach
             </tbody>

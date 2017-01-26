@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+
         {!! Form::model($mouse, ['action' => ['MouseController@update', $mouse], 'method' => 'put']) !!}
 
         <div class="form-group">

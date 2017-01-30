@@ -185,4 +185,14 @@ class MouseController extends Controller
         $mouse->delete();
         return redirect()->action('MouseController@index');
     }
+
+    public function createSource($source){
+
+        $mice = Mouse::all();
+        $colonies = Colony::all();
+        $users = User::all();
+
+//        return redirect()->action('MouseController@index');
+        return view('mice.create', compact('mice', 'colonies', 'users', 'source'));
+    }
 }

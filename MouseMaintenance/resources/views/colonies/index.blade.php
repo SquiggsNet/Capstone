@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <h1>Colony</h1>
+    <div>
+        <a href="{{ action( 'ColonyController@create') }}">
+            Create a New Colony
+        </a>
+    </div>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -37,8 +42,17 @@
         @endforeach
         </tbody>
     </table>
-    <a href="{{ action( 'ColonyController@create') }}">
-        Create a New Colony
-    </a>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropDownNewMice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Add Mice
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropDownNewMice">
+            <li><strong>Select Source</strong></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ action( 'MouseController@createSource', ['source' => 'internal']) }}">In House</a></li>
+            <li><a href="{{ action( 'MouseController@createSource', ['source' => 'external']) }}">External</a></li>
+        </ul>
+    </div>
 </div>
 @endsection

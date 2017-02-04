@@ -2,45 +2,69 @@
 
 @section('content')
 
-
-    @if($source == "internal")
+@if($source == "internal")
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">In House</div>
-                    <div class="panel-body">
-                        Select Quantity to Add and Sex:
-                        <div>
-                        <fieldset>
-                            <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-heading">In House</div>
+            <div class="panel-body">
+                <div>
+                    <form method="post" action="#">
+                        {{ method_field('PATCH') }}
+                        <div class="row">
+                            <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label>Male:</label>
-                                <input class="" type="number" id="maleMiceNumber" min="0"/>
+                                <input class="form-control" type="number" id="maleMiceNumber" min="0" />
                             </div>
-                            <div class="panel-body">
+                            <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label>Female:</label>
-                                <input type="number" id="femaleMiceNumber" min="0"/>
+                                <input class="form-control" type="number" id="femaleMiceNumber" min="0"/>
                             </div>
-                        </fieldset>
-
-                            {{--A nice +/- number selector, need to get JS to work in view --}}
-                            {{--<div class="col-lg-1">--}}
-                                {{--<div class="input-group">--}}
-                                    {{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="minus" data-target="font-size"><span class="glyphicon glyphicon-minus"></span></button></span>--}}
-                                    {{--<input type="text" value="1" class="form-control" id="font-size">--}}
-                                    {{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="plus" data-target="font-size"><span class="glyphicon glyphicon-plus"></span></button></span>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <label>Date of Birth:</label>
+                                <input class="form-control" type="date" id="dateOfBirth" />
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                                <label>Colony:</label>
+                                <select class="form-control" id="colony_id">
+                                    <option value="0">Select Colony...</option>
+                                    @foreach($colonies as $colony)
+                                        <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                <label>Breeder Cage:</label>
+                                <select class="form-control" id="colony_id">
+                                    <option value="0">Select Cage </option>
+                                    @foreach($colonies as $colony)
+                                        <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                <button type="submit" class="btn btn-primary">Save Mice</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    @else
+@else
 
-    @endif
+@endif
 
+
+    {{--A nice +/- number selector, need to get JS to work in view --}}
+    {{--<div class="col-lg-1">--}}
+    {{--<div class="input-group">--}}
+    {{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="minus" data-target="font-size"><span class="glyphicon glyphicon-minus"></span></button></span>--}}
+    {{--<input type="text" value="1" class="form-control" id="font-size">--}}
+    {{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="plus" data-target="font-size"><span class="glyphicon glyphicon-plus"></span></button></span>--}}
+    {{--</div>--}}
+    {{--</div>--}}
     <script type="text/javascript" src="{!! asset('public/js/button.js') !!}}"></script>
 
     {{--COMMENTED OUT BELOW TO CREATE NEW ADDITION PAGE--}}

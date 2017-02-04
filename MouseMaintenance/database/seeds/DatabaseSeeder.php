@@ -271,56 +271,6 @@ class TagTableSeeder extends Seeder
                 'lost_tag' => false
             ]);
         }
-
-//        DB::table('tags')->insert([
-//            'tag_num' => '430',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '431',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '432',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '433',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '434',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '435',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '436',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '437',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '438',
-//            'lost_tag' => false
-//        ]);
-//
-//        DB::table('tags')->insert([
-//            'tag_num' => '439',
-//            'lost_tag' => false
-//        ]);
     }
 }
 
@@ -392,7 +342,8 @@ class MouseTableSeeder extends Seeder
             'geno_type_b' => 'True',
             'father' => 1,
             'mother_one' => 2,
-            'mother_two' => 3,
+            'mother_two' => false,
+            'mother_three' => false,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
             'end_date' => '01/09/2012',
@@ -408,7 +359,8 @@ class MouseTableSeeder extends Seeder
             'geno_type_b' => 'False',
             'father' => 1,
             'mother_one' => 2,
-            'mother_two' => 3,
+            'mother_two' => false,
+            'mother_three' => false,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
             'end_date' => false,
@@ -424,7 +376,8 @@ class MouseTableSeeder extends Seeder
             'geno_type_b' => 'True',
             'father' => 1,
             'mother_one' => 2,
-            'mother_two' => 3,
+            'mother_two' => false,
+            'mother_three' => false,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
             'end_date' => false,
@@ -440,7 +393,8 @@ class MouseTableSeeder extends Seeder
             'geno_type_b' => 'True',
             'father' => 1,
             'mother_one' => 2,
-            'mother_two' => 3,
+            'mother_two' => false,
+            'mother_three' => false,
             'birth_date' => '01/02/2012',
             'wean_date' => '01/04/2012',
             'end_date' => false,

@@ -14,9 +14,14 @@ class CreateCagesTable extends Migration
     {
         Schema::create('cages', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('mouse_id');
-            $table->foreign('mouse_id')->references('id')->on('mice');
-            $table->boolean('breeder');
+            $table->unsignedInteger('male');
+            $table->foreign('male')->references('id')->on('mice');
+            $table->unsignedInteger('female_one');
+            $table->foreign('female_one')->references('id')->on('mice');
+            $table->unsignedInteger('female_two')->nullable;
+            $table->foreign('female_two')->references('id')->on('mice');
+            $table->unsignedInteger('female_three')->nullable;
+            $table->foreign('female_three')->references('id')->on('mice');
             $table->string('room_num')->nullable;
             $table->timestamps();
         });

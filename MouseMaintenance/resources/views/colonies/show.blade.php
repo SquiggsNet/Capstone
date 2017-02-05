@@ -74,7 +74,7 @@
             @endforeach
             </tbody>
         </table>
-
+.................
         <p>
             <a href="{{ action( 'HomeController@index') }}">
                 Go Back to Main Menu

@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PrivilegeTableSeeder::class);
         $this->call(Privilege_UserTableSeeder::class);
         $this->call(ColonyTableSeeder::class);
-        $this->call(CageTableSeeder::class);
         $this->call(TreatmentTableSeeder::class);
         $this->call(WeightTableSeeder::class);
         $this->call(Blood_PressureTableSeeder::class);
@@ -23,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TissueTableSeeder::class);
         $this->call(StorageTableSeeder::class);
         $this->call(MouseTableSeeder::class);
+        $this->call(CageTableSeeder::class);
         $this->call(SurgeryTableSeeder::class);
         $this->call(Mouse_SurgeryTableSeeder::class);
         $this->call(Mouse_StorageTableSeeder::class);
@@ -155,14 +155,11 @@ class CageTableSeeder extends Seeder
     public function run()
     {
         DB::table('cages')->insert([
-            'breeder' => true,
-            'room_num' => '78',
-            'mouse_id' => 1
-        ]);
-        DB::table('cages')->insert([
-            'breeder' => false,
-            'room_num' => '78',
-            'mouse_id' => 2
+            'male' => 1,
+            'female_one' => 2,
+            'female_two' => 3,
+            'female_three' => 4,
+            'room_num' => '78'
         ]);
     }
 }

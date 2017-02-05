@@ -44,11 +44,19 @@
                 </td>
                 <td>
                     {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->father_record->sex)}}({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})x
-                    {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->mother_one_record->sex)}}({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}}),
-                    {{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                    {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                    ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                    /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                    {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->mother_one_record->sex)}}({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
+                    @if(isset($mouse->mother_two_record->sex))
+                        ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
+                        {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                        ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
+                        /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                    @endif
+                    @if(isset($mouse->mother_three_record->sex))
+                        ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
+                        {{$mouse->getGender($mouse->mother_three_record->sex)}}
+                        ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
+                        /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                    @endif
                 </td>
                 <td>{{$mouse->getGender($mouse->sex)}}</td>
                 <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>

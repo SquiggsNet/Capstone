@@ -8,7 +8,7 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Drug Amount</th>
+            <th>Dosage (mg/kg/day)</th>
             <th>Mouse ID</th>
             <th></th>
             <th></th>
@@ -23,7 +23,7 @@
                 </a>
             </td>
             <td>{{$treatment->title}}</td>
-            <td>{{$treatment->drug_amount}} mg/kg/day</td>
+            <td>{{$treatment->drug_amount}}</td>
             <td>{{$treatment->mouse_id}}</td>
             <td>
                 {{ Form::open(['action' => ['TreatmentController@edit', $treatment], 'method' => 'get']) }}

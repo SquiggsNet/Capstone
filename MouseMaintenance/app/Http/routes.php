@@ -19,6 +19,10 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/appManagement', function () {
+    return view('appManagement.index');
+});
+
 Route::resource('users', 'UserController');
 Route::resource('privileges', 'PrivilegeController');
 

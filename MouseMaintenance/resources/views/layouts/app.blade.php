@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Research Facility</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Logo/Facility Acronym
                 </a>
             </div>
 
@@ -51,20 +51,21 @@
                     <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/mice') }}">Mice</a></li>
 
-                    <li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>
-                    <li><a href="{{ url('/cages') }}">Cages</a></li>
-                    <li><a href="{{ url('/storages') }}">Storages</a></li>
+                    {{--<li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>--}}
+                    {{--<li><a href="{{ url('/cages') }}">Cages</a></li>--}}
+                    {{--<li><a href="{{ url('/storages') }}">Storages</a></li>--}}
                     <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
-                    <li><a href="{{ url('/tags') }}">Tags</a></li>
-                    <li><a href="{{ url('/tissues') }}">Tissues</a></li>
-                    <li><a href="{{ url('/treatments') }}">Treatments</a></li>
-                    <li><a href="{{ url('/weights') }}">Weights</a></li>
+                    {{--<li><a href="{{ url('/tags') }}">Tags</a></li>--}}
+                    {{--<li><a href="{{ url('/tissues') }}">Tissues</a></li>--}}
+                    {{--<li><a href="{{ url('/treatments') }}">Treatments</a></li>--}}
+                    {{--<li><a href="{{ url('/weights') }}">Weights</a></li>--}}
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url('/users') }}">Users</a></li>
-                    <li><a href="{{ url('/privileges') }}">Privileges</a></li>
+                    <li><a href="{{ url('/appManagement') }}">Manage</a></li>
+                    {{--<li><a href="{{ url('/users') }}">Users</a></li>--}}
+                    {{--<li><a href="{{ url('/privileges') }}">Privileges</a></li>--}}
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>

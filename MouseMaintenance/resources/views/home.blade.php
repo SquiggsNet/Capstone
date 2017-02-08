@@ -8,7 +8,7 @@
                 <div class="panel-heading">Cardiovascular Research</div>
 
                 <div class="panel-body">
-                    <h3>Colonies</h3>
+                    <a href="{{ url('/colonies') }}"><h3>Colonies</h3></a>
 
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -28,11 +28,8 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ action( 'ColonyController@index') }}">
-                        Manage Colonies
-                    </a>
 
-                    <h3>Storage</h3>
+                    <a href="{{ url('/storages') }}"><h3>Storage</h3></a>
 
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -53,9 +50,8 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ action( 'StorageController@index') }}">
-                        Manage Storage Locations
-                    </a>
+
+                    <a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a>
 
                 </div>
             </div>

@@ -7,32 +7,38 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>id</th>
-                <th>Tag</th>
+                <th>Tag#</th>
+                <th>Strain</th>
                 <th>Geno Type</th>
-                <th>Treatment</th>
                 <th>DOB</th>
-
+                <th>Age (in weeks)</th>
+                <th>Weight</th>
+                <th>End Date</th>
+                <th>Comments</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($colony->mice as $mouse)
                 @if(isset($mouse->tags->last()->tag_num))
                 <tr>
-                    <td>{{ $mouse->id }}</td>
                     <td>
                         <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
                             {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
                         </a>
                     </td>
+                    <td>*strain info*</td>
                     <td>({{ $mouse->getGeno($mouse->geno_type_a) }}/{{ $mouse->getGeno($mouse->geno_type_b) }})</td>
-                    <td>
-                        @foreach ($mouse->treatments as $treatment)
-                            {{ $treatment->title }}
-                            <br>
-                        @endforeach
-                    </td>
+                    {{--<td>--}}
+                        {{--@foreach ($mouse->treatments as $treatment)--}}
+                            {{--{{ $treatment->title }}--}}
+                            {{--<br>--}}
+                        {{--@endforeach--}}
+                    {{--</td>--}}
                     <td>{{ $mouse->birth_date }}</td>
+                    <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                    <td>{{$mouse->weights->last()->weight}}g</td>
+                    <td>{{$mouse->end_date}}</td>
+                    <td>{{$mouse->comments}}</td>
                 </tr>
                 @endif
             @endforeach

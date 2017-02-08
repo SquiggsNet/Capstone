@@ -7,7 +7,7 @@
 
 @section('content')
 
-@if($source == "internal")
+@if($source == "1")
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">In House</div>
@@ -17,11 +17,11 @@
                         {{ method_field('PATCH') }}
                         <div class="row">
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
-                                <label>Male:</label>
+                                <label># Of Male(s):</label>
                                 <input class="form-control" type="number" id="male_mice_number" min="0" />
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
-                                <label>Female:</label>
+                                <label># Of Female(s):</label>
                                 <input class="form-control" type="number" id="female_mice_number" min="0"/>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
@@ -39,35 +39,51 @@
                             </div>
                         </div>
                         <div class="row">
-                            {{--<div class="form-group col-xs-12 col-sm-6 col-md-2">--}}
-                                {{--<?php $selectedCage = 0; ?>--}}
-                                {{--<label>Select Breeder Cage:</label>--}}
-                                {{--<select class="form-control" name="cage_id" id="cage_id" onchange="selectedCage(this.form.cage_id)">--}}
-                                    {{--<option value="0">Select Cage </option>--}}
-                                    {{--@foreach($cages as $cage)--}}
-                                        {{--<option value="{{ $selectedCage = $cage->id }}">{{ $cage->id }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group col-xs-12 col-sm-6 col-md-2">--}}
-                                {{--<label>Select Female Parent:</label>--}}
-                                {{--<select class="form-control" id="female_one">--}}
-                                    {{--<option value="0">Select Mother</option>--}}
-                                    {{--@foreach($cages as $cage)--}}
-                                        {{--@if($cage->id == $cageId)--}}
-                                            {{--@if(isset($cage->mother_one))--}}
-                                            {{--<option value="{{ $cage->mother_one }}">{{ $cage->mother_one}}</option>--}}
-                                            {{--@endif--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
                             <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <label>Unknown Predecessors:</label>
+                                <label>Male Parent:</label>
                                 <label>
-                                    <input type="checkbox" value="true" name="cb_unknown_parents">
-                                    Select all
+                                    @foreach($mice as $mouse)
+                                        @if($mouse->id == $cage->male)
+                                            <input class="form-control" type="text" id="male_parent" readonly="readonly"
+                                                   value=" #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                            $mouse->getGender($mouse->sex) . ' (' .
+                                                            $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                            $mouse->getGeno($mouse->geno_type_b) . ')' }} "/>
+                                        @endif
+                                    @endforeach
                                 </label>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                <label>Select Female Parent:</label>
+                                <select class="form-control" id="female_parent">
+                                    <option value="0">Select All (Unknown)</option>
+                                    @foreach($mice as $mouse)
+                                        @if($mouse->id == $cage->female_one)
+                                            <option value="{{ $mouse->id }}">
+                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                    $mouse->getGender($mouse->sex) . ' (' .
+                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                            </option>
+                                        @endif
+                                        @if($mouse->id == $cage->female_two)
+                                            <option value="{{ $mouse->id }}">
+                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                    $mouse->getGender($mouse->sex) . ' (' .
+                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                            </option>
+                                        @endif
+                                        @if($mouse->id == $cage->female_three)
+                                            <option value="{{ $mouse->id }}">
+                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                    $mouse->getGender($mouse->sex) . ' (' .
+                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="row">

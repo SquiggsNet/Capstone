@@ -191,7 +191,7 @@ class MouseController extends Controller
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();
-        $cage = $request['cage_id'];
+        $cage = Cage::find($request['cage_id']);
         $source = $request['source'];
 
 //        return redirect()->action('MouseController@index');

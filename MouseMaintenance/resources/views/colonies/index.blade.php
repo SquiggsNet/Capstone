@@ -46,13 +46,13 @@
         <div class="panel-heading">Add Mice</div>
         <div class="panel-body">
             <div>
-                <form id="createMice" method="GET" action="mice/">
+                <form id="createMice" method="GET" action="mice/source">
                     {{ csrf_field() }}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
                             <label>Add Mice</label>
-                            <select class="form-control" id="source" onchange="selectedSource();">
+                            <select class="form-control" name="source" id="source" onchange="selectedSource();">
                                 <option value="0">Select source</option>
                                 <option value="1">In House</option>
                                 <option value="2">External</option>

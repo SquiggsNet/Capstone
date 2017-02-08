@@ -18,7 +18,15 @@
     <style>
         body {
             font-family: 'Lato';
+
         }
+
+        @media (max-width: 600px) {
+            body{
+                background-color: darkgray;
+            }
+        }
+
 
         .fa-btn {
             margin-right: 6px;

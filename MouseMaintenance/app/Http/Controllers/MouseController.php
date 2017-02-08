@@ -29,16 +29,26 @@ class MouseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+//        $mice = Mouse::all();
+//        $colonies = Colony::all();
+//        $users = User::all();
+//        $cages = Cage::all();
+//
+//        return view('mice.create', compact('mice', 'colonies', 'users', 'cages'));
+
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();
-        $cages = Cage::all();
+        $cage = Cage::find($request['cage_id']);
+        $source = $request['source'];
 
-        return view('mice.create', compact('mice', 'colonies', 'users', 'cages'));
+//        return redirect()->action('MouseController@index');
+        return view('mice.create', compact('mice', 'colonies', 'users', 'cage', 'source'));
     }
 
     /**
@@ -49,54 +59,58 @@ class MouseController extends Controller
      */
     public function store(Request $request)
     {
-        $isSick = 0;
-        if($request['sick_report']){
-            $isSick = $request['sick_report'];
-        }
 
-        $mouse = Mouse::create([
-            'colony_id' => $request['colony_id'],
-            'reserved_for' => $request['reserved_for'],
-            'sex' => $request['sex'],
-            'geno_type_a' => $request['geno_type_a'],
-            'geno_type_b' => $request['geno_type_b'],
-            'father' => $request['father'],
-            'mother_one' => $request['mother_one'],
-            'mother_two' => $request['mother_two'],
-            'birth_date' => $request['birth_date'],
-            'wean_date' => $request['wean_date'],
-            'end_date' => $request['end_date'],
-            'sick_report' => $isSick,
-            'comments' => $request['comments']
-        ]);
-        $mouse->save();
-        $newMouse = DB::table('mice')->orderBy('id', 'desc')->first();
+//        $isSick = 0;
+//        if($request['sick_report']){
+//            $isSick = $request['sick_report'];
+//        }
+//
+//        $mouse = Mouse::create([
+//            'colony_id' => $request['colony_id'],
+//            'reserved_for' => $request['reserved_for'],
+//            'sex' => $request['sex'],
+//            'geno_type_a' => $request['geno_type_a'],
+//            'geno_type_b' => $request['geno_type_b'],
+//            'father' => $request['father'],
+//            'mother_one' => $request['mother_one'],
+//            'mother_two' => $request['mother_two'],
+//            'birth_date' => $request['birth_date'],
+//            'wean_date' => $request['wean_date'],
+//            'end_date' => $request['end_date'],
+//            'sick_report' => $isSick,
+//            'comments' => $request['comments']
+//        ]);
+//        $mouse->save();
+//        $newMouse = DB::table('mice')->orderBy('id', 'desc')->first();
+//
+//        if($request['weight_one'] or $request['weight_two']){
+//
+//            $mass = $request['weight_one'].'.'.$request['weight_two'];
+//
+//            $weight = Weight::create([
+//                'weight' => $mass,
+//                'mouse_id' => $newMouse->id,
+//                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
+//                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
+//            ]);
+//            $weight->save();
+//        }
+//
+//        if($request['systolic'] and $request['diastolic']) {
+//
+//            $bloodPressure = BloodPressure::create([
+//                'systolic' => $request['systolic'],
+//                'diastolic' => $request['diastolic'],
+//                'mouse_id' => $newMouse->id,
+//                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
+//                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
+//            ]);
+//            $bloodPressure->save();
+//        }
+        $colony = $request['colony_id'];
 
-        if($request['weight_one'] or $request['weight_two']){
-
-            $mass = $request['weight_one'].'.'.$request['weight_two'];
-
-            $weight = Weight::create([
-                'weight' => $mass,
-                'mouse_id' => $newMouse->id,
-                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
-                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
-            ]);
-            $weight->save();
-        }
-
-        if($request['systolic'] and $request['diastolic']) {
-
-            $bloodPressure = BloodPressure::create([
-                'systolic' => $request['systolic'],
-                'diastolic' => $request['diastolic'],
-                'mouse_id' => $newMouse->id,
-                'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
-                'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
-            ]);
-            $bloodPressure->save();
-        }
-        return redirect()->action('MouseController@index');
+        return($colony);
+//        return redirect()->action('MouseController@index');
     }
 
     /**
@@ -186,15 +200,15 @@ class MouseController extends Controller
         return redirect()->action('MouseController@index');
     }
 
-    public function createSource(Request $request){
-
-        $mice = Mouse::all();
-        $colonies = Colony::all();
-        $users = User::all();
-        $cage = Cage::find($request['cage_id']);
-        $source = $request['source'];
-
-//        return redirect()->action('MouseController@index');
-        return view('mice.create', compact('mice', 'colonies', 'users', 'cage', 'source'));
-    }
+//    public function createSource(Request $request){
+//
+//        $mice = Mouse::all();
+//        $colonies = Colony::all();
+//        $users = User::all();
+//        $cage = Cage::find($request['cage_id']);
+//        $source = $request['source'];
+//
+////        return redirect()->action('MouseController@index');
+//        return view('mice.create', compact('mice', 'colonies', 'users', 'cage', 'source'));
+//    }
 }

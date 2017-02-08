@@ -26,11 +26,22 @@
             </a>
         </p>
         <p><strong>Mother 2:</strong>
-            <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_two]) }}">
-                {{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
-            </a>
+            @if(isset($mouse->mother_two->id))
+                <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_two]) }}">
+                    {{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
+                    {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                    ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                </a>
+            @endif
+        </p>
+        <p><strong>Mother 3:</strong>
+            @if(isset($mouse->mother_three->id))
+                <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_three]) }}">
+                    {{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
+                    {{$mouse->getGender($mouse->mother_three_record->sex)}}
+                    ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                </a>
+            @endif
         </p>
         <p><strong>Birth Date:</strong> {{$mouse->birth_date}}</p>
         <p><strong>Wean Date:</strong> {{$mouse->wean_date}}</p>

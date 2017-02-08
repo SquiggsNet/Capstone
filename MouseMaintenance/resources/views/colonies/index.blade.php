@@ -46,9 +46,8 @@
         <div class="panel-heading">Add Mice</div>
         <div class="panel-body">
             <div>
-                <form id="createMice" method="GET" action="mice/source">
+                <form id="createMice" method="GET" action="mice/create">
                     {{ csrf_field() }}
-                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
                             <label>Add Mice</label>
@@ -70,7 +69,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                            <button type="submit" class="btn btn-primary">Save Mice</button>
+                            <button type="submit" class="btn btn-primary">Create Mice</button>
                         </div>
                     </div>
                 </form>
@@ -92,11 +91,11 @@
         }
     }
 
-    $('#createMice').on('submit', function() {
-        var id = $('#source').val();
-        var formAction = $('#createMice').attr('action');
-        $('#createMice').attr('action', formAction + id);
-    });
+//    $('#createMice').on('submit', function() {
+//        var id = $('#source').val();
+//        var formAction = $('#createMice').attr('action');
+//        $('#createMice').attr('action', formAction + id);
+//    });
 
 </script>
 @endsection

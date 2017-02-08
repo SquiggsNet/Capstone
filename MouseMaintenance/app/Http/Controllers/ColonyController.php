@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cage;
 use App\Mouse;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class ColonyController extends Controller
     public function index()
     {
         $colonies = Colony::all();
-        return view('colonies.index', compact('colonies', 'tags'));
+        $cages = Cage::all();
+        return view('colonies.index', compact('colonies', 'tags', 'cages'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BloodPressure;
+use App\Cage;
 use App\Colony;
 use App\User;
 use App\Weight;
@@ -35,10 +36,9 @@ class MouseController extends Controller
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();
+        $cages = Cage::all();
 
-        $mouse = Mouse::with('tags')->find(5);
-//        return($mouse);
-        return view('mice.create', compact('mice', 'colonies', 'users'));
+        return view('mice.create', compact('mice', 'colonies', 'users', 'cages'));
     }
 
     /**
@@ -186,13 +186,15 @@ class MouseController extends Controller
         return redirect()->action('MouseController@index');
     }
 
-    public function createSource($source){
+    public function createSource(Request $request){
 
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();
+        $cage = $request['cage_id'];
+        $source = $request['source'];
 
 //        return redirect()->action('MouseController@index');
-        return view('mice.create', compact('mice', 'colonies', 'users', 'source'));
+        return view('mice.create', compact('mice', 'colonies', 'users', 'cage', 'source'));
     }
 }

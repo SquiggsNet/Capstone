@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 @section('content')
 
 @if($source == "internal")
@@ -13,15 +18,15 @@
                         <div class="row">
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label>Male:</label>
-                                <input class="form-control" type="number" id="maleMiceNumber" min="0" />
+                                <input class="form-control" type="number" id="male_mice_number" min="0" />
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label>Female:</label>
-                                <input class="form-control" type="number" id="femaleMiceNumber" min="0"/>
+                                <input class="form-control" type="number" id="female_mice_number" min="0"/>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Date of Birth:</label>
-                                <input class="form-control" type="date" id="dateOfBirth" />
+                                <input class="form-control" type="date" id="date_of_birth" />
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Colony:</label>
@@ -32,14 +37,37 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        <div class="row">
+                            {{--<div class="form-group col-xs-12 col-sm-6 col-md-2">--}}
+                                {{--<?php $selectedCage = 0; ?>--}}
+                                {{--<label>Select Breeder Cage:</label>--}}
+                                {{--<select class="form-control" name="cage_id" id="cage_id" onchange="selectedCage(this.form.cage_id)">--}}
+                                    {{--<option value="0">Select Cage </option>--}}
+                                    {{--@foreach($cages as $cage)--}}
+                                        {{--<option value="{{ $selectedCage = $cage->id }}">{{ $cage->id }}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group col-xs-12 col-sm-6 col-md-2">--}}
+                                {{--<label>Select Female Parent:</label>--}}
+                                {{--<select class="form-control" id="female_one">--}}
+                                    {{--<option value="0">Select Mother</option>--}}
+                                    {{--@foreach($cages as $cage)--}}
+                                        {{--@if($cage->id == $cageId)--}}
+                                            {{--@if(isset($cage->mother_one))--}}
+                                            {{--<option value="{{ $cage->mother_one }}">{{ $cage->mother_one}}</option>--}}
+                                            {{--@endif--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
                             <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <label>Breeder Cage:</label>
-                                <select class="form-control" id="colony_id">
-                                    <option value="0">Select Cage </option>
-                                    @foreach($colonies as $colony)
-                                        <option value="{{ $colony->id }}">{{ $colony->name }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Unknown Predecessors:</label>
+                                <label>
+                                    <input type="checkbox" value="true" name="cb_unknown_parents">
+                                    Select all
+                                </label>
                             </div>
                         </div>
                         <div class="row">
@@ -52,9 +80,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function selectedCage(dropDown){
+            var cageId = dropDown.selectedIndex();
+        }
+    </script>
 @else
 
+    You've Reached external
 @endif
+
 
 
     {{--A nice +/- number selector, need to get JS to work in view --}}
@@ -65,7 +101,7 @@
     {{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="plus" data-target="font-size"><span class="glyphicon glyphicon-plus"></span></button></span>--}}
     {{--</div>--}}
     {{--</div>--}}
-    <script type="text/javascript" src="{!! asset('public/js/button.js') !!}}"></script>
+    {{--<script type="text/javascript" src="{!! asset('public/js/button.js') !!}}"></script>--}}
 
     {{--COMMENTED OUT BELOW TO CREATE NEW ADDITION PAGE--}}
     {{--<div class="container">--}}

@@ -17,7 +17,7 @@
             <th>Wean Date</th>
             <th>End Date</th>
             <th>Comments</th>
-            {{--<th></th>--}}
+            <th></th>
             {{--<th></th>--}}
         </tr>
         </thead>
@@ -71,13 +71,13 @@
                     <td>{{$mouse->wean_date}}</td>
                     <td>{{$mouse->end_date}}</td>
                     <td>{{$mouse->comments}}</td>
-                    {{--<td>--}}
-                        {{--{{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}--}}
-                        {{--<button type="submit" >--}}
-                            {{--<span class="glyphicon glyphicon-pencil"></span>--}}
-                        {{--</button>--}}
-                        {{--{{ Form::close() }}--}}
-                    {{--</td>--}}
+                    <td>
+                        {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
+                        <button type="submit" >
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        {{ Form::close() }}
+                    </td>
                     {{--<td>--}}
                         {{--{{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}--}}
                         {{--<button type="submit" >--}}

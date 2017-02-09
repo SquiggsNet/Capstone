@@ -109,7 +109,6 @@ class MouseController extends Controller
             }
         }
         return redirect()->action('MouseController@index');
-
     }
 
     /**
@@ -137,9 +136,9 @@ class MouseController extends Controller
     {
         $colonies = Colony::all();
         $mouse = Mouse::find($id);
-        $parents = Mouse::all();
+        $mice = Mouse::all();
         $users = User::all();
-        return view('mice.edit', compact('mouse', 'colonies', 'users', 'parents'));
+        return view('mice.edit', compact('mouse', 'colonies', 'users', 'mice'));
     }
 
     /**

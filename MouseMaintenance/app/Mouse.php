@@ -10,7 +10,7 @@ use DateTime;
 class Mouse extends Model
 {
     protected $fillable = array('colony_id', 'reserved_for', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
-                                'mother_two', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
+                                'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
 
     public function getGeno($geno){
         if($geno == 'True'){
@@ -21,7 +21,7 @@ class Mouse extends Model
     }
 
     public function getGender($sex){
-        if($sex == 'True'){
+        if($sex == 'True' || $sex == 1){
             return 'M';
         }else{
             return 'F';
@@ -108,6 +108,10 @@ class Mouse extends Model
 
     public function mother_two_record(){
         return $this->belongsTo(Mouse::class, 'mother_two');
+    }
+
+    public function mother_three_record(){
+        return $this->belongsTo(Mouse::class, 'mother_three');
     }
 
     public function offspring(){

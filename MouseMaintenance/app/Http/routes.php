@@ -30,7 +30,6 @@ Route::resource('bloodPressures', 'BloodPressureController');
 Route::resource('cages', 'CageController');
 Route::resource('colonies', 'ColonyController');
 
-//Route::get('mice/{source}', 'MouseController@createSource');
 Route::resource('mice', 'MouseController');
 
 

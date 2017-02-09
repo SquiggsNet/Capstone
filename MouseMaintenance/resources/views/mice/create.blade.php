@@ -13,24 +13,25 @@
             <div class="panel-heading">In House</div>
             <div class="panel-body">
                 <div>
-                    <form method="post" action="#">
-                        {{ method_field('PATCH') }}
+                    {!! Form::open((array('route' => 'mice.store'))) !!}
+                    {{--<form method="post" action="/mice">--}}
+                        {{--{{ csrf_field() }}--}}
                         <div class="row">
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Male(s):</label>
-                                <input class="form-control" type="number" id="male_mice_number" min="0" />
+                                <input class="form-control" type="number" name="male_mice_number" min="0" />
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Female(s):</label>
-                                <input class="form-control" type="number" id="female_mice_number" min="0"/>
+                                <input class="form-control" type="number" name="female_mice_number" min="0"/>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Date of Birth:</label>
-                                <input class="form-control" type="date" id="date_of_birth" />
+                                <input class="form-control" type="date" name="date_of_birth" />
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Colony:</label>
-                                <select class="form-control" id="colony_id">
+                                <select class="form-control" name="colony_id">
                                     <option value="0">Select Colony...</option>
                                     @foreach($colonies as $colony)
                                         <option value="{{ $colony->id }}">{{ $colony->name }}</option>
@@ -44,7 +45,7 @@
                                 <label>
                                     @foreach($mice as $mouse)
                                         @if($mouse->id == $cage->male)
-                                            <input class="form-control" type="text" id="male_parent" readonly="readonly"
+                                            <input class="form-control" type="text" name="male_parent" readonly="readonly"
                                                    value=" #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
                                                             $mouse->getGender($mouse->sex) . ' (' .
                                                             $mouse->getGeno($mouse->geno_type_a) . '/' .
@@ -55,7 +56,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-2">
                                 <label>Select Female Parent:</label>
-                                <select class="form-control" id="female_parent">
+                                <input type="hidden" name="cage_id" value="{{ $cage->id }}"/>
+                                <select class="form-control" name="female_parent">
                                     <option value="0">Select All (Unknown)</option>
                                     @foreach($mice as $mouse)
                                         @if($mouse->id == $cage->female_one)
@@ -86,12 +88,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <button type="submit" class="btn btn-primary">Save Mice</button>
-                            </div>
+                        {{--<div class="row">--}}
+                            {{--<div class="form-group col-xs-12 col-sm-6 col-md-2">--}}
+                                {{--<button type="submit" class="btn btn-primary">Save Mice</button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                            {!! Form::submit('Add',['class'=>'btn btn-default']) !!}
                         </div>
-                    </form>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

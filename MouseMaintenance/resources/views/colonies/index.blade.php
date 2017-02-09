@@ -28,26 +28,13 @@
         @endforeach
         </tbody>
     </table>
-    {{--<div class="dropdown">--}}
-        {{--<button class="btn btn-default dropdown-toggle" type="button" id="dropDownNewMice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">--}}
-            {{--Add Mice--}}
-            {{--<span class="caret"></span>--}}
-        {{--</button>--}}
-        {{--<ul class="dropdown-menu" aria-labelledby="dropDownNewMice">--}}
-            {{--<li><strong>Select Source</strong></li>--}}
-            {{--<li role="separator" class="divider"></li>--}}
-            {{--<li><a href="{{ action( 'MouseController@createSource', ['source' => 'internal']) }}">In House</a></li>--}}
-            {{--<li><a href="{{ action( 'MouseController@createSource', ['source' => 'external']) }}">External</a></li>--}}
-        {{--</ul>--}}
-    {{--</div>--}}
 </div>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">Add Mice</div>
         <div class="panel-body">
             <div>
-                <form id="createMice" method="GET" action="mice/create">
-                    {{ csrf_field() }}
+                {!! Form::open(['action' => 'MouseController@create', 'method' => 'get']) !!}
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
                             <label>Add Mice</label>
@@ -69,10 +56,10 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                            <button type="submit" class="btn btn-primary">Create Mice</button>
+                        {!! Form::submit('Add',['class'=>'btn btn-default']) !!}
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

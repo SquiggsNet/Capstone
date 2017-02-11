@@ -13,7 +13,7 @@ class Mouse extends Model
                                 'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
 
     public function getGeno($geno){
-        if($geno == 'True'){
+        if($geno == 'True' || $geno == 1){
             return '+';
         }else{
             return '-';
@@ -32,6 +32,7 @@ class Mouse extends Model
         $tagNum = str_pad($tag_num, 3, '00', STR_PAD_LEFT);
         return $tagNum;
     }
+
 
     public function getAge($birth_date){
 

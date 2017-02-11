@@ -135,10 +135,10 @@ class MouseController extends Controller
     public function edit($id)
     {
         $colonies = Colony::all();
-        $mouse = Mouse::find($id);
+        $editMouse = Mouse::find($id);
         $mice = Mouse::all();
         $users = User::all();
-        return view('mice.edit', compact('mouse', 'colonies', 'users', 'mice'));
+        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice'));
     }
 
     /**
@@ -154,16 +154,28 @@ class MouseController extends Controller
         if($request['sick_report']){
             $isSick = $request['sick_report'];
         }
+        if($request['geno'] == 2){
+            $geno_a = 1;
+            $geno_b = 1;
+        }
+        elseif($request['geno'] == 1){
+            $geno_a = 1;
+            $geno_b = 0;
+        }else{
+            $geno_a = 0;
+            $geno_b = 0;
+        }
 
         $mouse = Mouse::find($id);
         $mouse->colony_id = $request['colony_id'];
         $mouse->reserved_for = $request['reserved_for'];
         $mouse->sex = $request['sex'];
-        $mouse->geno_type_a = $request['geno_type_a'];
-        $mouse->geno_type_b = $request['geno_type_b'];
+        $mouse->geno_type_a = $geno_a;
+        $mouse->geno_type_b = $geno_b;
         $mouse->father = $request['father'];
         $mouse->mother_one = $request['mother_one'];
         $mouse->mother_two = $request['mother_two'];
+        $mouse->mother_three = $request['mother_three'];
         $mouse->birth_date = $request['birth_date'];
         $mouse->wean_date = $request['wean_date'];
         $mouse->end_date = $request['end_date'];

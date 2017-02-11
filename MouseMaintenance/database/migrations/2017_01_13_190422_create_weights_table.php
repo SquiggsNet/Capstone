@@ -17,6 +17,7 @@ class CreateWeightsTable extends Migration
             $table->unsignedInteger('mouse_id');
             $table->foreign('mouse_id')->references('id')->on('mice');
             $table->decimal('weight');
+            $table->date('weighed_on');
             $table->timestamps();
         });
     }

@@ -182,16 +182,25 @@ class MouseController extends Controller
         $mouse->sick_report = $isSick;
         $mouse->comments = $request['comments'];
         $mouse->save();
-//
-//        $mass = $request['weight_one'].'.'.$request['weight_two'];
-//        $weight = Weight::create([
-//            'weight' => $mass,
-//            'mouse_id' => $newMouse->id,
-//            'created_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s'),
-//            'modified_at' => Carbon::now('America/Halifax')->format('Y-m-d H:i:s')
-//        ]);
-//        $weight->save();
 
+        if($mouse->weights->last()->weighed_on != $request['weight_date']) {
+            $weight = Weight::create([
+                'weight' => $request['weight'],
+                'weighed_on' => $request['weight_date'],
+                'mouse_id' => $mouse->id
+            ]);
+            $weight->save();
+        }
+
+        if($mouse->blood_pressures->last()->taken_on != $request['bp_date']) {
+            $bp = BloodPressure::create([
+                'systolic' => 'null',
+                'diastolic' => 'null',
+                'taken_on' => $request['bp_date'],
+                'mouse_id' => $mouse->id
+            ]);
+            $bp->save();
+        }
 
 
         return redirect()->action('MouseController@index');

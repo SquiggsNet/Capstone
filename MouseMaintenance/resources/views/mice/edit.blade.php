@@ -183,7 +183,17 @@
             </div>
             <div class="form-group">
                 <label>Blood Pressure Last Taken</label>
-                <input class="form-control" name="bp_date" type="date" value="{{ $editMouse->end_date }}"/>
+                <input class="form-control" name="bp_date" type="date" value="{{ $editMouse->blood_pressures->last()->taken_on }}"/>
+            </div>
+            <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllBPs">
+                View Previous Dates &#8659;
+            </button>
+            <div class="@if(!session('open')){{'collapse'}}@endif" id="ViewAllBPs">
+                @foreach($editMouse->blood_pressures->reverse() as $bps)
+                    <li class="list-group-item">
+                        {{ $bps->taken_on }}
+                    </li>
+                @endforeach
             </div>
         </div>
     </div>
@@ -194,18 +204,30 @@
                 <label for="weight" class="col-md-1 control-label">Weight</label>
                 <div class="input-group col-xs-6 col-sm-6 col-md-2">
                     <div class="input-group">
-                        <input class="form-control" name="weight" id="weight" type="number" aria-describedby="basic-addon2"
+                        <input class="form-control" name="weight" id="weight" type="number" step="any" aria-describedby="basic-addon2"
                                value="{{ $editMouse->weights->last()->weight}}">
                         <span class="input-group-addon" id="basic-addon2">gms</span>
                     </div>
                     <input class="form-control" name="weight_date" id="weight_date" type="date"
-                           value="">
+                           value="{{ $editMouse->weights->last()->weighed_on }}">
+
+                    <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllWeights">
+                        View Previous Dates &#8659;
+                    </button>
+                    <div class="@if(!session('open')){{'collapse'}}@endif" id="ViewAllWeights">
+                        @foreach($editMouse->weights->reverse() as $weights)
+                            <li class="list-group-item">
+                                {{ $weights->weight . 'g. @ ' . $weights->weighed_on }}
+                            </li>
+                        @endforeach
+                    </div>
                 </div>
+            </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <label>Sick Report</label>
-                    {!! Form::checkbox('sick_report', 'value') !!}
+                    <input type="checkbox" name="sick_report" value="1" @if($editMouse->sick_report) checked="checked" @endif />
                 </div>
             </div>
             <div class="form-group">

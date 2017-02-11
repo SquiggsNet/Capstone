@@ -64,9 +64,7 @@
                     <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
                     <td>{{$mouse->weights->last()->weight}}g</td>
                     <td>
-                        {{$mouse->blood_pressures->last()->systolic}}
-                        /
-                        {{$mouse->blood_pressures->last()->diastolic}}
+                        {{$mouse->blood_pressures->last()->taken_on}}
                     </td>
                     <td>{{$mouse->wean_date}}</td>
                     <td>{{$mouse->end_date}}</td>

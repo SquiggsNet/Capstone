@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BloodPressure;
 use App\Cage;
 use App\Colony;
+use App\Tag;
 use App\User;
 use App\Weight;
 use Carbon\Carbon;
@@ -138,7 +139,10 @@ class MouseController extends Controller
         $editMouse = Mouse::find($id);
         $mice = Mouse::all();
         $users = User::all();
-        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice'));
+//        $tags = Tag::has('mice')->where('mouse_id', $editMouse->id)->get();
+//
+//        return($tags);
+        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'tags'));
     }
 
     /**
@@ -200,6 +204,10 @@ class MouseController extends Controller
                 'mouse_id' => $mouse->id
             ]);
             $bp->save();
+        }
+
+        if(isset($request['new_tag_id'])){
+            $mouse->tags()->attach($request['new_tag_id'] + 1);
         }
 
 

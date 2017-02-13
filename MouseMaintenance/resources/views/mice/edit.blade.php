@@ -12,9 +12,34 @@
         <div class="panel-heading">Identification</div>
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-xs-6 col-sm-6 col-md-3">
-                    <label>Tag:</label>
-                    <input type="text" class="form-control" name="tag_id" value="{{ $editMouse->tagPad($editMouse->tags->last()->tag_num )}}"/>
+                <div class="form-group col-xs-4 col-sm-6 col-md-3 col-md-offset-1">
+                    <label>Tag No.</label>
+                    <input type="text" id="tag_id" class="form-control" maxlength="3" minlength="3" name="tag_id"
+                           value="{{ $editMouse->tagPad($editMouse->tags->last()->tag_num )}}"/>
+                </div>
+                <div class="form-group col-xs-4 col-sm-6 col-md-3">
+                    <label>Lost Tag</label>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <input type="checkbox" class="form-control" id="lost_tag" onchange="newTag()" value="True">
+                    </div>
+                </div>
+                <div class="form-group col-xs-4 col-sm-6 col-md-3" style="display: none" id="new_tag_input">
+                    <label>New Tag</label>
+                    <input type="text"  maxlength="3" minlength="3" class="form-control" name="new_tag_id" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllTags">
+                        View All Tags &#8659;
+                    </button>
+                    <div class="collapse" id="ViewAllTags">
+                        @foreach($editMouse->tags->reverse() as $tags)
+                            <li class="list-group-item">
+                                {{ $editMouse->tagPad($tags->tag_num) }}
+                            </li>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -188,7 +213,7 @@
             <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllBPs">
                 View Previous Dates &#8659;
             </button>
-            <div class="@if(!session('open')){{'collapse'}}@endif" id="ViewAllBPs">
+            <div class="collapse" id="ViewAllBPs">
                 @foreach($editMouse->blood_pressures->reverse() as $bps)
                     <li class="list-group-item">
                         {{ $bps->taken_on }}
@@ -210,24 +235,31 @@
                     </div>
                     <input class="form-control" name="weight_date" id="weight_date" type="date"
                            value="{{ $editMouse->weights->last()->weighed_on }}">
-
-                    <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllWeights">
-                        View Previous Dates &#8659;
-                    </button>
-                    <div class="@if(!session('open')){{'collapse'}}@endif" id="ViewAllWeights">
-                        @foreach($editMouse->weights->reverse() as $weights)
-                            <li class="list-group-item">
-                                {{ $weights->weight . 'g. @ ' . $weights->weighed_on }}
-                            </li>
-                        @endforeach
+                </div>
+                <div class="form-group row">
+                    <div class="input-group col-xs-12 col-sm-6 col-md-4">
+                        <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllWeights">
+                            View Previous Weights &#8659;
+                        </button>
+                        <div class="collapse" id="ViewAllWeights">
+                            @foreach($editMouse->weights->reverse() as $weights)
+                                <dl class="dl-horizontal">
+                                    <dt>{{ $weights->weight . 'g' }}</dt>
+                                    <dd>{{ $weights->weighed_on }}</dd>
+                                </dl>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
             </div>
             <div class="row">
-                <div class="form-group">
+                <div class="form-group col-xs-1 col-sm-1 col-md-2">
                     <label>Sick Report</label>
-                    <input type="checkbox" name="sick_report" value="1" @if($editMouse->sick_report) checked="checked" @endif />
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                        <input type="checkbox" class="form-control" name="sick_report"
+                               value="1" @if($editMouse->sick_report) checked="checked" @endif />
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -257,6 +289,17 @@
             document.getElementById('geno3').addClass('active');;
         }
     }
+
+    function newTag(){
+        var check_box = document.getElementById("lost_tag");
+        if(check_box.checked){
+            document.getElementById('new_tag_input').style.display = 'block';
+        }else{
+            document.getElementById('new_tag_input').style.display = 'none';
+        }
+
+    }
+
     window.onload = setChecked();
 </script>
 

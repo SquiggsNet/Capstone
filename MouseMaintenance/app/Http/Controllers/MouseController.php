@@ -196,6 +196,7 @@ class MouseController extends Controller
         $editMouse = Mouse::find($id);
         $mice = Mouse::all();
         $users = User::all();
+//        return($editMouse->blood_pressures);
         return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'tags'));
     }
 
@@ -208,10 +209,12 @@ class MouseController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $isSick = 0;
         if($request['sick_report']){
             $isSick = $request['sick_report'];
         }
+
         if($request['geno'] == 2){
             $geno_a = 1;
             $geno_b = 1;
@@ -219,13 +222,15 @@ class MouseController extends Controller
         elseif($request['geno'] == 1){
             $geno_a = 1;
             $geno_b = 0;
-        }else{
+        }elseif($request['geno'] == 0){
             $geno_a = 0;
             $geno_b = 0;
+        }else{
+            $geno_a = 'null';
+            $geno_b = 'null';
         }
 
         $mouse = Mouse::find($id);
-        $mouse->colony_id = $request['colony_id'];
         $mouse->reserved_for = $request['reserved_for'];
         $mouse->sex = $request['sex'];
         $mouse->geno_type_a = $geno_a;
@@ -241,27 +246,64 @@ class MouseController extends Controller
         $mouse->comments = $request['comments'];
         $mouse->save();
 
-        if($mouse->weights->last()->weighed_on != $request['weight_date']) {
-            $weight = Weight::create([
-                'weight' => $request['weight'],
-                'weighed_on' => $request['weight_date'],
-                'mouse_id' => $mouse->id
-            ]);
-            $weight->save();
+
+        if (isset($request['weight'])) {
+            if(isset($mouse->weights->last()->weighed_on)){
+                if($mouse->weights->last()->weighed_on != $request['weight_date']) {
+                    $weight = Weight::create([
+                        'weight' => $request['weight'],
+                        'weighed_on' => $request['weight_date'],
+                        'mouse_id' => $mouse->id
+                    ]);
+                    $weight->save();
+                }
+            }else{
+                $weight = Weight::create([
+                    'weight' => $request['weight'],
+                    'weighed_on' => $request['weight_date'],
+                    'mouse_id' => $mouse->id
+                ]);
+                $weight->save();
+            }
         }
 
-        if($mouse->blood_pressures->last()->taken_on != $request['bp_date']) {
-            $bp = BloodPressure::create([
-                'systolic' => 'null',
-                'diastolic' => 'null',
-                'taken_on' => $request['bp_date'],
-                'mouse_id' => $mouse->id
-            ]);
-            $bp->save();
+        if(isset($request['bp_date'])){
+            if(isset($mouse->blood_pressures->last()->taken_on)) {
+                if ($mouse->blood_pressures->last()->taken_on != $request['bp_date']) {
+                    $bp = BloodPressure::create([
+                        'systolic' => 'null',
+                        'diastolic' => 'null',
+                        'taken_on' => $request['bp_date'],
+                        'mouse_id' => $mouse->id
+                    ]);
+                    $bp->save();
+                }
+            }else{
+                $bp = BloodPressure::create([
+                    'systolic' => 'null',
+                    'diastolic' => 'null',
+                    'taken_on' => $request['bp_date'],
+                    'mouse_id' => $mouse->id
+                ]);
+                $bp->save();
+            }
         }
 
-        if(isset($request['new_tag_id'])){
-            $mouse->tags()->attach($request['new_tag_id'] + 1);
+        if($request['lost_tag_cb'] != 1){
+            if(isset($mouse->tags->last()->tag_num)){
+                if($request['tag_id'] != $mouse->tagPad($mouse->tags->last()->tag_num)) {
+                    $tag_num = $request['tag_id'] + 1;
+                    $mouse->tags()->attach($request[$tag_num]);
+                }
+            }else{
+                $tag_num = $request['tag_id'] + 1;
+                $mouse->tags()->attach($tag_num);
+            }
+        }
+
+        if(!empty($request['new_tag_id'])){
+            $tag_num = $request['new_tag_id'] + 1;
+            $mouse->tags()->attach($tag_num);
         }
 
 

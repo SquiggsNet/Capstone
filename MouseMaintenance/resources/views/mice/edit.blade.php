@@ -15,12 +15,15 @@
                 <div class="form-group col-xs-4 col-sm-6 col-md-3 col-md-offset-1">
                     <label>Tag No.</label>
                     <input type="text" id="tag_id" class="form-control" maxlength="3" minlength="3" name="tag_id"
-                           value="{{ $editMouse->tagPad($editMouse->tags->last()->tag_num )}}"/>
+                            @if(isset($editMouse->tags->last()->tag_num))
+                                value="{{$editMouse->tagPad($editMouse->tags->last()->tag_num )}}"
+                                readonly="readonly"
+                            @endif/>
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-3">
                     <label>Lost Tag</label>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12">
-                    <input type="checkbox" class="form-control" id="lost_tag" onchange="newTag()" value="True">
+                    <input type="checkbox" class="form-control" name="lost_tag_cb" id="lost_tag_cb" onchange="newTag()" value="1">
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-3" style="display: none" id="new_tag_input">
@@ -43,9 +46,9 @@
                 </div>
             </div>
             <div class="form-group">
-                {!! Form::label('colony_id', 'Colony') !!}
+                {!! Form::label('colony_id', 'Strain') !!}
                 <select name="colony_id" id="colony_id" class="form-control">
-                    <option value="0">Select Colony...</option>
+                    <option value="0">Select Strain...</option>
                     @foreach($colonies as $colony)
                         <option value="{{ $colony->id }}"
                         @if($editMouse->colony_id == $colony->id)
@@ -87,12 +90,15 @@
 
             <div class="form-group">
                 <fieldset>
-                    <?php $gene = 0;?>
-                    @if($editMouse->geno_type_a == 1)
-                        <?php $gene += 1; ?>
-                    @endif
-                    @if($editMouse->geno_type_b == 1)
-                        <?php $gene += 1; ?>
+                    <?php $gene = 4;?>
+                    @if($editMouse->geno_type_a != 'null')
+                        <?php $gene = 0;?>
+                        @if($editMouse->geno_type_a == 1)
+                            <?php $gene += 1; ?>
+                        @endif
+                        @if($editMouse->geno_type_b == 1)
+                            <?php $gene += 1; ?>
+                        @endif
                     @endif
                     {!! Form::label('geno_type', 'Geno Type') !!}
                     <div class="btn-group radio-group" data-toggle="buttons">
@@ -208,17 +214,22 @@
             </div>
             <div class="form-group">
                 <label>Blood Pressure Last Taken</label>
-                <input class="form-control" name="bp_date" type="date" value="{{ $editMouse->blood_pressures->last()->taken_on }}"/>
+                <input class="form-control" name="bp_date" type="date"
+                        @if(isset($editMouse->blood_pressures->last()->taken_on))
+                            value="{{ $editMouse->blood_pressures->last()->taken_on }}"
+                        @endif />
             </div>
             <button type="button" class="btn btn-grey btn-block" data-toggle="collapse" data-target="#ViewAllBPs">
                 View Previous Dates &#8659;
             </button>
             <div class="collapse" id="ViewAllBPs">
-                @foreach($editMouse->blood_pressures->reverse() as $bps)
-                    <li class="list-group-item">
-                        {{ $bps->taken_on }}
-                    </li>
-                @endforeach
+                @if(isset($editMouse->blood_pressures->last()->taken_on))
+                    @foreach($editMouse->blood_pressures->reverse() as $bps)
+                        <li class="list-group-item">
+                            {{ $bps->taken_on }}
+                        </li>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -230,11 +241,15 @@
                 <div class="input-group col-xs-6 col-sm-6 col-md-2">
                     <div class="input-group">
                         <input class="form-control" name="weight" id="weight" type="number" step="any" aria-describedby="basic-addon2"
-                               value="{{ $editMouse->weights->last()->weight}}">
+                            @if(isset($editMouse->weights->last()->weight))
+                                value="{{ $editMouse->weights->last()->weight }}"
+                            @endif />
                         <span class="input-group-addon" id="basic-addon2">gms</span>
                     </div>
                     <input class="form-control" name="weight_date" id="weight_date" type="date"
-                           value="{{ $editMouse->weights->last()->weighed_on }}">
+                        @if(isset($editMouse->weights->last()->weight))
+                            value="{{ $editMouse->weights->last()->weighed_on }}"
+                        @endif />
                 </div>
                 <div class="form-group row">
                     <div class="input-group col-xs-12 col-sm-6 col-md-4">
@@ -242,12 +257,14 @@
                             View Previous Weights &#8659;
                         </button>
                         <div class="collapse" id="ViewAllWeights">
-                            @foreach($editMouse->weights->reverse() as $weights)
-                                <dl class="dl-horizontal">
-                                    <dt>{{ $weights->weight . 'g' }}</dt>
-                                    <dd>{{ $weights->weighed_on }}</dd>
-                                </dl>
-                            @endforeach
+                            @if(isset($editMouse->weights->last()->weight))
+                                @foreach($editMouse->weights->reverse() as $weights)
+                                    <dl class="dl-horizontal">
+                                        <dt>{{ $weights->weight . 'g' }}</dt>
+                                        <dd>{{ $weights->weighed_on }}</dd>
+                                    </dl>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -291,7 +308,7 @@
     }
 
     function newTag(){
-        var check_box = document.getElementById("lost_tag");
+        var check_box = document.getElementById("lost_tag_cb");
         if(check_box.checked){
             document.getElementById('new_tag_input').style.display = 'block';
         }else{

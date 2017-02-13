@@ -162,20 +162,17 @@
 
                         <td>{{ $mouse->birth_date }}</td>
                         <td>
-                            {{--{{ Form::open(['action' => ['#'], 'method' => 'get']) }}--}}
+                            {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                             <button type="submit" >
                                 <span class="glyphicon glyphicon-tags"></span>
                             </button>
-    {{--                                                {{ Form::close() }}--}}
+                            {{ Form::close() }}
                         </td>
                     </tr>
                 @endif
             @endforeach
             </tbody>
         </table>
-        <a href="{{ action( 'MouseController@create') }}">
-            Create a New Mouse
-        </a>
     </div>
 @else
     <div class="container">

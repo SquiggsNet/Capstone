@@ -97,7 +97,6 @@
         </div>
     </div>
 </div>
-
 @else
     <div class="container">
         <div class="panel panel-default">

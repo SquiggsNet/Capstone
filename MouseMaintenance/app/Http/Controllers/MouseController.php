@@ -19,12 +19,20 @@ class MouseController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $mice = Mouse::all();
-        return view('mice.index', compact('mice'));
+        $day = date('Y-m-d');
+        if(isset($request['pep_mice'])){
+            $mice = Mouse::whereDate('end_date', '<', $day)->get();
+            $pep = true;
+        }else {
+            $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', 'null')->get();
+            $pep = false;
+        }
+        return view('mice.index', compact('mice', 'pep'));
     }
 
     /**

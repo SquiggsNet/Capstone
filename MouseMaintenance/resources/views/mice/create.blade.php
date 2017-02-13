@@ -15,6 +15,7 @@
                 <div>
                     {!! Form::open((array('route' => 'mice.store'))) !!}
                         <div class="row">
+                            <input type="hidden" name="source" id="source" value="In house"/>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Male(s):</label>
                                 <input class="form-control" type="number" name="male_mice_number" min="0" />
@@ -30,7 +31,7 @@
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Colony:</label>
                                 <select class="form-control" name="colony_id">
-                                    <option value="0">Select Colony...</option>
+                                    <option value="0">Select Strain...</option>
                                     @foreach($colonies as $colony)
                                         <option value="{{ $colony->id }}">{{ $colony->name }}</option>
                                     @endforeach
@@ -98,8 +99,46 @@
 </div>
 
 @else
-
-    You've Reached external
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">External</div>
+            <div class="panel-body">
+                <div>
+                    {!! Form::open((array('route' => 'mice.store'))) !!}
+                    <div class="row">
+                        <input type="hidden" name="source" id="source" value="External"/>
+                        <div class="form-group col-xs-6 col-sm-6 col-md-2">
+                            <label># Of Male(s):</label>
+                            <input class="form-control" type="number" name="male_mice_number" min="0" />
+                        </div>
+                        <div class="form-group col-xs-6 col-sm-6 col-md-2">
+                            <label># Of Female(s):</label>
+                            <input class="form-control" type="number" name="female_mice_number" min="0"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                            <label>Date Received:</label>
+                            <input class="form-control" type="date" name="date_received" />
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                            <label>Strain:</label>
+                            <select class="form-control" name="colony_id">
+                                <option value="0">Select Strain...</option>
+                                @foreach($colonies as $colony)
+                                    <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                            {!! Form::submit('Add',['class'=>'btn btn-default']) !!}
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endif
 
 {{--A nice +/- number selector, need to get JS to work in view --}}

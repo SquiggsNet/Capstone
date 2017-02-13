@@ -340,6 +340,7 @@ class MouseTableSeeder extends Seeder
     {
         DB::table('mice')->insert([
             'colony_id' => 1,
+            'source' => 'In house',
             'reserved_for' => 1,
             'sex' => 'True',
             'geno_type_a' => 1,
@@ -357,6 +358,7 @@ class MouseTableSeeder extends Seeder
 
         DB::table('mice')->insert([
             'colony_id' => 1,
+            'source' => 'In house',
             'reserved_for' => 1,
             'sex' => 'False',
             'geno_type_a' => 1,
@@ -374,6 +376,7 @@ class MouseTableSeeder extends Seeder
 
         DB::table('mice')->insert([
             'colony_id' => 1,
+            'source' => 'In house',
             'reserved_for' => 1,
             'sex' => 'False',
             'geno_type_a' => 0,
@@ -391,6 +394,7 @@ class MouseTableSeeder extends Seeder
 
         DB::table('mice')->insert([
             'colony_id' => 1,
+            'source' => 'In house',
             'reserved_for' => 1,
             'sex' => 'False',
             'geno_type_a' => 1,

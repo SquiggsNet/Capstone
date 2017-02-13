@@ -9,7 +9,7 @@ use DateTime;
 
 class Mouse extends Model
 {
-    protected $fillable = array('colony_id', 'reserved_for', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
+    protected $fillable = array('colony_id', 'reserved_for', 'source', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
                                 'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
 
     public function getGeno($geno){

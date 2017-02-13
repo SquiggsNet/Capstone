@@ -7,7 +7,8 @@
         <thead>
         <tr>
             <th data-field="tag" >Tag</th>
-            <th>Colony</th>
+            <th>Strain</th>
+            <th>Source</th>
             <th>Pedigree</th>
             <th>Sex</th>
             <th>Geno Type</th>
@@ -35,15 +36,18 @@
                     <?php $id = "no_report" ?>
                 @endif
                     <tr class="{{ $class }}" id="{{ $id }}">
-                        <td>
-                            <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
-                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
-                            </a>
-                        </td>
+                    <td>
+                        <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
+                            {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
+                        </a>
+                    </td>
                     <td>
                         <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
                             {{$mouse->colony->name}}
                         </a>
+                    </td>
+                    <td>
+                        {{ $mouse->source }}
                     </td>
                     <td>
                         {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->father_record->sex)}}({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})x
@@ -78,13 +82,13 @@
                         </button>
                         {{ Form::close() }}
                     </td>
-                    <td>
-                        {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
+                    {{--<td>--}}
+                        {{--{{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}--}}
                         {{--<button type="submit" >--}}
                             {{--<span class="glyphicon glyphicon-trash"></span>--}}
                         {{--</button>--}}
-                        {{ Form::close() }}
-                    </td>
+                        {{--{{ Form::close() }}--}}
+                    {{--</td>--}}
                 </tr>
             @endif
         @endforeach
@@ -95,7 +99,8 @@
         <thead>
         <tr>
             <th>DB ID</th>
-            <th>Colony</th>
+            <th>Strain</th>
+            <th>Source</th>
             <th>Sex</th>
             <th>Pedigree</th>
             <th>DOB</th>
@@ -109,42 +114,53 @@
                     <tr class="info">
                 @else
                     <tr class="danger">
+                    @endif              @if($mouse->sex == 1)
+                    <?php $class = "info" ?>
+                @else
+                    <?php $class = "danger" ?>
                 @endif
                 @if($mouse->sick_report)
-                    <tr id="report">
+                    <?php $id = "report" ?>
                 @else
-                    <tr id="no_report">
+                    <?php $id = "no_report" ?>
                 @endif
+                <tr class="{{ $class }}" id="{{ $id }}">
                     <td>{{ $mouse->id }}</td>
                     <td>{{ $mouse->colony->name }}</td>
+                    <td>{{ $mouse->source }}</td>
                     <td>{{ $mouse->getGender($mouse->sex) }}</td>
-                    <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
-                        {{$mouse->getGender($mouse->father_record->sex)}}
-                        ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/
-                        {{$mouse->getGeno($mouse->father_record->geno_type_b)}}) x
-                        {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
-                        {{$mouse->getGender($mouse->mother_one_record->sex)}}
-                        ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/
-                        {{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
-                        @if(isset($mouse->mother_two_record->sex))
-                            ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                            {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                            ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                            /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
-                        @endif
-                        @if(isset($mouse->mother_three_record->sex))
-                            ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
-                            {{$mouse->getGender($mouse->mother_three_record->sex)}}
-                            ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
-                            /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
-                        @endif</td>
+                    @if($mouse->source == 'In house')
+                        <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
+                            {{$mouse->getGender($mouse->father_record->sex)}}
+                            ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/
+                            {{$mouse->getGeno($mouse->father_record->geno_type_b)}}) x
+                            {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
+                            {{$mouse->getGender($mouse->mother_one_record->sex)}}
+                            ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/
+                            {{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
+                            @if(isset($mouse->mother_two_record->sex))
+                                ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
+                                {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
+                                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                            @endif
+                            @if(isset($mouse->mother_three_record->sex))
+                                ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
+                                {{$mouse->getGender($mouse->mother_three_record->sex)}}
+                                ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
+                                /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                            @endif</td>
+                    @else
+                        <td>N/A</td>
+                    @endif
+
                     <td>{{ $mouse->birth_date }}</td>
                     <td>
                         {{--{{ Form::open(['action' => ['#'], 'method' => 'get']) }}--}}
                         <button type="submit" >
                             <span class="glyphicon glyphicon-tags"></span>
                         </button>
-                        {{--                        {{ Form::close() }}--}}
+{{--                                                {{ Form::close() }}--}}
                     </td>
                 </tr>
             @endif
@@ -161,17 +177,4 @@
         color: red;
     }
 </style>
-
-<script type="text/javascript">
-    $(function(){
-        $("th[data-field='tag'].sortable").click();
-    });
-    $(document),ready(function(){
-        $('#mice_table').DataTable();
-    });
-</script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
-
 @endsection

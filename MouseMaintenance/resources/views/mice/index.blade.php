@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <h1>Mice</h1>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
         <thead>
         <tr>
-            <th>Tag</th>
+            <th data-field="tag" >Tag</th>
             <th>Colony</th>
             <th>Pedigree</th>
             <th>Sex</th>
@@ -24,15 +24,17 @@
         <tbody>
         @foreach ($mice as $mouse)
             @if(isset($mouse->tags->last()->tag_num))
-                @if($mouse->end_date)
-                    <tr class="danger">
-                @elseif($mouse->surgeries->first())
-                    <tr class="info">
-                @elseif($mouse->sick_report)
-                    <tr class="warning">
+                @if($mouse->sex == 'True')
+                    <?php $class = "info" ?>
                 @else
-                    <tr>
+                    <?php $class = "danger" ?>
                 @endif
+                @if($mouse->sick_report)
+                    <?php $id = "report" ?>
+                @else
+                    <?php $id = "no_report" ?>
+                @endif
+                    <tr class="{{ $class }}" id="{{ $id }}">
                         <td>
                             <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
                                 {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
@@ -103,7 +105,16 @@
         <tbody>
         @foreach ($mice as $mouse)
             @if(!isset($mouse->tags->last()->tag_num))
-                <tr>
+                @if($mouse->sex == 'True')
+                    <tr class="info">
+                @else
+                    <tr class="danger">
+                @endif
+                @if($mouse->sick_report)
+                    <tr id="report">
+                @else
+                    <tr id="no_report">
+                @endif
                     <td>{{ $mouse->id }}</td>
                     <td>{{ $mouse->colony->name }}</td>
                     <td>{{ $mouse->getGender($mouse->sex) }}</td>
@@ -144,4 +155,23 @@
         Create a New Mouse
     </a>
 </div>
+
+<style type="text/css">
+    #report{
+        color: red;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function(){
+        $("th[data-field='tag'].sortable").click();
+    });
+    $(document),ready(function(){
+        $('#mice_table').DataTable();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+
 @endsection

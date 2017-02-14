@@ -18,11 +18,35 @@
                             <input type="hidden" name="source" id="source" value="In house"/>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Male(s):</label>
-                                <input class="form-control" type="number" name="male_mice_number" min="0" />
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity_m">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="male_mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity_m">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity_m">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Female(s):</label>
-                                <input class="form-control" type="number" name="female_mice_number" min="0"/>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity_f">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="female_mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity_f">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity_f">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                            </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-3">
                                 <label>Date of Birth:</label>
@@ -140,14 +164,40 @@
     </div>
 @endif
 
-{{--A nice +/- number selector, need to get JS to work in view --}}
-{{--<div class="col-lg-1">--}}
-{{--<div class="input-group">--}}
-{{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="minus" data-target="font-size"><span class="glyphicon glyphicon-minus"></span></button></span>--}}
-{{--<input type="text" value="1" class="form-control" id="font-size">--}}
-{{--<span class="input-group-btn"><button class="btn btn-default value-control" data-action="plus" data-target="font-size"><span class="glyphicon glyphicon-plus"></span></button></span>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--<script type="text/javascript" src="{!! asset('public/js/button.js') !!}}"></script>--}}
+<script type="text/javascript">
+    $(document).on('click','.value-control',function(){
+        var action = $(this).attr('data-action')
+        var target = $(this).attr('data-target')
+        var value  = parseFloat($('[id="'+target+'"]').val());
+        if(isNaN(value)){
+            value = 0;
+        }
+        if ( action == "plus" && value != 99 ) {
+            value++;
+        }
+        if ( action == "minus" && value != 0) {
+            value--;
+        }
+        $('[id="'+target+'"]').val(value)
+    });
+
+    $(document).ready(function () {
+        $("#quantity_m").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#quantity_f").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
 
 @endsection

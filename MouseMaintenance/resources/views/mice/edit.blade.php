@@ -283,14 +283,14 @@
                 {!! Form::label('comments', 'Comments') !!}
                 {!! Form::textarea('comments',null ,['class'=>'form-control', 'rows' => 3]) !!}
             </div>
+            <div class="col-md-12 ">
+                {!! Form::submit('Update',['class'=>'btn btn-default']) !!}
+                {!! Form::close() !!}
+                <a href="{{ action( 'MouseController@index') }}">
+                    Go Back
+                </a>
+            </div>
         </div>
-    </div>
-    <div class=" col-md-12 ">
-        {!! Form::submit('Update',['class'=>'btn btn-default']) !!}
-        {!! Form::close() !!}
-        <a href="{{ action( 'MouseController@index') }}">
-            Go Back
-        </a>
     </div>
 </div>
 

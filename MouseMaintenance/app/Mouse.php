@@ -34,14 +34,26 @@ class Mouse extends Model
         return $tagNum;
     }
 
-
     public function getAge($birth_date){
+        date_default_timezone_set('America/Edmonton');
         $DOB = new DateTime($birth_date);
         $today = new DateTime();
         $diff_in_wks = $DOB->diff($today)->days/7;
         $age_in_wks = round($diff_in_wks, 1 , PHP_ROUND_HALF_UP);
 
         return $age_in_wks;
+    }
+
+    public function showDate($date_in){
+
+        if(! empty($date_in)) {
+            date_default_timezone_set('America/Edmonton');
+            $date = new DateTime($date_in);
+            $long_date = date_format($date, 'M d, Y');
+            return $long_date;
+        }else{
+            return $date_in;
+        }
     }
 
     //one-to-many relationships

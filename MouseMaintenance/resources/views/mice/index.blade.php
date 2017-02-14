@@ -4,12 +4,14 @@
 @if(!$pep)
     <div class="container">
         <h1>Mice</h1>
-        {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
-        <button type="submit" >
-            <input type="hidden" name="pep_mice"/>
-            View Archived mice
-        </button>
-        {{ Form::close() }}
+        <div class="form-group">
+            {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
+            <button type="submit" class="btn btn-default pull-right">
+                <input type="hidden" name="pep_mice"/>
+                View Archived mice
+            </button>
+            {{ Form::close() }}
+        </div>
         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
             <thead>
             <tr>
@@ -76,11 +78,11 @@
                         <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
                         <td>{{$mouse->weights->last()->weight}}g</td>
                         <td>
-                            {{$mouse->blood_pressures->last()->taken_on}}
+                            {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
                         </td>
-                        <td>{{$mouse->wean_date}}</td>
-                        <td>{{$mouse->end_date}}</td>
-                        <td>{{$mouse->comments}}</td>
+                        <td>{{$mouse->showDate($mouse->wean_date)}}</td>
+                        <td>{{$mouse->showDate($mouse->end_date)}}</td>
+                        <td>{{$mouse->comments}}  </td>
                         <td>
                             {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                             <button type="submit" >
@@ -177,13 +179,15 @@
 @else
     <div class="container">
         <h1>Archived Mice</h1>
-        {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
-        <button type="submit" >
-            <input type="hidden" name="mice"/>
-            <span class="glyphicon glyphicon-skull"></span>
-            View Current Mice
-        </button>
-        {{ Form::close() }}
+        <div class="form-group">
+            {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
+            <button type="submit" class="btn btn-default pull-right">
+                <input type="hidden" name="mice"/>
+                <span class="glyphicon glyphicon-skull"></span>
+                View Current Mice
+            </button>
+            {{ Form::close() }}
+        </div>
         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
             <thead>
             <tr>
@@ -262,13 +266,6 @@
                             </button>
                             {{ Form::close() }}
                         </td>
-                        {{--<td>--}}
-                        {{--{{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}--}}
-                        {{--<button type="submit" >--}}
-                        {{--<span class="glyphicon glyphicon-trash"></span>--}}
-                        {{--</button>--}}
-                        {{--{{ Form::close() }}--}}
-                        {{--</td>--}}
                     </tr>
                 @endif
             @endforeach

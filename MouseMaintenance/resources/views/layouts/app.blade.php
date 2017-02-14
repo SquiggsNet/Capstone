@@ -18,6 +18,7 @@
     <style>
         body {
             font-family: 'Lato';
+            background-color: #F4F4F4;
 
         }
 
@@ -32,10 +33,17 @@
             margin-right: 6px;
         }
 
+        #nav{
+            background-color: #373737;
+
+        }
+        a {
+            color: red;
+        }
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" id="nav">
         <div class="container">
             <div class="navbar-header">
 
@@ -61,7 +69,7 @@
                     <li><a href="{{ url('/mice') }}">Mice</a></li>
 
                     {{--<li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>--}}
-                    {{--<li><a href="{{ url('/cages') }}">Cages</a></li>--}}
+                    <li><a href="{{ url('/cages') }}">Cages</a></li>
                     {{--<li><a href="{{ url('/storages') }}">Storages</a></li>--}}
                     <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
                     {{--<li><a href="{{ url('/tags') }}">Tags</a></li>--}}

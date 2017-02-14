@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="text-right">
-                <a class="glyphicon glyphicon-question-sign" href="{{ url('/password/reset') }}"></a>
+                <a id="help" class="glyphicon glyphicon-question-sign" href="{{ url('/password/reset') }}"></a>
             </div>
             <div class="control-label col-md-offset-2 hidden-xs">
                 {!! Html::image('img/mmLogoSmooth.png', 'Laboratory Mouse Tracker') !!}
@@ -51,7 +51,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-5">
-                            <button type="submit" class="btn btn-primary">
+                            <button id="login" type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-sign-in"></i> Login
                             </button>
                         </div>
@@ -63,8 +63,21 @@
 </div>
 
 <style type="text/css">
-    .glyphicon.glyphicon-question-sign {
+    .glyphicon.glyphicon-question-sign , #help{
         font-size: 25px;
+        color: #E7DFDD;
     }
+
+    .form-control{
+        border-radius: 30px 30px 30px 30px;
+        background-color: #E7DFDD;
+    }
+
+    #login{
+        background-color: #373737;
+        color: #f4f4f4;
+    }
+
+
 </style>
 @endsection

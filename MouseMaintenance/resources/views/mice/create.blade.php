@@ -19,7 +19,7 @@
                             <div class="form-group col-xs-6 col-sm-6 col-md-2">
                                 <label># Of Male(s):</label>
                                 <div class="input-group">
-                                    <span class="input-group-btn">
+                                    <span class="input-group-btn ">
                                         <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity_m">
                                             <span class="glyphicon glyphicon-minus"></span>
                                         </button>

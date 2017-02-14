@@ -26,7 +26,7 @@
                             {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
                         </a>
                     </td>
-                    <td>*strain info*</td>
+                    <td>{{ $mouse->colony->name }}</td>
                     <td>({{ $mouse->getGeno($mouse->geno_type_a) }}/{{ $mouse->getGeno($mouse->geno_type_b) }})</td>
                     {{--<td>--}}
                         {{--@foreach ($mouse->treatments as $treatment)--}}

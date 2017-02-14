@@ -36,20 +36,12 @@ class Mouse extends Model
 
 
     public function getAge($birth_date){
+        $DOB = new DateTime($birth_date);
+        $today = new DateTime();
+        $diff_in_wks = $DOB->diff($today)->days/7;
+        $age_in_wks = round($diff_in_wks, 1 , PHP_ROUND_HALF_UP);
 
-        $currentDate = Carbon::now('America/Halifax')->format('d-m-y');
-
-
-        $age = ($currentDate - $birth_date)/7;
-
-
-//        $age = date_diff(DateTime::createFromFormat('d-m-y', $currentDate),DateTime::createFromFormat('d-m-y', $currentDate));
-//        $birthDate = Carbon::parse($birth_date);
-//        $age = $birth_date->DiffInWeeks($currentDate);
-
-//        return $currentDate;
-//        return $birth_date;
-        return $age;
+        return $age_in_wks;
     }
 
     //one-to-many relationships

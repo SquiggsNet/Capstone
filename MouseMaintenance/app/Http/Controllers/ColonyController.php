@@ -20,7 +20,7 @@ class ColonyController extends Controller
     {
         $colonies = Colony::all();
         $cages = Cage::all();
-        return view('colonies.index', compact('colonies', 'tags', 'cages'));
+        return view('colonies.index', compact('colonies', 'cages'));
     }
 
     /**

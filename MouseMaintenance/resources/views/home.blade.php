@@ -70,7 +70,7 @@
 
                             <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
                                 {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> (Storage information goes here)
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> (-80&deg;C Freezer)
                             </a>
 
                         @endforeach

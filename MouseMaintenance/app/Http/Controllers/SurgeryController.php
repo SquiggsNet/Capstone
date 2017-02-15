@@ -71,8 +71,8 @@ class SurgeryController extends Controller
      */
     public function show($id)
     {
-        $surgery = Surgery::find($id);
-        return view('surgeries.show', compact('surgery'));
+        $surgery = Surgery::with('user', 'mice')->find($id);
+        return view('surgeries.show', compact('surgery', 'user', 'mice'));
     }
 
     /**
@@ -83,8 +83,9 @@ class SurgeryController extends Controller
      */
     public function edit($id)
     {
-        $surgery = Surgery::find($id);
-        return view('surgeries.edit', compact('surgery'));
+        $surgery = Surgery::with('user', 'mice')->find($id);
+        $surgeons = User::all();
+        return view('surgeries.edit', compact('surgery', 'user', 'mice', 'surgeons'));
     }
 
     /**

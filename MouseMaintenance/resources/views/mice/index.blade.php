@@ -20,10 +20,10 @@
                     <th></th>
                     <th data-field="tag" >Tag</th>
                     <th>Strain</th>
+                    <th>Genotype</th>
                     <th>Source</th>
                     <th>Pedigree</th>
                     <th>Sex</th>
-                    <th>Geno Type</th>
                     <th>Age</th>
                     <th>Weight</th>
                     <th>Blood Pressure</th>
@@ -60,6 +60,11 @@
                                     {{$mouse->colony->name}}
                                 </a>
                             </td>
+                                <td>
+                                    @if($mouse->geno_type_a != "null")
+                                        ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})
+                                    @endif
+                                </td>
                             <td>
                                 {{ $mouse->source }}
                             </td>
@@ -80,11 +85,6 @@
                                 @endif
                             </td>
                             <td>{{$mouse->getGender($mouse->sex)}}</td>
-                            <td>
-                                @if($mouse->geno_type_a != "null")
-                                    ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})
-                                @endif
-                            </td>
                             <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
                             <td>
                                 @if(! empty($mouse->weights->last()->weight))

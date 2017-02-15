@@ -14,6 +14,7 @@
             <th>Surgeon</th>
             <th>Purpose</th>
             <th>Comments</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +28,9 @@
             <td>{{$surgery->scheduled_date}}</td>
             <td>
                 @foreach($surgery->mice as $mouse)
-                    {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
+                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
+                        {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
+                    </a>
                     <br>
                 @endforeach
             </td>
@@ -42,6 +45,13 @@
                 @endif
             </td>
             <td>{{$surgery->comments}}</td>
+            <td>
+                {{ Form::open(['action' => ['SurgeryController@edit', $surgery], 'method' => 'get']) }}
+                <button type="submit" >
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                {{ Form::close() }}
+            </td>
         </tr>
         @endforeach
         </tbody>

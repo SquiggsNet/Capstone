@@ -44,11 +44,11 @@
 
                     <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/mice') }}">Mice</a></li>
-
-                    {{--<li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>--}}
-                    <li><a href="{{ url('/cages') }}">Cages</a></li>
-                    {{--<li><a href="{{ url('/storages') }}">Storages</a></li>--}}
                     <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
+                    {{--<li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>--}}
+                    <li><a href="{{ url('/cages') }}">Breeders</a></li>
+                    <li><a href="{{ url('/storages') }}">Storages</a></li>
+
                     {{--<li><a href="{{ url('/tags') }}">Tags</a></li>--}}
                     {{--<li><a href="{{ url('/tissues') }}">Tissues</a></li>--}}
                     {{--<li><a href="{{ url('/treatments') }}">Treatments</a></li>--}}

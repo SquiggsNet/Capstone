@@ -1,4 +1,23 @@
-.quarter { width: 23.5%; }
+.whole, .half, .third, .third-x2, .quarter, .quarter-x3, .sixth, .twelveth{
+    float:left;
+    padding:0;
+    margin: 0 2% 0 0;
+}
+
+.last { margin-right:0;
+    padding-right: 0 !important;}
+
+.whole { width: 100%; }
+
+.half { width: 49%; }
+
+.third { width: 32%; } .third-x2 { width: 64%; }
+
+.quarter { width: 23.5%; } .quarter-x3 { width: 74.5% }
+
+.sixth { width: 15%; } .sixth-x5 { width: 83%; }
+
+.twelveth { width: 5.4%; }
 
 body {
     font-family: 'Lato';
@@ -36,4 +55,22 @@ body {
 
 .colonyBtn{
     /*height: 100px;*/
+}
+
+.btn{
+    background-color: #373737;
+    color: #E7DFDD;
+}
+
+.btn:hover{
+    background-color: #E7DFDD;
+    color:#373737;
+}
+
+a{
+    color:#373737;
+}
+
+a:hover{
+    color:#373737;
 }

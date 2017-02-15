@@ -92,22 +92,22 @@
                 <fieldset>
                     <?php $gene = 4;?>
                     @if($editMouse->geno_type_a != 'null')
-                        <?php $gene = 0;?>
+                        <?php $gene = 1;?>
                         @if($editMouse->geno_type_a == 1)
-                            <?php $gene += 1; ?>
+                            <?php $gene += 2; ?>
                         @endif
                         @if($editMouse->geno_type_b == 1)
-                            <?php $gene += 1; ?>
+                            <?php $gene += 2; ?>
                         @endif
                     @endif
                     {!! Form::label('geno_type', 'Geno Type') !!}
                     <div class="btn-group radio-group" data-toggle="buttons">
-                            <input type="radio" name="geno" id="geno_check1" value="2"
-                            <?php if($gene == 2) echo "checked='checked'" ?>>(+/+)
+                            <input type="radio" name="geno" id="geno_check1" value="5"
+                            <?php if($gene == 5) echo "checked='checked'" ?>>(+/+)
+                            <input type="radio" name="geno" id="geno_check1" value="3"
+                            <?php if($gene == 3) echo "checked='checked'" ?>>(+/-)
                             <input type="radio" name="geno" id="geno_check1" value="1"
-                            <?php if($gene == 1) echo "checked='checked'" ?>>(+/-)
-                            <input type="radio" name="geno" id="geno_check1" value="0"
-                            <?php if($gene == 0) echo "checked='checked'" ?>>(-/-)
+                            <?php if($gene == 1) echo "checked='checked'" ?>>(-/-)
                     </div>
                 </fieldset>
             </div>

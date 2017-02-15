@@ -132,11 +132,35 @@
                         <input type="hidden" name="source" id="source" value="External"/>
                         <div class="form-group col-xs-6 col-sm-6 col-md-2">
                             <label># Of Male(s):</label>
-                            <input class="form-control" type="number" name="male_mice_number" min="0" />
+                            <div class="input-group">
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity_m">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                <input type="text" name="male_mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity_m">
+                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity_m">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                            </div>
                         </div>
                         <div class="form-group col-xs-6 col-sm-6 col-md-2">
                             <label># Of Female(s):</label>
-                            <input class="form-control" type="number" name="female_mice_number" min="0"/>
+                            <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity_f">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                <input type="text" name="female_mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity_f">
+                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity_f">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                            </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-6 col-md-3">
                             <label>Date Received:</label>

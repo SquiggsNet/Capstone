@@ -215,14 +215,14 @@ class MouseController extends Controller
             $isSick = $request['sick_report'];
         }
 
-        if($request['geno'] == 2){
+        if($request['geno'] == 5){
             $geno_a = 1;
             $geno_b = 1;
         }
-        elseif($request['geno'] == 1){
+        elseif($request['geno'] == 3){
             $geno_a = 1;
             $geno_b = 0;
-        }elseif($request['geno'] == 0){
+        }elseif($request['geno'] == 1){
             $geno_a = 0;
             $geno_b = 0;
         }else{

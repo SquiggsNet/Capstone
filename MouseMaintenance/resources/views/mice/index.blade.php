@@ -80,9 +80,17 @@
                                 @endif
                             </td>
                             <td>{{$mouse->getGender($mouse->sex)}}</td>
-                            <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
+                            <td>
+                                @if($mouse->geno_type_a != "null")
+                                    ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})
+                                @endif
+                            </td>
                             <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
-                            <td>{{$mouse->weights->last()->weight}}g</td>
+                            <td>
+                                @if(! empty($mouse->weights->last()->weight))
+                                    {{$mouse->weights->last()->weight . 'g'}}
+                                @endif
+                            </td>
                             <td>
                                 {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
                             </td>
@@ -117,7 +125,6 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>DB ID</th>
                 <th>Strain</th>
                 <th>Source</th>
                 <th>Sex</th>
@@ -144,7 +151,6 @@
                         <?php $id = "no_report" ?>
                     @endif
                     <tr class="{{ $class }}" id="{{ $id }}">
-                        <td>{{ $mouse->id }}</td>
                         <td>{{ $mouse->colony->name }}</td>
                         <td>{{ $mouse->source }}</td>
                         <td>{{ $mouse->getGender($mouse->sex) }}</td>
@@ -173,7 +179,7 @@
                             <td>N/A</td>
                         @endif
 
-                        <td>{{ $mouse->birth_date }}</td>
+                        <td>{{$mouse->showDate($mouse->birth_date)}}</td>
                         <td>
                             {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                             <button type="submit" >

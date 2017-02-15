@@ -1,3 +1,5 @@
+.quarter { width: 23.5%; }
+
 body {
     font-family: 'Lato';
     background-color: #F4F4F4;
@@ -17,10 +19,17 @@ body {
 
 #nav{
     background-color: #373737;
+}
 
+#nav a:hover{
+    color: powderblue;
 }
 
 .navbar-brand>img{
     margin-top: -10px;
     height: 45px;
+}
+
+.colonyBtn{
+    /*height: 100px;*/
 }

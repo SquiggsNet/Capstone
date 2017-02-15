@@ -24,6 +24,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getFullName(){
+        $fullName = $this->first_name." ".$this->last_name;
+        return $fullName;
+    }
+
     //one-to-many relationships
     //Mouse
     public function mice(){

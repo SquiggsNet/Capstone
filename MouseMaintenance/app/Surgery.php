@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Surgery extends Model
 {
-    protected $fillable = array('user_id', 'scheduled_date', 'purpose', 'comments');
+    protected $fillable = array('user_id', 'scheduled_date','dose', 'treatment', 'purpose', 'comments');
 
     //one-to-many relationships
     //User
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 

@@ -99,7 +99,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6 col-sm-6">
                                     <div class="form-group col-md-12">
-                                        <input class="form-control" id="batch" name="batch" placeholder="Batch Title" type="text"/>
+                                        <input class="form-control" id="treatment" name="treatment" placeholder="Treatment" type="text"/>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <input class="form-control" placeholder="Surgery Date" id="date" name="scheduled_date" type="date"/>

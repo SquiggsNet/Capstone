@@ -18,8 +18,8 @@ class SurgeryController extends Controller
 
     public function index()
     {
-        $surgeries = Surgery::all();
-        return view('surgeries.index', compact('surgeries'));
+        $surgeries = Surgery::with('user', 'mice')->get();
+        return view('surgeries.index', compact('surgeries', 'user', 'mice'));
     }
 
     /**
@@ -49,7 +49,9 @@ class SurgeryController extends Controller
         $surgery = Surgery::create([
             'user_id' => $request['surgeon'],
             'scheduled_date' => $request['scheduled_date'],
-            'purpose' => $request['batch'],
+            'treatment' => $request['treatment'],
+            'dose' => 'null',
+            'purpose' => 'null',
             'comments' => $request['comments']
         ]);
         $surgery->save();

@@ -10,24 +10,13 @@
                 <div class="panel-body">
                     <a href="{{ url('/colonies') }}"><h3>Colonies</h3></a>
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Colony Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($colonies as $colony)
-                            <tr>
-                                <td>
-                                    <a href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}">
-                                        {{$colony->name}}
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @foreach ($colonies as $colony)
+
+                        <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> {{$colony->name}}
+                        </a>
+
+                    @endforeach
 
                     <a href="{{ url('/storages') }}"><h3>Storage</h3></a>
 

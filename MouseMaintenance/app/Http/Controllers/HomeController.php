@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $colonies = Colony::all();
         $storages = Storage::all();
         return view('home', compact('colonies', 'storages'));

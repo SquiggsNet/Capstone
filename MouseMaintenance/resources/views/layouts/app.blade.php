@@ -31,7 +31,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="img/mmLogoSmoothXS.png">
+                <img src="img/mmLogoSmoothXSInvert.png">
             </a>
         </div>
 

@@ -3,35 +3,83 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+
+        <div class="user quarter">
+        {{--<div class="third">--}}
             <div class="panel panel-default">
-                <div class="panel-heading">Cardiovascular Research</div>
+                <div class="panel-heading"><h4>{{ Auth::user()->getFullName() }}</h4></div>
 
                 <div class="panel-body">
-                    <a href="{{ url('/colonies') }}"><h3>Colonies</h3></a>
 
-                    @foreach ($colonies as $colony)
+                    <h4>User Info</h4>
 
-                        <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
-                        {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> {{$colony->name}}
-                        </a>
+                    <p>A general info for user</p>
 
-                    @endforeach
+                    <h4>Surgeries</h4>
 
-                    <a href="{{ url('/storages') }}"><h3>Storage</h3></a>
+                    <ul>
+                        <li>Surgery 1</li>
+                        <li>Surgery 2</li>
+                        <li>Surgery 3</li>
+                    </ul>
 
-                    @foreach ($storages as $storage)
+                    <p>A general info for user</p>
 
-                        <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
-                            {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> (Type should be changed from boolean to string
-                            to represent freezer type(freezer 1, freezer 2, Histology)
-                        </a>
+                    <h4>User Info</h4>
 
-                    @endforeach
+                    <p>A general info for user</p>
+                </div>
+            </div>
+        </div>
 
-                    <a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a>
+
+
+
+        {{--<div class="third-x2">--}}
+        <div class="content last quarter-x3">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Cardiovascular Research - Home</h3></div>
+
+                <div class="panel-body">
+                    <div class="whole">
+
+                        <a href="{{ url('/colonies') }}"><h4>Colonies</h4></a>
+
+                        <?php $count = 1; ?>
+                        @foreach ($colonies as $colony)
+
+                            @if($count%4 == 0)
+                                <a class="btn btn-primary btn-lg quarter last colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                            @else
+                                <a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                            @endif
+
+                            {{--<a class="btn btn-primary btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> {{$colony->name}}
+                            </a>
+
+                            <?php $count ++; ?>
+                        @endforeach
+
+                    </div>
+                    <div class="whole">
+
+                        <a href="{{ url('/storages') }}"><h3>Storage</h3></a>
+
+                        @foreach ($storages as $storage)
+
+                            <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
+                                {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
+                                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> (Storage information goes here)
+                            </a>
+
+                        @endforeach
+
+                    </div>
+
+                    <div class="whole">
+                        <a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a>
+                    </div>
 
                 </div>
             </div>

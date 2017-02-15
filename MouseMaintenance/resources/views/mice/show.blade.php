@@ -8,8 +8,16 @@
             </a>
         <p><strong>Colony:</strong> {{ $colony->name }}</p>
         <p><strong>Sex:</strong> {{ $mouse->getGender($mouse->sex) }}</p>
-        <p><strong>Reserved For:</strong> {{ $user->first_name . ' ' . $user->last_name }} </p>
-        <p><strong>Geno Type:</strong> ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</p>
+        <p><strong>Reserved For:</strong>
+            @if(isset($user->first_name))
+                {{ $user->first_name . ' ' . $user->last_name }}
+            @endif
+        </p>
+        <p><strong>Geno Type:</strong>
+            @if($mouse->geno_type_a != 'null')
+                ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})
+            @endif
+        </p>
         <p><strong>Father:</strong>
 
             <a href="{{ action( 'MouseController@show', ['id' => $mouse->father]) }}">

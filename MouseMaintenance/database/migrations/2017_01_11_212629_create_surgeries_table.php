@@ -16,9 +16,11 @@ class CreateSurgeriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable;
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('treatment')->nullable;
+            $table->unsignedInteger('dose')->nullable;
             $table->date('scheduled_date');
             $table->string('purpose');
-            $table->string('comments');
+            $table->string('comments')->nullable;
             $table->timestamps();
         });
     }

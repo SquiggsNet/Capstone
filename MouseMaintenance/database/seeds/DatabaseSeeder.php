@@ -418,14 +418,18 @@ class SurgeryTableSeeder extends Seeder
     {
         DB::table('surgeries')->insert([
             'user_id' => 1,
-            'scheduled_date' => '01/02/2012',
+            'scheduled_date' => '2012-01-02',
+            'treatment' => 'Saline',
+            'dose' => 2.1,
             'purpose' => 'Emmanual-intracardiac',
             'comments' => 'Oleg Kept tissue'
         ]);
 
         DB::table('surgeries')->insert([
             'user_id' => 1,
-            'scheduled_date' => '01/02/2012',
+            'scheduled_date' => '2012-01-02',
+            'treatment' => 'ANG II',
+            'dose' => 0.9,
             'purpose' => 'Hailey intracardiac',
             'comments' => 'Atrial prep for mlcl, plasma frozen'
         ]);

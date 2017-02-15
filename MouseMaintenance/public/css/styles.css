@@ -54,12 +54,17 @@ body {
 }
 
 nav .dropdown-menu{
-    background-color: #373737;
-    color: #E7DFDD;
+    background-color: #494949;
+    color: whitesmoke;
 }
 
-li.dropdown.open{
-    background-color: transparent;
+nav .dropdown-menu a:hover{
+    background-color: #494949;
+    color: powderblue;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background-color: #494949;
     color: #E7DFDD;
 }
 

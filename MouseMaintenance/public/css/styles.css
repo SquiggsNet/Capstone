@@ -53,8 +53,23 @@ body {
     height: 45px;
 }
 
+nav .dropdown-menu{
+    background-color: #373737;
+    color: #E7DFDD;
+}
+
+li.dropdown.open{
+    background-color: transparent;
+    color: #E7DFDD;
+}
+
 .colonyBtn{
-    /*height: 100px;*/
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.last{
+    margin-right: 0;
 }
 
 .btn{

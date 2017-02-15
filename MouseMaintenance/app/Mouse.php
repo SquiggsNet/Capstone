@@ -77,6 +77,22 @@ class Mouse extends Model
         return $this->belongsTo(Cage::class);
     }
 
+    public function maleCage(){
+        return $this->belongsTo(Cage::class, 'male');
+    }
+
+    public function femaleOneCage(){
+        return $this->belongsTo(Cage::class, 'female_one');
+    }
+
+    public function femaleTwoCage(){
+        return $this->belongsTo(Cage::class, 'female_two');
+    }
+
+    public function femaleThreeCage(){
+        return $this->belongsTo(Cage::class, 'female_three');
+    }
+
     //Colony
     public function colony(){
         return $this->belongsTo(Colony::class);

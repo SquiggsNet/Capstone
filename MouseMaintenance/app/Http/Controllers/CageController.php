@@ -16,7 +16,9 @@ class CageController extends Controller
      */
     public function index()
     {
-        $cages = Cage::all();
+        $cages = Cage::with('male', 'female_one', 'female_two', 'female_three')->get();
+//        $mice = Cage::with('male')->get()->find(1);
+//        return($mice->male);
         return view('cages.index', compact('cages'));
     }
 

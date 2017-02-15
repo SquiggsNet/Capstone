@@ -37,9 +37,6 @@
             background-color: #373737;
 
         }
-        a {
-            color: red;
-        }
     </style>
 </head>
 <body id="app-layout">

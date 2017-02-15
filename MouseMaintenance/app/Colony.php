@@ -10,6 +10,5 @@ class Colony extends Model
 
     public function mice(){
         return $this->hasMany(Mouse::class);
-
     }
 }

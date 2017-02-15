@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mouse;
+use App\User;
 use Illuminate\Http\Request;
 use App\Surgery;
 use App\Http\Requests;
@@ -22,11 +24,15 @@ class SurgeryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('surgeries.create');
+        $mice_for_surgery = $request['group_select_cb'];
+        $mice = Mouse::whereIn('id', $mice_for_surgery)->get();
+        $surgeons = User::all();
+        return view('surgeries.create', compact('mice', 'surgeons'));
     }
 
     /**
@@ -37,14 +43,21 @@ class SurgeryController extends Controller
      */
     public function store(Request $request)
     {
+        $mice = Mouse::whereIn('id', $request['surgery_mice'])->get();
+
         $surgery = Surgery::create([
-            'user_id' => $request['user_id'],
+            'user_id' => $request['surgeon'],
             'scheduled_date' => $request['scheduled_date'],
-            'purpose' => $request['purpose'],
+            'purpose' => $request['batch'],
             'comments' => $request['comments']
         ]);
         $surgery->save();
-        return redirect()->action('SurgeryController@index');
+
+        foreach($mice as $mouse){
+            $surgery->mice()->attach($mouse->id);
+        }
+
+       return redirect()->action('SurgeryController@index');
     }
 
     /**

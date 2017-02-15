@@ -12,7 +12,8 @@
 
                     @foreach ($colonies as $colony)
 
-                        <a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                        <a class="btn btn-primary btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                        {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
                             <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> {{$colony->name}}
                         </a>
 

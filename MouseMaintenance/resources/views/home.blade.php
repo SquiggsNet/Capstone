@@ -3,49 +3,120 @@
 @section('content')
 
 
+    <div class="container">
+        <div class="row">
 
+            <div class="panel panel-default quarter">
+                <div class="panel-heading"><h4>{{ Auth::user()->getFullName() }}</h4></div>
+                <div class="panel-body">
 
-        <div class="panel-body">
-            <div class="whole">
+                    <h4>User Info</h4>
 
-                <a href="{{ url('/colonies') }}"><h4>Colonies</h4></a>
+                    <p>A general info for user</p>
 
-                <?php $count = 1; ?>
-                @foreach ($colonies as $colony)
+                    <h4>Surgeries</h4>
 
-                    {{--@if($count%4 == 0)--}}
-                        {{--<a class="btn btn-primary btn-lg quarter last colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                    {{--@else--}}
-                        {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                    {{--@endif--}}
+                    <ul>
+                        <li>Surgery 1</li>
+                        <li>Surgery 2</li>
+                        <li>Surgery 3</li>
+                    </ul>
 
-                    <a class="btn btn-primary btn-lg btn-block colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
-                        {{$colony->name}}
-                    </a>
+                    <p>A general info for user</p>
 
-                    <?php $count ++; ?>
-                @endforeach
+                    <h4>User Info</h4>
 
-            </div>
-            <div class="whole">
+                    <p>A general info for user</p>
 
-                <a href="{{ url('/storages') }}"><h3>Storage</h3></a>
-
-                @foreach ($storages as $storage)
-
-                    <a class="btn btn-primary btn-lg btn-block storageBtn" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
-                        {{--<a class="btn btn-primary btn-lg quarter colonyBtn" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
-                        (-80&deg;C Freezer)
-                    </a>
-
-                @endforeach
-
+                </div>
             </div>
 
-            <div class="whole">
-                <a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a>
-            </div>
+            <div class="quarter-x3 last">
+                <div class="panel panel-default half">
+                    <div class="panel-heading"><a href="{{ url('/colonies') }}"><h3>Colonies</h3></a></div>
+                    <div class="panel-body">
 
+                        @foreach ($colonies as $colony)
+                            <a class="btn btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                                {{$colony->name}}
+                            </a>
+                        @endforeach
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default half last">
+                    <div class="panel-heading"><a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a></div>
+                    <div class="panel-body">
+
+                        @foreach ($storages as $storage)
+                            <a class="btn btn-lg btn-block" href="{{ action( 'SurgeryController@show', ['id' => $storage->id]) }}" role="button">
+                                (Current Surgeries)
+                            </a>
+                        @endforeach
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default half">
+                    <div class="panel-heading"><a href="{{ url('/storages') }}"><h3>Storage</h3></a></div>
+                    <div class="panel-body">
+
+                        @foreach ($storages as $storage)
+                            <a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
+                                (-80&deg;C Freezer)
+                            </a>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
+
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+
+            {{--<div class="panel panel-default half">--}}
+                {{--<div class="panel-heading"><a href="{{ url('/colonies') }}"><h3>Colonies</h3></a></div>--}}
+                {{--<div class="panel-body">--}}
+
+                    {{--@foreach ($colonies as $colony)--}}
+                        {{--<a class="btn btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">--}}
+                            {{--{{$colony->name}}--}}
+                        {{--</a>--}}
+                    {{--@endforeach--}}
+
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="panel panel-default half last">--}}
+                {{--<div class="panel-heading"><a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a></div>--}}
+                {{--<div class="panel-body">--}}
+
+                    {{--@foreach ($storages as $storage)--}}
+                        {{--<a class="btn btn-lg btn-block" href="{{ action( 'SurgeryController@show', ['id' => $storage->id]) }}" role="button">--}}
+                            {{--(Current Surgeries)--}}
+                        {{--</a>--}}
+                    {{--@endforeach--}}
+
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="panel panel-default half">--}}
+                {{--<div class="panel-heading"><a href="{{ url('/storages') }}"><h3>Storage</h3></a></div>--}}
+                {{--<div class="panel-body">--}}
+
+                    {{--@foreach ($storages as $storage)--}}
+                        {{--<a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">--}}
+                            {{--(-80&deg;C Freezer)--}}
+                        {{--</a>--}}
+                    {{--@endforeach--}}
+
+                {{--</div>--}}
+            {{--</div>--}}
+
+        {{--</div>--}}
+    {{--</div>--}}
 @endsection

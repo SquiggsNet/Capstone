@@ -13,7 +13,7 @@
 
 .third { width: 32%; } .third-x2 { width: 64%; }
 
-.quarter { width: 23.5%; } .quarter-x3 { width: 74.5% }
+.quarter { width: 22.6%; } .quarter-x3 { width: 74.2% }
 
 .sixth { width: 15%; } .sixth-x5 { width: 83%; }
 
@@ -47,7 +47,7 @@ body {
 }
 
 #nav a:hover{
-    color: powderblue;
+    color: #d7eff2;
 }
 
 /*.navbar-brand>img{*/
@@ -75,7 +75,7 @@ nav .dropdown-menu{
 
 nav .dropdown-menu a:hover{
     background-color: #494949;
-    color: powderblue;
+    color: #d7eff2;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
@@ -92,14 +92,21 @@ nav .dropdown-menu a:hover{
     color: #E7DFDD;
     padding-top: 9px;
     padding-bottom: 9px;
+    border: 1px solid #373737;
 }
-
-.colonyBtn{
-    /*background-color: #ec971f;*/
-}
-
 
 .btn:hover{
+    background-color: #E7DFDD;
+    color:#373737;
+    outline-color: #373737;
+}
+
+.btn:focus{
+    background-color: #E7DFDD;
+    color:#373737;
+}
+
+.btn:active{
     background-color: #E7DFDD;
     color:#373737;
 }
@@ -114,4 +121,12 @@ a:hover{
 
 table th, td{
     align: center;
+}
+
+.panel{
+    margin-bottom: 25px;
+}
+
+.panel-heading{
+    background-color: #d7eff2 !important;
 }

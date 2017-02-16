@@ -41,6 +41,8 @@ body {
 }
 
 #nav a{
+    font-weight: bold;
+    font-size: 17px;
     color: whitesmoke;
 }
 
@@ -48,10 +50,23 @@ body {
     color: powderblue;
 }
 
-.navbar-brand>img{
-    margin-top: -10px;
+/*.navbar-brand>img{*/
+    /*margin-top: -10px;*/
+    /*height: 45px;*/
+/*}*/
+
+.navbar-brand{
+    background-image: url('../img/mmLogoSmoothLink.png');
+    background-size: 87px 90px;
+    background-repeat: no-repeat;
     height: 45px;
+    width: 86px;
+    margin-top: 3px;
+    background-position: 0 0px;
 }
+.navbar-brand:hover{background-position: 0 -45px;}
+.navbar-brand:active{background-position: 0 -45px;}
+
 
 nav .dropdown-menu{
     background-color: #494949;
@@ -68,11 +83,6 @@ nav .dropdown-menu a:hover{
     color: #E7DFDD;
 }
 
-.colonyBtn{
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
 .last{
     margin-right: 0;
 }
@@ -80,7 +90,14 @@ nav .dropdown-menu a:hover{
 .btn{
     background-color: #373737;
     color: #E7DFDD;
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
+
+.colonyBtn{
+    /*background-color: #ec971f;*/
+}
+
 
 .btn:hover{
     background-color: #E7DFDD;
@@ -93,4 +110,8 @@ a{
 
 a:hover{
     color:#373737;
+}
+
+table th, td{
+    align: center;
 }

@@ -31,7 +31,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="img/mmLogoSmoothXSInvert.png">
+                {{--<img src="img/mmLogoSmoothXSInvert.png">--}}
             </a>
         </div>
 
@@ -82,8 +82,49 @@
 </div>
 <div>
 
+    @if (Auth::guest())
+        @yield('content')
+    @else
+        <div class="container">
+            <div class="row">
 
-    @yield('content')
+                <div class="user quarter">
+                    {{--<div class="third">--}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>{{ Auth::user()->getFullName() }}</h4></div>
+
+                        <div class="panel-body">
+
+                            <h4>User Info</h4>
+
+                            <p>A general info for user</p>
+
+                            <h4>Surgeries</h4>
+
+                            <ul>
+                                <li>Surgery 1</li>
+                                <li>Surgery 2</li>
+                                <li>Surgery 3</li>
+                            </ul>
+
+                            <p>A general info for user</p>
+
+                            <h4>User Info</h4>
+
+                            <p>A general info for user</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content last quarter-x3">
+                    <div class="panel panel-default">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 </div>
 
 

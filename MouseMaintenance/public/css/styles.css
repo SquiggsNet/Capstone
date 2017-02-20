@@ -21,9 +21,18 @@
 
 body {
     font-family: 'Lato';
-    background-color: #F4F4F4;
-
+    background-color: #e6e6e6;
+    height: 100%;
 }
+
+/*footer{*/
+    /*background-color: #373737;*/
+    /*color: #8da58b;*/
+    /*font-weight: bold;*/
+    /*text-align:center;*/
+    /*height: 35px;*/
+    /*padding-top: 8px;*/
+/*}*/
 
 @media (max-width: 600px) {
     body{
@@ -43,11 +52,12 @@ body {
 #nav a{
     font-weight: bold;
     font-size: 17px;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
+    color: #8da58b;
 }
 
 #nav a:hover{
-    color: #d7eff2;
+    color: #b0e0e6;
 }
 
 /*.navbar-brand>img{*/
@@ -56,7 +66,7 @@ body {
 /*}*/
 
 .navbar-brand{
-    background-image: url('../img/mmLogoSmoothLink.png');
+    background-image: url('../img/mmLogoSmoothLinkV2.png');
     background-size: 87px 90px;
     background-repeat: no-repeat;
     height: 45px;
@@ -112,11 +122,13 @@ nav .dropdown-menu a:hover{
 }
 
 a{
-    color:#373737;
+    /*color:#373737;*/
+    color: #8da58b;
 }
 
 a:hover{
     color:#373737;
+    text-decoration:  none;
 }
 
 table th, td{
@@ -125,8 +137,22 @@ table th, td{
 
 .panel{
     margin-bottom: 25px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #bfbfbf;
+}
+
+.panel-body{
+    /*background-color: #daf2df !important;*/
 }
 
 .panel-heading{
-    background-color: #d7eff2 !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-width: 1px;
+    border-color: #bfbfbf;
+    /*background-color: #d7eff2 !important;*/
+    /*background-color: #e7f2e6 !important;*/
+    /*background-color: #8e8e8e !important;*/
 }
+

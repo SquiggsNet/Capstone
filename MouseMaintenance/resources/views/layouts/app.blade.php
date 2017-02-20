@@ -77,14 +77,17 @@
         </div>
     </div>
 </nav>
-<div>
 
-</div>
 <div>
 
     @yield('content')
 
 </div>
+{{--<footer>--}}
+    {{--<div class="whole">--}}
+        {{--<p>COPYRIGHT &copy; MURIDAE MAINFRAME 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>--}}
+    {{--</div>--}}
+{{--</footer>--}}
 
 
 <!-- JavaScripts -->

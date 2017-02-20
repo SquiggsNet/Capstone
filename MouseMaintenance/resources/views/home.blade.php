@@ -10,7 +10,7 @@
                 <div class="panel-heading"><h4>{{ Auth::user()->getFullName() }}</h4></div>
                 <div class="panel-body">
 
-                    <h4>User Info</h4>
+                    <h3>User Info</h3>
 
                     <p>A general info for user</p>
 

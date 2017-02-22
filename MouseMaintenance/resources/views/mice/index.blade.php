@@ -104,13 +104,13 @@
                                 </button>
                                 {{ Form::close() }}
                             </td>
-                            {{--<td>--}}
-                                {{--{{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}--}}
-                                {{--<button type="submit" >--}}
-                                    {{--<span class="glyphicon glyphicon-trash"></span>--}}
-                                {{--</button>--}}
-                                {{--{{ Form::close() }}--}}
-                            {{--</td>--}}
+                            <td>
+                                {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
+                                <button type="submit" >
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                                {{ Form::close() }}
+                            </td>
                         </tr>
                     @endif
                 @endforeach

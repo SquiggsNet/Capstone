@@ -29,7 +29,7 @@ class MouseController extends Controller
             $mice = Mouse::whereDate('end_date', '<', $day)->get();
             $pep = true;
         }else {
-            $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', 'null')->get();
+            $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', null)->get();
             $pep = false;
         }
         return view('mice.index', compact('mice', 'pep'));

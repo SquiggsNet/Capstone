@@ -1,5 +1,6 @@
 <?php
 
+use App\Mouse;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -369,7 +370,7 @@ class MouseTableSeeder extends Seeder
             'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
-            'end_date' => false,
+            'end_date' => null,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -387,7 +388,7 @@ class MouseTableSeeder extends Seeder
             'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
-            'end_date' => false,
+            'end_date' => null,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -405,10 +406,32 @@ class MouseTableSeeder extends Seeder
             'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
-            'end_date' => false,
+            'end_date' => null,
             'sick_report' => true,
             'comments' => ""
         ]);
+
+        $mouse = Mouse::find(1);
+        $mouse->father = 1;
+        $mouse->mother_one = 2;
+        $mouse->save();
+
+        $mouse = Mouse::find(2);
+        $mouse->father = 1;
+        $mouse->mother_one = 2;
+        $mouse->save();
+
+        $mouse = Mouse::find(3);
+        $mouse->father = 1;
+        $mouse->mother_one = 2;
+        $mouse->save();
+
+        $mouse = Mouse::find(4);
+        $mouse->father = 1;
+        $mouse->mother_one = 2;
+        $mouse->save();
+
+
     }
 }
 

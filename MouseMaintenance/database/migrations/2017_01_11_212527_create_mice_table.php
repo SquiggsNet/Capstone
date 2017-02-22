@@ -19,7 +19,7 @@ class CreateMiceTable extends Migration
             $table->string('source');
             $table->unsignedInteger('reserved_for')->nullable();
             $table->foreign('reserved_for')->references('id')->on('users');
-            $table->boolean('sex');
+            $table->boolean('sex')->nullable();
             $table->boolean('geno_type_a')->nullable();
             $table->boolean('geno_type_b')->nullable();
             $table->unsignedInteger('father')->nullable();

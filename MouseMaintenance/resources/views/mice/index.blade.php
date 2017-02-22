@@ -36,10 +36,12 @@
                 <tbody>
                 @foreach ($mice as $mouse)
                     @if(isset($mouse->tags->last()->tag_num))
-                        @if($mouse->sex == 'True')
+                        @if($mouse->sex == "1")
                             <?php $class = "info" ?>
-                        @else
+                        @elseif($mouse->sex == "0" and !is_null($mouse->sex))
                             <?php $class = "danger" ?>
+                        @else
+                            <?php $class = "" ?>
                         @endif
                         @if($mouse->sick_report)
                             <?php $id = "report" ?>
@@ -136,20 +138,18 @@
             <tbody>
             @foreach ($mice as $mouse)
                 @if(!isset($mouse->tags->last()->tag_num))
-                    @if($mouse->sex == 'True')
-                        <tr class="info">
-                    @else
-                        <tr class="danger">
-                        @endif              @if($mouse->sex == 1)
-                        <?php $class = "info" ?>
-                    @else
-                        <?php $class = "danger" ?>
-                    @endif
+                    @if($mouse->sex == "1")
+                            <?php $class = "info" ?>
+                        @elseif($mouse->sex == "0")
+                            <?php $class = "danger" ?>
+                        @else
+                            <?php $class = "" ?>
+                        @endif
                     @if($mouse->sick_report)
-                        <?php $id = "report" ?>
-                    @else
-                        <?php $id = "no_report" ?>
-                    @endif
+                            <?php $id = "report" ?>
+                        @else
+                            <?php $id = "no_report" ?>
+                        @endif
                     <tr class="{{ $class }}" id="{{ $id }}">
                         <td>{{ $mouse->colony->name }}</td>
                         <td>{{ $mouse->source }}</td>
@@ -226,7 +226,7 @@
             <tbody>
             @foreach ($mice as $mouse)
                 @if(isset($mouse->tags->last()->tag_num))
-                    @if($mouse->sex == 'True')
+                    @if($mouse->sex == '1')
                         <?php $class = "info" ?>
                     @else
                         <?php $class = "danger" ?>

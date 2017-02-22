@@ -25,6 +25,10 @@ body {
     height: 100%;
 }
 
+table, th{
+    text-align: center;
+}
+
 /*footer{*/
     /*background-color: #373737;*/
     /*color: #8da58b;*/

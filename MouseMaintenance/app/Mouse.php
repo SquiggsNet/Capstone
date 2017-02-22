@@ -22,10 +22,12 @@ class Mouse extends Model
     }
 
     public function getGender($sex){
-        if($sex == 'True' || $sex == 1){
+        if($sex == 'True' || $sex == '1'){
             return 'M';
-        }else{
+        }elseif($sex == 'False' || $sex == '0'){
             return 'F';
+        }else{
+            return 'N/A';
         }
     }
 

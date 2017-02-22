@@ -32,6 +32,7 @@ class MouseController extends Controller
             $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', null)->get();
             $pep = false;
         }
+//        return($mice);
         return view('mice.index', compact('mice', 'pep'));
     }
 
@@ -60,7 +61,7 @@ class MouseController extends Controller
      */
     public function store(Request $request)
     {
-        $males = $request['male_mice_number'];
+        $mice_total = $request['mice_number'];
         $females = $request['female_mice_number'];
 
         $source = $request['source'];
@@ -70,61 +71,51 @@ class MouseController extends Controller
             $cage = Cage::find($cage_id);
             $father = $cage->male;
             $mother_one = $request['female_parent'];
-            $mother_two = 0;
-            $mother_three = 0;
+            $mother_two = null;
+            $mother_three = null;
             if ($mother_one == '0') {
                 $mother_one = $cage->female_one;
                 $mother_two = $cage->female_two;
                 $mother_three = $cage->female_three;
             }
 
-            if ($males != 0) {
-                for ($i = 0; $i < $males; $i++) {
+                for ($i = 0; $i < $mice_total; $i++) {
                     $mouse = Mouse::create([
                         'colony_id' => $request['colony_id'],
-                        'sex' => true,
                         'source' => $source,
-                        'reserved_for' => false,
                         'father' => $father,
-                        'geno_type_a' => 'null',
-                        'geno_type_b' => 'null',
                         'mother_one' => $mother_one,
                         'mother_two' => $mother_two,
                         'mother_three' => $mother_three,
                         'birth_date' => $request['date_of_birth'],
-                        'wean_date' => 'null',
-                        'end_date' => 'null',
-                        'sick_report' => false,
-                        'comments' => 'null'
                     ]);
                     $mouse->save();
                 }
-            }
 
-            if ($females != 0) {
-                for ($i = 0; $i < $females; $i++) {
-                    $mouse = Mouse::create([
-                        'colony_id' => $request['colony_id'],
-                        'sex' => false,
-                        'source' => $source,
-                        'reserved_for' => '0',
-                        'father' => $father,
-                        'geno_type_a' => 'null',
-                        'geno_type_b' => 'null',
-                        'mother_one' => $mother_one,
-                        'mother_two' => $mother_two,
-                        'mother_three' => $mother_three,
-                        'birth_date' => $request['date_of_birth'],
-                        'wean_date' => 'null',
-                        'end_date' => 'null',
-                        'sick_report' => false,
-                        'comments' => 'null'
-                    ]);
-                    $mouse->save();
-                }
-            }
+//            if ($females != 0) {
+//                for ($i = 0; $i < $females; $i++) {
+//                    $mouse = Mouse::create([
+//                        'colony_id' => $request['colony_id'],
+//                        'sex' => false,
+//                        'source' => $source,
+//                        'reserved_for' => '0',
+//                        'father' => $father,
+//                        'geno_type_a' => 'null',
+//                        'geno_type_b' => 'null',
+//                        'mother_one' => $mother_one,
+//                        'mother_two' => $mother_two,
+//                        'mother_three' => $mother_three,
+//                        'birth_date' => $request['date_of_birth'],
+//                        'wean_date' => 'null',
+//                        'end_date' => 'null',
+//                        'sick_report' => false,
+//                        'comments' => 'null'
+//                    ]);
+//                    $mouse->save();
+//                }
+//            }
         }else{
-            for($i = 0; $i < $males; $i++) {
+            for($i = 0; $i < $mice_total; $i++) {
                 $mouse = Mouse::create([
                     'colony_id' => $request['colony_id'],
                     'sex' => true,

@@ -16,8 +16,8 @@ class CreateBloodPressuresTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
             $table->foreign('mouse_id')->references('id')->on('mice');
-            $table->unsignedInteger('systolic')->nullable;
-            $table->unsignedInteger('diastolic')->nullable;
+            $table->unsignedInteger('systolic')->nullable();
+            $table->unsignedInteger('diastolic')->nullable();
             $table->date('taken_on');
             $table->timestamps();
         });

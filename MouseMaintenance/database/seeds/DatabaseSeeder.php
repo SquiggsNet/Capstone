@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PrivilegeTableSeeder::class);
         $this->call(Privilege_UserTableSeeder::class);
         $this->call(ColonyTableSeeder::class);
-        $this->call(TreatmentTableSeeder::class);
-        $this->call(WeightTableSeeder::class);
-        $this->call(Blood_PressureTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(TissueTableSeeder::class);
         $this->call(StorageTableSeeder::class);
         $this->call(MouseTableSeeder::class);
+        $this->call(WeightTableSeeder::class);
+        $this->call(Blood_PressureTableSeeder::class);
+        $this->call(TreatmentTableSeeder::class);
         $this->call(CageTableSeeder::class);
         $this->call(SurgeryTableSeeder::class);
         $this->call(Mouse_SurgeryTableSeeder::class);
@@ -345,10 +345,10 @@ class MouseTableSeeder extends Seeder
             'sex' => 'True',
             'geno_type_a' => 1,
             'geno_type_b' => 1,
-            'father' => 1,
-            'mother_one' => 2,
-            'mother_two' => false,
-            'mother_three' => false,
+            'father' => null,
+            'mother_one' => null,
+            'mother_two' => null,
+            'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => '2012-02-28',
@@ -363,10 +363,10 @@ class MouseTableSeeder extends Seeder
             'sex' => 'False',
             'geno_type_a' => 1,
             'geno_type_b' => 0,
-            'father' => 1,
-            'mother_one' => 2,
-            'mother_two' => false,
-            'mother_three' => false,
+            'father' => null,
+            'mother_one' => null,
+            'mother_two' => null,
+            'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => false,
@@ -381,10 +381,10 @@ class MouseTableSeeder extends Seeder
             'sex' => 'False',
             'geno_type_a' => 0,
             'geno_type_b' => 0,
-            'father' => 1,
-            'mother_one' => 2,
-            'mother_two' => false,
-            'mother_three' => false,
+            'father' => null,
+            'mother_one' => null,
+            'mother_two' => null,
+            'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => false,
@@ -399,10 +399,10 @@ class MouseTableSeeder extends Seeder
             'sex' => 'False',
             'geno_type_a' => 1,
             'geno_type_b' => 1,
-            'father' => 1,
-            'mother_one' => 2,
-            'mother_two' => false,
-            'mother_three' => false,
+            'father' => null,
+            'mother_one' => null,
+            'mother_two' => null,
+            'mother_three' => null,
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => false,

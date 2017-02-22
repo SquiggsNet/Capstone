@@ -14,13 +14,13 @@ class CreateSurgeriesTable extends Migration
     {
         Schema::create('surgeries', function (Blueprint $table){
             $table->increments('id');
-            $table->unsignedInteger('user_id')->nullable;
+            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('treatment')->nullable;
-            $table->unsignedInteger('dose')->nullable;
+            $table->string('treatment')->nullable();
+            $table->unsignedInteger('dose')->nullable();
             $table->date('scheduled_date');
             $table->string('purpose');
-            $table->string('comments')->nullable;
+            $table->string('comments')->nullable();
             $table->timestamps();
         });
     }

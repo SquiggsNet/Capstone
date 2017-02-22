@@ -17,9 +17,9 @@ class CreateStoragesTable extends Migration
             $table->unsignedInteger('tissue_id');
             $table->foreign('tissue_id')->references('id')->on('tissues');
             $table->boolean('type');
-            $table->unsignedInteger('freezer')->nullable;
-            $table->unsignedInteger('compartment')->nullable;
-            $table->unsignedInteger('shelf')->nullable;
+            $table->unsignedInteger('freezer')->nullable();
+            $table->unsignedInteger('compartment')->nullable();
+            $table->unsignedInteger('shelf')->nullable();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tag_num');
-            $table->boolean('lost_tag')->nullable;
+            $table->boolean('lost_tag')->nullable();
             $table->timestamps();
         });
     }

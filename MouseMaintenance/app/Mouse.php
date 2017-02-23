@@ -12,9 +12,20 @@ class Mouse extends Model
     protected $fillable = array('colony_id', 'reserved_for', 'source', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
                                 'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'sick_report', 'comments');
 
+    public function genoFormat($geno_a, $geno_b){
+        if($geno_a == '1' and $geno_b == '1'){
+            return '(+/+)';
+        }elseif($geno_a == '1' and $geno_b == '0'){
+            return '(+/-)';
+        }elseif($geno_a == '0' and $geno_b == '0'){
+            return '(-/-)';
+        }else{
+            return 'N/A';
+        }
+    }
 
     public function getGeno($geno){
-        if($geno == 'True' || $geno == 1){
+        if($geno == 'True' || $geno == '1'){
             return '+';
         }else{
             return '-';

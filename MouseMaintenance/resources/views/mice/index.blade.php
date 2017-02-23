@@ -25,9 +25,9 @@
                     <th>Pedigree</th>
                     <th>Sex</th>
                     <th>Age</th>
+                    <th>DOB</th>
                     <th>Weight</th>
                     <th>Blood Pressure</th>
-                    <th>Wean Date</th>
                     <th>End Date</th>
                     <th>Comments</th>
                     <th></th>
@@ -62,11 +62,7 @@
                                     {{$mouse->colony->name}}
                                 </a>
                             </td>
-                                <td>
-                                    @if($mouse->geno_type_a != "null")
-                                        ({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})
-                                    @endif
-                                </td>
+                            <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
                             <td>
                                 {{ $mouse->source }}
                             </td>
@@ -88,15 +84,17 @@
                             </td>
                             <td>{{$mouse->getGender($mouse->sex)}}</td>
                             <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                            <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
                             <td>
-                                @if(! empty($mouse->weights->last()->weight))
+                                @if(!empty($mouse->weights->last()->weight))
                                     {{$mouse->weights->last()->weight . 'g'}}
                                 @endif
                             </td>
                             <td>
-                                {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
+                                @if(!empty($mouse->blood_pressures->last()->taken_on))
+                                    {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
+                                @endif
                             </td>
-                            <td>{{$mouse->showDate($mouse->wean_date)}}</td>
                             <td>{{$mouse->showDate($mouse->end_date)}}</td>
                             <td>{{$mouse->comments}}  </td>
                             <td>
@@ -215,6 +213,7 @@
                 <th>Sex</th>
                 <th>Geno Type</th>
                 <th>Age</th>
+                <th>DOB</th>
                 <th>Weight</th>
                 <th>Blood Pressure</th>
                 <th>Wean Date</th>
@@ -267,8 +266,9 @@
                             @endif
                         </td>
                         <td>{{$mouse->getGender($mouse->sex)}}</td>
-                        <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
+                        <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
                         <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                        <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
                         <td>{{$mouse->weights->last()->weight}}g</td>
                         <td>
                             {{$mouse->blood_pressures->last()->taken_on}}

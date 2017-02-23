@@ -61,7 +61,7 @@
             <div class="form-group">
                 {!! Form::label('reserved_for', 'Reserved For') !!}
                 <select name="reserved_for" id="reserved_for" class="form-control">
-                    <option value="0">Reserve For...</option>
+                    <option value="">Reserve For...</option>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}"
                         @if($editMouse->reserved_for == $user->id)
@@ -81,9 +81,9 @@
                 <label>Sex:</label>
                 <select class="form-control" name="sex">
                     <option value="0">Select..</option>
-                    <option value="True"
+                    <option value="1"
                             @if($editMouse->getGender($editMouse->sex) =='M')selected="selected"@endif>Male</option>
-                    <option value="False"
+                    <option value="0"
                             @if($editMouse->getGender($editMouse->sex) == 'F')selected="selected"@endif>Female</option>
                 </select>
             </div>
@@ -91,7 +91,7 @@
             <div class="form-group">
                 <fieldset>
                     <?php $gene = 4;?>
-                    @if($editMouse->geno_type_a != 'null')
+                    @if(!is_null($editMouse->geno_type_a))
                         <?php $gene = 1;?>
                         @if($editMouse->geno_type_a == 1)
                             <?php $gene += 2; ?>

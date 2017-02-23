@@ -187,7 +187,7 @@ class MouseController extends Controller
         $editMouse = Mouse::find($id);
         $mice = Mouse::all();
         $users = User::all();
-//        return($editMouse->blood_pressures);
+//        return($editMouse);
         return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'tags'));
     }
 
@@ -200,7 +200,6 @@ class MouseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $isSick = 0;
         if($request['sick_report']){
             $isSick = $request['sick_report'];
@@ -217,28 +216,39 @@ class MouseController extends Controller
             $geno_a = 0;
             $geno_b = 0;
         }else{
-            $geno_a = 'null';
-            $geno_b = 'null';
+            $geno_a = null;
+            $geno_b = null;
         }
 
+
         $mouse = Mouse::find($id);
-        $mouse->reserved_for = $request['reserved_for'];
+        if(!empty($request['reserved_for'])){
+            $mouse->reserved_for = $request['reserved_for'];
+        }
         $mouse->sex = $request['sex'];
         $mouse->geno_type_a = $geno_a;
         $mouse->geno_type_b = $geno_b;
         $mouse->father = $request['father'];
         $mouse->mother_one = $request['mother_one'];
-        $mouse->mother_two = $request['mother_two'];
-        $mouse->mother_three = $request['mother_three'];
+        if(!empty($request['mother_two'])) {
+            $mouse->mother_two = $request['mother_two'];
+        }
+        if(!empty($request['mother_three'])) {
+            $mouse->mother_three = $request['mother_three'];
+        }
         $mouse->birth_date = $request['birth_date'];
-        $mouse->wean_date = $request['wean_date'];
-        $mouse->end_date = $request['end_date'];
+        if(!empty($request['wean_date'])) {
+            $mouse->wean_date = $request['wean_date'];
+        }
+        if(!empty($request['end_date'])) {
+            $mouse->end_date = $request['end_date'];
+        }
         $mouse->sick_report = $isSick;
         $mouse->comments = $request['comments'];
         $mouse->save();
 
 
-        if (isset($request['weight'])) {
+        if (!empty($request['weight'])) {
             if(isset($mouse->weights->last()->weighed_on)){
                 if($mouse->weights->last()->weighed_on != $request['weight_date']) {
                     $weight = Weight::create([
@@ -258,7 +268,7 @@ class MouseController extends Controller
             }
         }
 
-        if(isset($request['bp_date'])){
+        if(!empty($request['bp_date'])){
             if(isset($mouse->blood_pressures->last()->taken_on)) {
                 if ($mouse->blood_pressures->last()->taken_on != $request['bp_date']) {
                     $bp = BloodPressure::create([
@@ -287,8 +297,10 @@ class MouseController extends Controller
                     $mouse->tags()->attach($request[$tag_num]);
                 }
             }else{
-                $tag_num = $request['tag_id'] + 1;
-                $mouse->tags()->attach($tag_num);
+                if(!empty($request['tag_id'])) {
+                    $tag_num = $request['tag_id'] + 1;
+                    $mouse->tags()->attach($tag_num);
+                }
             }
         }
 

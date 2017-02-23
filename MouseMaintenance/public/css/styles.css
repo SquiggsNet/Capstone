@@ -57,7 +57,7 @@ table, th{
     font-weight: bold;
     font-size: 17px;
     /*color: whitesmoke;*/
-    color: #8da58b;
+    color: #ffffff;
 }
 
 #nav a:hover{
@@ -70,7 +70,7 @@ table, th{
 /*}*/
 
 .navbar-brand{
-    background-image: url('../img/mmLogoSmoothLinkV2.png');
+    background-image: url('../img/mmLogoSmoothLink.png');
     background-size: 87px 90px;
     background-repeat: no-repeat;
     height: 45px;
@@ -127,7 +127,7 @@ nav .dropdown-menu a:hover{
 
 a{
     /*color:#373737;*/
-    color: #8da58b;
+    color: #373737;
 }
 
 a:hover{

@@ -32,9 +32,12 @@ Route::resource('cages', 'CageController');
 Route::resource('colonies', 'ColonyController');
 
 Route::resource('mice', 'MouseController');
+Route::post('mice/group', 'MouseController@group');
 
 
 Route::resource('storages', 'StorageController');
+
+Route::get('surgeries/{mice}/create', 'SurgeryController@create');
 Route::resource('surgeries', 'SurgeryController');
 Route::resource('tags', 'TagController');
 Route::resource('tissues', 'TissueController');

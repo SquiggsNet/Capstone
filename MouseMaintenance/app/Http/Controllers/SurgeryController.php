@@ -25,13 +25,15 @@ class SurgeryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Request $request
+     * @param $mice_id
      * @return \Illuminate\Http\Response
+     * @internal param $mice
+     * @internal param Request $request
      */
-    public function create(Request $request)
+    public function create($mice_id)
     {
-        $mice_for_surgery = $request['group_select_cb'];
-        $mice = Mouse::whereIn('id', $mice_for_surgery)->get();
+        $mice_ex = explode(",", $mice_id);
+        $mice = Mouse::whereIn('id', $mice_ex)->get();
         $surgeons = User::all();
         return view('surgeries.create', compact('mice', 'surgeons'));
     }

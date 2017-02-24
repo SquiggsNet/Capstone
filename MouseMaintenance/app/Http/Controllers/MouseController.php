@@ -22,6 +22,21 @@ class MouseController extends Controller
         $this->middleware('auth');
     }
 
+    public function group(Request $request){
+
+        $mice_for_surgery = $request['group_select_cb'];
+        $mice = implode(",",$mice_for_surgery);
+
+
+        if($request->input('submit') == 'surgery'){
+            return redirect('surgeries/'.$mice.'/create');
+//            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
+        }else{
+            return redirect()->action('TissueController@index');
+        }
+//        return($request->input('submit'));
+    }
+
     public function index(Request $request)
     {
         $day = date('Y-m-d');

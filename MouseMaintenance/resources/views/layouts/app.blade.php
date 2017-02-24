@@ -50,7 +50,7 @@
                     <li><a href="{{ url('/storages') }}">Storages</a></li>
 
                     {{--<li><a href="{{ url('/tags') }}">Tags</a></li>--}}
-                    {{--<li><a href="{{ url('/tissues') }}">Tissues</a></li>--}}
+                    <li><a href="{{ url('/tissues') }}">Tissues</a></li>
                     {{--<li><a href="{{ url('/treatments') }}">Treatments</a></li>--}}
                     {{--<li><a href="{{ url('/weights') }}">Weights</a></li>--}}
                 @endif

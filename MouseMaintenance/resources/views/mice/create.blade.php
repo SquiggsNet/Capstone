@@ -41,7 +41,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label>Date of Birth:</label>
-                    <input class="form-control" type="date" name="date_of_birth" />
+                    <input class="form-control" type="date" max="9999-12-31" name="date_of_birth" />
                 </div>
                 <div class="form-group">
                     <label>Colony:</label>

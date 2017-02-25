@@ -4,11 +4,20 @@
 @if(!$pep)
     <div class="container">
         <h1 class="row-centered">All Mice</h1>
-
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Tagged Mice</h3></div>
             <div class="panel-body">
-
+                @if(count($errors))
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            @if($error == 'The group select cb field is required.')
+                                <li>Please select mice to process.</li>
+                            @else
+                                <li>{{ $error }}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                @endif
                 <button type="submit" name="submit" value="breeders" id="submit_breeders" class="btn btn-default pull-right btn-block sixth">
                     Breeders
                 </button>

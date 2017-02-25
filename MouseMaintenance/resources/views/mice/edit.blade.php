@@ -202,15 +202,15 @@
         <div class="panel-body">
             <div class="form-group">
                 <label>Birth Date</label>
-                <input class="form-control" name="birth_date" type="date" value="{{ $editMouse->birth_date }}"/>
+                <input class="form-control" name="birth_date" type="date" max="9999-12-31" value="{{ $editMouse->birth_date }}"/>
             </div>
             <div class="form-group">
                 <label>Wean Date</label>
-                <input class="form-control" name="wean_date" type="date" value="{{ $editMouse->wean_date }}"/>
+                <input class="form-control" name="wean_date" type="date" max="9999-12-31" value="{{ $editMouse->wean_date }}"/>
             </div>
             <div class="form-group">
                 <label>End Date</label>
-                <input class="form-control" name="end_date" type="date" value="{{ $editMouse->end_date }}"/>
+                <input class="form-control" name="end_date" type="date" max="9999-12-31" value="{{ $editMouse->end_date }}"/>
             </div>
             <div class="form-group">
                 <label>Blood Pressure Last Taken</label>

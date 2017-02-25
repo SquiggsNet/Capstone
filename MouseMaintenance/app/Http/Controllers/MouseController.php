@@ -24,6 +24,10 @@ class MouseController extends Controller
 
     public function group(Request $request){
 
+        $this->validate($request, [
+            'group_select_cb' => 'required'
+        ]);
+
         $mice_for_surgery = $request['group_select_cb'];
         $mice = implode(",",$mice_for_surgery);
 

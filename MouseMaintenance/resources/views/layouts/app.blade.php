@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Muridae Mainframe</title>
+    <title>Laboratory Mouse Tracker</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -38,16 +38,16 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Home</a></li>
+
 
                 @if (!Auth::guest())
-
+                    <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/colonies') }}">Colonies</a></li>
                     <li><a href="{{ url('/mice') }}">Mice</a></li>
                     <li><a href="{{ url('/surgeries') }}">Surgeries</a></li>
                     {{--<li><a href="{{ url('/bloodPressures') }}">Blood Pressures</a></li>--}}
                     <li><a href="{{ url('/cages') }}">Breeders</a></li>
-                    <li><a href="{{ url('/storages') }}">Storages</a></li>
+                    <li><a href="{{ url('/storages') }}">Storage</a></li>
 
                     {{--<li><a href="{{ url('/tags') }}">Tags</a></li>--}}
                     <li><a href="{{ url('/tissues') }}">Tissues</a></li>
@@ -83,11 +83,11 @@
     @yield('content')
 
 </div>
-{{--<footer>--}}
-    {{--<div class="whole">--}}
-        {{--<p>COPYRIGHT &copy; MURIDAE MAINFRAME 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>--}}
-    {{--</div>--}}
-{{--</footer>--}}
+<footer>
+    <div class="whole">
+        <p>COPYRIGHT &copy; LABORATORY MOUSE TRACKER 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>
+    </div>
+</footer>
 
 
 <!-- JavaScripts -->

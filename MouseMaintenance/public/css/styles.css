@@ -13,11 +13,28 @@
 
 .third { width: 32%; } .third-x2 { width: 64%; }
 
-.quarter { width: 22.6%; } .quarter-x3 { width: 74.2% }
+.quarter { width: 23.5%; } .quarter-x3 { width: 74.2% }
 
 .sixth { width: 15%; } .sixth-x5 { width: 83%; }
 
 .twelveth { width: 5.4%; }
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.top-buffer { margin-top:20px; }
+
+.show_btn{
+    margin-top: 0 !important;
+}
 
 body {
     font-family: 'Lato';
@@ -25,23 +42,32 @@ body {
     height: 100%;
 }
 
+.glyphicon.glyphicon-question-sign , #help{
+    font-size: 25px;
+    color: #E7DFDD;
+}
+
+.form-control.login{
+    border-radius: 30px 30px 30px 30px;
+    background-color: #E7DFDD;
+}
+
+.form-horizontal .checkbox{
+    padding-top: 0 !important;
+}
+
+
 table, th{
     text-align: center;
 }
 
-/*footer{*/
-    /*background-color: #373737;*/
-    /*color: #8da58b;*/
-    /*font-weight: bold;*/
-    /*text-align:center;*/
-    /*height: 35px;*/
-    /*padding-top: 8px;*/
-/*}*/
-
-@media (max-width: 600px) {
-    body{
-        background-color: darkgray;
-    }
+footer{
+    background-color: #373737;
+    color: #ffffff;
+    font-weight: bold;
+    text-align:center;
+    height: 35px;
+    padding-top: 8px;
 }
 
 button{
@@ -52,7 +78,7 @@ button:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-#submit_euthanize{
+.left_btn{
     margin-left: 5px;
     padding-left: 20px;
     padding-right: 20px;
@@ -61,6 +87,10 @@ button:hover{
 
 .fa-btn {
     margin-right: 6px;
+}
+
+#report{
+    color: red;
 }
 
 #nav{
@@ -174,3 +204,31 @@ table th, td{
     /*background-color: #8e8e8e !important;*/
 }
 
+/* ==========================================================================
+   Media Queries for Responsive Design.
+   These styles override the primary styles.
+   ========================================================================== */
+
+
+@media (max-width: 992px) {
+    .quarter{
+        width: 49%;
+    }
+
+    .sixth{ width: 23.5%; }
+
+    .new_last { margin-right:0;
+        padding-right: 0 !important;}
+}
+
+@media (max-width: 768px) {
+    .half, .quarter{
+        width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+    .third-x2, .third{
+        width: 100%;
+    }
+}

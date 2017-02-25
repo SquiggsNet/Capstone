@@ -9,102 +9,121 @@
 
 @if($source == "1")
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">In House</div>
+        <h1 class="row-centered">Add Mice</h1>
+
+        {!! Form::open((array('route' => 'mice.store'))) !!}
+        <input type="hidden" name="source" id="source" value="In house"/>
+
+        <div class="panel panel-default quarter">
+            <div class="panel-heading">Quantity</div>
             <div class="panel-body">
-                <div>
-                    {!! Form::open((array('route' => 'mice.store'))) !!}
-                        <div class="row">
-                            <input type="hidden" name="source" id="source" value="In house"/>
-                            <div class="form-group col-xs-6 col-sm-6 col-md-2">
-                                <label># Of Mice:</label>
-                                <div class="input-group">
-                                    <span class="input-group-btn ">
-                                        <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity">
-                                            <span class="glyphicon glyphicon-minus"></span>
-                                        </button>
-                                    </span>
-                                    <input type="text" name="mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                                <label>Date of Birth:</label>
-                                <input class="form-control" type="date" name="date_of_birth" />
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                                <label>Colony:</label>
-                                <select class="form-control" name="colony_id">
-                                    <option value="0">Select Strain...</option>
-                                    @foreach($colonies as $colony)
-                                        <option value="{{ $colony->id }}">{{ $colony->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <label>Male Parent:</label>
-                                <label>
-                                    @foreach($mice as $mouse)
-                                        @if($mouse->id == $cage->male)
-                                            <input class="form-control" type="text" name="male_parent" readonly="readonly"
-                                                   value=" #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
-                                                            $mouse->getGender($mouse->sex) . ' (' .
-                                                            $mouse->getGeno($mouse->geno_type_a) . '/' .
-                                                            $mouse->getGeno($mouse->geno_type_b) . ')' }} "/>
-                                        @endif
-                                    @endforeach
-                                </label>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <label>Select Female Parent:</label>
-                                <input type="hidden" name="cage_id" value="{{ $cage->id }}"/>
-                                <select class="form-control" name="female_parent">
-                                    <option value="0">Select All (Unknown)</option>
-                                    @foreach($mice as $mouse)
-                                        @if($mouse->id == $cage->female_one)
-                                            <option value="{{ $mouse->id }}">
-                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
-                                                    $mouse->getGender($mouse->sex) . ' (' .
-                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
-                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
-                                            </option>
-                                        @endif
-                                        @if($mouse->id == $cage->female_two)
-                                            <option value="{{ $mouse->id }}">
-                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
-                                                    $mouse->getGender($mouse->sex) . ' (' .
-                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
-                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
-                                            </option>
-                                        @endif
-                                        @if($mouse->id == $cage->female_three)
-                                            <option value="{{ $mouse->id }}">
-                                                {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
-                                                    $mouse->getGender($mouse->sex) . ' (' .
-                                                    $mouse->getGeno($mouse->geno_type_a) . '/' .
-                                                    $mouse->getGeno($mouse->geno_type_b) . ')' }}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                            {!! Form::submit('Add',['class'=>'btn btn-default']) !!}
-                        </div>
+                <div class="form-group">
+                    <label># Of Mice:</label>
+                    <div class="input-group">
+                        <span class="input-group-btn ">
+                            <button type="button" class="btn btn-default value-control" data-action="minus" data-target="quantity">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </span>
+                        <input type="text" name="mice_number" value="0" min="0" maxlength="2" class="form-control" id="quantity">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default value-control" data-action="plus" data-target="quantity">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </span>
                     </div>
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default quarter new_last">
+            <div class="panel-heading">DOB/Strain</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <input class="form-control" type="date" name="date_of_birth" />
+                </div>
+                <div class="form-group">
+                    <label>Colony:</label>
+                    <select class="form-control" name="colony_id">
+                        <option value="0">Select Strain...</option>
+                        @foreach($colonies as $colony)
+                            <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default quarter">
+            <div class="panel-heading">Parents</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Male Parent:</label>
+                    <label>
+                        @foreach($mice as $mouse)
+                            @if($mouse->id == $cage->male)
+                                <input class="form-control" type="text" name="male_parent" readonly="readonly"
+                                       value=" #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                            $mouse->getGender($mouse->sex) . ' (' .
+                                                            $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                            $mouse->getGeno($mouse->geno_type_b) . ')' }} "/>
+                            @endif
+                        @endforeach
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Select Female Parent:</label>
+                    <input type="hidden" name="cage_id" value="{{ $cage->id }}"/>
+                    <select class="form-control" name="female_parent">
+                        <option value="0">Select All (Unknown)</option>
+                        @foreach($mice as $mouse)
+                            @if($mouse->id == $cage->female_one)
+                                <option value="{{ $mouse->id }}">
+                                    {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                        $mouse->getGender($mouse->sex) . ' (' .
+                                        $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                        $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                </option>
+                            @endif
+                            @if($mouse->id == $cage->female_two)
+                                <option value="{{ $mouse->id }}">
+                                    {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                        $mouse->getGender($mouse->sex) . ' (' .
+                                        $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                        $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                </option>
+                            @endif
+                            @if($mouse->id == $cage->female_three)
+                                <option value="{{ $mouse->id }}">
+                                    {{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                        $mouse->getGender($mouse->sex) . ' (' .
+                                        $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                        $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default quarter last">
+            <div class="panel-heading">Batch</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Comments:</label>
+                    <textarea class="form-control" rows="5" name="comments" ></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group quarter last pull-right">
+            {!! Form::submit('Add Mice',['class'=>'btn btn-default btn-block']) !!}
+        </div>
+        {!! Form::close() !!}
     </div>
-</div>
+
 @else
     <div class="container">
         <div class="panel panel-default">
@@ -156,32 +175,5 @@
     </div>
 @endif
 
-<script type="text/javascript">
-    $(document).on('click','.value-control',function(){
-        var action = $(this).attr('data-action')
-        var target = $(this).attr('data-target')
-        var value  = parseFloat($('[id="'+target+'"]').val());
-        if(isNaN(value)){
-            value = 0;
-        }
-        if ( action == "plus" && value != 99 ) {
-            value++;
-        }
-        if ( action == "minus" && value != 0) {
-            value--;
-        }
-        $('[id="'+target+'"]').val(value)
-    });
-
-    $(document).ready(function () {
-        $("#quantity").keypress(function (e) {
-            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                $("#errmsg").html("Digits Only").show().fadeOut("slow");
-                return false;
-            }
-        });
-    });
-
-</script>
 
 @endsection

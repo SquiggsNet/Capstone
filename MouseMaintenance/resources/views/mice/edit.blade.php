@@ -4,7 +4,6 @@
 
 
 <div class="container">
-
     <h1>Edit Mouse</h1>
 
     {{ Form::open(['action' => ['MouseController@update', $editMouse], 'method' => 'put']) }}
@@ -23,12 +22,12 @@
                 <div class="form-group col-xs-4 col-sm-6 col-md-3">
                     <label>Lost Tag</label>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12">
-                    <input type="checkbox" class="form-control" name="lost_tag_cb" id="lost_tag_cb" onchange="newTag()" value="1">
+                    <input type="checkbox" class="form-control" name="lost_tag_cb" id="lost_tag_cb" onclick="newTag()" value="1">
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-sm-6 col-md-3" style="display: none" id="new_tag_input">
                     <label>New Tag</label>
-                    <input type="text"  maxlength="3" minlength="3" class="form-control" name="new_tag_id" />
+                    <input type="text"  id="new_tag_id" maxlength="3" minlength="3" onkeyup="check()" class="form-control" name="new_tag_id" />
                 </div>
             </div>
             <div class="row">
@@ -292,20 +291,22 @@
             </div>
         </div>
     </div>
-</div>
 
 <script type="text/javascript">
-    function setChecked() {
-        if(document.getElementById('geno_check1').checked) {
-            $('#plus_plus').click();
-        }
-        if(document.getElementById('geno_check2').checked) {
-            document.getElementById('geno2').style.color = "grey";
-        }
-        if(document.getElementById('geno_check3').checked) {
-            document.getElementById('geno3').addClass('active');;
-        }
-    }
+
+    //This function was for button masks on the checkboxes, may be implemented later
+    //If not feel free to remove this section.
+//    function setChecked() {
+//        if(document.getElementById('geno_check1').checked) {
+//            $('#plus_plus').click();
+//        }
+//        if(document.getElementById('geno_check2').checked) {
+//            document.getElementById('geno2').style.color = "grey";
+//        }
+//        if(document.getElementById('geno_check3').checked) {
+//            document.getElementById('geno3').addClass('active');
+//        }
+//    }
 
     function newTag(){
         var check_box = document.getElementById("lost_tag_cb");
@@ -314,10 +315,27 @@
         }else{
             document.getElementById('new_tag_input').style.display = 'none';
         }
-
     }
 
-    window.onload = setChecked();
+    function check(){
+        var tagArray = <?php echo json_encode($active_tags) ?>;
+        var new_tag = document.getElementById('new_tag_id').value;
+        var new_tag_input = document.getElementById('new_tag_id');
+        for(var i=0; i < tagArray.length; i++){
+            if(tagArray[i] == new_tag){
+                alert("Tag already in use.");
+                new_tag_input.style.backgroundColor = "yellow";
+                break;
+            }else{
+                new_tag_input.style.backgroundColor = "";
+            }
+        }
+    }
+
+    function start(){
+//        setChecked();
+    }
+    window.onload = start();
 </script>
 
 @endsection

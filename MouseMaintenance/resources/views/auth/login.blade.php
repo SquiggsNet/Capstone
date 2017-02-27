@@ -116,5 +116,13 @@
     </div>
 </div>
 
+<style type="text/css">
+    footer{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
 
 @endsection

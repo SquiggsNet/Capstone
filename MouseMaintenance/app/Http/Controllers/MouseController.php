@@ -206,8 +206,14 @@ class MouseController extends Controller
         $editMouse = Mouse::find($id);
         $mice = Mouse::all();
         $users = User::all();
-//        return($editMouse);
-        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'tags'));
+
+        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->orWhere('end_date', '')->orWhere('end_date', null)->get();
+
+        foreach($active_mice as $a_m){
+            $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
+        }
+
+        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
     }
 
     /**

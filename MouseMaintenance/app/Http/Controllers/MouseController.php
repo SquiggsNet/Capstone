@@ -108,6 +108,7 @@ class MouseController extends Controller
                         'colony_id' => $request['colony_id'],
                         'source' => $source,
                         'father' => $father,
+                        'sex' => null,
                         'mother_one' => $mother_one,
                         'mother_two' => $mother_two,
                         'mother_three' => $mother_three,

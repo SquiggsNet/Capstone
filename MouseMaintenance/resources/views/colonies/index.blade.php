@@ -25,13 +25,13 @@
 
                             <div class="form-group">
                                 <label>Add Mice</label>
-                                <select class="form-control" name="source" id="source" onchange="selectedSource();">
+                                <select class="form-control" name="source" id="source">
                                     <option value="0">Select source</option>
                                     <option value="1">In House</option>
                                     <option value="2">External</option>
                                 </select>
                             </div>
-                            <div style="display:none" id=selectCage class="form-group">
+                            <div id=selectCage class="form-group">
                                 <label>Select Breeder Cage:</label>
                                 <select class="form-control" name="cage_id" id="cage_id">
                                     <option value="0">Select Cage </option>
@@ -50,12 +50,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
-
-
-
-
 
                             <div class="form-group clearfix">
                                 {!! Form::submit('Add',['class'=>'btn btn-block']) !!}

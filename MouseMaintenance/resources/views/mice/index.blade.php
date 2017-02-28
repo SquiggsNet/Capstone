@@ -188,12 +188,21 @@
                                     @endif
                                 <tr class="{{ $class }}" id="{{ $id }}">
                                     <td>
-                                        <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $mouse->id }}"/>
+                                        <input type="checkbox" class="untaggedChk" id="group_select_untagged_cb{{ $mouse->id }}" name="group_select_untagged_cb[]" value="{{ $mouse->id }}"/>
                                     </td>
-                                    <td></td>
+                                    <td class="col-xs-2">
+                                        <input class="untaggedInput" type="text" id="new_tag_group_select_untagged_cb{{ $mouse->id }}" maxlength="3" minlength="3" onkeyup="check()" class="form-control" name="new_tag_id"/></td>
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
                                     {{--<td>{{ $mouse->source }}</td>--}}
-                                    <td>{{ $mouse->getGender($mouse->sex) }}</td>
+                                    <td>
+
+                                    <select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="sex">
+                                        <option value="0"></option>
+                                        <option value="1">M</option>
+                                        <option value="0">F</option>
+                                    </select>
+
+                                    </td>
                                     @if($mouse->source == 'In house')
                                         <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
                                             {{$mouse->getGender($mouse->father_record->sex)}}

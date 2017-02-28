@@ -1,17 +1,3 @@
-
-//Colony Index Page, Mouse Creation Function
-function selectedSource(){
-    var dropDown = document.getElementById("source");
-    var currentValue = dropDown.options[dropDown.selectedIndex].value;
-
-    if(currentValue == "1"){
-        document.getElementById("selectCage").style.display = "block";
-    }else{
-        document.getElementById("selectCage").style.display = "none";
-    }
-}
-
-
 $(document).on('click','.value-control',function(){
     var action = $(this).attr('data-action')
     var target = $(this).attr('data-target')
@@ -29,6 +15,41 @@ $(document).on('click','.value-control',function(){
 });
 
 $(document).ready(function () {
+
+    //colony index create mouse source display
+    if($("#source").val() == "1"){
+        $("#selectCage").show();
+    }
+    else{
+        $("#selectCage").hide();
+    }
+    $("#source").change(function() {
+        if($("#source").val() == "1"){
+            $("#selectCage").show();
+        }
+        else{
+            $("#selectCage").hide();
+        }
+    });
+
+    //mouse table untagged checkbox display options
+    $(".untaggedInput").hide();
+    $(".untaggedChk").click(function(){
+        if (this.checked) {
+            $("#new_tag_"+this.id).show();
+            $("#sex_"+this.id).show();
+        } else {
+            $("#new_tag_"+this.id).hide();
+            $("#sex_"+this.id).hide();
+        }
+
+    });
+
+    //select Euthanize
+    $("#submit_euthanize").click(function(){
+    });
+
+    //validation
     $("#quantity").keypress(function (e) {
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
             $("#errmsg").html("Digits Only").show().fadeOut("slow");

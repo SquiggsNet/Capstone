@@ -31,7 +31,7 @@
                                     <option value="2">External</option>
                                 </select>
                             </div>
-                            <div id=selectCage class="form-group">
+                            <div id="selectCage" class="form-group">
                                 <label>Select Breeder Cage:</label>
                                 <select class="form-control" name="cage_id" id="cage_id">
                                     <option value="0">Select Cage </option>

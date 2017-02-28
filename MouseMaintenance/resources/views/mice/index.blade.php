@@ -137,19 +137,50 @@
                 <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
                     Create Surgery
                 </button>
-
-                <button type="submit" name="submit" value="euthanize" id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
+                {{ Form::close() }}
+                <button id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                     Eunthanize
                 </button>
 
-                {{ Form::close() }}
+
                 {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
                 <button type="submit" class="btn btn-default pull-right btn-block sixth last">
                     <input type="hidden" name="pep_mice"/>
                     View Archived mice
                 </button>
                 {{ Form::close() }}
-
+                <div id="euthOptions" class="top-buffer">
+                    <div id="euthPurpose" class="form-group quarter">
+                        <label>Purpose:</label>
+                        <select class="form-control" name="purpose" id="purpose">
+                            <option value="0">Select Purpose</option>
+                            <option value="1">Experiment</option>
+                            <option value="2">Tissue Isolation</option>
+                            <option value="3">N/A</option>
+                        </select>
+                    </div>
+                    <div id="euthExperiment" class="form-group quarter">
+                        <label>Experiment Type:</label>
+                        <select class="form-control" name="experiment" id="experiment">
+                            <option value="0">Select Experiment</option>
+                            <option value="1">Optical Mapping</option>
+                            <option value="2">Patch Clamp Experiment</option>
+                            <option value="3">Intracardiac Experiment</option>
+                        </select>
+                    </div>
+                    <div id="euthStorage" class="form-group quarter">
+                        <label>Storage Type:</label>
+                        <select class="form-control" name="storage" id="storage">
+                            <option value="0">Select Storage</option>
+                            <option value="1">-80 Freezer #1</option>
+                            <option value="2">-80 Freezer #2</option>
+                            <option value="2">Paraffin Embedding (Histology)</option>
+                        </select>
+                    </div>
+                    <button type="submit" name="submit" value="euthNext" id="submit_Euthanization" class="btn btn-default pull-left btn-block sixth show_btn">
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
 

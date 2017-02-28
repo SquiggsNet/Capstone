@@ -63,6 +63,10 @@ table, th{
     text-align: center;
 }
 
+#euthOptions{
+    padding-top: 60px;
+}
+
 footer{
     background-color: #373737;
     color: #ffffff;

@@ -45,8 +45,44 @@ $(document).ready(function () {
 
     });
 
-    //select Euthanize
+    //select Euthanize options
+    $("#euthPurpose").hide();
+    $("#euthExperiment").hide();
+    $("#euthStorage").hide();
+    $("#submit_Euthanization").hide();
     $("#submit_euthanize").click(function(){
+        $("#euthPurpose").show();
+    });
+    $("#purpose").change(function() {
+        if($("#purpose").val() == "1"){
+            $("#euthStorage").hide();
+            $("#euthExperiment").show();
+            $("#submit_Euthanization").hide();
+        }
+        else if($("#purpose").val() == "2"){
+            $("#euthStorage").show();
+            $("#euthExperiment").hide();
+            $("#submit_Euthanization").hide();
+        }
+        else if($("#purpose").val() == "3"){
+            $("#euthExperiment").hide();
+            $("#euthStorage").hide();
+            $("#submit_Euthanization").show();
+        }
+    });
+    $("#experiment").change(function() {
+        if($("#experiment").val() != "0"){
+            $("#submit_Euthanization").show();
+        }else{
+            $("#submit_Euthanization").hide();
+        }
+    });
+    $("#storage").change(function() {
+        if($("#storage").val() != "0"){
+            $("#submit_Euthanization").show();
+        }else{
+            $("#submit_Euthanization").hide();
+        }
     });
 
     //validation

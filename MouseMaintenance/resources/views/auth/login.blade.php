@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row row-centered">
-        <div class="half col-centered">
+        <div class="third col-centered">
 
             <div class="control-label hidden-xs">
-                {!! Html::image('img/mmLogoSmooth.png', 'Laboratory Mouse Tracker') !!}
+                {!! Html::image('img/mmLogoSmooth.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
             </div>
             <div class="control-label hidden-sm hidden-md hidden-lg">
-                {!! Html::image('img/mmLogoSmoothXS.png', 'Laboratory Mouse Tracker') !!}
+                {!! Html::image('img/mmLogoSmoothXS.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
             </div>
 
             <form class="form-horizontal sixth-x5 center-block" role="form" method="POST" action="{{ url('/login') }}">
@@ -116,13 +116,13 @@
     </div>
 </div>
 
-<style type="text/css">
-    footer{
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-</style>
+{{--<style type="text/css">--}}
+    {{--footer{--}}
+        {{--position: absolute;--}}
+        {{--left: 0;--}}
+        {{--right: 0;--}}
+        {{--bottom: 0;--}}
+    {{--}--}}
+{{--</style>--}}
 
 @endsection

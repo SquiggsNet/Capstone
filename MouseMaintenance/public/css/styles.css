@@ -30,7 +30,9 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+
 .top-buffer { margin-top:20px; }
+.bottom-buffer { margin-bottom:20px; }
 
 .show_btn{
     margin-top: 0 !important;
@@ -68,6 +70,10 @@ footer{
     text-align:center;
     height: 35px;
     padding-top: 8px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 button{

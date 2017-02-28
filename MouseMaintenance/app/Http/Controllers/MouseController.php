@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Mouse;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class MouseController extends Controller
 {
@@ -92,6 +93,10 @@ class MouseController extends Controller
             $mother_one = $request['female_parent'];
             $mother_two = null;
             $mother_three = null;
+            date_default_timezone_set('America/Edmonton');
+            $DOB = new DateTime($request['date_of_birth']);
+            $DOB->modify('+3 week');
+            $wean_date = $DOB;
             if ($mother_one == '0') {
                 $mother_one = $cage->female_one;
                 $mother_two = $cage->female_two;
@@ -107,6 +112,8 @@ class MouseController extends Controller
                         'mother_two' => $mother_two,
                         'mother_three' => $mother_three,
                         'birth_date' => $request['date_of_birth'],
+                        'wean_date' => $wean_date,
+                        'comments' => $request['comments'],
                     ]);
                     $mouse->save();
                 }

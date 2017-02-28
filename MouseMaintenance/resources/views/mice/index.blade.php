@@ -18,7 +18,7 @@
                         @endforeach
                     </ul>
                 @endif
-                <button type="submit" name="submit" value="breeders" id="submit_breeders" class="btn btn-default pull-right btn-block sixth">
+                <button type="submit" name="submit" value="breeders" id="submit_breeders" class="btn btn-default pull-right btn-block sixth bottom-buffer last">
                     Breeders
                 </button>
 
@@ -41,6 +41,7 @@
                             {{--<th>End Date</th>--}}
                             <th>Reserved For</th>
                             <th>Comments</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -143,7 +144,7 @@
 
                 {{ Form::close() }}
                 {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
-                <button type="submit" class="btn btn-default pull-right btn-block sixth">
+                <button type="submit" class="btn btn-default pull-right btn-block sixth last">
                     <input type="hidden" name="pep_mice"/>
                     View Archived mice
                 </button>

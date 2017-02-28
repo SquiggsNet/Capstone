@@ -19,9 +19,10 @@ class ColonyController extends Controller
 
     public function index()
     {
+        $mice = Mouse::all();
         $colonies = Colony::all();
         $cages = Cage::all();
-        return view('colonies.index', compact('colonies', 'cages'));
+        return view('colonies.index', compact('mice', 'colonies', 'cages'));
     }
 
     /**

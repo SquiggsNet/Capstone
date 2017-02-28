@@ -35,11 +35,27 @@
                                 <label>Select Breeder Cage:</label>
                                 <select class="form-control" name="cage_id" id="cage_id">
                                     <option value="0">Select Cage </option>
+
                                     @foreach($cages as $cage)
-                                        <option value="{{ $cage->id }}">{{ $cage->id }}</option>
+                                        @foreach($mice as $mouse)
+                                            @if($mouse->id == $cage->male)
+                                                <option value="{{ $cage->id }}">
+                                                    #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                            $mouse->getGender($mouse->sex) . ' (' .
+                                                            $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                            $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                                </option>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>
+
+
+
+
+
+
 
                             <div class="form-group clearfix">
                                 {!! Form::submit('Add',['class'=>'btn btn-block']) !!}

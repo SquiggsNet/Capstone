@@ -44,6 +44,7 @@ class MouseController extends Controller
 
     public function index(Request $request)
     {
+
         $day = date('Y-m-d');
         if(isset($request['pep_mice'])){
             $mice = Mouse::whereDate('end_date', '<', $day)->get();
@@ -52,8 +53,14 @@ class MouseController extends Controller
             $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', null)->get();
             $pep = false;
         }
-//        return($mice);
-        return view('mice.index', compact('mice', 'pep'));
+
+        foreach($mice as $a_m){
+            if(isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
+            }
+        }
+
+        return view('mice.index', compact('mice', 'active_tags', 'pep'));
     }
 
     /**
@@ -215,7 +222,8 @@ class MouseController extends Controller
         $mice = Mouse::all();
         $users = User::all();
 
-        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->orWhere('end_date', '')->orWhere('end_date', null)->get();
+        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
+                                orWhere('end_date', '')->orWhere('end_date', null)->get();
 
         foreach($active_mice as $a_m){
             $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);

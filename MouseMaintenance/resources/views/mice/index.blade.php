@@ -221,8 +221,10 @@
                                     <td>
                                         <input type="checkbox" class="untaggedChk" id="group_select_untagged_cb{{ $mouse->id }}" name="group_select_untagged_cb[]" value="{{ $mouse->id }}"/>
                                     </td>
-                                    <td class="col-xs-2">
-                                        <input class="untaggedInput" type="text" id="new_tag_group_select_untagged_cb{{ $mouse->id }}" maxlength="3" minlength="3" onkeyup="check()" class="form-control" name="new_tag_id"/></td>
+                                    <td class="col-sm-2 col-md-1">
+                                        <input type="text" id="new_tag_id[]" maxlength="3" minlength="3"
+                                               class="form-control col-md-1" onkeyup="check()" name="new_tag_id[]"/>
+                                    </td>
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
                                     {{--<td>{{ $mouse->source }}</td>--}}
                                     <td>
@@ -275,7 +277,7 @@
                     </tbody>
                 </table>
                 <button type="submit" name="submit" value="tag" id="submit_tag" class="btn btn-default pull-left btn-block sixth">
-                    Tag Selected mice
+                    Tag Selected Mice
                 </button>
 
                 <button type="submit" name="submit" value="sex" id="submit_sex" class="btn btn-default pull-left btn-block sixth show_btn">
@@ -388,4 +390,33 @@
     </div>
 
 @endif
+
+<script type="text/javascript">
+
+    function check(){
+        var tagArray = <?php echo json_encode($active_tags) ?>;
+        var new_tag_array = document.getElementsByName('new_tag_id[]');
+        var tag_num = [];
+        var duplicate = [];
+
+        for(i=0; i < new_tag_array.length; i++){
+            tag_num.push(new_tag_array[i].value);
+        }
+
+        for(var i = 0; i < tagArray.length; i++) {
+            for (var j = 0; j < tag_num.length; j++) {
+                if (tagArray[i] == tag_num[j]) {
+//                    alert("Tag already in use.");
+                    duplicate.push(j);
+                } else {
+                    new_tag_array[j].style.backgroundColor = "white";
+                }
+            }
+        }
+
+        for(var i = 0; i < duplicate.length; i++){
+            new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
+        }
+    }
+</script>
 @endsection

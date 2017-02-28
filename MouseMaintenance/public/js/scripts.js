@@ -46,7 +46,7 @@ $(document).ready(function () {
     });
 
     //select Euthanize options
-    $("#euthPurpose").hide();
+    //$("#euthPurpose").hide();
     $("#euthExperiment").hide();
     $("#euthStorage").hide();
     $("#submit_Euthanization").hide();
@@ -68,7 +68,12 @@ $(document).ready(function () {
             $("#euthExperiment").hide();
             $("#euthStorage").hide();
             $("#submit_Euthanization").show();
+        }else{
+            $("#euthStorage").hide();
+            $("#euthExperiment").hide();
+            $("#submit_Euthanization").hide();
         }
+
     });
     $("#experiment").change(function() {
         if($("#experiment").val() != "0"){

@@ -56,10 +56,10 @@
     </div>
 </div>
 
-<footer>
-    <div class="whole">
-        <p>COPYRIGHT &copy; LABORATORY MOUSE TRACKER 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>
-    </div>
-</footer>
+{{--<footer>--}}
+    {{--<div class="whole">--}}
+        {{--<p>COPYRIGHT &copy; LABORATORY MOUSE TRACKER 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>--}}
+    {{--</div>--}}
+{{--</footer>--}}
 
 @endsection

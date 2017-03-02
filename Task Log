@@ -11,10 +11,10 @@ Home:
 Mice:
   format archived table
   link to breeders
-  Untagged Mice:
-    assign tags
-    assign sex
-    remove(delete)
+  Untagged Mice:    <-(Devon)
+    assign tags     <-
+    assign sex      <-
+    remove(delete)  <-
   Tagged Mice:
     edit single mouse
     mockup for mice.show

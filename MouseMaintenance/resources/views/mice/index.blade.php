@@ -224,17 +224,23 @@
                                     </td>
                                     <td class="col-sm-2 col-md-1">
                                         <input type="text" id="new_tag_id[]" maxlength="3" minlength="3"
-                                               class="form-control col-md-1" onkeyup="checkTag()" name="new_tag_id[]"/>
+                                               class="form-control col-md-1" oninput="checkTag()" name="new_tag_id[]"/>
                                     </td>
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
                                     {{--<td>{{ $mouse->source }}</td>--}}
                                     <td>
-                                    <div class="sex">
-                                        <select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="set_sex[]">
-                                            <option value="0"></option>
-                                            <option value="1">M</option>
-                                            <option value="0">F</option>
-                                        </select>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="sex" id="sex_male" onchange="checkSex()" />M
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="sex" id="sex_female" onchange="checkSex()" />F
+                                        </label>
+                                        {{--<select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="set_sex[]">--}}
+                                            {{--<option value="0"></option>--}}
+                                            {{--<option value="1">M</option>--}}
+                                            {{--<option value="0">F</option>--}}
+                                        {{--</select>--}}
                                     </div>
                                     </td>
                                     @if($mouse->source == 'In house')
@@ -277,16 +283,16 @@
                         @endforeach
                     </tbody>
                 </table>
-                <button type="submit" name="submit" value="tag" id="submit_tag" class="btn btn-default pull-left btn-block sixth">
+                <button type="submit" name="submit" value="tag" id="submit_remove" class="btn btn-default pull-left btn-block sixth">
+                    Remove
+                </button>
+
+                <button type="submit" name="submit" value="sex" id="submit_tag" class="btn btn-default pull-left btn-block sixth show_btn">
                     Tag Selected Mice
                 </button>
 
-                <button type="submit" name="submit" value="sex" id="submit_sex" class="btn btn-default pull-left btn-block sixth show_btn">
+                <button type="submit" name="submit" value="remove" id="submit_sex" class="btn btn-default pull-left btn-block sixth show_btn">
                     Assign Sex
-                </button>
-
-                <button type="submit" name="submit" value="remove" id="submit_remove" class="btn btn-default pull-left btn-block sixth show_btn">
-                    Remove
                 </button>
             </div>
         </div>
@@ -398,7 +404,6 @@
     var btn_submit_remove = document.getElementById('submit_remove');
     var new_tag_array = document.getElementsByName('new_tag_id[]');
     var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
-    var new_sex_array = document.getElementsByName('set_sex[]');
 
     function checkTag(){
         var tagArray = <?php echo json_encode($active_tags) ?>;
@@ -438,38 +443,69 @@
         if(isNaN(tag_str)){
             btn_submit_sex.disabled = false;
             btn_submit_remove.disabled = false;
+            $(".btn-group label").attr("disabled", false);
+            $("[name='group_select_untagged_cb[]']").attr('disabled', false);
         }else{
+            $(".btn-group label").attr("disabled", true);
             btn_submit_sex.disabled = true;
             btn_submit_remove.disabled = true;
+            $("[name='group_select_untagged_cb[]']").attr('disabled', true);
         }
     }
 
-    function checkRemove(){
+    function checkRemove() {
         var total_cbks = $('.untaggedChk').length;
         var remove_array = [];
 
-        for(var i =0; i < total_cbks; i++) {
-           if(remove_cbk_array[i].checked){
-               remove_array.push(i);
-           }
+        for (var i = 0; i < total_cbks; i++) {
+            if (remove_cbk_array[i].checked) {
+                remove_array.push(i);
+            }
         }
-
-        if(remove_array.length < 1){
+        //check boxes not selected enable other form elements
+        if (remove_array.length < 1) {
             btn_submit_sex.disabled = false;
             btn_submit_tag.disabled = false;
-            for(i =0; i < total_cbks; i++) {
-                new_sex_array[i].disabled = false;
-                new_tag_array[i].readOnly = false;
-            }
-        }else{
+            $(".btn-group label").attr("disabled", false);
+            $("[name='new_tag_id[]']").attr('readOnly', false);
+        } else { //check boxes selected, disable and clear other form elements
             btn_submit_sex.disabled = true;
             btn_submit_tag.disabled = true;
-            for(i =0; i < total_cbks; i++) {
-                new_sex_array[i].disabled = true;
-                new_tag_array[i].readOnly = true;
-            }
-
+            $(".btn-group label").attr("disabled", true);
+            $(".btn-group label").removeClass('active').end()
+                    .find('[type="radio"]').prop('checked', false);
+            $("[name='new_tag_id[]']").val('');
+            $("[name='new_tag_id[]']").attr('readOnly', true);
         }
     }
+
+    function checkSex(){
+        //determine if any checkbox is checked
+        if(($(".btn-group label").find('[type="radio"]')).length > 0){
+            //disable other form controls
+            $("[name='new_tag_id[]']").attr('readOnly', true);
+            $("[name='group_select_untagged_cb[]']").attr('disabled', true);
+            btn_submit_tag.disabled = true;
+            btn_submit_remove.disabled = true;
+        }else{//enable other form controls when no radio checked
+            $("[name='new_tag_id[]']").attr('readOnly', false);
+            $("[name='group_select_untagged_cb[]']").attr('disabled', false);
+            $(".btn-group label").find('[type="radio"]').data('waschecked', false);
+            $(".btn-group label").find('[type="radio"]').prop('checked', false);
+            btn_submit_tag.disabled = false;
+            btn_submit_remove.disabled = false;
+        }
+    }
+
+
+    $("[name='group_select_untagged_cb[]']").click(function(){
+       alert("CHANGE!");
+    });
 </script>
+<style type="text/css">
+    /*Prevent disabled radios from being clicked*/
+    label[disabled]{
+        pointer-events:none;
+    }
+</style>
 @endsection

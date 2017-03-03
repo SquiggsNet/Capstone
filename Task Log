@@ -1,0 +1,99 @@
+Export to excel functionality
+
+Login:
+  proper logo
+  center login on page
+  
+Home:
+  Populate storage
+  Populate surgery
+  
+Mice:
+  format archived table
+  link to breeders
+  Untagged Mice:    <-(Devon)
+    assign tags     <-
+    assign sex      <-
+    remove(delete)  <-
+  Tagged Mice:
+    edit single mouse
+    mockup for mice.show
+    process for euthanize
+    
+Colonies:
+  Option to create Colony 
+  Untagged Mice:
+    assign tags
+    assign sex
+    remove(delete)
+  Tagged Mice:
+    edit single mouse
+    mockup for mice.show
+    process for surgery
+    process for euthanize
+    
+Surgery:
+  layout to match pictures
+  treament drop down select
+  dosage drop down select
+  experimental use drop down
+  
+Breeder:
+  layout to match surgery
+  mockup for work flow
+  
+Tissue/Storage:
+  option to create tissue type
+  option to create storage type
+  advanced search option
+  isolation of tissue
+  set to stoarage location
+  view locations
+  
+User Profiles:
+  user CRUD
+  edit privileges
+  restrict access
+  
+Validation(by page):
+  Login
+  Home
+  Colony:
+    create
+    index
+    show
+    edit
+  Mice:
+    create
+    index
+    show
+    edit
+    archive
+  Surgery:
+    create
+    index
+    show
+    edit
+  Storage:
+    create
+    index
+    show
+    edit
+  Tissue:
+    create
+    index
+    show
+    edit
+  Breeder:
+    create
+    index
+    show
+    edit
+  Users:
+    create
+    index
+    show
+    edit
+  unregistered URI routes
+  
+  

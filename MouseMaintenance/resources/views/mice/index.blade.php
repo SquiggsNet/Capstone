@@ -193,7 +193,7 @@
                         <tr>
                             {{--<th>Strain</th>--}}
                             {{--<th>Source</th>--}}
-                            <th></th>
+                            <th>Remove</th>
                             <th>Tag</th>
                             <th>Sex</th>
                             <th>Pedigree</th>
@@ -219,22 +219,23 @@
                                     @endif
                                 <tr class="{{ $class }}" id="{{ $id }}">
                                     <td>
-                                        <input type="checkbox" class="untaggedChk" id="group_select_untagged_cb{{ $mouse->id }}" name="group_select_untagged_cb[]" value="{{ $mouse->id }}"/>
+                                        <input type="checkbox" class="untaggedChk" id="group_select_untagged_cb{{ $mouse->id }}"
+                                               name="group_select_untagged_cb[]" onchange="checkRemove()"/>
                                     </td>
                                     <td class="col-sm-2 col-md-1">
                                         <input type="text" id="new_tag_id[]" maxlength="3" minlength="3"
-                                               class="form-control col-md-1" onkeyup="check()" name="new_tag_id[]"/>
+                                               class="form-control col-md-1" onkeyup="checkTag()" name="new_tag_id[]"/>
                                     </td>
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
                                     {{--<td>{{ $mouse->source }}</td>--}}
                                     <td>
-
-                                    <select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="sex">
-                                        <option value="0"></option>
-                                        <option value="1">M</option>
-                                        <option value="0">F</option>
-                                    </select>
-
+                                    <div class="sex">
+                                        <select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="set_sex[]">
+                                            <option value="0"></option>
+                                            <option value="1">M</option>
+                                            <option value="0">F</option>
+                                        </select>
+                                    </div>
                                     </td>
                                     @if($mouse->source == 'In house')
                                         <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
@@ -392,30 +393,82 @@
 @endif
 
 <script type="text/javascript">
+    var btn_submit_tag = document.getElementById('submit_tag');
+    var btn_submit_sex = document.getElementById('submit_sex');
+    var btn_submit_remove = document.getElementById('submit_remove');
+    var new_tag_array = document.getElementsByName('new_tag_id[]');
+    var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
+    var new_sex_array = document.getElementsByName('set_sex[]');
 
-    function check(){
+    function checkTag(){
         var tagArray = <?php echo json_encode($active_tags) ?>;
-        var new_tag_array = document.getElementsByName('new_tag_id[]');
+        var tag_str;
         var tag_num = [];
         var duplicate = [];
 
+        //place each new_tag_input into one array
         for(i=0; i < new_tag_array.length; i++){
             tag_num.push(new_tag_array[i].value);
         }
 
+        //loop array of current tags and new tags for duplicates and disable submit
         for(var i = 0; i < tagArray.length; i++) {
             for (var j = 0; j < tag_num.length; j++) {
                 if (tagArray[i] == tag_num[j]) {
-//                    alert("Tag already in use.");
                     duplicate.push(j);
+                    btn_submit_tag.disabled = true;
                 } else {
                     new_tag_array[j].style.backgroundColor = "white";
                 }
             }
         }
 
+        //if duplicate set input to yellow
         for(var i = 0; i < duplicate.length; i++){
             new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
+        }
+
+        //if no duplicates ensure button is enabled
+        if(duplicate.length < 1){
+            btn_submit_tag.disabled = false;
+        }
+
+        //if any inputs hold value, disable submit for sex and delete
+        tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
+        if(isNaN(tag_str)){
+            btn_submit_sex.disabled = false;
+            btn_submit_remove.disabled = false;
+        }else{
+            btn_submit_sex.disabled = true;
+            btn_submit_remove.disabled = true;
+        }
+    }
+
+    function checkRemove(){
+        var total_cbks = $('.untaggedChk').length;
+        var remove_array = [];
+
+        for(var i =0; i < total_cbks; i++) {
+           if(remove_cbk_array[i].checked){
+               remove_array.push(i);
+           }
+        }
+
+        if(remove_array.length < 1){
+            btn_submit_sex.disabled = false;
+            btn_submit_tag.disabled = false;
+            for(i =0; i < total_cbks; i++) {
+                new_sex_array[i].disabled = false;
+                new_tag_array[i].readOnly = false;
+            }
+        }else{
+            btn_submit_sex.disabled = true;
+            btn_submit_tag.disabled = true;
+            for(i =0; i < total_cbks; i++) {
+                new_sex_array[i].disabled = true;
+                new_tag_array[i].readOnly = true;
+            }
+
         }
     }
 </script>

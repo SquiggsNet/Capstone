@@ -23,7 +23,7 @@
                 </button>
 
                 {{--{{ Form::open(['action' => ['SurgeryController@create'], 'method' => 'get']) }}--}}
-                {{ Form::open(array('url' => 'mice/group')) }}
+                {{ Form::open(array('url' => 'mice/groupTagged')) }}
                 <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                     <thead>
                         <tr>
@@ -188,6 +188,7 @@
             <div class="panel-heading"><h3>Untagged Mice</h3></div>
             <div class="panel-body">
 
+                {{ Form::open(array('url' => 'mice/groupUntagged')) }}
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -219,8 +220,9 @@
                                     @endif
                                 <tr class="{{ $class }}" id="{{ $id }}">
                                     <td>
-                                        <input type="checkbox" class="untaggedChk" id="group_select_untagged_cb{{ $mouse->id }}"
+                                        <input type="checkbox" class="untaggedChk" value="{{ $mouse->id }}" id="group_select_untagged_cb"
                                                name="group_select_untagged_cb[]" onchange="checkRemove()"/>
+
                                     </td>
                                     <td class="col-sm-2 col-md-1">
                                         <input type="text" id="new_tag_id[]" maxlength="3" minlength="3"
@@ -283,16 +285,20 @@
                         @endforeach
                     </tbody>
                 </table>
-                <button type="submit" name="submit" value="tag" id="submit_remove" class="btn btn-default pull-left btn-block sixth">
+                <button type="submit" name="submit" value="remove" id="submit_remove" class="btn btn-default pull-left btn-block sixth">
                     Remove
                 </button>
 
-                <button type="submit" name="submit" value="sex" id="submit_tag" class="btn btn-default pull-left btn-block sixth show_btn">
+                <button type="submit" name="submit" value="tag" id="submit_tag" class="btn btn-default pull-left btn-block sixth show_btn">
                     Tag Selected Mice
                 </button>
 
-                <button type="submit" name="submit" value="remove" id="submit_sex" class="btn btn-default pull-left btn-block sixth show_btn">
+                <button type="submit" name="submit" value="sex" id="submit_sex" class="btn btn-default pull-left btn-block sixth show_btn">
                     Assign Sex
+                </button>
+                {{ Form::close() }}
+                <button type="button"  value="clear_sex" id="clear_sex" onclick="clearSex()" class="btn btn-default pull-left btn-block sixth show_btn">
+                    Clear Sex
                 </button>
             </div>
         </div>
@@ -401,6 +407,7 @@
 <script type="text/javascript">
     var btn_submit_tag = document.getElementById('submit_tag');
     var btn_submit_sex = document.getElementById('submit_sex');
+    var btn_clear_sex = document.getElementById('clear_sex');
     var btn_submit_remove = document.getElementById('submit_remove');
     var new_tag_array = document.getElementsByName('new_tag_id[]');
     var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
@@ -443,12 +450,14 @@
         if(isNaN(tag_str)){
             btn_submit_sex.disabled = false;
             btn_submit_remove.disabled = false;
+            btn_clear_sex.disabled = false;
             $(".btn-group label").attr("disabled", false);
             $("[name='group_select_untagged_cb[]']").attr('disabled', false);
         }else{
             $(".btn-group label").attr("disabled", true);
             btn_submit_sex.disabled = true;
             btn_submit_remove.disabled = true;
+            btn_clear_sex.disabled = true;
             $("[name='group_select_untagged_cb[]']").attr('disabled', true);
         }
     }
@@ -466,11 +475,13 @@
         if (remove_array.length < 1) {
             btn_submit_sex.disabled = false;
             btn_submit_tag.disabled = false;
+            btn_clear_sex.disabled = false;
             $(".btn-group label").attr("disabled", false);
             $("[name='new_tag_id[]']").attr('readOnly', false);
         } else { //check boxes selected, disable and clear other form elements
             btn_submit_sex.disabled = true;
             btn_submit_tag.disabled = true;
+            btn_clear_sex.disabled = true;
             $(".btn-group label").attr("disabled", true);
             $(".btn-group label").removeClass('active').end()
                     .find('[type="radio"]').prop('checked', false);
@@ -497,10 +508,16 @@
         }
     }
 
+    //clear the sex option if one or more have been clicked
+    function clearSex(){
+        $(".btn-group label").removeClass('active').end()
+                .find('[type="radio"]').prop('checked', false);
+        $("[name='new_tag_id[]']").attr('readOnly', false);
+        $("[name='group_select_untagged_cb[]']").attr('disabled', false);
+        btn_submit_tag.disabled = false;
+        btn_submit_remove.disabled = false;
+    }
 
-    $("[name='group_select_untagged_cb[]']").click(function(){
-       alert("CHANGE!");
-    });
 </script>
 <style type="text/css">
     /*Prevent disabled radios from being clicked*/

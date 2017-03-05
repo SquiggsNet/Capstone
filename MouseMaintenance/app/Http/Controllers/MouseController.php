@@ -23,7 +23,7 @@ class MouseController extends Controller
         $this->middleware('auth');
     }
 
-    public function group(Request $request){
+    public function groupTagged(Request $request){
 
         $this->validate($request, [
             'group_select_cb' => 'required'
@@ -40,6 +40,32 @@ class MouseController extends Controller
             return redirect()->action('TissueController@index');
         }
 //        return($request->input('submit'));
+    }
+
+    public function groupUntagged(Request $request){
+
+//        $this->validate($request, [
+//            'group_select_untagged_cb' => 'required'
+//        ]);
+
+        $untagged_mice = $request['group_select_untagged_cb'];
+
+        $action = $request->input('submit');
+        switch($action){
+            case "remove":
+                foreach($untagged_mice as $mouse){
+                    Mouse::destroy($mouse);
+                }
+                return redirect()->action('MouseController@index');
+                break;
+            case "tag":
+                return("DID IT! -tag");
+                break;
+            case "sex":
+                return("DID IT! -sex");
+                break;
+        }
+
     }
 
     public function index(Request $request)

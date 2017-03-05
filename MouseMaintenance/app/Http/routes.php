@@ -32,7 +32,8 @@ Route::resource('cages', 'CageController');
 Route::resource('colonies', 'ColonyController');
 
 Route::resource('mice', 'MouseController');
-Route::post('mice/group', 'MouseController@group');
+Route::post('mice/groupTagged', 'MouseController@groupTagged');
+Route::post('mice/groupUntagged', 'MouseController@groupUntagged');
 
 
 Route::resource('storages', 'StorageController');

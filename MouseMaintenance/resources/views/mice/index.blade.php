@@ -220,12 +220,13 @@
                                     @endif
                                 <tr class="{{ $class }}" id="{{ $id }}">
                                     <td>
+                                        <input type="hidden" name="mice[]" id="mice" value="{{ $mouse->id }}"/>
                                         <input type="checkbox" class="untaggedChk" value="{{ $mouse->id }}" id="group_select_untagged_cb"
                                                name="group_select_untagged_cb[]" onchange="checkRemove()"/>
 
                                     </td>
                                     <td class="col-sm-2 col-md-1">
-                                        <input type="text" id="new_tag_id[]" maxlength="3" minlength="3"
+                                        <input type="text" id="new_tag_id" maxlength="3" minlength="3"
                                                class="form-control col-md-1" oninput="checkTag()" name="new_tag_id[]"/>
                                     </td>
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
@@ -454,6 +455,8 @@
             $(".btn-group label").attr("disabled", false);
             $("[name='group_select_untagged_cb[]']").attr('disabled', false);
         }else{
+            var idx = $(this).index('[type=input]');
+            remove_cbk_array[idx].prop("checked", true);
             $(".btn-group label").attr("disabled", true);
             btn_submit_sex.disabled = true;
             btn_submit_remove.disabled = true;
@@ -461,6 +464,10 @@
             $("[name='group_select_untagged_cb[]']").attr('disabled', true);
         }
     }
+
+    document.on('change', '[type=input]', function (e) {
+        alert('This is the ' + $(this).index('[type=input]') + ' checkbox');
+    });
 
     function checkRemove() {
         var total_cbks = $('.untaggedChk').length;

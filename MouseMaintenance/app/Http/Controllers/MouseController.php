@@ -48,18 +48,42 @@ class MouseController extends Controller
 //            'group_select_untagged_cb' => 'required'
 //        ]);
 
-        $untagged_mice = $request['group_select_untagged_cb'];
+
+        //id of mice selected for removal
+        $mice_to_remove = $request['group_select_untagged_cb'];
+
+        //all values entered to the tag inputs
+        $tags = $request['new_tag_id'];
+        if(!empty($tags)) {
+            //id of all mice in untagged column
+            $untagged_mice = $request['mice'];
+
+            //remove mice id's that have not returned a value
+            for ($x = 0; $x < count($tags); $x++) {
+                if ($tags[$x] == "") {
+                    unset($untagged_mice[$x]);
+                }
+            }
+            //remove empty space from array of tags
+            $tags = array_slice(array_filter($tags), 0);
+        }
 
         $action = $request->input('submit');
         switch($action){
             case "remove":
-                foreach($untagged_mice as $mouse){
+                foreach($mice_to_remove as $mouse){
                     Mouse::destroy($mouse);
                 }
                 return redirect()->action('MouseController@index');
                 break;
             case "tag":
-                return("DID IT! -tag");
+                $mice = Mouse::whereIn('id', $untagged_mice)->get();
+                $i = 0;
+                foreach($mice as $mouse){
+                    $mouse->tags()->attach(($tags[$i]+1));
+                    $i++;
+                }
+                return redirect()->action('MouseController@index');
                 break;
             case "sex":
                 return("DID IT! -sex");

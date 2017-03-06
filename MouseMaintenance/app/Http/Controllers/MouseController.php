@@ -180,33 +180,11 @@ class MouseController extends Controller
                         'mother_three' => $mother_three,
                         'birth_date' => $request['date_of_birth'],
                         'wean_date' => $wean_date,
+                        'is_alive' => '1',
                         'comments' => $request['comments'],
                     ]);
                     $mouse->save();
                 }
-
-//            if ($females != 0) {
-//                for ($i = 0; $i < $females; $i++) {
-//                    $mouse = Mouse::create([
-//                        'colony_id' => $request['colony_id'],
-//                        'sex' => false,
-//                        'source' => $source,
-//                        'reserved_for' => '0',
-//                        'father' => $father,
-//                        'geno_type_a' => 'null',
-//                        'geno_type_b' => 'null',
-//                        'mother_one' => $mother_one,
-//                        'mother_two' => $mother_two,
-//                        'mother_three' => $mother_three,
-//                        'birth_date' => $request['date_of_birth'],
-//                        'wean_date' => 'null',
-//                        'end_date' => 'null',
-//                        'sick_report' => false,
-//                        'comments' => 'null'
-//                    ]);
-//                    $mouse->save();
-//                }
-//            }
         }else{
             for($i = 0; $i < $mice_total; $i++) {
                 $mouse = Mouse::create([
@@ -223,6 +201,7 @@ class MouseController extends Controller
                     'birth_date' => $request['date_received'],
                     'wean_date' => 'null',
                     'end_date' => 'null',
+                    'is_alive' => 1,
                     'sick_report' => false,
                     'comments' => 'null'
                 ]);
@@ -244,6 +223,7 @@ class MouseController extends Controller
                     'birth_date' => $request['date_received'],
                     'wean_date' => 'null',
                     'end_date' => 'null',
+                    'is_alive' => 1,
                     'sick_report' => false,
                     'comments' => 'null'
                 ]);
@@ -322,12 +302,11 @@ class MouseController extends Controller
             $geno_b = null;
         }
 
-
         $mouse = Mouse::find($id);
         if(!empty($request['reserved_for'])){
             $mouse->reserved_for = $request['reserved_for'];
         }
-        if(!empty($request['sex'])) {
+        if(isset($request['sex'])) {
             $mouse->sex = $request['sex'];
         }
         $mouse->geno_type_a = $geno_a;

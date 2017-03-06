@@ -456,8 +456,6 @@
             $(".btn-group label").attr("disabled", false);
             $("[name='group_select_untagged_cb[]']").attr('disabled', false);
         }else{
-            var idx = $(this).index('[type=input]');
-            remove_cbk_array[idx].prop("checked", true);
             $(".btn-group label").attr("disabled", true);
             btn_submit_sex.disabled = true;
             btn_submit_remove.disabled = true;

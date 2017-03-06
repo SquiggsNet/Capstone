@@ -18,7 +18,8 @@ class CageController extends Controller
     public function index()
     {
         $cages = Cage::with('male', 'female_one', 'female_two', 'female_three')->get();
-
+        $mice = Mouse::where('is_alive', 1)->get();
+        return ($mice);
         return view('cages.index', compact('cages'));
     }
 

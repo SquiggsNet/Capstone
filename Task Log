@@ -9,6 +9,7 @@ Home:
   Populate surgery
   
 Mice:
+  Paging/sorting
   format archived table
   link to breeders
   Untagged Mice:    <-complete (DT)
@@ -21,6 +22,7 @@ Mice:
     process for euthanize
     
 Colonies:
+  Paging/sorting
   Option to create Colony 
   Untagged Mice:
     assign tags

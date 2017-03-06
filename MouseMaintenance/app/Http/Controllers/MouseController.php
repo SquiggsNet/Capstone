@@ -286,7 +286,9 @@ class MouseController extends Controller
                                 orWhere('end_date', '')->orWhere('end_date', null)->get();
 
         foreach($active_mice as $a_m){
-            $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
+            if(isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
+            }
         }
 
         return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));

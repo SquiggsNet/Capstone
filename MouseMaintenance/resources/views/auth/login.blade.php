@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row row-centered">
-        <div class="third col-centered">
+        <div class="third col-centered" id="login">
 
             <div class="control-label hidden-xs">
                 {!! Html::image('img/mmLogoSmooth.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
@@ -61,5 +61,4 @@
         {{--<p>COPYRIGHT &copy; LABORATORY MOUSE TRACKER 2017. SITE DESIGN BY DEVON TURNER AND SCOTT RAFAEL</p>--}}
     {{--</div>--}}
 {{--</footer>--}}
-
 @endsection

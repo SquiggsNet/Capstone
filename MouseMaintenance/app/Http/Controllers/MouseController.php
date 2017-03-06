@@ -105,17 +105,16 @@ class MouseController extends Controller
     public function index(Request $request)
     {
 
-        $day = date('Y-m-d');
         if(isset($request['pep_mice'])){
-            $mice = Mouse::whereDate('end_date', '<', $day)->get();
+            $mice = Mouse::where('is_alive', 0)->get();
             $pep = true;
         }else {
-            $mice = Mouse::whereDate('end_date', '>=', $day)->orWhere('end_date', '')->orWhere('end_date', null)->get();
+            $mice = Mouse::where('is_alive', 1)->get();
             $pep = false;
         }
 
-        foreach($mice as $a_m){
-            if(isset($a_m->tags->last()->tag_num)) {
+        foreach ($mice as $a_m) {
+            if (isset($a_m->tags->last()->tag_num)) {
                 $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
             }
         }
@@ -328,7 +327,9 @@ class MouseController extends Controller
         if(!empty($request['reserved_for'])){
             $mouse->reserved_for = $request['reserved_for'];
         }
-        $mouse->sex = $request['sex'];
+        if(!empty($request['sex'])) {
+            $mouse->sex = $request['sex'];
+        }
         $mouse->geno_type_a = $geno_a;
         $mouse->geno_type_b = $geno_b;
         $mouse->father = $request['father'];

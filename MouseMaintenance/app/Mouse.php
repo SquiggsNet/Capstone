@@ -53,8 +53,14 @@ class Mouse extends Model
         $today = new DateTime();
         $diff_in_wks = $DOB->diff($today)->days/7;
         $age_in_wks = round($diff_in_wks, 1 , PHP_ROUND_HALF_UP);
+        if($age_in_wks == 1){
+            $weeks = 'week';
+        }else{
+            $weeks = 'weeks';
+        }
 
-        return $age_in_wks;
+        $age_display = $age_in_wks . ' ' . $weeks;
+        return $age_display;
     }
 
     public function showDate($date_in){

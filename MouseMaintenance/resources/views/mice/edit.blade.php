@@ -79,7 +79,7 @@
             <div class="form-group col-xs-6 col-sm-6 col-md-5">
                 <label>Sex:</label>
                 <select class="form-control" name="sex">
-                    <option value="0">Select..</option>
+                    <option value="">Select..</option>
                     <option value="1"
                             @if($editMouse->getGender($editMouse->sex) =='M')selected="selected"@endif>Male</option>
                     <option value="0"

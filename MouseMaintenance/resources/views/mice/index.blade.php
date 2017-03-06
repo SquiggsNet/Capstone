@@ -96,7 +96,7 @@
                                     {{--</td>--}}
                                     {{--<td>{{$mouse->getGender($mouse->sex)}}</td>--}}
                                     <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
-                                    <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                                    <td>{{$mouse->getAge($mouse->birth_date)}}</td>
                                     <td>
                                         @if(!empty($mouse->weights->last()->weight))
                                             {{$mouse->weights->last()->weight . 'g'}}

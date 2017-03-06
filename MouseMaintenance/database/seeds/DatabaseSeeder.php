@@ -353,6 +353,7 @@ class MouseTableSeeder extends Seeder
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => '2012-02-28',
+            'is_alive' => 1,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -371,6 +372,7 @@ class MouseTableSeeder extends Seeder
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => null,
+            'is_alive' => 1,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -389,6 +391,7 @@ class MouseTableSeeder extends Seeder
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => null,
+            'is_alive' => 1,
             'sick_report' => false,
             'comments' => ""
         ]);
@@ -407,6 +410,7 @@ class MouseTableSeeder extends Seeder
             'birth_date' => '2012-01-02',
             'wean_date' => '2012-01-29',
             'end_date' => null,
+            'is_alive' => 1,
             'sick_report' => true,
             'comments' => ""
         ]);

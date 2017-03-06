@@ -17,8 +17,8 @@
                                 <label>Male:</label>
                                 <select name="male" id="male" class="form-control">
                                     <option value="0">Select Male</option>
-                                    @foreach($mice as $mouse)
-                                        @if($mouse->sex == 'True')
+                                    @foreach($tagged_mice as $mouse)
+                                        @if($mouse->sex == 1)
                                             <option value="{{ $mouse->id }}">
                                                 @foreach($mouse->tags as $tag)
                                                     @if($tag->lost_tag == '0')
@@ -39,8 +39,8 @@
                                     <label>Female 1:</label>
                                     <select name="female_one" id="female_one" class="form-control">
                                         <option value="0">Select Female 1</option>
-                                        @foreach($mice as $mouse)
-                                            @if($mouse->sex == 'False')
+                                        @foreach($tagged_mice as $mouse)
+                                            @if($mouse->sex == 0)
                                                 <option value="{{ $mouse->id }}">
                                                     @foreach($mouse->tags as $tag)
                                                         @if($tag->lost_tag == '0')
@@ -59,8 +59,8 @@
                                     <label>Female 2:</label>
                                     <select name="female_two" id="female_two" class="form-control">
                                         <option value="0">Select Female 2</option>
-                                        @foreach($mice as $mouse)
-                                            @if($mouse->sex == 'False')
+                                        @foreach($tagged_mice as $mouse)
+                                            @if($mouse->sex == 0)
                                                 <option value="{{ $mouse->id }}">
                                                     @foreach($mouse->tags as $tag)
                                                         @if($tag->lost_tag == '0')
@@ -79,8 +79,8 @@
                                     <label>Female 3:</label>
                                     <select name="female_three" id="female_three" class="form-control">
                                         <option value="0">Select Female 3</option>
-                                        @foreach($mice as $mouse)
-                                            @if($mouse->sex == 'False')
+                                        @foreach($tagged_mice as $mouse)
+                                            @if($mouse->sex == 0)
                                                 <option value="{{ $mouse->id }}">
                                                     @foreach($mouse->tags as $tag)
                                                         @if($tag->lost_tag == '0')

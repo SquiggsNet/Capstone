@@ -5,7 +5,7 @@
     <h1 class="row-centered">Breeder Cages</h1>
     @foreach($cages as $cage)
         <div class="panel panel-default whole">
-            <div class="panel-heading"><h3>Cage #{{$cage->room_num}}</h3></div>
+            <div class="panel-heading"><h3>Cage: {{$cage->room_num}}</h3></div>
             <div class="panel-body">
             <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                 <thead>

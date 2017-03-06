@@ -38,8 +38,15 @@ class CageController extends Controller
      */
     public function create()
     {
-        $mice = Mouse::all();
-        return view('cages.create', compact('mice'));
+        //select living mice and determine which ones are tagged
+        $mice = Mouse::where('is_alive', 1)->get();
+        $tagged_mice = collect(new Mouse);
+        foreach($mice as $mouse){
+            if(isset($mouse->tags->last()->tag_num)) {
+                $tagged_mice->push($mouse);
+            }
+        }
+        return view('cages.create', compact('tagged_mice'));
     }
 
     /**

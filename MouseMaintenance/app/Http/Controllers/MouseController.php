@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Mouse;
 use App\Http\Requests;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 
@@ -48,35 +49,35 @@ class MouseController extends Controller
 //            'group_select_untagged_cb' => 'required'
 //        ]);
 
-
-        //id of mice selected for removal
-        $mice_to_remove = $request['group_select_untagged_cb'];
-
-        //all values entered to the tag inputs
-        $tags = $request['new_tag_id'];
-        if(!empty($tags)) {
-            //id of all mice in untagged column
-            $untagged_mice = $request['mice'];
-
-            //remove mice id's that have not returned a value
-            for ($x = 0; $x < count($tags); $x++) {
-                if ($tags[$x] == "") {
-                    unset($untagged_mice[$x]);
-                }
-            }
-            //remove empty space from array of tags
-            $tags = array_slice(array_filter($tags), 0);
-        }
-
+        //determine which action the user wanted to perform
         $action = $request->input('submit');
+
+        //id of all mice in untagged column
+        $untagged_mice = $request['mice'];
+
+        //switch to handle the three options from the one form
         switch($action){
             case "remove":
+                //id of mice selected for removal
+                $mice_to_remove = $request['group_select_untagged_cb'];
+
                 foreach($mice_to_remove as $mouse){
                     Mouse::destroy($mouse);
                 }
                 return redirect()->action('MouseController@index');
                 break;
             case "tag":
+                //all values entered to the tag inputs
+                $tags = $request['new_tag_id'];
+                //remove mice id's that have not returned a value
+                for ($x = 0; $x < count($tags); $x++) {
+                    if ($tags[$x] == "") {
+                        unset($untagged_mice[$x]);
+                    }
+                }
+                //remove empty space from array of tags
+                $tags = array_slice(array_filter($tags), 0);
+
                 $mice = Mouse::whereIn('id', $untagged_mice)->get();
                 $i = 0;
                 foreach($mice as $mouse){
@@ -86,10 +87,19 @@ class MouseController extends Controller
                 return redirect()->action('MouseController@index');
                 break;
             case "sex":
-                return("DID IT! -sex");
+                //mice that have been sexed
+                $sexed = $request['sex'];
+                $mice = Mouse::whereIn('id', $untagged_mice)->get();
+
+                foreach($mice as $mouse){
+                    if(array_key_exists($mouse->id, $sexed)){
+                        Mouse::where('id', $mouse->id)->update(array('sex' => $sexed[$mouse->id]));
+                    }
+                }
+
+                return redirect()->action('MouseController@index');
                 break;
         }
-
     }
 
     public function index(Request $request)

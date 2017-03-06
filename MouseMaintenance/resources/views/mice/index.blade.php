@@ -196,6 +196,7 @@
                             {{--<th>Source</th>--}}
                             <th>Remove</th>
                             <th>Tag</th>
+                            <th>Set Sex</th>
                             <th>Sex</th>
                             <th>Pedigree</th>
                             <th>DOB</th>
@@ -232,19 +233,19 @@
                                     {{--<td>{{ $mouse->colony->name }}</td>--}}
                                     {{--<td>{{ $mouse->source }}</td>--}}
                                     <td>
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="sex" id="sex_male" onchange="checkSex()" />M
-                                        </label>
-                                        <label class="btn btn-default">
-                                            <input type="radio" name="sex" id="sex_female" onchange="checkSex()" />F
-                                        </label>
-                                        {{--<select class="form-control untaggedInput" id="sex_group_select_untagged_cb{{ $mouse->id }}" name="set_sex[]">--}}
-                                            {{--<option value="0"></option>--}}
-                                            {{--<option value="1">M</option>--}}
-                                            {{--<option value="0">F</option>--}}
-                                        {{--</select>--}}
-                                    </div>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" for="sex">
+                                                <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="1" onchange="checkSex()" />M
+                                            </label>
+                                            <label class="btn btn-default" for="sex">
+                                                <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="0" onchange="checkSex()" />F
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if(isset($mouse->sex))
+                                            {{ $mouse->getGender($mouse->sex) }}
+                                        @endif
                                     </td>
                                     @if($mouse->source == 'In house')
                                         <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}

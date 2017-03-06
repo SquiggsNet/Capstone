@@ -2,52 +2,91 @@
 
 @section('content')
 <div class="container">
-    <h1>Breeder Cages</h1>
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>Cage ID</th>
-            <th>Location</th>
-            <th>Male</th>
-            <th>Female 1</th>
-            <th>Female 2</th>
-            <th>Female 3</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach ($cages as $cage)
-
+    <h1 class="row-centered">Breeder Cages</h1>
+    @foreach($cages as $cage)
+        <div class="panel panel-default whole">
+            <div class="panel-heading"><h3>Cage #{{$cage->room_num}}</h3></div>
+            <div class="panel-body">
+            <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                <thead>
                 <tr>
-                    <td>
-                        <a href="{{ action( 'CageController@show', ['id' => $cage->id]) }}">
-                            {{$cage->id}}
-                        </a>
-                    </td>
-                    <td>{{$cage->room_num}}</td>
-                    <td>{{$cage->male}}</td>
-                    <td>{{$cage->female_one}}</td>
-                    <td>{{$cage->female_two}}</td>
-                    <td>{{$cage->female_three}}</td>
-                    <td>
-                        {{ Form::open(['action' => ['CageController@edit', $cage], 'method' => 'get']) }}
-                        <button type="submit" >
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        {{ Form::close() }}
-                    </td>
-                    <td>
-                        {{ Form::open(['action' => ['CageController@destroy', $cage], 'method' => 'delete']) }}
-                        <button type="submit" >
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                        {{ Form::close() }}
-                    </td>
+                    <th></th>
+                    <th data-field="tag" >Tag</th>
+                    <th>Strain</th>
+                    <th>Genotype</th>
+                    <th>DOB</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Reserved For</th>
+                    <th>Comments</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                @foreach ($tagged_mice as $mouse)
+                    @if($mouse->id == $cage->male or $mouse->id == $cage->female_one
+                        or$mouse->id == $cage->female_two or$mouse->id == $cage->female_three)
+                        @if(isset($mouse->tags->last()->tag_num))
+                            @if($mouse->sex == "1")
+                                <?php $class = "info" ?>
+                            @elseif($mouse->sex == "0" and !is_null($mouse->sex))
+                                <?php $class = "danger" ?>
+                            @else
+                                <?php $class = "" ?>
+                            @endif
+                            @if($mouse->sick_report)
+                                <?php $id = "report" ?>
+                            @else
+                                <?php $id = "no_report" ?>
+                            @endif
+                            <tr class="{{ $class }}" id="{{ $id }}">
+                                <td>
+                                    <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $mouse->id }}"/>
+                                </td>
+                                <td>
+                                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
+                                        {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
+                                        {{$mouse->colony->name}}
+                                    </a>
+                                </td>
+                                <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
+                                <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
+                                <td>{{$mouse->getAge($mouse->birth_date)}}</td>
+                                <td>
+                                    @if(!empty($mouse->weights->last()->weight))
+                                        {{$mouse->weights->last()->weight . 'g'}}
+                                    @endif
+                                </td>
+                                <td>{{$mouse->users}}</td>
+                                <td>{{$mouse->comments}}  </td>
+                                <td>
+                                    {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
+                                    <button type="submit" >
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    {{ Form::close() }}
+                                </td>
+                                <td>
+                                    {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
+                                    <button type="submit" >
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                    {{ Form::close() }}
+                                </td>
+                            </tr>
+                        @endif
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+            </div>
+        </div>
+    @endforeach
     <a href="{{ action( 'CageController@create') }}">
         Create a New Cage
     </a>

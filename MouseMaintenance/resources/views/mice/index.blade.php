@@ -381,11 +381,17 @@
                         </td>
                         <td>{{$mouse->getGender($mouse->sex)}}</td>
                         <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
-                        <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
+                        <td>{{$mouse->getAge($mouse->birth_date)}}</td>
                         <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
-                        <td>{{$mouse->weights->last()->weight}}g</td>
                         <td>
-                            {{$mouse->blood_pressures->last()->taken_on}}
+                            @if(isset($mouse->weights->last()->weight))
+                                {{$mouse->weights->last()->weight}}g
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($mouse->blood_pressures->last()->taken_on))
+                                {{$mouse->blood_pressures->last()->taken_on}}
+                            @endif
                         </td>
                         <td>{{$mouse->wean_date}}</td>
                         <td>{{$mouse->end_date}}</td>

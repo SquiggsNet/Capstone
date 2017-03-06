@@ -17,10 +17,18 @@ class CageController extends Controller
 
     public function index()
     {
+        //get all current cages
         $cages = Cage::with('male', 'female_one', 'female_two', 'female_three')->get();
+
+        //select living mice and determine which ones are tagged
         $mice = Mouse::where('is_alive', 1)->get();
-        return ($mice);
-        return view('cages.index', compact('cages'));
+        $tagged_mice = collect(new Mouse);
+        foreach($mice as $mouse){
+            if(isset($mouse->tags->last()->tag_num)) {
+                $tagged_mice->push($mouse);
+            }
+        }
+        return view('cages.index', compact('cages', 'tagged_mice'));
     }
 
     /**

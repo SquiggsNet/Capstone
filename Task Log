@@ -2,7 +2,7 @@ Export to excel functionality
 
 Login:
   proper logo
-  center login on page
+  center login on page <-complete (DT)
   
 Home:
   Populate storage
@@ -27,7 +27,7 @@ Colonies:
     assign sex
     remove(delete)
   Tagged Mice:
-    edit single mouse
+    edit single mouse <-complete (DT)
     mockup for mice.show
     process for surgery
     process for euthanize
@@ -39,7 +39,7 @@ Surgery:
   experimental use drop down
   
 Breeder:
-  layout to match surgery
+  layout to match surgery <-In progress (Devon)
   mockup for work flow
   
 Tissue/Storage:

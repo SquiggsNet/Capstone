@@ -11,12 +11,12 @@ Home:
 Mice:
   format archived table
   link to breeders
-  Untagged Mice:    <-(Devon)
-    assign tags     <-
-    assign sex      <-
-    remove(delete)  <-
+  Untagged Mice:    <-complete (DT)
+    assign tags     <-complete (DT)
+    assign sex      <-complete (DT)
+    remove(delete)  <-complete (DT)
   Tagged Mice:
-    edit single mouse
+    edit single mouse <-complete (DT)
     mockup for mice.show
     process for euthanize
     

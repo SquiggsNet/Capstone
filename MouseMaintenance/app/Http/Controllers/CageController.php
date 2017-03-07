@@ -6,6 +6,7 @@ use App\Mouse;
 use Illuminate\Http\Request;
 use App\Cage;
 use App\Http\Requests;
+use Mockery\Generator\CachingGenerator;
 
 class CageController extends Controller
 {
@@ -40,13 +41,28 @@ class CageController extends Controller
     {
         //select living mice and determine which ones are tagged
         $mice = Mouse::where('is_alive', 1)->get();
-        $tagged_mice = collect(new Mouse);
+        $tagged_mice = [];
         foreach($mice as $mouse){
             if(isset($mouse->tags->last()->tag_num)) {
-                $tagged_mice->push($mouse);
+                array_push($tagged_mice, $mouse->id);
             }
         }
-        return view('cages.create', compact('tagged_mice'));
+
+        //get all mice assigned to a cage and set to array
+        $caged_mice = [];
+        $cages = Cage::all();
+        foreach($cages as $cage){
+            array_push($caged_mice, $cage->male, $cage->female_one, $cage->female_two, $cage->female_three);
+        }
+
+        //compare the two to determine what mice can be placed in breeder cages
+        $usable_mice = array_diff($tagged_mice, $caged_mice);
+        $breeder_mice = collect(new Mouse);
+        foreach($usable_mice as $um){
+            $um_2 = Mouse::find($um);
+            $breeder_mice->push($um_2);
+        }
+        return view('cages.create', compact('breeder_mice'));
     }
 
     /**

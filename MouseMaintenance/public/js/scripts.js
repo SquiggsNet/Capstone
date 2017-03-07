@@ -104,3 +104,55 @@ $(document).ready(function () {
 //        var formAction = $('#createMice').attr('action');
 //        $('#createMice').attr('action', formAction + id);
 //    });
+
+/*CREATE BREEDER CAGE*/
+
+//event to get drop-down Female one box change
+function checkFemaleOne(){
+    var ddl_two = document.getElementById('female_two');
+    var ddl_three = document.getElementById('female_three');
+
+    //get value of female_one
+    var f_one = $('#female_one').val();
+
+    //remove this value from the second drop down
+    for(var i = 0; i < ddl_two.options.length; i++){
+        if(f_one != 0) {
+            if (ddl_two.options[i].value == f_one) {
+                ddl_two.options[i].style.display = "none";
+                ddl_three.options[i].style.display = "none";
+                ddl_two.disabled = false;
+            }
+        }else{//Reset and disable the 2nd and 3rd drop downs if 1st de-selected
+            ddl_two.options[i].style.display = "block";
+            ddl_three.options[i].style.display = "block";
+            ddl_two.selectedIndex = 0;
+            ddl_three.selectedIndex = 0;
+            ddl_two.disabled = true;
+            ddl_three.disabled = true;
+        }
+    }
+}
+
+function checkFemaleTwo(){
+
+    var ddl_three = document.getElementById('female_three');
+
+    //get value of female_two
+    var f_two = $('#female_two').val();
+
+
+    //remove this option from the 3rd drop down
+    for(var i = 0; i < ddl_three.options.length; i++){
+        if(f_two != 0) {
+            if (ddl_three.options[i].value == f_two) {
+                ddl_three.options[i].style.display = "none";
+                ddl_three.disabled = false;
+            }
+        }else{//Reset and disable the 2nd and 3rd drop downs if 1st de-selected
+            ddl_three.options[i].style.display = "block";
+            ddl_three.selectedIndex = 0;
+            ddl_three.disabled = true;
+        }
+    }
+}

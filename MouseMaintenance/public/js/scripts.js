@@ -109,11 +109,33 @@ $(document).ready(function () {
 
 //event to get drop-down Female one box change
 function checkFemaleOne(){
+    var ddl_one = document.getElementById('female_one');
     var ddl_two = document.getElementById('female_two');
     var ddl_three = document.getElementById('female_three');
 
     //get value of female_one
     var f_one = $('#female_one').val();
+
+    //reset 2nd and 3rd indexes if it matches new selection
+    if(f_one == $('#female_two').val()) {
+        ddl_two.selectedIndex = 0;
+
+    }
+    if(f_one == $('#female_three').val()) {
+        ddl_three.selectedIndex = 0;
+    }
+
+    //return all values visible in second ddl if any have been hidden
+    for(var i = 0; i < ddl_two.options.length; i++) {
+        ddl_two.options[i].style.display = "block";
+    }
+
+    //reset all values visible in third ddl if any have been hidden and don't match second selected
+    for(var i = 0; i < ddl_three.options.length; i++) {
+        if ($('#female_two').val() != ddl_two.options[i].value) {
+            ddl_three.options[i].style.display = "block";
+        }
+    }
 
     //remove this value from the second drop down
     for(var i = 0; i < ddl_two.options.length; i++){
@@ -135,17 +157,26 @@ function checkFemaleOne(){
 }
 
 function checkFemaleTwo(){
-
     var ddl_three = document.getElementById('female_three');
 
     //get value of female_two
     var f_two = $('#female_two').val();
+    var f_one = $('#female_one').val();
 
+    //return all values visible if any have been hidden
+    for(var i = 0; i < ddl_three.options.length; i++) {
+        ddl_three.options[i].style.display = "block";
+    }
+
+    //reset 3rd value if it matches new selection
+    if(f_two == $('#female_three').val()) {
+        ddl_three.selectedIndex = 0;
+    }
 
     //remove this option from the 3rd drop down
     for(var i = 0; i < ddl_three.options.length; i++){
         if(f_two != 0) {
-            if (ddl_three.options[i].value == f_two) {
+            if (ddl_three.options[i].value == f_two || ddl_three.options[i].value == f_one) {
                 ddl_three.options[i].style.display = "none";
                 ddl_three.disabled = false;
             }

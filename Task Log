@@ -35,13 +35,13 @@ Colonies:
     process for euthanize
     
 Surgery:
-  layout to match pictures
+  layout to match pictures <- In Progress (DT)
   treament drop down select
   dosage drop down select
   experimental use drop down
   
 Breeder:
-  layout to match surgery <-In progress (Devon)
+  layout to match surgery <-Complete (DT)
   mockup for work flow
   
 Tissue/Storage:

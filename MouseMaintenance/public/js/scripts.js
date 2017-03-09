@@ -187,3 +187,11 @@ function checkFemaleTwo(){
         }
     }
 }
+
+/*CONFIRMATION OF DELETE USING ALERT*/
+//function is used, not recognised due to laravel FORM annotation.
+function confirmDelete()
+{
+    var confirmed = confirm("Are you sure you want to delete?");
+    return confirmed;
+}

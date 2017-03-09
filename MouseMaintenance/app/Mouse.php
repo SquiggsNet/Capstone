@@ -13,14 +13,12 @@ class Mouse extends Model
                                 'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'is_alive', 'sick_report', 'comments');
 
     public function genoFormat($geno_a, $geno_b){
-        if($geno_a == '1' and $geno_b == '1'){
+        if($geno_a == 1 and $geno_b == 1){
             return '(+/+)';
-        }elseif($geno_a == '1' and $geno_b == '0'){
+        }elseif($geno_a == 1 and $geno_b == 0){
             return '(+/-)';
-        }elseif($geno_a == '0' and $geno_b == '0'){
+        }elseif($geno_a == 0 and $geno_b == 0){
             return '(-/-)';
-        }else{
-            return 'N/A';
         }
     }
 
@@ -83,7 +81,7 @@ class Mouse extends Model
 
     //Treatment
     public function treatments(){
-        return $this->hasMany(Treatment::class);
+        return $this->belongsToMany(Treatment::class);
     }
 
     //Weight

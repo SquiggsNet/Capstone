@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Treatment extends Model
 {
-    protected $fillable = array('mouse_id', 'title', 'drug_amount');
+    protected $fillable = array('title', 'drug_amount');
 
     public function mice(){
-        return $this->belongsTo(Mouse::class);
+        return $this->belongsToMany(Mouse::class);
     }
 }

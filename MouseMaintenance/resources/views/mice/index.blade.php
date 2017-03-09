@@ -18,10 +18,10 @@
                         @endforeach
                     </ul>
                 @endif
-                <button type="submit" name="submit" value="breeders" id="submit_breeders" class="btn btn-default pull-right btn-block sixth bottom-buffer last">
-                    Breeders
-                </button>
-
+                    <a id="breeders_link" class="btn btn-default pull-right btn-block sixth bottom-buffer last"
+                       href="{{ action( 'CageController@index') }}">
+                        Breeders
+                    </a>
                 {{--{{ Form::open(['action' => ['SurgeryController@create'], 'method' => 'get']) }}--}}
                 {{ Form::open(array('url' => 'mice/groupTagged')) }}
                 <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >

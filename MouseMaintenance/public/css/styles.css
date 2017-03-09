@@ -118,6 +118,10 @@ button:hover{
     color: #b0e0e6;
 }
 
+#create_cage{
+    padding-bottom: 5px;
+}
+
 /*.navbar-brand>img{*/
     /*margin-top: -10px;*/
     /*height: 45px;*/

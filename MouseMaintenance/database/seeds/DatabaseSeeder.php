@@ -29,11 +29,33 @@ class DatabaseSeeder extends Seeder
         $this->call(Mouse_SurgeryTableSeeder::class);
         $this->call(Mouse_StorageTableSeeder::class);
         $this->call(Mouse_TagTableSeeder::class);
+        $this->call(MouseTreatmentsTable::class);
+    }
+}
+
+class MouseTreatmentsTable extends Seeder
+{
+    public function run(){
+        DB::table('mouse_treatment')->insert([
+            'mouse_id' => 1,
+            'treatment_id' => 1
+        ]);
+
+        DB::table('mouse_treatment')->insert([
+            'mouse_id' => 2,
+            'treatment_id' => 1
+        ]);
+
+        DB::table('mouse_treatment')->insert([
+            'mouse_id' => 3,
+            'treatment_id' => 1
+        ]);
     }
 }
 
 class UserTableSeeder extends Seeder
 {
+
     public function run()
     {
         DB::table('users')->insert([
@@ -173,19 +195,16 @@ class TreatmentTableSeeder extends Seeder
         DB::table('treatments')->insert([
             'title' => 'Ang-II',
             'drug_amount' => '160',
-            'mouse_id' => 1
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'saline',
             'drug_amount' => '245',
-            'mouse_id' => 2
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'Ang-II + cANF',
             'drug_amount' => '85',
-            'mouse_id' => 2
         ]);
     }
 }

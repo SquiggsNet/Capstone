@@ -10,20 +10,17 @@
             <tr>
                 <th data-field="tag" >Tag</th>
                 <th>Strain</th>
-                <th>Source</th>
-                <th>Pedigree</th>
-                <th>Sex</th>
                 <th>Geno Type</th>
                 <th>Age</th>
                 <th>Weight</th>
-                <th>Blood Pressure</th>
-                <th>Wean Date</th>
-                <th>End Date</th>
-                <th>Comments</th>
+                <th>Treatment</th>
+                <th>Dosage(mg/kg/day)</th>
+                <th>Experimental Use</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
+            <?php $m_num = 0;?>
             @foreach ($mice as $mouse)
                 @if(isset($mouse->tags->last()->tag_num))
                     @if($mouse->sex == 'True')
@@ -37,45 +34,60 @@
                         <?php $id = "no_report" ?>
                     @endif
                     <tr class="{{ $class }}" id="{{ $id }}">
+                        {{--Mouse Tags--}}
                         <td>
                             <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
                                 {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
                             </a>
                         </td>
+                        {{--Strain--}}
                         <td>
                             <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
                                 {{$mouse->colony->name}}
                             </a>
                         </td>
+                        {{--GenoType--}}
                         <td>
-                            {{ $mouse->source }}
-                        </td>
-                        <td>
-                            {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->father_record->sex)}}({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})x
-                            {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->mother_one_record->sex)}}({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
-                            @if(isset($mouse->mother_two_record->sex))
-                                ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                                {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
-                            @endif
-                            @if(isset($mouse->mother_three_record->sex))
-                                ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
-                                {{$mouse->getGender($mouse->mother_three_record->sex)}}
-                                ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
-                                /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                            @if(isset($mouse->geno_type_a))
+                                {{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}
+                            @else
+                                N/A
                             @endif
                         </td>
-                        <td>{{$mouse->getGender($mouse->sex)}}</td>
-                        <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
-                        <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
-                        <td>{{$mouse->weights->last()->weight}}g</td>
+                        {{--Age--}}
                         <td>
-                            {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
+                            {{$mouse->getAge($mouse->birth_date)}}
                         </td>
-                        <td>{{$mouse->showDate($mouse->wean_date)}}</td>
-                        <td>{{$mouse->showDate($mouse->end_date)}}</td>
-                        <td>{{$mouse->comments}}  </td>
+                        {{--Current Weight--}}
+                        <td>
+                            @if(isset($mouse->weights->last()->weight))
+                                {{$mouse->weights->last()->weight}}g
+                            @endif
+                        </td>
+                        {{--Treatment--}}
+                        <td class="col-lg-2">
+                            @for($i = 0; $i < count($treatments); $i++)
+                                <select name="{{ $m_num }}_treatment[]" id="treatment" class="form-control">
+                                    <option value="0">Treatment Type</option>
+                                    @foreach($treatments as $treatment)
+                                            <option value="{{ $treatment->id }}">
+                                                {{ $treatment->title }}
+                                            </option>
+                                    @endforeach
+                                </select>
+                            @endfor
+                           <button value="{{ $m_num }}" type="button" onclick="addTreatment({{ $m_num }})" class="pull-left" >
+                                <span class="glyphicon glyphicon-plus"></span>
+                           </button>
+                            <?php $m_num++; ?>
+                        </td>
+                        {{--Dosage--}}
+                        <td class="col-lg-1">
+                            <input class="form-control" name="dosage" id="dosage" type="number" step="any"/>
+                        </td>
+                        {{--Experimental Use--}}
+                        <td></td>
+                        {{--Edit--}}
                         <td>
                             {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                             <button type="submit" >
@@ -137,22 +149,54 @@
                 </div>
             </div>
         </div>
+
+    <script type="text/javascript">
+        //get the total amount of mice rows
+        var rows = "{{ count($mice)}}"
+        //total amount of treatments available
+        var treatments = "{{ count($treatments) }}"
+        //empty array to load data too=
+        var ddl_treatment = [];
+
+        //populate the nested array with all the treatments per mouse
+        for(var i = 0; i < rows; i++){
+            for(var j = 0; j < treatments; j++) {
+                ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+            }
+        }
+
+        //hide all treatments that are beyond the first one.
+        for(var x = 0; x < ddl_treatment.length; x++){
+            var ddl = ddl_treatment[x];
+            for(var y = 0; y < ddl.length; y++) {
+                if(y != 0){
+                    ddl[y].style.display = 'none';
+                }
+            }
+        }
+
+        function addTreatment(btn_pressed){
+            var ddl_treatment = [];
+
+            //populate the nested array with all the treatments per mouse
+            for(var i = 0; i < rows; i++){
+                for(var j = 0; j < treatments; j++) {
+                    ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+                }
+            }
+
+            //hide all treatments that are beyond the first one.
+            for(var x = 0; x < ddl_treatment.length; x++) {
+                if (btn_pressed == x) {
+                    var ddl = ddl_treatment[x];
+                    for (var y = 1; y < ddl.length + 1; y++) {
+                        if (ddl[y - 1].offsetParent != null) {
+                            ddl[y].style.display = 'block';
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 @endsection
-
-
-{{--<div class="form-group">--}}
-    {{--{!! Form::label('user_id', 'User ID') !!}--}}
-    {{--{!! Form::text('user_id',null ,['class'=>'form-control'])!!}--}}
-{{--</div>--}}
-{{--<div class="form-group">--}}
-    {{--{!! Form::label('scheduled_date', 'Scheduled Date') !!}--}}
-    {{--{!! Form::text('scheduled_date',null ,['class'=>'form-control'])!!}--}}
-{{--</div>--}}
-{{--<div class="form-group">--}}
-    {{--{!! Form::label('purpose', 'Purpose') !!}--}}
-    {{--{!! Form::text('purpose',null ,['class'=>'form-control']) !!}--}}
-{{--</div>--}}
-{{--<div class="form-group">--}}
-    {{--{!! Form::label('comments', 'Comments') !!}--}}
-    {{--{!! Form::text('comments',null ,['class'=>'form-control']) !!}--}}
-{{--</div>--}}

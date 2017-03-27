@@ -12,12 +12,13 @@ class CreateMouseTreatmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mouse_treatment', function (Blueprint $table) {
+        Schema::create('mouse_treatments', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
             $table->foreign('mouse_id')->references('id')->on('mice');
             $table->unsignedInteger('treatment_id');
             $table->foreign('treatment_id')->references('id')->on('treatments');
+            $table->decimal('dosage');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateMouseTreatmentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('mouse_treatment');
+        Schema::drop('mouse_treatments');
     }
 }

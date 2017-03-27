@@ -36,17 +36,17 @@ class DatabaseSeeder extends Seeder
 class MouseTreatmentsTable extends Seeder
 {
     public function run(){
-        DB::table('mouse_treatment')->insert([
+        DB::table('mouse_treatments')->insert([
             'mouse_id' => 1,
             'treatment_id' => 1
         ]);
 
-        DB::table('mouse_treatment')->insert([
+        DB::table('mouse_treatments')->insert([
             'mouse_id' => 2,
             'treatment_id' => 1
         ]);
 
-        DB::table('mouse_treatment')->insert([
+        DB::table('mouse_treatments')->insert([
             'mouse_id' => 3,
             'treatment_id' => 1
         ]);
@@ -465,19 +465,13 @@ class SurgeryTableSeeder extends Seeder
         DB::table('surgeries')->insert([
             'user_id' => 1,
             'scheduled_date' => '2012-01-02',
-            'treatment' => 'Saline',
-            'dose' => 2.1,
-            'purpose' => 'Emmanual-intracardiac',
-            'comments' => 'Oleg Kept tissue'
+            'end_date' => '2012-01-31'
         ]);
 
         DB::table('surgeries')->insert([
             'user_id' => 1,
             'scheduled_date' => '2012-01-02',
-            'treatment' => 'ANG II',
-            'dose' => 0.9,
-            'purpose' => 'Hailey intracardiac',
-            'comments' => 'Atrial prep for mlcl, plasma frozen'
+            'end_date' => '2012-01-31'
         ]);
     }
 }

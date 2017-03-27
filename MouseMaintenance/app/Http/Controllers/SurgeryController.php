@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mouse;
+use App\MouseTreatment;
 use App\Treatment;
 use App\User;
 use Illuminate\Http\Request;
@@ -51,20 +52,39 @@ class SurgeryController extends Controller
      */
     public function store(Request $request)
     {
+        //get all mice selected for surgery
         $mice = Mouse::whereIn('id', $request['surgery_mice'])->get();
 
+        //create the surgery
         $surgery = Surgery::create([
             'user_id' => $request['surgeon'],
             'scheduled_date' => $request['scheduled_date'],
-            'treatment' => $request['treatment'],
-            'dose' => 'null',
-            'purpose' => 'null',
-            'comments' => $request['comments']
+            'end_date' => $request['end_date'],
         ]);
         $surgery->save();
 
+        $mouse_list = 0;
         foreach($mice as $mouse){
+            //attach the mice to the newly created surgery
             $surgery->mice()->attach($mouse->id);
+
+            //get treatments and dosage associated with each mouse
+            $treatments = $request[$mouse_list .'_treatment'];
+            $dosage = $request[$mouse_list . '_dosage'];
+
+            //attach the mice to the treatment type and add the dosage
+            for($i = 0; $i < count($treatments); $i++){
+                if($treatments[$i] != 0){
+
+                    $mouse_treatment = MouseTreatment::create([
+                        'mouse_id' => $mouse->id,
+                        'treatment_id' => $treatments[$i],
+                        'dosage' => $dosage[$i]
+                    ]);
+                    $mouse_treatment->save();
+                }
+            }
+        $mouse_list++;
         }
 
        return redirect()->action('SurgeryController@index');

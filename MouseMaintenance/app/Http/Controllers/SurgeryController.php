@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mouse;
-use App\MouseTreatment;
 use App\Treatment;
 use App\User;
 use Illuminate\Http\Request;
 use App\Surgery;
-use App\Http\Requests;
 
 class SurgeryController extends Controller
 {
@@ -21,8 +19,6 @@ class SurgeryController extends Controller
     public function index()
     {
         $surgeries = Surgery::with('user', 'mice')->get();
-//        $surgery = Surgery::Find(1)->with('mice')->get();
-//        return($surgery);
         return view('surgeries.index', compact('surgeries', 'user', 'mice'));
     }
 
@@ -74,16 +70,11 @@ class SurgeryController extends Controller
             $treatments = $request[$mouse_list .'_treatment'];
             $dosage = $request[$mouse_list . '_dosage'];
 
-            //attach the mice to the treatment type and add the dosage
+            //attach the mice to the treatment type and add the dosage into the pivot table
             for($i = 0; $i < count($treatments); $i++){
                 if($treatments[$i] != 0){
 
-                    $mouse_treatment = MouseTreatment::create([
-                        'mouse_id' => $mouse->id,
-                        'treatment_id' => $treatments[$i],
-                        'dosage' => $dosage[$i]
-                    ]);
-                    $mouse_treatment->save();
+                    $mouse->treatments()->attach($treatments[$i], ['dosage' => $dosage[$i]]);
                 }
             }
         $mouse_list++;

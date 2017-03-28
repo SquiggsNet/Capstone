@@ -8,13 +8,8 @@ class Treatment extends Model
 {
     protected $fillable = array('title', 'drug_amount');
 
-    public function mouse_treatments()
-    {
-        return $this->belongsTo(MouseTreatment::class);
-    }
-
     public function mice()
     {
-        return $this->belongsToMany(Mouse::class);
+        return $this->belongsToMany('App\Mouse')->withPivot('dosage');
     }
 }

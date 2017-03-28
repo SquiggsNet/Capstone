@@ -13,4 +13,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/MouseMaintenance/database/migrations/2017_03_28_124309_create_experiment_table.php" />
+  </component>
 </project>

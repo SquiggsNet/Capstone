@@ -70,8 +70,16 @@
                                     <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
                                     <td>{{ $mouse->getAge($mouse->birth_date) }}</td>
                                     <td>{{ $mouse->showDate($surgery->scheduled_date) }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        @foreach($mouse->treatments as $treatments)
+                                            {{ $treatments->title }} <br>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($mouse->treatments as $treatments)
+                                            {{ $treatments->pivot->dosage }} <br>
+                                        @endforeach
+                                    </td>
                                     <td>{{ $mouse->showDate($surgery->end_date) }}</td>
                                     <td>{{ $mouse->comments }}  </td>
                                     <td>

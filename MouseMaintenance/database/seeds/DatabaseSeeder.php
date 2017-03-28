@@ -36,19 +36,22 @@ class DatabaseSeeder extends Seeder
 class MouseTreatmentsTable extends Seeder
 {
     public function run(){
-        DB::table('mouse_treatments')->insert([
+        DB::table('mouse_treatment')->insert([
             'mouse_id' => 1,
-            'treatment_id' => 1
+            'treatment_id' => 1,
+            'dosage' => 1.05
         ]);
 
-        DB::table('mouse_treatments')->insert([
+        DB::table('mouse_treatment')->insert([
             'mouse_id' => 2,
-            'treatment_id' => 1
+            'treatment_id' => 1,
+            'dosage' => 1.05
         ]);
 
-        DB::table('mouse_treatments')->insert([
+        DB::table('mouse_treatment')->insert([
             'mouse_id' => 3,
-            'treatment_id' => 1
+            'treatment_id' => 1,
+            'dosage' => 1.05
         ]);
     }
 }

@@ -80,12 +80,16 @@ class Mouse extends Model
     }
 
     //Treatment
-    public function mouse_treatments(){
-        return $this->belongsTo(MouseTreatment::class);
-    }
+//    public function mouse_treatments(){
+//        return $this->belongsTo(MouseTreatment::class);
+//    }
 
     public function treatments(){
-        return $this->belongsToMany(Treatment::class);
+        return $this->belongsToMany(Treatment::class)->withPivot('dosage');
+    }
+
+    public function experiments(){
+        return $this->belongsToMany(Experiment::class);
     }
 
     //Weight

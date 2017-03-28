@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Surgery extends Model
 {
-    protected $fillable = array('user_id', 'scheduled_date','dose', 'treatment', 'purpose', 'comments');
+    protected $fillable = array('user_id', 'end_date', 'scheduled_date','dose', 'treatment', 'purpose', 'comments');
 
     //one-to-many relationships
     //User

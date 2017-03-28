@@ -69,7 +69,6 @@
                         <td class="col-lg-2">
                             <input type="hidden" id="{{$m_num}}_viewable" value="1"/>
                             @for($i = 0; $i < count($treatments); $i++)
-                                {{--<select name="{{ $mouse->id }}_treatment[]" id="treatment" class="form-control">--}}
                                 <select name="{{ $m_num }}_treatment[]" id="treatment" class="form-control">
                                     <option value="0">Treatment Type</option>
                                     @foreach($treatments as $treatment)
@@ -91,7 +90,6 @@
                         {{--Dosage--}}
                         <td class="col-lg-1">
                             @for($i = 0; $i < count($treatments); $i++)
-                                {{--<input class="form-control" name="{{ $mouse->id }}_dosage[]" id="dosage" type="number" step="any"/>--}}
                                 <input class="form-control" name="{{ $m_num }}_dosage[]" id="dosage" type="number" step="any"/>
                             @endfor
                         </td>

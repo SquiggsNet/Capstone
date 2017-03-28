@@ -21,6 +21,8 @@ class SurgeryController extends Controller
     public function index()
     {
         $surgeries = Surgery::with('user', 'mice')->get();
+//        $surgery = Surgery::Find(1)->with('mice')->get();
+//        return($surgery);
         return view('surgeries.index', compact('surgeries', 'user', 'mice'));
     }
 

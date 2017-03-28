@@ -30,6 +30,26 @@ class DatabaseSeeder extends Seeder
         $this->call(Mouse_StorageTableSeeder::class);
         $this->call(Mouse_TagTableSeeder::class);
         $this->call(MouseTreatmentsTable::class);
+        $this->call(ExperimentSeeder::class);
+    }
+}
+
+class ExperimentSeeder extends seeder{
+    public function run(){
+        DB::table('experiments')->insert([
+            'id' => 1,
+            'title' => 'N/A',
+        ]);
+
+        DB::table('experiments')->insert([
+            'id' => 2,
+            'title' => 'Patch Clamp',
+        ]);
+
+        DB::table('experiments')->insert([
+            'id' => 3,
+            'title' => 'Optical Mapping',
+        ]);
     }
 }
 

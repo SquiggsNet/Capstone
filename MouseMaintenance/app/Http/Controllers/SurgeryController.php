@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mouse;
 use App\Treatment;
+use App\Experiment;
 use App\User;
 use Illuminate\Http\Request;
 use App\Surgery;
@@ -36,10 +37,11 @@ class SurgeryController extends Controller
         $mice = Mouse::whereIn('id', $mice_ex)->get();
         $surgeons = User::all();
         $treatments = Treatment::all();
+        $experiments = Experiment::all();
 
         $t_rows = count($mice) * count($treatments);
 
-        return view('surgeries.create', compact('mice', 'surgeons', 'treatments', 't_rows'));
+        return view('surgeries.create', compact('mice', 'surgeons', 'treatments', 'experiments', 't_rows'));
     }
 
     /**

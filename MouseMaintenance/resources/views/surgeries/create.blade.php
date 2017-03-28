@@ -94,7 +94,16 @@
                             @endfor
                         </td>
                         {{--Experimental Use--}}
-                        <td></td>
+                        <td class="col-lg-2">
+                                <select name="{{ $m_num }}_experiment[]" id="experiment" class="form-control">
+                                    <option value="0">Treatment Type</option>
+                                    @foreach($experiments as $experiment)
+                                        <option value="{{ $experiment->id }}">
+                                            {{ $experiment->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                        </td>
                         {{--Edit--}}
                         <td>
                             {{--{{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}--}}
@@ -165,12 +174,14 @@
         var treatments = "{{ count($treatments) }}"
         //empty array to load data too=
         var ddl_treatment = [];
+        var ddl_experiment = [];
         var dosage = [];
 
         //populate the nested array with all the treatments per mouse
         for(var i = 0; i < rows; i++){
             for(var j = 0; j < treatments; j++) {
                 ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+                ddl_experiment[i] = document.getElementsByName(i + '_experiment[]');
                 dosage[i] = document.getElementsByName(i + '_dosage[]');
             }
         }

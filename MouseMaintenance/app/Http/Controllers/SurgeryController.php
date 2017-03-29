@@ -8,6 +8,7 @@ use App\Experiment;
 use App\User;
 use Illuminate\Http\Request;
 use App\Surgery;
+use Illuminate\Pagination\Paginator;
 
 class SurgeryController extends Controller
 {
@@ -58,6 +59,7 @@ class SurgeryController extends Controller
         //create the surgery
         $surgery = Surgery::create([
             'user_id' => $request['surgeon'],
+            'title' => $request['surgery_title'],
             'scheduled_date' => $request['scheduled_date'],
             'end_date' => $request['end_date'],
         ]);
@@ -144,8 +146,32 @@ class SurgeryController extends Controller
      */
     public function destroy($id)
     {
+        //get the surgery
         $surgery = Surgery::find($id);
+
+        //get mice associated with the surgery
+        $mice = $surgery->mice()->where('surgery_id', $surgery->id)->get();
+
+        foreach($mice as $mouse){
+
+            //get all treatments associated with each mouse
+            $treatments = $mouse->treatments()->where('mouse_id', $mouse->id)->get();
+
+            //detach treatments
+            $mouse->treatments()->detach($treatments);
+
+            //get experimental uses associated with each mouse
+            $experiment = $mouse->experiments()->where('mouse_id', $mouse->id)->get();
+
+            //detach experiments
+            $mouse->experiments()->detach($experiment);
+
+            //detach mice from surgery
+            $surgery->mice()->detach($mouse);
+        }
+        //delete the surgery
         $surgery->delete();
+
         return redirect()->action('SurgeryController@index');
     }
 }

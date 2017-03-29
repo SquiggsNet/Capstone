@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Colony;
 use App\Storage;
+use App\Surgery;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +27,7 @@ class HomeController extends Controller
 
         $colonies = Colony::all();
         $storages = Storage::all();
-        return view('home', compact('colonies', 'storages'));
+        $surgeries = Surgery::all();
+        return view('home', compact('colonies', 'storages', 'surgeries'));
     }
 }

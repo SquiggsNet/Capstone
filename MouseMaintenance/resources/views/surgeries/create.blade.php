@@ -17,7 +17,7 @@
                 <th>Treatment</th>
                 <th>Dosage(mg/kg/day)</th>
                 <th>Experimental Use</th>
-                <th></th>
+                <th>End User</th>
             </tr>
             </thead>
             <tbody>
@@ -96,7 +96,7 @@
                         {{--Experimental Use--}}
                         <td class="col-lg-2">
                                 <select name="{{ $m_num }}_experiment[]" id="experiment" class="form-control">
-                                    <option value="0">Treatment Type</option>
+                                    <option value="0">Experiment Type</option>
                                     @foreach($experiments as $experiment)
                                         <option value="{{ $experiment->id }}">
                                             {{ $experiment->title }}
@@ -104,13 +104,16 @@
                                     @endforeach
                                 </select>
                         </td>
-                        {{--Edit--}}
+                        {{--End User--}}
                         <td>
-                            {{--{{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}--}}
-                            {{--<button type="submit" >--}}
-                                {{--<span class="glyphicon glyphicon-pencil"></span>--}}
-                            {{--</button>--}}
-                            {{--{{ Form::close() }}--}}
+                            <select name="{{ $m_num }}_user[]" id="user" class="form-control">
+                                <option value="0">End User</option>
+                                @foreach($surgeons as $surgeon)
+                                    <option value="{{ $surgeon->id }}">
+                                        {{ $surgeon->getFullName($surgeon->id) }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
                     <?php $m_num++; ?>
@@ -128,15 +131,9 @@
                             <div class="row">
                                 <div class="form-group col-md-6 col-sm-6">
                                     <div class="form-group col-md-12">
-                                        <label class="form-label" >Planned End Date</label>
-                                        <input class="form-control" placeholder="End Date" id="date" name="end_date" type="date"/>
+                                        <label class="form-label" >Short Description</label>
+                                        <input class="form-control" id="surgery_title" name="surgery_title" type="text" />
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label class="form-label" >Scheduled Surgery Date</label>
-                                        <input class="form-control" placeholder="Surgery Date" id="date" name="scheduled_date" type="date"/>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6">
                                     <div class="form-group col-md-12">
                                         <label class="form-label" >Surgeon</label>
                                         <select name="surgeon" id="surgeon" class="form-control">
@@ -147,6 +144,16 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label" >Scheduled Surgery Date</label>
+                                        <input class="form-control" placeholder="Surgery Date" id="date" name="scheduled_date" type="date"/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="form-label" >Planned End Date</label>
+                                        <input class="form-control" placeholder="End Date" id="date" name="end_date" type="date"/>
                                     </div>
                                     <div class="col-md-12" style="height:20px;"></div>
                                     <div class="form-group col-md-12 hidden-xs">

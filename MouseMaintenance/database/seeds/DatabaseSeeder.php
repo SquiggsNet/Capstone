@@ -487,12 +487,14 @@ class SurgeryTableSeeder extends Seeder
     {
         DB::table('surgeries')->insert([
             'user_id' => 1,
+            'title' => 'Martin\'s Cardiac H2',
             'scheduled_date' => '2012-01-02',
             'end_date' => '2012-01-31'
         ]);
 
         DB::table('surgeries')->insert([
             'user_id' => 1,
+            'title' => 'BEEEEYYYYYZZZZAAAAAAADDDD',
             'scheduled_date' => '2012-01-02',
             'end_date' => '2012-01-31'
         ]);

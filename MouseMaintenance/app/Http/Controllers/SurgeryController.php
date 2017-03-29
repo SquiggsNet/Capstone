@@ -65,12 +65,17 @@ class SurgeryController extends Controller
 
         $mouse_list = 0;
         foreach($mice as $mouse){
+            //set the reserved for of each mouse
+            $reserved_for = $request[$mouse_list .'_user'];
+            Mouse::where('id', $mouse->id)->update(['reserved_for' => $reserved_for[0]]);
+
             //attach the mice to the newly created surgery
             $surgery->mice()->attach($mouse->id);
 
-            //get treatments and dosage associated with each mouse
+            //get treatments, experimental use and dosage associated with each mouse
             $treatments = $request[$mouse_list .'_treatment'];
             $dosage = $request[$mouse_list . '_dosage'];
+            $experiment = $request[$mouse_list . '_experiment'];
 
             //attach the mice to the treatment type and add the dosage into the pivot table
             for($i = 0; $i < count($treatments); $i++){
@@ -78,11 +83,14 @@ class SurgeryController extends Controller
 
                     $mouse->treatments()->attach($treatments[$i], ['dosage' => $dosage[$i]]);
                 }
+
             }
+            //attach the mice to the experiment type
+            $mouse->experiments()->attach($experiment);
+        //increment to the next row
         $mouse_list++;
         }
-
-       return redirect()->action('SurgeryController@index');
+        return redirect()->action('SurgeryController@index');
     }
 
     /**

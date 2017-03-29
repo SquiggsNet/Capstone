@@ -38,9 +38,9 @@
                     <div class="panel-heading"><a href="{{ url('/surgeries') }}"><h3>Surgeries</h3></a></div>
                     <div class="panel-body">
 
-                        @foreach ($storages as $storage)
-                            <a class="btn btn-lg btn-block" href="{{ action( 'SurgeryController@show', ['id' => $storage->id]) }}" role="button">
-                                (Current Surgeries)
+                        @foreach ($surgeries as $surgery)
+                            <a class="btn btn-lg btn-block" href="{{ action( 'SurgeryController@show', ['id' => $surgery->id]) }}" role="button">
+                                {{ $surgery->title }}
                             </a>
                         @endforeach
 

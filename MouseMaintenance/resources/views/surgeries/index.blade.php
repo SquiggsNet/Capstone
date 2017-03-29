@@ -7,20 +7,22 @@
         <div class="panel panel-default whole">
             <div class="panel-heading">
                 <div class="col-lg-3">
-                    <h3>Batch: {{$surgery->id}}</h3>
+                    <h3>{{$surgery->title}}</h3>
                 </div>
                 <div class="col-lg-4 pull-right">
-                    <h3>Surgeon: {{ $surgery->user->getFullName() }}</h3>
+                    <h3>Surgeon:  {{ $surgery->user->getFullName() }}</h3>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-                {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id],
-                'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
-                <button type="submit" class="btn btn-default pull-right sixth bottom-buffer last" >
-                    Delete Surgery
-                </button>
-                {{ Form::close() }}
+                    <div class="col-lg-6 pull-right bottom-buffer">
+                        {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id],
+                        'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
+                        <button type="submit" class="btn btn-default pull-right" >
+                            Delete Surgery
+                        </button>
+                        {{ Form::close() }}
+                    </div>
                 <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                     <thead>
                     <tr>
@@ -33,6 +35,7 @@
                         <th>Treatment</th>
                         <th>Dosage</th>
                         <th>End Date</th>
+                        <th>Experimental Use</th>
                         <th>End User</th>
                         <th></th>
                         <th></th>
@@ -81,7 +84,16 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $mouse->showDate($surgery->end_date) }}</td>
-                                    <td>{{ $mouse->comments }}  </td>
+                                    <td>
+                                        @foreach($mouse->experiments as $experiments)
+                                            {{ $experiments->title }}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @if(!empty($mouse->reserved_for))
+                                            {{ $mouse->getUserName($mouse->reserved_for) }}
+                                        @endif
+                                    </td>
                                     <td>
                                         {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                                         <button type="submit" >

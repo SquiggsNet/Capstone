@@ -73,6 +73,12 @@ class Mouse extends Model
         }
     }
 
+    public function getUserName($user_id){
+        $user = User::where('id', $user_id)->get()->first();
+        $fullName = $user->first_name . " " . $user->last_name;
+        return $fullName;
+    }
+
     //one-to-many relationships
     //Blood pressure
     public function blood_pressures(){
@@ -80,10 +86,6 @@ class Mouse extends Model
     }
 
     //Treatment
-//    public function mouse_treatments(){
-//        return $this->belongsTo(MouseTreatment::class);
-//    }
-
     public function treatments(){
         return $this->belongsToMany(Treatment::class)->withPivot('dosage');
     }

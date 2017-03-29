@@ -14,6 +14,7 @@ class CreateSurgeriesTable extends Migration
     {
         Schema::create('surgeries', function (Blueprint $table){
             $table->increments('id');
+            $table->string('title', 50);
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->date('scheduled_date');

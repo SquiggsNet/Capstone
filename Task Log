@@ -6,12 +6,12 @@ Login:
   
 Home:
   Populate storage
-  Populate surgery
+  Populate surgery <- complete (DT)
   
 Mice:
   Paging/sorting
   format archived table
-  link to breeders
+  link to breeders  <-complete (DT)
   Untagged Mice:    <-complete (DT)
     assign tags     <-complete (DT)
     assign sex      <-complete (DT)
@@ -35,10 +35,10 @@ Colonies:
     process for euthanize
     
 Surgery:
-  layout to match pictures <- In Progress (DT)
-  treament drop down select
-  dosage drop down select
-  experimental use drop down
+  layout to match pictures  <- complete (DT)
+  treament drop down select <- complete (DT)
+  dosage drop down select   <- complete (DT)
+  experimental use drop down <-complete (DT)
   
 Breeder:
   layout to match surgery <-Complete (DT)

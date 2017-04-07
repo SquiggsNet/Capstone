@@ -29,6 +29,12 @@ class User extends Authenticatable
         return $fullName;
     }
 
+    public function formatPhone(){
+        $p = $this->phone;
+        $phoneNum = "(" . substr($p, 0, 3) . ")" . substr($p, 3, 3) . "-" . substr($p, 6);
+        return $phoneNum;
+    }
+
     //one-to-many relationships
     //Mouse
     public function mice(){

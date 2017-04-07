@@ -20,9 +20,11 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
-Route::get('/appManagement', function () {
-    return view('appManagement.index');
-});
+//Route::get('/appManagement', function () {
+//    return view('appManagement.index');
+//});
+
+Route::resource('appManagement', 'AppManagementController');
 
 Route::resource('users', 'UserController');
 Route::resource('privileges', 'PrivilegeController');
@@ -38,6 +40,7 @@ Route::post('mice/groupUntagged', 'MouseController@groupUntagged');
 
 Route::resource('storages', 'StorageController');
 
+Route::post('surgeries/{surgery}/remove', 'SurgeryController@remove');
 Route::get('surgeries/{mice}/create', 'SurgeryController@create');
 Route::resource('surgeries', 'SurgeryController');
 Route::resource('tags', 'TagController');

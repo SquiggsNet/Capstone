@@ -46,6 +46,22 @@ class SurgeryController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param $surgery
+     * @return string
+     * @internal param $mouse_id
+     * @internal param $mouse
+     */
+    public function remove(Request $request, $surgery){
+        $mouse = Mouse::find($request['mouse']);
+        $treatments = Treatment::all();
+        $surgery = Surgery::find($surgery);
+        $surgery->mice()->detach($mouse->id);
+        $mouse->treatments()->detach($treatments);
+        return redirect()->action('SurgeryController@index');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

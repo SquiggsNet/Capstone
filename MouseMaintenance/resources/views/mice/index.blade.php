@@ -22,7 +22,6 @@
                        href="{{ action( 'CageController@index') }}">
                         Breeders
                     </a>
-                {{--{{ Form::open(['action' => ['SurgeryController@create'], 'method' => 'get']) }}--}}
                 {{ Form::open(array('url' => 'mice/groupTagged')) }}
                 <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                     <thead>
@@ -31,14 +30,9 @@
                             <th data-field="tag" >Tag</th>
                             <th>Strain</th>
                             <th>Genotype</th>
-                            {{--<th>Source</th>--}}
-                            {{--<th>Pedigree</th>--}}
-                            {{--<th>Sex</th>--}}
                             <th>DOB</th>
                             <th>Age</th>
                             <th>Weight</th>
-                            {{--<th>Blood Pressure</th>--}}
-                            {{--<th>End Date</th>--}}
                             <th>Reserved For</th>
                             <th>Comments</th>
                             <th></th>
@@ -75,26 +69,6 @@
                                         </a>
                                     </td>
                                     <td>{{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}</td>
-                                    {{--<td>--}}
-                                        {{--{{ $mouse->source }}--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->father_record->sex)}}({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})x--}}
-                                        {{--{{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->mother_one_record->sex)}}({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})--}}
-                                        {{--@if(isset($mouse->mother_two_record->sex))--}}
-                                            {{--,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}--}}
-                                            {{--{{$mouse->getGender($mouse->mother_two_record->sex)}}--}}
-                                            {{--({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}--}}
-                                            {{--/{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})--}}
-                                        {{--@endif--}}
-                                        {{--@if(isset($mouse->mother_three_record->sex))--}}
-                                            {{--,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}--}}
-                                            {{--{{$mouse->getGender($mouse->mother_three_record->sex)}}--}}
-                                            {{--({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}--}}
-                                            {{--/{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})--}}
-                                        {{--@endif--}}
-                                    {{--</td>--}}
-                                    {{--<td>{{$mouse->getGender($mouse->sex)}}</td>--}}
                                     <td>{{ $mouse->showDate($mouse->birth_date) }}</td>
                                     <td>{{$mouse->getAge($mouse->birth_date)}}</td>
                                     <td>
@@ -102,12 +76,6 @@
                                             {{$mouse->weights->last()->weight . 'g'}}
                                         @endif
                                     </td>
-                                    {{--<td>--}}
-                                        {{--@if(!empty($mouse->blood_pressures->last()->taken_on))--}}
-                                            {{--{{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}--}}
-                                        {{--@endif--}}
-                                    {{--</td>--}}
-                                    {{--<td>{{$mouse->showDate($mouse->end_date)}}</td>--}}
                                     <td>{{$mouse->users}}</td>
                                     <td>{{$mouse->comments}}  </td>
                                     <td>

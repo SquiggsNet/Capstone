@@ -10,9 +10,9 @@
                     <h3>{{$surgery->title}}</h3>
                 </div>
                 <div class="col-lg-4 pull-right">
-                    <h3>Surgeon:  {{ $surgery->user->getFullName() }}</h3>
+                    <h3 class="pull-left">Surgeon:  {{ $surgery->user->getFullName() }}</h3>
                     {{ Form::open(['action' => ['SurgeryController@edit', $surgery], 'method' => 'get']) }}
-                    <button type="submit" class="pull-right" >
+                    <button type="submit" class="pull-right float-right" >
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                     {{ Form::close() }}
@@ -21,8 +21,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-lg-2 pull-right bottom-buffer">
-                    {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id],
-                    'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
+                    {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id], 'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
                     <button type="submit" class="btn btn-default pull-right" >
                         Delete Surgery
                     </button>
@@ -100,7 +99,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
+                                        {!! Form::open(['action' => ['SurgeryController@remove', $surgery],
+                                         'method' => 'post', 'onsubmit' => 'return confirmRemove()']) !!} {{--<- Doesn't confirm for some unknown reason--}}
+                                        <input type="hidden" name="mouse" value="{{ $mouse->id }}" />
                                         <button type="submit" >
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>

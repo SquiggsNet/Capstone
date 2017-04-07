@@ -188,10 +188,15 @@ function checkFemaleTwo(){
     }
 }
 
+//Confirm removal of mouse from surgery.
+function confirmRemove()
+{
+    return confirm("Remove mouse from this surgery?");
+}
+
 /*CONFIRMATION OF DELETE USING ALERT*/
 //function is used, not recognised due to laravel FORM annotation.
 function confirmDelete()
 {
-    var confirmed = confirm("Are you sure you want to delete?");
-    return confirmed;
+    return confirm("Are you sure you want to delete?");
 }

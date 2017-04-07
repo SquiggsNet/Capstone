@@ -117,7 +117,9 @@ class SurgeryController extends Controller
     {
         $surgery = Surgery::with('user', 'mice')->find($id);
         $surgeons = User::all();
-        return view('surgeries.edit', compact('surgery', 'user', 'mice', 'surgeons'));
+        $treatments = Treatment::all();
+        $experiments = Experiment::all();
+        return view('surgeries.edit', compact('surgery', 'user', 'mice', 'surgeons', 'treatments', 'experiments'));
     }
 
     /**

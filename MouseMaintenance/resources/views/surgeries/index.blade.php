@@ -11,18 +11,24 @@
                 </div>
                 <div class="col-lg-4 pull-right">
                     <h3>Surgeon:  {{ $surgery->user->getFullName() }}</h3>
+                    {{ Form::open(['action' => ['SurgeryController@edit', $surgery], 'method' => 'get']) }}
+                    <button type="submit" class="pull-right" >
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    {{ Form::close() }}
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="panel-body">
-                    <div class="col-lg-6 pull-right bottom-buffer">
-                        {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id],
-                        'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
-                        <button type="submit" class="btn btn-default pull-right" >
-                            Delete Surgery
-                        </button>
-                        {{ Form::close() }}
+                <div class="col-lg-2 pull-right bottom-buffer">
+                    {{ Form::open(['action' => ['SurgeryController@destroy', $surgery->id],
+                    'method' => 'delete', 'onsubmit' => 'return confirmDelete()']) }}
+                    <button type="submit" class="btn btn-default pull-right" >
+                        Delete Surgery
+                    </button>
+                    {{ Form::close() }}
                     </div>
+                {{ Form::open(array('url' => 'mice/groupTagged')) }}
                 <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                     <thead>
                     <tr>
@@ -37,7 +43,6 @@
                         <th>End Date</th>
                         <th>Experimental Use</th>
                         <th>End User</th>
-                        <th></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -95,13 +100,6 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
-                                        <button type="submit" >
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                        {{ Form::close() }}
-                                    </td>
-                                    <td>
                                         {{ Form::open(['action' => ['MouseController@destroy', $mouse], 'method' => 'delete']) }}
                                         <button type="submit" >
                                             <span class="glyphicon glyphicon-trash"></span>
@@ -113,6 +111,11 @@
                     @endforeach
                     </tbody>
                 </table>
+                <button type="submit" name="euthanize" id="euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
+                    Eunthanize
+                </button>
+
+                {{ Form::close() }}
             </div>
         </div>
     @endforeach

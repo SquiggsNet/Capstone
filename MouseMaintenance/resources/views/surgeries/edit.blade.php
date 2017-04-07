@@ -3,30 +3,25 @@
 @section('content')
     <div class="container">
         <h1>
-            <label class="control-label">Surgery Batch # {{$surgery->id}}</label>
+            <label class="control-label">Edit Surgery: {{ $surgery->title }}</label>
         </h1>
-        <h3>
-            Mice in Batch:
-        </h3>
+        {!! Form::open(['action' => 'SurgeryController@store' ]) !!}
         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
             <thead>
             <tr>
                 <th data-field="tag" >Tag</th>
                 <th>Strain</th>
-                <th>Source</th>
-                <th>Pedigree</th>
-                <th>Sex</th>
                 <th>Geno Type</th>
                 <th>Age</th>
                 <th>Weight</th>
-                <th>Blood Pressure</th>
-                <th>Wean Date</th>
-                <th>End Date</th>
-                <th>Comments</th>
-                <th></th>
+                <th>Treatment</th>
+                <th>Dosage(mg/kg/day)</th>
+                <th>Experimental Use</th>
+                <th>End User</th>
             </tr>
             </thead>
             <tbody>
+            <?php $m_num = 0;?>
             @foreach ($surgery->mice as $mouse)
                 @if(isset($mouse->tags->last()->tag_num))
                     @if($mouse->sex == 'True')
@@ -40,58 +35,110 @@
                         <?php $id = "no_report" ?>
                     @endif
                     <tr class="{{ $class }}" id="{{ $id }}">
+                        {{--Mouse Tags--}}
                         <td>
                             <a href="{{ action( 'MouseController@show', ['id' => $mouse->id]) }}">
                                 {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}
                             </a>
                         </td>
+                        {{--Strain--}}
                         <td>
                             <a href="{{ action( 'ColonyController@show', ['id' => $mouse->colony->id]) }}">
                                 {{$mouse->colony->name}}
                             </a>
                         </td>
+                        {{--GenoType--}}
                         <td>
-                            {{ $mouse->source }}
-                        </td>
-                        <td>
-                            {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->father_record->sex)}}({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})x
-                            {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}{{$mouse->getGender($mouse->mother_one_record->sex)}}({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
-                            @if(isset($mouse->mother_two_record->sex))
-                                ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                                {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
-                            @endif
-                            @if(isset($mouse->mother_three_record->sex))
-                                ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
-                                {{$mouse->getGender($mouse->mother_three_record->sex)}}
-                                ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
-                                /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                            @if(isset($mouse->geno_type_a))
+                                {{ $mouse->genoFormat($mouse->geno_type_a, $mouse->geno_type_b) }}
+                            @else
+                                N/A
                             @endif
                         </td>
-                        <td>{{$mouse->getGender($mouse->sex)}}</td>
-                        <td>({{$mouse->getGeno($mouse->geno_type_a)}}/{{$mouse->getGeno($mouse->geno_type_b)}})</td>
-                        <td>{{$mouse->getAge($mouse->birth_date)}} weeks</td>
-                        <td>{{$mouse->weights->last()->weight}}g</td>
+                        {{--Age--}}
                         <td>
-                            {{$mouse->showDate($mouse->blood_pressures->last()->taken_on)}}
+                            {{$mouse->getAge($mouse->birth_date)}}
                         </td>
-                        <td>{{$mouse->showDate($mouse->wean_date)}}</td>
-                        <td>{{$mouse->showDate($mouse->end_date)}}</td>
-                        <td>{{$mouse->comments}}  </td>
+                        {{--Current Weight--}}
                         <td>
-                            {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
-                            <button type="submit" >
-                                <span class="glyphicon glyphicon-pencil"></span>
+                            @if(isset($mouse->weights->last()->weight))
+                                {{$mouse->weights->last()->weight}}g
+                            @endif
+                        </td>
+                        {{--Treatment--}}
+                        <td class="col-lg-2">
+                            <input type="hidden" id="{{$m_num}}_viewable" value="1"/>
+                            @for($i = 0; $i < count($treatments); $i++)
+                                <select name="{{ $m_num }}_treatment[]" id="treatment" class="form-control">
+                                    <option value="0">Treatment Type</option>
+                                    @foreach($treatments as $treatment)
+                                        <option value="{{ $treatment->id }}"
+                                        @foreach($mouse->treatments as $index => $treat)
+                                            @if($i == $index and $treat->id == $treatment->id)
+                                                {{ "selected='selected'" }}
+                                            @endif
+                                        @endforeach
+                                        >
+                                            {{ $treatment->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endfor
+                            <button id="{{$m_num}}_add" value="{{ $m_num }}" type="button"
+                                    onclick="addTreatment({{ $m_num }})" class="pull-left" >
+                                <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                            {{ Form::close() }}
+                            <button id="{{$m_num}}_remove" value="{{ $m_num }}" type="button"
+                                    onclick="removeTreatment({{ $m_num }})" class="pull-left" hidden>
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </td>
+                        {{--Dosage--}}
+                        <td class="col-lg-1">
+                            @for($i = 0; $i < count($treatments); $i++)
+                                <input class="form-control" name="{{ $m_num }}_dosage[]" id="dosage" type="number" step="any"
+                                @foreach($mouse->treatments as $index => $treat)
+                                    @if($i == $index)
+                                        value="{{$treat->pivot->dosage}}"
+                                    @endif
+                                @endforeach
+                                />
+                            @endfor
+                        </td>
+                        {{--Experimental Use--}}
+                        <td class="col-lg-2">
+                            <select name="{{ $m_num }}_experiment[]" id="experiment" class="form-control">
+                                <option value="0">Experiment Type</option>
+                                @foreach($experiments as $experiment)
+                                    <option value="{{ $experiment->id }}"
+                                    @if($experiment->id == $mouse->experiments->last()->id)
+                                        {{ "selected='selected'" }}
+                                            @endif>
+                                        {{ $experiment->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </td>
+                        {{--End User--}}
+                        <td>
+                            <select name="{{ $m_num }}_user[]" id="user" class="form-control">
+                                <option value="0">End User</option>
+                                @foreach($surgeons as $surgeon)
+                                    <option value="{{ $surgeon->id }}"
+                                    @if($surgeon->id == $mouse->reserved_for)
+                                        {{ "selected='selected'" }}
+                                            @endif>
+                                        {{ $surgeon->getFullName($surgeon->id) }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
+                    <?php $m_num++; ?>
                 @endif
             @endforeach
             </tbody>
         </table>
-        {!! Form::open(['action' => 'SurgeryController@store' ]) !!}
         @foreach ($surgery->mice as $mouse)
             <input type="hidden" name="surgery_mice[]" value="{{$mouse->id}}"/>
         @endforeach
@@ -102,36 +149,39 @@
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <div class="form-group col-md-12">
-                                    <input class="form-control" id="treatment" value="{{ $surgery->treatment }}"
-                                           name="treatment" placeholder="Treatment" type="text"/>
+                                    <label class="form-label" >Short Description</label>
+                                    <input class="form-control" id="surgery_title" name="surgery_title" type="text" value="{{ $surgery->title }}"/>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <input class="form-control" value="{{$surgery->scheduled_date}}"
-                                           placeholder="Surgery Date" id="date" name="scheduled_date" type="date"/>
-                                </div>
-                                <div class="col-md-12" style="height:50px;"></div>
-                                <div class="form-group col-md-12 hidden-xs">
-                                    {!! Form::submit('Add',['class'=>'btn btn-default pull-right']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-6">
-                                <div class="form-group col-md-12">
+                                    <label class="form-label" >Surgeon</label>
                                     <select name="surgeon" id="surgeon" class="form-control">
                                         <option value="0">Select Surgeon...</option>
                                         @foreach($surgeons as $surgeon)
                                             <option value="{{ $surgeon->id }}"
-                                                @if($surgery->user_id == $surgeon->id) selected="selected" @endif>
+                                            @if($surgeon->id == $surgery->user->id)
+                                                {{ "selected='selected'" }}
+                                            @endif>
                                                 {{$surgeon->first_name . ' ' . $surgeon->last_name}}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
                                 <div class="form-group col-md-12">
-                                    <textarea class="form-control" cols="40" id="comments" name="comments"
-                                              placeholder="Comments" rows="6">{{$surgery->comments}}</textarea>
+                                    <label class="form-label" >Scheduled Surgery Date</label>
+                                    <input class="form-control" placeholder="Surgery Date" id="date" name="scheduled_date" type="date" value="{{ $surgery->scheduled_date }}"/>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="form-label" >Planned End Date</label>
+                                    <input class="form-control" placeholder="End Date" id="date" name="end_date" type="date" value="{{ $surgery->end_date }}"/>
+                                </div>
+                                <div class="col-md-12" style="height:20px;"></div>
+                                <div class="form-group col-md-12 hidden-xs">
+                                    {!! Form::submit('Save',['class'=>'btn btn-default pull-right']) !!}
                                 </div>
                                 <div class="form-group col-md-12 hidden-sm hidden-md hidden-lg">
-                                    {!! Form::submit('Add',['class'=>'btn btn-default pull-right']) !!}
+                                    {!! Form::submit('Save',['class'=>'btn btn-default pull-right']) !!}
                                 </div>
                             </div>
                         </div>
@@ -144,4 +194,118 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        //get the total amount of mice rows
+        var rows = "{{ count($surgery->mice)}}"
+        //total amount of treatments available
+        var treatments = "{{ count($treatments) }}"
+        //empty array to load data too=
+        var ddl_treatment = [];
+        var ddl_experiment = [];
+        var dosage = [];
+
+        //populate the nested array with all the treatments per mouse
+        for(var i = 0; i < rows; i++){
+            for(var j = 0; j < treatments; j++) {
+                ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+                ddl_experiment[i] = document.getElementsByName(i + '_experiment[]');
+                dosage[i] = document.getElementsByName(i + '_dosage[]');
+            }
+        }
+
+        //hide all treatments that are beyond the first one.
+        for(var x = 0; x < ddl_treatment.length; x++){
+            var ddl = ddl_treatment[x];
+            var dose = dosage[x];
+            for(var y = 0; y < ddl.length; y++) {
+                if(y != 0){
+                    ddl[y].style.display = 'none';
+                    dose[y].style.display = 'none';
+                }
+            }
+        }
+
+        //button clicked to add a treatment during create surgery
+        function addTreatment(btn_pressed){
+            var ddl_treatment = [];
+            var dosage = [];
+            var viewable = [];
+
+            //populate the nested array with all the treatments per mouse
+            for(var i = 0; i < rows; i++){
+                //get the hidden element to determine how many rows are visible
+                viewable[i] = $('#'+ i + '_viewable').val();
+                for(var j = 0; j < treatments; j++) {
+                    ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+                    dosage[i] = document.getElementsByName(i + '_dosage[]');
+                }
+            }
+
+            //hide all treatments that are beyond the first one.
+            for(var x = 0; x < ddl_treatment.length; x++) {
+                if (btn_pressed == x) {
+                    var ddl = ddl_treatment[x];
+                    var dose = dosage[x];
+                    for (var y = 0; y < ddl.length; y++) {
+                        if(y == viewable[btn_pressed]){
+                            ddl[y].style.display = 'block';
+                            dose[y].style.display = 'block';
+                            $('#'+btn_pressed+'_remove').show();
+                            $('#'+btn_pressed+'_viewable').val(y+1);
+                            break;
+                        }
+                    }
+                    if($('#'+ btn_pressed + '_viewable').val() == ddl.length){
+                        $('#'+btn_pressed+'_add').prop('disabled', true);
+                    }
+                }
+            }
+        }
+
+        function removeTreatment(btn_pressed){
+            var ddl_treatment = [];
+            var dosage = [];
+            var viewable = [];
+
+            //populate the nested array with all the treatments per mouse
+            for(var i = 0; i < rows; i++){
+                viewable[i] = $('#'+ i + '_viewable').val();
+                for(var j = 0; j < treatments; j++) {
+                    ddl_treatment[i] = document.getElementsByName(i + '_treatment[]');
+                    dosage[i] = document.getElementsByName(i + '_dosage[]');
+                }
+            }
+
+            //hide all treatments that are beyond the first one.
+            for(var x = 0; x < ddl_treatment.length; x++) {
+                if (btn_pressed == x) {
+                    var ddl = ddl_treatment[x];
+                    var dose = dosage[x];
+                    for (var y = 0; y < ddl.length+1; y++) {
+                        if(y == viewable[btn_pressed] && y != 1){
+                            ddl[y-1].style.display = 'none';
+                            dose[y-1].style.display = 'none';
+                            $('#'+btn_pressed+'_viewable').val(y-1);
+                            $('#'+btn_pressed+'_add').prop('disabled', false);
+                            break;
+                        }
+                    }
+                    if($('#'+ btn_pressed + '_viewable').val() == 1)
+                    {
+                        $('#'+btn_pressed+'_remove').hide();
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        /*Prevent disabled radios from being clicked*/
+        button[disabled]{
+            pointer-events:none;
+            background-color: #3B3838;
+            color: lightgrey;
+        }
+    </style>
+
 @endsection

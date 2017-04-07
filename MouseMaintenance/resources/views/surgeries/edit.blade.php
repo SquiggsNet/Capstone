@@ -5,7 +5,9 @@
         <h1>
             <label class="control-label">Edit Surgery: {{ $surgery->title }}</label>
         </h1>
-        {!! Form::open(['action' => 'SurgeryController@store' ]) !!}
+        <form role="form" method="POST" action="/surgeries/{{ $surgery->id }}">
+            {!! csrf_field() !!}
+            <input type="hidden" name="_method" value="PUT" />
         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
             <thead>
             <tr>
@@ -145,7 +147,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-sm-10 col-xs-12 col-md-offset-3 col-sm-offset-1">
-                    <form method="post">
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <div class="form-group col-md-12">
@@ -185,14 +186,13 @@
                                 </div>
                             </div>
                         </div>
-                        {!! Form::close() !!}
-                    </form>
                     <a class="pull-right" href="{{ action( 'SurgeryController@index') }}">
                         Go Back
                     </a>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <script type="text/javascript">
@@ -222,6 +222,12 @@
                 if(y != 0){
                     ddl[y].style.display = 'none';
                     dose[y].style.display = 'none';
+                    //alert("Dose: " + dose[y].value);
+                }
+                if(dose[y].value != "")
+                {
+                    ddl[y].style.display = 'block';
+                    dose[y].style.display = 'block';
                 }
             }
         }

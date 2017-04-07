@@ -132,11 +132,37 @@ class SurgeryController extends Controller
     public function update(Request $request, $id)
     {
         $surgery = Surgery::find($id);
-        $surgery->user_id = $request['user_id'];
-        $surgery->scheduled_date = $request['scheduled_date'];
-        $surgery->purpose = $request['purpose'];
-        $surgery->comments = $request['comments'];
-        $surgery->save();
+        $mouse_list = 0;
+
+        $surgery->update([
+            'user_id' => $request['surgeon'],
+            'title' => $request['surgery_title'],
+            'scheduled_date' => $request['scheduled_date'],
+            'end_date' => $request['end_date'],
+        ]);
+
+        foreach($surgery->mice as $mouse){
+            //set the reserved for of each mouse
+            $reserved_for = $request[$mouse_list .'_user'];
+            Mouse::where('id', $mouse->id)->update(['reserved_for' => $reserved_for[0]]);
+
+            //get treatments, experimental use and dosage associated with each mouse
+            $treatments = $request[$mouse_list .'_treatment'];
+            $dosage = $request[$mouse_list . '_dosage'];
+            $experiment = $request[$mouse_list . '_experiment'];
+
+            //attach the mice to the treatment type and add the dosage into the pivot table
+            for($i = 0; $i < count($treatments); $i++){
+                if($treatments[$i] != 0){
+
+                    $mouse->treatments()->sync(array($treatments[$i] => array('dosage' => $dosage[$i])));
+                }
+            }
+            //attach the mice to the experiment type
+            $mouse->experiments()->sync( (array) $experiment);
+            //increment to the next row
+            $mouse_list++;
+        }
         return redirect()->action('SurgeryController@index');
     }
 

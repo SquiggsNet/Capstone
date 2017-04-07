@@ -148,14 +148,14 @@ class SurgeryController extends Controller
 
             //get treatments, experimental use and dosage associated with each mouse
             $treatments = $request[$mouse_list .'_treatment'];
+
             $dosage = $request[$mouse_list . '_dosage'];
             $experiment = $request[$mouse_list . '_experiment'];
 
             //attach the mice to the treatment type and add the dosage into the pivot table
             for($i = 0; $i < count($treatments); $i++){
                 if($treatments[$i] != 0){
-
-                    $mouse->treatments()->sync(array($treatments[$i] => array('dosage' => $dosage[$i])));
+                    $mouse->treatments()->syncWithoutDetaching(array($treatments[$i] => array('dosage' => $dosage[$i])));
                 }
             }
             //attach the mice to the experiment type

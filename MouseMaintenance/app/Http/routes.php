@@ -20,10 +20,6 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
-//Route::get('/appManagement', function () {
-//    return view('appManagement.index');
-//});
-
 Route::resource('appManagement', 'AppManagementController');
 
 Route::resource('users', 'UserController');

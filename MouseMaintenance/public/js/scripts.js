@@ -1,6 +1,6 @@
 $(document).on('click','.value-control',function(){
-    var action = $(this).attr('data-action')
-    var target = $(this).attr('data-target')
+    var action = $(this).attr('data-action');
+    var target = $(this).attr('data-target');
     var value  = parseFloat($('[id="'+target+'"]').val());
     if(isNaN(value)){
         value = 0;
@@ -200,3 +200,19 @@ function confirmDelete()
 {
     return confirm("Are you sure you want to delete?");
 }
+
+//edit user reset password
+var cb_reset = document.getElementById('reset_password');
+function hide_password() {
+    if(cb_reset.checked){
+        $("#password").show();
+        $("#password_label").show();
+    }else{
+        $("#password").hide();
+        $("#password_label").hide();
+    }
+}
+
+window.onload = function(){
+    hide_password();
+};

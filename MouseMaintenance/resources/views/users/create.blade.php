@@ -7,7 +7,7 @@
                 <h2>New User Information</h2>
             </div>
             <div class="panel-body">
-                {!! Form::open(['action' => 'UserController@store' ]) !!}
+                {!! Form::open(['action' => 'UserController@store']) !!}
                 <div class="form-group col-lg-6">
                     {!! Form::label('first_name', 'First Name') !!}
                     {!! Form::text('first_name',null ,['class'=>'form-control'])!!}
@@ -30,19 +30,20 @@
                 </div>
                 <div class="form-group col-lg-3">
                     {!! Form::label('password', 'Default Password') !!}
-                    {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ) }}
+                    {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control', 'autocomplete' => 'new-password')) }}
+                </div>
+                <div class="form-group col-lg-3 top-buffer">
+                    {!! Form::checkbox('admin', 'true') !!}
+                    {!! Form::label('Admin', 'Administrator') !!}
                 </div>
                 <div class="form-group col-lg-3">
-                    {!! Form::label('Admin', 'Administrator') !!}
-                    {!! Form::checkbox('admin', 'true') !!}
+                    {!! Form::submit('Add',['class'=>'btn btn-default btn-lg']) !!}
+                    {!! Form::close() !!}
                 </div>
-                {!! Form::submit('Add',['class'=>'btn btn-default']) !!}
-                {!! Form::close() !!}
-
-                <a href="{{ action( 'UserController@index') }}">
-                    Go Back
-                </a>
             </div>
         </div>
+        <a href="{{ action( 'UserController@index') }}">
+            Go Back
+        </a>
     </div>
 @endsection

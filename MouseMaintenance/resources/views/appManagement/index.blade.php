@@ -45,8 +45,9 @@
 
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">User Management</div>
+                    <div class="panel-heading"><h4>User Management</h4></div>
                     <div class="panel-body">
+                        <h5>Active Users</h5>
                         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
                             <thead>
                                 <tr>
@@ -55,36 +56,30 @@
                                     <th>Phone No.</th>
                                     <th>E-Mail</th>
                                     <th>Administrator</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($users as $user)
-                                    <tr>
-                                        <td>{{ $user->getFullName() }}</td>
-                                        <td>{{ $user->student_id }}</td>
-                                        <td>{{ $user->formatPhone() }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            @if($user->admin)
-                                                Yes
-                                            @else
-                                                No
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{ Form::open(['action' => ['UserController@edit', $user], 'method' => 'get']) }}
-                                            <button type="submit" >
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </button>
-                                            {{ Form::close() }}
-                                        </td>
-                                    </tr>
+                                    @if($user->active)
+                                        <tr>
+                                            <td>{{ $user->getFullName() }}</td>
+                                            <td>{{ $user->student_id }}</td>
+                                            <td>{{ $user->formatPhone() }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                @if($user->admin)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
-                        <a class="btn btn-default" href="{{ action( 'UserController@create') }}">
-                            Add a new User
+                        <a class="btn btn-default" href="{{ action( 'UserController@index') }}">
+                            All Users
                         </a>
                     </div>
                 </div>

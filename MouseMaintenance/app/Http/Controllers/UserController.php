@@ -50,7 +50,7 @@ class UserController extends Controller
             'phone' => $request['phone']
         ]);
         $user->save();
-        return redirect()->action('UserController@index');
+        return redirect()->action('AppManagementController@index');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
         $users->student_id = $request['student_id'];
         $users->phone = $request['phone'];
         $users->save();
-        return redirect()->action('UserController@index');
+        return redirect()->action('AppManagementController@index');
     }
 
     /**
@@ -107,8 +107,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
-        $users->delete();
+        $user = User::find($id);
+        if($user->active){
+            $user->active = false;
+        }else{
+            $user->active = true;
+        }
+        $user->save();
         return redirect()->action('UserController@index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -109,6 +110,7 @@ class UserController extends Controller
         $user = User::find($id);
         if($user->active){
             $user->active = false;
+            $user->remember_token = null;
         }else{
             $user->active = true;
         }

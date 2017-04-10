@@ -25,6 +25,10 @@ class Authenticate
             }
         }
 
+        if(Auth::guard($guard)->user()->active != 1){
+            Auth::guard($guard)->logout();
+            return redirect('/login')->withErrors('Account deactivated, please contact your supervisor.');
+        }
         return $next($request);
     }
 }

@@ -51,4 +51,12 @@ class User extends Authenticatable
     public function privileges() {
         return $this->belongsToMany(Privilege::class);
     }
+
+    public function isActive(){
+        if($this->active){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

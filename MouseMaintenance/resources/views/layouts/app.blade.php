@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+    use Illuminate\Support\Facades\Auth;
+    $user = Auth::user(); ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -70,7 +73,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/appManagement') }}">Manage</a></li>
+                            @if($user->admin)
+                                <li><a href="{{ url('/appManagement') }}">Manage</a></li>
+                            @endif
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>

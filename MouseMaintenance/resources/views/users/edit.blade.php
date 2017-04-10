@@ -29,7 +29,7 @@
                     {!! Form::text('student_id',null ,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group col-lg-3 top-buffer">
-                    <input type="checkbox" id="reset_password" name="reset_password" onchange="hide_password()" />
+                    <input type="checkbox" id="reset_password" name="reset_password" value="1" onchange="hide_password()" />
                     {!! Form::label('reset_label', 'Reset Password', ['id' => 'reset_label']) !!}
                 </div>
                 <div class="form-group col-lg-3" id="new_password">
@@ -37,7 +37,7 @@
                     {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control', 'autocomplete' => 'new-password')) }}
                 </div>
                 <div class="form-group col-lg-3 top-buffer">
-                    {!! Form::checkbox('admin', 'true') !!}
+                    {!! Form::checkbox('admin') !!}
                     {!! Form::label('Admin', 'Administrator') !!}
                 </div>
                 <div class="form-group col-lg-3">

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'student_id', 'email', 'password', 'phone'
+        'first_name', 'last_name', 'student_id', 'email', 'admin', 'active', 'password', 'new_password', 'phone'
     ];
 
     /**

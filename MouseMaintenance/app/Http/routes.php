@@ -11,12 +11,14 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Route::auth();
 
+Route::get('/reset', 'PasswordController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
@@ -43,6 +45,7 @@ Route::resource('tags', 'TagController');
 Route::resource('tissues', 'TissueController');
 Route::resource('treatments', 'TreatmentController');
 Route::resource('weights', 'WeightController');
+Route::resource('password', 'PasswordController');
 
 
 

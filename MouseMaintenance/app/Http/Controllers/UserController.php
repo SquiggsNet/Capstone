@@ -41,11 +41,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        if(empty($request['admin'])){
+            $admin = false;
+        }else{
+            $admin = true;
+        }
+
         $user = User::create([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'new_password' => 1,
+            'admin' => $admin,
+            'active' => 1,
             'student_id' => $request['student_id'],
             'phone' => $request['phone']
         ]);
@@ -89,11 +99,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $users = User::find($id);
+        if($request['reset_password'] == 1){
+            $users->new_password = 1;
+            $users->password = Hash::make($request['password']);
+        }
         $users->first_name = $request['first_name'];
         $users->last_name = $request['last_name'];
         $users->email = $request['email'];
-        $users->password = Hash::make($request['password']);
+
         $users->student_id = $request['student_id'];
+        $users->admin = $request['admin'];
         $users->phone = $request['phone'];
         $users->save();
         return redirect()->action('AppManagementController@index');

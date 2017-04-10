@@ -29,6 +29,10 @@ class Authenticate
             Auth::guard($guard)->logout();
             return redirect('/login')->withErrors('Account deactivated, please contact your supervisor.');
         }
+
+        if(Auth::guard($guard)->user()->new_password == 1){
+            return view('passwords.index');
+        }
         return $next($request);
     }
 }

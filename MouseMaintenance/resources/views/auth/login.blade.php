@@ -42,7 +42,8 @@
                 </div>
 
                 <div class="form-group text-right half pull-right">
-                    <a href="{{ url('/password/reset') }}">Forgot Password</a>
+                    <a href="{{ url('/reset') }}">Forgot Password</a>
+                    <a href="{{ action( 'PasswordController@index') }}">New Pword</a>
                 </div>
 
                 <div class="form-group">

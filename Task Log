@@ -23,7 +23,7 @@ Mice:
     
 Colonies:
   Paging/sorting
-  Option to create Colony 
+  Option to create Colony < - In Progress (DT)
   Untagged Mice:
     assign tags
     assign sex
@@ -31,7 +31,7 @@ Colonies:
   Tagged Mice:
     edit single mouse <-complete (DT)
     mockup for mice.show
-    process for surgery
+    process for surgery <-complete(DT)
     process for euthanize
     
 Surgery:
@@ -52,10 +52,10 @@ Tissue/Storage:
   set to stoarage location
   view locations
   
-User Profiles: <-in progess (DT)
-  user CRUD
-  edit privileges
-  restrict access
+User Profiles:    <-complete (DT)
+  user CRUD       <-complete (DT)
+  edit privileges <-complete (DT)
+  restrict access 
   
 Validation(by page):
   Login

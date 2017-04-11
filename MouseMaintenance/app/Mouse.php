@@ -13,6 +13,10 @@ class Mouse extends Model
                                 'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'is_alive', 'sick_report', 'comments');
 
     public function genoFormat($geno_a, $geno_b){
+
+        if(is_null($geno_a) and is_null($geno_b)){
+            return 'N/A';
+        }
         if($geno_a == 1 and $geno_b == 1){
             return '(+/+)';
         }elseif($geno_a == 1 and $geno_b == 0){

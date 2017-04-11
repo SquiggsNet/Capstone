@@ -39,16 +39,19 @@ class ExperimentSeeder extends seeder{
         DB::table('experiments')->insert([
             'id' => 1,
             'title' => 'N/A',
+            'active' => true
         ]);
 
         DB::table('experiments')->insert([
             'id' => 2,
             'title' => 'Patch Clamp',
+            'active' => false
         ]);
 
         DB::table('experiments')->insert([
             'id' => 3,
             'title' => 'Optical Mapping',
+            'active' => true
         ]);
     }
 }
@@ -230,17 +233,17 @@ class TreatmentTableSeeder extends Seeder
     {
         DB::table('treatments')->insert([
             'title' => 'Ang-II',
-            'drug_amount' => '160',
+            'active' => true
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'saline',
-            'drug_amount' => '245',
+            'active' => true
         ]);
 
         DB::table('treatments')->insert([
             'title' => 'Ang-II + cANF',
-            'drug_amount' => '85',
+            'active' => true
         ]);
     }
 }
@@ -339,23 +342,28 @@ class TissueTableSeeder extends Seeder
     public function run()
     {
         DB::table('tissues')->insert([
-            'name' => 'Ventricle'
+            'name' => 'Ventricle',
+            'active' => true
         ]);
 
         DB::table('tissues')->insert([
-            'name' => 'Apex'
+            'name' => 'Apex',
+            'active' => true
         ]);
 
         DB::table('tissues')->insert([
-            'name' => 'Full Atrial'
+            'name' => 'Full Atrial',
+            'active' => true
         ]);
 
         DB::table('tissues')->insert([
-            'name' => 'Posterior Wall'
+            'name' => 'Posterior Wall',
+            'active' => false
         ]);
 
         DB::table('tissues')->insert([
-            'name' => 'Whole Heart'
+            'name' => 'Whole Heart',
+            'active' => true
         ]);
     }
 }

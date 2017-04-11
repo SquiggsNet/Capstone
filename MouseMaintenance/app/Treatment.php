@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Treatment extends Model
 {
-    protected $fillable = array('title', 'drug_amount');
+    protected $fillable = array('title', 'active');
 
     public function mice()
     {

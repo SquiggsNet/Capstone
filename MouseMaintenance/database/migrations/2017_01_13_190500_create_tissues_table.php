@@ -14,6 +14,7 @@ class CreateTissuesTable extends Migration
     {
         Schema::create('tissues', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('active');
             $table->string('name');
             $table->timestamps();
         });

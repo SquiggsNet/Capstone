@@ -2,23 +2,19 @@
 
 @section('content')
     <div class="container">
-        {!! Form::model($treatment, ['action' => ['TreatmentController@update', $treatment], 'method' => 'put']) !!}
+        <div class="panel panel-default">
+            <div class="panel-heading ">Edit Tissue Type</div>
+            <div class="panel-body">
+            {!! Form::model($treatment, ['action' => ['TreatmentController@update', $treatment], 'method' => 'put']) !!}
 
-        <div class="form-group">
-            {!! Form::label('title', 'Title') !!}
-            {!! Form::text('title',null ,['class'=>'form-control'])!!}
+            <div class="form-group">
+                {!! Form::label('title', 'Title') !!}
+                {!! Form::text('title',null ,['class'=>'form-control'])!!}
+            </div>
+            {!! Form::submit('Save Update',['class'=>'btn btn-default']) !!}
+            {!! Form::close() !!}
+            </div>
         </div>
-        <div class="form-group">
-            {!! Form::label('drug_amount', 'Drug Ammunt') !!}
-            {!! Form::text('drug_amount',null ,['class'=>'form-control'])!!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('mouse_id', 'Mouse ID') !!}
-            {!! Form::text('mouse_id',null ,['class'=>'form-control']) !!}
-        </div>
-        {!! Form::submit('Save Update',['class'=>'btn btn-default']) !!}
-        {!! Form::close() !!}
-
         <a href="{{ action( 'TreatmentController@index') }}">
             Go Back
         </a>

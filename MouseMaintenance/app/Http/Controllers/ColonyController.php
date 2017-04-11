@@ -45,7 +45,8 @@ class ColonyController extends Controller
     public function store(Request $request)
     {
         $colony = Colony::create([
-            'name' => $request['name']
+            'name' => $request['name'],
+            'active' =>true
         ]);
         $colony->save();
         return redirect()->action('ColonyController@create');

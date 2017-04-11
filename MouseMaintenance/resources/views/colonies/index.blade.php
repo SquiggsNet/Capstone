@@ -10,9 +10,12 @@
                 <div class="panel-heading"><h3>Colonies</h3></div>
                 <div class="panel-body">
                     @foreach ($colonies as $colony)
-                        <a class="btn btn-lg btn-block" href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
-                            {{$colony->name}}
-                        </a>
+                        @if($colony->active)
+                            <a class="btn btn-lg btn-block"
+                               href="{{ action( 'ColonyController@show', ['id' => $colony->id]) }}" role="button">
+                                {{$colony->name}}
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>

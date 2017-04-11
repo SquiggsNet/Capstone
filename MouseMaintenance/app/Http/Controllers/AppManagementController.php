@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Colony;
+use App\Tissue;
+use App\Treatment;
+use App\Experiment;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,9 +21,16 @@ class AppManagementController extends Controller
      */
     public function index()
     {
+        $experiments = Experiment::where('active', 1)->get();
+        $treatments = Treatment::where('active', 1)->get();
+        $tissues = Tissue::where('active', 1)->get();
         $colonies = Colony::with('mice')->get();
         $users = User::all();
-        return view('appManagement.index', compact('users', 'colonies'));
+
+        $total_rows = max(count($experiments), count($treatments), count($tissues));
+
+        return view('appManagement.index',
+            compact('users', 'colonies', 'tissues', 'treatments', 'experiments', 'total_rows'));
     }
 
     /**

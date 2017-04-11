@@ -35,7 +35,7 @@ Route::resource('mice', 'MouseController');
 Route::post('mice/groupTagged', 'MouseController@groupTagged');
 Route::post('mice/groupUntagged', 'MouseController@groupUntagged');
 
-
+Route::resource('experiments', 'ExperimentController');
 Route::resource('storages', 'StorageController');
 
 Route::post('surgeries/{surgery}/remove', 'SurgeryController@remove');

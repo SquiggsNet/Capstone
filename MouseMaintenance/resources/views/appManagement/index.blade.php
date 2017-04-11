@@ -99,6 +99,89 @@
             </div>
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h4>Surgery Management</h4></div>
+                    <div class="panel-body">
+                        <div class="col-lg-4">
+
+                            <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                                <thead>
+                                    <tr>
+                                        <th>Tissues</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for($i = 0; $i < $total_rows; $i++)
+                                        <tr>
+                                            <td>
+                                                @if(!empty($tissues[$i]))
+                                                    {{ $tissues[$i]->name }}
+                                                @else
+                                                    <br>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endfor
+                                </tbody>
+                            </table>
+                            <a class="btn btn-default" href="{{ action( 'TissueController@index') }}">
+                                All Tissues
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                                <thead>
+                                <tr>
+                                    <th>Treatments</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for($i = 0; $i < $total_rows; $i++)
+                                    <tr>
+                                        <td>
+                                            @if(!empty($treatments[$i]))
+                                                {{ $treatments[$i]->title }}
+                                            @else
+                                                <br>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
+                            <a class="btn btn-default" href="{{ action( 'TreatmentController@index') }}">
+                                All Treatments
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                                <thead>
+                                <tr>
+                                    <th>Experiments</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for($i = 0; $i < $total_rows; $i++)
+                                    <tr>
+                                        <td>
+                                            @if(!empty($experiments[$i]))
+                                                {{ $experiments[$i]->title }}
+                                            @else
+                                                <br>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
+                            <a class="btn btn-default" href="{{ action( 'ExperimentController@index') }}">
+                                All Experiments
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
                     <div class="panel-heading text-center"><h4>Storage Facility Management</h4></div>
                     <div class="panel-body">
                         <a href="{{ action( 'StorageController@create') }}">

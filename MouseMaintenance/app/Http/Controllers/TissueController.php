@@ -39,6 +39,7 @@ class TissueController extends Controller
     {
         $tissue = Tissue::create([
             'name' => $request['name'],
+            'active' => true
         ]);
         $tissue->save();
         return redirect()->action('TissueController@index');
@@ -92,7 +93,12 @@ class TissueController extends Controller
     public function destroy($id)
     {
         $tissue = Tissue::find($id);
-        $tissue->delete();
+        if($tissue->active){
+            $tissue->active = false;
+        }else{
+            $tissue->active = true;
+        }
+        $tissue->save();
         return redirect()->action('TissueController@index');
     }
 }

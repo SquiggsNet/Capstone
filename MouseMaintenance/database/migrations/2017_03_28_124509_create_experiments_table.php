@@ -14,6 +14,7 @@ class CreateExperimentsTable extends Migration
     {
         Schema::create('experiments', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('active');
             $table->string('title');
         });
     }

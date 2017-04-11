@@ -14,8 +14,8 @@ class CreateTreatmentsTable extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('active');
             $table->string('title');
-            $table->decimal('drug_amount');
             $table->timestamps();
         });
     }

@@ -76,7 +76,11 @@
                                             {{$mouse->weights->last()->weight . 'g'}}
                                         @endif
                                     </td>
-                                    <td>{{$mouse->users}}</td>
+                                    <td>
+                                        @if(!empty($mouse->reserved_for))
+                                            {{ $mouse->getUserName($mouse->reserved_for) }}
+                                        @endif
+                                    </td>
                                     <td>{{$mouse->comments}}  </td>
                                     <td>
                                     {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}

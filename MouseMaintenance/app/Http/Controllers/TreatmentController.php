@@ -40,8 +40,7 @@ class TreatmentController extends Controller
     {
         $treatment = Treatment::create([
             'title' => $request['title'],
-            'drug_amount' => $request['drug_amount'],
-            'mouse_id' => $request['mouse_id']
+            'active' => 1,
         ]);
         $treatment->save();
         return redirect()->action('TreatmentController@index');
@@ -82,8 +81,6 @@ class TreatmentController extends Controller
     {
         $treatment = Treatment::find($id);
         $treatment->title = $request['title'];
-        $treatment->drug_amount = $request['drug_amount'];
-        $treatment->mouse_id = $request['mouse_id'];
         $treatment->save();
         return redirect()->action('TreatmentController@index');
     }
@@ -97,7 +94,12 @@ class TreatmentController extends Controller
     public function destroy($id)
     {
         $treatment = Treatment::find($id);
-        $treatment->delete();
+        if($treatment->active){
+            $treatment->active = false;
+        }else{
+            $treatment->active = true;
+        }
+        $treatment->save();
         return redirect()->action('TreatmentController@index');
     }
 }

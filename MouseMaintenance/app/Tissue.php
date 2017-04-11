@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tissue extends Model
 {
-    protected $fillable = array('name');
+    protected $fillable = array('name', 'active');
 
     public function storages(){
         return $this->belongsTo(Storage::class);

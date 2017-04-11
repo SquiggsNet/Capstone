@@ -15,6 +15,7 @@ class CreateColoniesTable extends Migration
         Schema::create('colonies', function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

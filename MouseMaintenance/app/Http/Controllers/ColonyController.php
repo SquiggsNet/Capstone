@@ -32,7 +32,8 @@ class ColonyController extends Controller
      */
     public function create()
     {
-        return view('colonies.create');
+        $colonies = Colony::with('mice')->get();
+        return view('colonies.create', compact('colonies'));
     }
 
     /**
@@ -47,7 +48,7 @@ class ColonyController extends Controller
             'name' => $request['name']
         ]);
         $colony->save();
-        return redirect()->action('ColonyController@index');
+        return redirect()->action('ColonyController@create');
     }
 
     /**
@@ -87,7 +88,7 @@ class ColonyController extends Controller
         $colony = Colony::find($id);
         $colony->name = $request['name'];
         $colony->save();
-        return redirect()->action('ColonyController@index');
+        return redirect()->action('ColonyController@create');
     }
 
     /**
@@ -99,7 +100,12 @@ class ColonyController extends Controller
     public function destroy($id)
     {
         $colony = Colony::find($id);
-        $colony->delete();
-        return redirect()->action('ColonyController@index');
+        if($colony->active){
+            $colony->active = false;
+        }else{
+            $colony->active = true;
+        }
+        $colony->save();
+        return redirect()->action('ColonyController@create');
     }
 }

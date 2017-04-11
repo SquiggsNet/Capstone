@@ -4,48 +4,10 @@
 
     <div class="container">
         <h1>Application</h1>
-
         <div class="row">
-
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Cage Management</div>
-
-                    <div class="panel-body">
-                        <li><a href="{{ action( 'CageController@create') }}">
-                            Add a new Cage
-                        </a></li>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Colony Management</div>
-
-                    <div class="panel-body">
-                        <li><a href="{{ action( 'ColonyController@create') }}">
-                            Add a new Colony
-                        </a></li>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Storage Facility Management</div>
-
-                    <div class="panel-body">
-                        <a href="{{ action( 'StorageController@create') }}">
-                            Add a new Storage Facility (Freezer?)
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h4>User Management</h4></div>
+                    <div class="panel-heading text-center"><h4>User Management</h4></div>
                     <div class="panel-body">
                         <h5>Active Users</h5>
                         <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
@@ -80,6 +42,67 @@
                         </table>
                         <a class="btn btn-default" href="{{ action( 'UserController@index') }}">
                             All Users
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h4>Colony Management</h4></div>
+                    <div class="panel-body">
+                        <h5>Active Colonies</h5>
+                        <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                            <thead>
+                            <tr>
+                                <th>Colony</th>
+                                <th>Active Mice</th>
+                                <th>Males</th>
+                                <th>Females</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($colonies as $colony)
+                                    @if($colony->active)
+                                        <?php $male_count = 0; $female_count = 0; ?>
+                                        @foreach($colony->mice as $mouse)
+                                            @if($mouse->sex == 1)
+                                                <?php $male_count++;?>
+                                            @else
+                                                <?php $female_count++;?>
+                                            @endif
+                                        @endforeach
+                                        <tr>
+                                            {{--Colony Name--}}
+                                            <td>
+                                                {{ $colony->name }}
+                                            </td>
+                                            {{--Active Mice--}}
+                                            <td>
+                                                {{ count($colony->mice) }}
+                                            </td>
+                                            {{--Males--}}
+                                            <td>
+                                                {{ $male_count }}
+                                            </td>
+                                            {{--Females--}}
+                                            <td>
+                                                {{ $female_count }}
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <a class="btn btn-default" href="{{ action( 'ColonyController@create') }}"> All Colonies </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><h4>Storage Facility Management</h4></div>
+                    <div class="panel-body">
+                        <a href="{{ action( 'StorageController@create') }}">
+                            Add a new Storage Facility (Freezer?)
                         </a>
                     </div>
                 </div>

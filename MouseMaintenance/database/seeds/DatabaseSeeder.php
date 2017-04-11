@@ -189,19 +189,23 @@ class ColonyTableSeeder extends Seeder
     public function run()
     {
         DB::table('colonies')->insert([
-           'name' => 'NPR-C'
+            'name' => 'NPR-C',
+            'active' => true
         ]);
 
         DB::table('colonies')->insert([
-            'name' => 'Akita'
+            'name' => 'Akita',
+            'active' => true
         ]);
 
         DB::table('colonies')->insert([
-            'name' => 'NPR-B'
+            'name' => 'NPR-B',
+            'active' => true
         ]);
 
         DB::table('colonies')->insert([
-            'name' => 'GFP'
+            'name' => 'GFP',
+            'active' => false
         ]);
     }
 }

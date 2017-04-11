@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Colony;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
-use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
-
-class AppManagementController extends Controller
+class PasswordController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +17,7 @@ class AppManagementController extends Controller
      */
     public function index()
     {
-        $colonies = Colony::with('mice')->get();
-        $users = User::all();
-        return view('appManagement.index', compact('users', 'colonies'));
+        return view('passwords.index');
     }
 
     /**
@@ -41,7 +38,27 @@ class AppManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pass1 = $request['password'];
+        $pass2 = $request['password_confirmation'];
+
+        if($pass1 == $pass2) {
+            $this->validate(request(), [
+                'password' => 'required|min:6'
+            ]);
+        }else{
+            $this->validate(request(), [
+                'password' => 'required|min:6|confirmed'
+            ]);
+        }
+        $user = User::where('email', $request['email'])->get();
+
+        if($user->isEmpty())
+        {
+            return Redirect::back()->withErrors(['Invalid e-mail address']);
+        }
+
+        User::where('email', $request['email'])->update(['password' => Hash::make($pass1), 'new_password' => 0]);
+        return redirect()->action('HomeController@index');
     }
 
     /**
@@ -73,9 +90,9 @@ class AppManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
     }
 
     /**

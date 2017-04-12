@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Experiment;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -20,7 +21,8 @@ class ExperimentController extends Controller
      */
     public function index()
     {
-        return view('experiments.index');
+        $experiments = Experiment::all();
+        return view('experiments.index', compact('experiments'));
     }
 
     /**
@@ -41,7 +43,12 @@ class ExperimentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $experiment = Experiment::create([
+            'title' => $request['title'],
+            'active' => 1,
+        ]);
+        $experiment->save();
+        return redirect()->action('ExperimentController@index');
     }
 
     /**
@@ -63,7 +70,8 @@ class ExperimentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $experiment = Experiment::find($id);
+        return view('experiments.edit', compact('experiment'));
     }
 
     /**
@@ -75,7 +83,10 @@ class ExperimentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $experiment = Experiment::find($id);
+        $experiment->title = $request['title'];
+        $experiment->save();
+        return redirect()->action('ExperimentController@index');
     }
 
     /**
@@ -86,6 +97,13 @@ class ExperimentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $experiment = Experiment::find($id);
+        if($experiment->active){
+            $experiment->active = false;
+        }else{
+            $experiment->active = true;
+        }
+        $experiment->save();
+        return redirect()->action('ExperimentController@index');
     }
 }

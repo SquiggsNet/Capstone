@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Experiment extends Model
 {
-    protected $fillable = array('title');
+    protected $fillable = array('title', 'active');
+    public $timestamps = false;
 
     public function mice()
     {

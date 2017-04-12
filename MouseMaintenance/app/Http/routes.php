@@ -34,6 +34,7 @@ Route::resource('colonies', 'ColonyController');
 Route::resource('mice', 'MouseController');
 Route::post('mice/groupTagged', 'MouseController@groupTagged');
 Route::post('mice/groupUntagged', 'MouseController@groupUntagged');
+Route::post('mice/export', 'MouseController@excel');
 
 Route::resource('experiments', 'ExperimentController');
 Route::resource('storages', 'StorageController');

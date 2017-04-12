@@ -15,6 +15,7 @@ use App\Http\Requests;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MouseController extends Controller
 {
@@ -36,18 +37,12 @@ class MouseController extends Controller
 
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
-//            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
         }else{
             return redirect()->action('TissueController@index');
         }
-//        return($request->input('submit'));
     }
 
     public function groupUntagged(Request $request){
-
-//        $this->validate($request, [
-//            'group_select_untagged_cb' => 'required'
-//        ]);
 
         //determine which action the user wanted to perform
         $action = $request->input('submit');
@@ -408,4 +403,18 @@ class MouseController extends Controller
         $mouse->delete();
         return redirect()->action('MouseController@index');
     }
+
+    public function excel(){
+
+        $data = Mouse::get()->toArray();
+
+        return Excel::create('Mouse Data', function($excel) use ($data) {
+
+            $excel->sheet('Info', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download('xlsx');
+    }
+
 }

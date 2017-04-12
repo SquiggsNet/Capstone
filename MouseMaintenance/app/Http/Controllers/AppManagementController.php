@@ -40,7 +40,7 @@ class AppManagementController extends Controller
      */
     public function create()
     {
-        //
+        return view('appManagement.create');
     }
 
     /**

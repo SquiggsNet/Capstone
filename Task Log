@@ -1,4 +1,4 @@
-Export to excel functionality
+Export to excel functionality <-in progress (DT)
 
 Login:
   proper logo
@@ -51,6 +51,10 @@ Tissue/Storage:
   isolation of tissue
   set to stoarage location
   view locations
+  
+Experiments/Surgery: 
+   Admin CRUD   <-complete (DT)
+   Admin CRUD   <-complete (DT)
   
 User Profiles:    <-complete (DT)
   user CRUD       <-complete (DT)

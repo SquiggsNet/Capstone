@@ -406,13 +406,66 @@ class MouseController extends Controller
 
     public function excel(){
 
-        $data = Mouse::get()->toArray();
+//        $data = Mouse::get()->toArray();
+        //query all required fields
+        $mice = Mouse::with('Tags', 'Treatments')->get();
+
+
+//        return($mice);
+
+
+        //specify array to set data to.
+        $data = [];
+
+
+        //loop through query and set all key value pairs
+        foreach ($mice as $mouse){
+
+            $mother_two = 'N/A';
+            $mother_three = 'N/A';
+            if(!is_null($mouse->mother_two)){
+                $mother_two = $mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num);
+            }
+            if(!is_null($mouse->mother_three)){
+                $mother_three = $mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num);
+            }
+
+            $array = array(
+                'ID' => $mouse->id,
+                'Tag #' => $mouse->tagPad($mouse->tags->last()->tag_num),
+                'Colony' => $mouse->colony->name,
+                'Sex' => $mouse->getGender($mouse->sex),
+                'Birth Date' => $mouse->birth_date,
+                'Wean Date' => $mouse->wean_date,
+                'Father Tag#' => $mouse->tagPad($mouse->father_record->tags->last()->tag_num),
+                'Mother One Tag#' => $mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num),
+                'Mother Two Tag#' => $mother_two,
+                'Mother Three Tag#' => $mother_three,
+                'Alive' => $mouse->is_alive,
+                'Sick Report' => $mouse->sick_report,
+                'End Date' => $mouse->end_date,
+                );
+
+            if(!is_null($mouse->treatments)){
+                $i = 1;
+                foreach($mouse->treatments as $treatment){
+                    $t = 'Treatment ' . $i;
+                    $array[$t] = $treatment->title;
+                    $i++;
+                }
+            }
+
+            array_push($data, $array);
+        }
+
+
+//        return($data);
 
         return Excel::create('Mouse Data', function($excel) use ($data) {
 
             $excel->sheet('Info', function($sheet) use ($data)
             {
-                $sheet->fromArray($data);
+                $sheet->fromArray($data, null, 'A1', true, true);
             });
         })->download('xlsx');
     }

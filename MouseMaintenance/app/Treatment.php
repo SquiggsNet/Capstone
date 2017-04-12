@@ -10,6 +10,6 @@ class Treatment extends Model
 
     public function mice()
     {
-        return $this->belongsToMany('App\Mouse')->withPivot('dosage');
+        return $this->belongsToMany(Mouse::class)->withPivot('dosage');
     }
 }

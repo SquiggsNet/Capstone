@@ -52,6 +52,10 @@ Tissue/Storage:
   set to stoarage location
   view locations
   
+Experiments/Surgery: 
+   Admin CRUD   <-complete (DT)
+   Admin CRUD   <-complete (DT)
+  
 User Profiles:    <-complete (DT)
   user CRUD       <-complete (DT)
   edit privileges <-complete (DT)

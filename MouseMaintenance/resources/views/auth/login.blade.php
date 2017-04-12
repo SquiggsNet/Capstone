@@ -40,12 +40,6 @@
                         </label>
                     </div>
                 </div>
-
-                <div class="form-group text-right half pull-right">
-                    <a href="{{ url('/reset') }}">Forgot Password</a>
-                    <a href="{{ action( 'PasswordController@index') }}">New Pword</a>
-                </div>
-
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary top-buffer">
                         <i class="fa fa-btn fa-sign-in"></i> Login

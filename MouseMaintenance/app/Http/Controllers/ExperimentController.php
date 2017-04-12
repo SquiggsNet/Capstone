@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 
-class Experiment extends Controller
+class ExperimentController extends Controller
 {
 
     public function __construct()
@@ -21,7 +20,7 @@ class Experiment extends Controller
      */
     public function index()
     {
-        //
+        return view('experiments.index');
     }
 
     /**

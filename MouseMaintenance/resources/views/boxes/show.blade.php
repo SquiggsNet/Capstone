@@ -39,7 +39,11 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Tissue Region</th>
+                        <th>
+                            <a href="{{ action( 'BoxController@show', ['id' => $box->id]) }}">
+                                Tissue Region
+                            </a>
+                        </th>
                         <th>Strain</th>
                         <th>Genotype</th>
                         <th>Treatment</th>
@@ -49,7 +53,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tissues as $tissue)
+                    @foreach ($tissues->sortBy('tissue') as $tissue)
                         <tr>
                             <td>
                                 <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $box->id }}"/>

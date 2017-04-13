@@ -83,7 +83,15 @@ class BoxController extends Controller
     public function show($id)
     {
         $box = Box::find($id);
-        $tissues = MouseStorage::where('box_id', $id)->get();
+
+//        if($sort_by != "" && $sort_order != ""){
+//            $tissues = MouseStorage::where('box_id', $id)
+//                ->orderBy('tissue', $sort_order)
+//                ->get();
+//        }else{
+            $tissues = MouseStorage::where('box_id', $id)->get();
+//        }
+
         return view('boxes.show', compact('box', 'tissues'));
     }
 

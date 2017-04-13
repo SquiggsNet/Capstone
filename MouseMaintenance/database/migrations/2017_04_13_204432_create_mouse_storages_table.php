@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMouseStorageTable extends Migration
+class CreateMouseStoragesTable extends Migration
 {
     /**
      * Run the migrations.

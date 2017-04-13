@@ -19,4 +19,9 @@ class MouseStorage extends Model
     public function tissue(){
         return $this->belongsTo(Tissue::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

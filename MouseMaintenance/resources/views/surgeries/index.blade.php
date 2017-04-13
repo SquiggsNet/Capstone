@@ -112,7 +112,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <button type="submit" name="euthanize" id="euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
+                <button type="submit" name="submit" value="euthanize"  id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                     Eunthanize
                 </button>
 

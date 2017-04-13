@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MouseStorage;
 use App\Tissue;
+use App\User;
 use Illuminate\Http\Request;
 use App\Box;
 use App\Mouse;
@@ -32,10 +33,11 @@ class BoxController extends Controller
         $mice_ex = explode(",", $mice_id);
         $mice = Mouse::whereIn('id', $mice_ex)->get();
         $boxes = Box::where('storage_id', "1")->get(); //orderBy('box')->get();
+        $surgeons = User::all();
         $tissues = Tissue::all();
 
 
-        return view('boxes.create', compact('mice', 'tissues', 'boxes'));
+        return view('boxes.create', compact('mice', 'tissues', 'boxes', 'surgeons'));
     }
 
     /**
@@ -62,6 +64,8 @@ class BoxController extends Controller
                         'mouse_id' => $mouse->id,
                         'box_id' => $box[0],
                         'tissue_id' => $tissues[$i],
+                        'user_id' => $request['surgeon'],
+                        'extraction_date' => $request['extraction_date']
                     ]);
                     $tissueStorage->save();
                 }

@@ -48,7 +48,7 @@
                         <th>Genotype</th>
                         <th>Treatment</th>
                         <th>Tag#</th>
-                        <th>Isolation Date#</th>
+                        <th>Isolation Date</th>
                         <th>Isolated By</th>
                     </tr>
                     </thead>
@@ -61,10 +61,18 @@
                             <td>{{$tissue->tissue->name}}</td>
                             <td>{{$tissue->mouse->colony->name}}</td>
                             <td>{{$tissue->mouse->genoFormat($tissue->mouse->geno_type_a, $tissue->mouse->geno_type_b)}}</td>
-                            <td>?</td>
+                            @if(!$tissue->mouse->treatments->isEmpty())
+                                <td>
+                                @foreach ($tissue->mouse->treatments as $treatment)
+                                    {{$treatment->title}}
+                                @endforeach
+                                </td>
+                            @else
+                                <td>N/A</td>
+                            @endif
                             <td>{{ $tissue->mouse->tagPad($tissue->mouse->tags->last()->tag_num) }}</td>
-                            <td>?</td>
-                            <td>?</td>
+                            <td>{{$tissue->extraction_date}}</td>
+                            <td>{{$tissue->user->first_name . ' ' . $tissue->user->last_name}}</td>
                         </tr>
                     @endforeach
                     </tbody>

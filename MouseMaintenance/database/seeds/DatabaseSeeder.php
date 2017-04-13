@@ -425,34 +425,6 @@ class StorageTableSeeder extends Seeder
             'compartment' => '2',
             'shelf' => '2',
         ]);
-
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '2',
-            'compartment' => '1',
-            'shelf' => '1',
-        ]);
-
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '2',
-            'compartment' => '1',
-            'shelf' => '2',
-        ]);
-
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '2',
-            'compartment' => '2',
-            'shelf' => '1',
-        ]);
-
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '2',
-            'compartment' => '2',
-            'shelf' => '2',
-        ]);
     }
 }
 
@@ -653,13 +625,17 @@ class Mouse_StoragesTableSeeder extends Seeder
         DB::table('mouse_storages')->insert([
             'mouse_id' => 1,
             'tissue_id' => 1,
-            'box_id' => 1
+            'box_id' => 1,
+            'user_id' => 1,
+            'extraction_date' => '2012-01-31'
         ]);
 
         DB::table('mouse_storages')->insert([
             'mouse_id' => 2,
             'tissue_id' => 1,
-            'box_id' => 1
+            'box_id' => 1,
+            'user_id' => 2,
+            'extraction_date' => '2012-01-31'
         ]);
     }
 }

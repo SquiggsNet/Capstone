@@ -20,6 +20,9 @@ class CreateMouseStoragesTable extends Migration
             $table->foreign('box_id')->references('id')->on('boxes');
             $table->unsignedInteger('tissue_id');
             $table->foreign('tissue_id')->references('id')->on('tissues');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->date('extraction_date');
             $table->timestamps();
         });
     }

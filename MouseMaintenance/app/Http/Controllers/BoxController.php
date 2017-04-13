@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\MouseStorage;
+use App\Tissue;
 use Illuminate\Http\Request;
 use App\Box;
 use App\Mouse;
-use App\Tissue;
 
 use App\Http\Requests;
 
-class TissueStorageController extends Controller
+class BoxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class TissueStorageController extends Controller
         $tissues = Tissue::all();
 
 
-        return view('tissuestorages.create', compact('mice', 'tissues', 'boxes'));
+        return view('boxes.create', compact('mice', 'tissues', 'boxes'));
     }
 
     /**
@@ -71,7 +71,7 @@ class TissueStorageController extends Controller
             $mouse_list++;
         }
 
-        return redirect()->action('storages@index');
+        return redirect()->action('storagesController@index');
     }
 
     /**
@@ -82,7 +82,9 @@ class TissueStorageController extends Controller
      */
     public function show($id)
     {
-        //
+        $box = Box::find($id);
+        $tissues = MouseStorage::where('box_id', $id)->get();
+        return view('boxes.show', compact('box', 'tissues'));
     }
 
     /**

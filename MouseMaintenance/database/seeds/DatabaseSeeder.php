@@ -460,31 +460,48 @@ class BoxTableSeeder extends Seeder
 {
     public function run()
     {
-       for($h = 1; $h < 9; $h++) {
-          for ($i = 0; $i < 4; $i++) {
-              for ($j = 1; $j < 6; $j++) {
-                   for ($k = 1; $k < 4; $k++) {
+        DB::table('boxes')->insert([
+            'column' => "A",
+            'row' =>  1,
+            'box' =>  1,
+            'storage_id' => 1,
+            'capacity' => '81'
+        ]);
 
-                        if ($i == 0) {
-                            $l = "A";
-                        } elseif ($i == 1) {
-                            $l = "B";
-                        } elseif ($i == 2) {
-                            $l = "C";
-                        }else{
-                            $l = "D";
-                        }
+        DB::table('boxes')->insert([
+            'column' => "A",
+            'row' =>  1,
+            'box' =>  2,
+            'storage_id' => 1,
+            'capacity' => '81'
+        ]);
 
-                        DB::table('boxes')->insert([
-                            'column' => $l,
-                            'row' =>  $j,
-                            'box' =>  $k,
-                            'storage_id' => $h
-                        ]);
-                    }
-               }
-            }
-       }
+//       for($h = 1; $h < 9; $h++) {
+//          for ($i = 0; $i < 4; $i++) {
+//              for ($j = 1; $j < 6; $j++) {
+//                   for ($k = 1; $k < 4; $k++) {
+//
+//                        if ($i == 0) {
+//                            $l = "A";
+//                        } elseif ($i == 1) {
+//                            $l = "B";
+//                        } elseif ($i == 2) {
+//                            $l = "C";
+//                        }else{
+//                            $l = "D";
+//                        }
+//
+//                        DB::table('boxes')->insert([
+//                            'column' => $l,
+//                            'row' =>  $j,
+//                            'box' =>  $k,
+//                            'storage_id' => $h,
+//                            'capacity' => '81'
+//                        ]);
+//                    }
+//               }
+//            }
+//       }
     }
 }
 

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Box;
-use App\Mouse;
-use App\Tissue;
+use App\Storage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -29,10 +28,6 @@ class StorageController extends Controller
      */
     public function create($mice_id)
     {
-        $mice_ex = explode(",", $mice_id);
-        $mice = Mouse::whereIn('id', $mice_ex)->get();
-        $boxes = Box::where('storage_id', "1")->get(); //orderBy('box')->get();
-        $tissues = Tissue::all();
 
 
         return view('storages.create', compact('mice', 'tissues', 'boxes'));
@@ -66,7 +61,8 @@ class StorageController extends Controller
     public function show($id)
     {
         $storage = Storage::find($id);
-        return view('storages.show', compact('storage'));
+        $boxes = Box::where('storage_id', $id)->get();
+        return view('storages.show', compact('storage', 'boxes'));
     }
 
     /**

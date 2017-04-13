@@ -6,7 +6,7 @@
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Tissue Region Selection</h3></div>
             <div class="panel-body">
-                {!! Form::open(['action' => 'TissueStorageController@store' ]) !!}
+                {!! Form::open(['action' => 'BoxController@store' ]) !!}
                     <table class="table table-bordered table-striped" id="mice_table" data-toggle="table">
                         <thead>
                             <tr>

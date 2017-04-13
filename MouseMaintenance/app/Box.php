@@ -8,7 +8,7 @@ class Box extends Model
 {
     protected $fillable = array('name');
 
-    public function storages(){
+    public function storage(){
         return $this->belongsTo(Storage::class);
     }
 

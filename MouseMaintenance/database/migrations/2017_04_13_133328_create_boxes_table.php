@@ -17,6 +17,7 @@ class CreateBoxesTable extends Migration
             $table->string('column')->nullable();
             $table->unsignedInteger('row')->nullable();
             $table->unsignedInteger('box')->nullable();
+            $table->unsignedInteger('capacity')->nullable();
             $table->unsignedInteger('storage_id');
             $table->foreign('storage_id')->references('id')->on('storages');
             $table->timestamps();

@@ -39,8 +39,8 @@ Route::post('mice/export', 'MouseController@excel');
 Route::resource('experiments', 'ExperimentController');
 Route::resource('storages', 'StorageController');
 
-Route::get('tissuestorages/{mice}/create', 'TissueStorageController@create');
-Route::resource('tissuestorages', 'TissueStorageController');
+Route::get('boxes/{mice}/create', 'BoxController@create');
+Route::resource('boxes', 'BoxController');
 
 Route::post('surgeries/{surgery}/remove', 'SurgeryController@remove');
 Route::get('surgeries/{mice}/create', 'SurgeryController@create');

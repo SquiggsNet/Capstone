@@ -74,7 +74,6 @@ class BoxController extends Controller
             Mouse::where('id', $mouse->id)->update(['is_alive' => false]);
             $mouse_list++;
         }
-
         return redirect()->action('StorageController@index');
     }
 

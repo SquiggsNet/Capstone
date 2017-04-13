@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MouseStorage extends Model
 {
-    protected $fillable = array('mouse_id','box_id','tissue_id');
+    protected $fillable = array('mouse_id','box_id','tissue_id','user_id' ,'extraction_date');
 
     public function mouse(){
         return $this->belongsTo(Mouse::class);

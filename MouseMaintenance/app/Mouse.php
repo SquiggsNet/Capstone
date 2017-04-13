@@ -145,9 +145,14 @@ class Mouse extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+//    //Storage
+//    public function storages(){
+//        return $this->belongsToMany(Storage::class);
+//    }
+
     //Storage
-    public function storages(){
-        return $this->belongsToMany(Storage::class);
+    public function boxes(){
+        return $this->belongsToMany(Box::class);
     }
 
     //recursive relationships

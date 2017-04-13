@@ -5,12 +5,13 @@
     <div class="row row-centered">
         <div class="third col-centered" id="login">
 
-            <div class="control-label hidden-xs">
-                {!! Html::image('img/mmLogoSmooth.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
+            {{--<div class="control-label hidden-xs">--}}
+            <div class="control-label">
+                {!! Html::image('img/lmtLogoFull.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
             </div>
-            <div class="control-label hidden-sm hidden-md hidden-lg">
-                {!! Html::image('img/mmLogoSmoothXS.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}
-            </div>
+            {{--<div class="control-label hidden-sm hidden-md hidden-lg">--}}
+                {{--{!! Html::image('img/mmLogoSmoothXS.png', 'Laboratory Mouse Tracker', array('class' => 'whole' )) !!}--}}
+            {{--</div>--}}
 
             <form class="form-horizontal sixth-x5 center-block" role="form" method="POST" action="{{ url('/login') }}">
             {{ csrf_field() }}

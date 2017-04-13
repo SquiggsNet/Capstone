@@ -109,11 +109,11 @@
                 <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
                     Create Surgery
                 </button>
-                {{ Form::close() }}
-                <button id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
+
+                <button type="submit" name="submit" value="euthanize"  id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                     Eunthanize
                 </button>
-
+                {{ Form::close() }}
 
                 {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
                 <button type="submit" class="btn btn-default pull-right btn-block sixth last">

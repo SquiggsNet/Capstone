@@ -1,25 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\MouseStorage;
+use Illuminate\Http\Request;
 use App\Box;
 use App\Mouse;
 use App\Tissue;
-use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class StorageController extends Controller
+class TissueStorageController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $storages = Storage::all();
-        return view('storages.index', compact('storages'));
+        //
     }
 
     /**
@@ -35,7 +35,7 @@ class StorageController extends Controller
         $tissues = Tissue::all();
 
 
-        return view('storages.create', compact('mice', 'tissues', 'boxes'));
+        return view('tissuestorages.create', compact('mice', 'tissues', 'boxes'));
     }
 
     /**
@@ -46,15 +46,32 @@ class StorageController extends Controller
      */
     public function store(Request $request)
     {
-        $storage = Storage::create([
-            'tissue_id' => $request['tissue_id'],
-            'type' => $request['type'],
-            'freezer' => $request['freezer'],
-            'compartment' => $request['compartment'],
-            'shelf' => $request['shelf']
-        ]);
-        $storage->save();
-        return redirect()->action('StorageController@index');
+        //get all mice selected for TissueStorage
+        $mice = Mouse::whereIn('id', $request['euthanize_mice'])->get();
+
+        $mouse_list = 0;
+        foreach($mice as $mouse){
+            $box = $request[$mouse_list .'_box'];
+            $tissues = $request[$mouse_list .'_tissue'];
+
+            for($i = 0; $i < count($tissues); $i++){
+                if($tissues[$i] != 0){
+
+                    //create the Tissue Storage
+                    $tissueStorage = MouseStorage::create([
+                        'mouse_id' => $mouse->id,
+                        'box_id' => $box[0],
+                        'tissue_id' => $tissues[$i],
+                    ]);
+                    $tissueStorage->save();
+                }
+
+            }
+            Mouse::where('id', $mouse->id)->update(['is_alive' => false]);
+            $mouse_list++;
+        }
+
+        return redirect()->action('storages@index');
     }
 
     /**
@@ -65,8 +82,7 @@ class StorageController extends Controller
      */
     public function show($id)
     {
-        $storage = Storage::find($id);
-        return view('storages.show', compact('storage'));
+        //
     }
 
     /**
@@ -77,8 +93,7 @@ class StorageController extends Controller
      */
     public function edit($id)
     {
-        $storage = Storage::find($id);
-        return view('storages.edit', compact('storage'));
+        //
     }
 
     /**
@@ -90,14 +105,7 @@ class StorageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $storage = Storage::find($id);
-        $storage->tissue_id = $request['tissue_id'];
-        $storage->type = $request['type'];
-        $storage->freezer = $request['freezer'];
-        $storage->compartment = $request['compartment'];
-        $storage->shelf = $request['shelf'];
-        $storage->save();
-        return redirect()->action('StorageController@index');
+        //
     }
 
     /**
@@ -108,8 +116,6 @@ class StorageController extends Controller
      */
     public function destroy($id)
     {
-        $storage = Storage::find($id);
-        $storage->delete();
-        return redirect()->action('StorageController@index');
+        //
     }
 }

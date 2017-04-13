@@ -128,17 +128,14 @@ button:hover{
 /*}*/
 
 .navbar-brand{
-    background-image: url('../img/mmLogoSmoothLink.png');
-    background-size: 87px 90px;
+    background-image: url('../img/lmtLogo.png');
+    background-size: 50px 50px;
     background-repeat: no-repeat;
-    height: 45px;
-    width: 86px;
+    height: 50px;
+    width: 50px;
     margin-top: 3px;
     background-position: 0 0px;
 }
-.navbar-brand:hover{background-position: 0 -45px;}
-.navbar-brand:active{background-position: 0 -45px;}
-
 
 nav .dropdown-menu{
     background-color: #494949;
@@ -216,10 +213,6 @@ table th, td{
     /*background-color: #d7eff2 !important;*/
     /*background-color: #e7f2e6 !important;*/
     /*background-color: #8e8e8e !important;*/
-}
-
-#login{
-    padding-top: 15%;
 }
 
 /* ==========================================================================

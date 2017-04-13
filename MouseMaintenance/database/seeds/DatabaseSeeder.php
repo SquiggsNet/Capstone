@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CageTableSeeder::class);
         $this->call(SurgeryTableSeeder::class);
         $this->call(Mouse_SurgeryTableSeeder::class);
-        $this->call(Mouse_StorageTableSeeder::class);
+        $this->call(BoxTableSeeder::class);
+        $this->call(Mouse_StoragesTableSeeder::class);
         $this->call(Mouse_TagTableSeeder::class);
         $this->call(MouseTreatmentsTable::class);
         $this->call(ExperimentSeeder::class);
@@ -342,23 +343,48 @@ class TissueTableSeeder extends Seeder
     public function run()
     {
         DB::table('tissues')->insert([
-            'name' => 'Ventricle',
-            'active' => true
-        ]);
-
-        DB::table('tissues')->insert([
-            'name' => 'Apex',
-            'active' => true
-        ]);
-
-        DB::table('tissues')->insert([
             'name' => 'Full Atrial',
             'active' => true
         ]);
 
         DB::table('tissues')->insert([
-            'name' => 'Posterior Wall',
+            'name' => 'RAA',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'LAA',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'SAN',
             'active' => false
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'RA',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Vent.',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'LV',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'RV',
+            'active' => true
+        ]);
+
+        DB::table('tissues')->insert([
+            'name' => 'Vent Apex',
+            'active' => true
         ]);
 
         DB::table('tissues')->insert([
@@ -373,28 +399,92 @@ class StorageTableSeeder extends Seeder
     public function run()
     {
         DB::table('storages')->insert([
-            'tissue_id' => 1,
             'type' => true,
             'freezer' => '1',
             'compartment' => '1',
-            'shelf' => '2'
+            'shelf' => '1',
         ]);
 
         DB::table('storages')->insert([
-            'tissue_id' => 1,
+            'type' => true,
+            'freezer' => '1',
+            'compartment' => '1',
+            'shelf' => '2',
+        ]);
+
+        DB::table('storages')->insert([
             'type' => true,
             'freezer' => '1',
             'compartment' => '2',
-            'shelf' => '2'
+            'shelf' => '1',
         ]);
 
         DB::table('storages')->insert([
-            'tissue_id' => 1,
             'type' => true,
             'freezer' => '1',
-            'compartment' => '1',
-            'shelf' => '3'
+            'compartment' => '2',
+            'shelf' => '2',
         ]);
+
+        DB::table('storages')->insert([
+            'type' => true,
+            'freezer' => '2',
+            'compartment' => '1',
+            'shelf' => '1',
+        ]);
+
+        DB::table('storages')->insert([
+            'type' => true,
+            'freezer' => '2',
+            'compartment' => '1',
+            'shelf' => '2',
+        ]);
+
+        DB::table('storages')->insert([
+            'type' => true,
+            'freezer' => '2',
+            'compartment' => '2',
+            'shelf' => '1',
+        ]);
+
+        DB::table('storages')->insert([
+            'type' => true,
+            'freezer' => '2',
+            'compartment' => '2',
+            'shelf' => '2',
+        ]);
+    }
+}
+
+class BoxTableSeeder extends Seeder
+{
+    public function run()
+    {
+       for($h = 1; $h < 9; $h++) {
+          for ($i = 0; $i < 4; $i++) {
+              for ($j = 1; $j < 6; $j++) {
+                   for ($k = 1; $k < 4; $k++) {
+
+                        if ($i == 0) {
+                            $l = "A";
+                        } elseif ($i == 1) {
+                            $l = "B";
+                        } elseif ($i == 2) {
+                            $l = "C";
+                        }else{
+                            $l = "D";
+                        }
+
+                        DB::table('boxes')->insert([
+                            'column' => $l,
+                            'row' =>  $j,
+                            'box' =>  $k,
+                            'storage_id' => $h
+                        ]);
+                    }
+               }
+            }
+       }
     }
 }
 
@@ -539,18 +629,20 @@ class Mouse_SurgeryTableSeeder extends Seeder
     }
 }
 
-class Mouse_StorageTableSeeder extends Seeder
+class Mouse_StoragesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('mouse_storage')->insert([
+        DB::table('mouse_storages')->insert([
             'mouse_id' => 1,
-            'storage_id' => 1
+            'tissue_id' => 1,
+            'box_id' => 1
         ]);
 
-        DB::table('mouse_storage')->insert([
+        DB::table('mouse_storages')->insert([
             'mouse_id' => 2,
-            'storage_id' => 2
+            'tissue_id' => 1,
+            'box_id' => 1
         ]);
     }
 }

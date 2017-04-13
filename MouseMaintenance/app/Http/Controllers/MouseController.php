@@ -37,6 +37,9 @@ class MouseController extends Controller
 
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
+//            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
+        }else if($request->input('submit') == 'euthanize'){
+            return redirect('tissuestorages/'.$mice.'/create');
         }else{
             return redirect()->action('TissueController@index');
         }

@@ -6,7 +6,7 @@
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Tissue Region Selection</h3></div>
             <div class="panel-body">
-                {!! Form::open(['action' => 'StorageController@store' ]) !!}
+                {!! Form::open(['action' => 'TissueStorageController@store' ]) !!}
                     <table class="table table-bordered table-striped" id="mice_table" data-toggle="table">
                         <thead>
                             <tr>
@@ -18,16 +18,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $m_num = 0;?>
                             @foreach($mice as $mouse)
                                 <tr>
                                     <td>{{ $mouse->tagPad($mouse->tags->last()->tag_num) }}</td>
                                     @foreach($tissues as $tissue)
                                         <td>
-                                            <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $tissue->id }}"/>
+                                            <input type="checkbox" name="{{ $m_num }}_tissue[]" value="{{ $tissue->id }}"/>
                                         </td>
                                     @endforeach
                                     <td>
-                                        <select class="form-control" name="box_id" id="box_id">
+                                        <select class="form-control" name="{{ $m_num }}_box[]" >
                                             <option value="0">Select Box </option>
                                             @foreach($boxes as $box)
                                                 <option value="{{ $box->id }}">
@@ -35,45 +36,21 @@
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </td>
                                 </tr>
+                                <?php $m_num++; ?>
                             @endforeach
                         </tbody>
                     </table>
+                    @foreach ($mice as $mouse)
+                        <input type="hidden" name="euthanize_mice[]" value="{{$mouse->id}}"/>
+                    @endforeach
                     <div class="form-group col-md-12">
                         {!! Form::submit('Confirm',['class'=>'btn btn-default pull-right']) !!}
                     </div>
                 {!! Form::close() !!}
             </div>
         </div>
-
-        {{--{!! Form::open(['action' => 'StorageController@store' ]) !!}--}}
-        {{--<div class="form-group">--}}
-            {{--{!! Form::label('tissue_id', 'Tissue ID') !!}--}}
-            {{--{!! Form::text('tissue_id',null ,['class'=>'form-control'])!!}--}}
-        {{--</div>--}}
-        {{--<div class="form-group">--}}
-            {{--{!! Form::label('type', 'Type') !!}--}}
-            {{--{!! Form::text('type',null ,['class'=>'form-control'])!!}--}}
-        {{--</div>--}}
-        {{--<div class="form-group">--}}
-            {{--{!! Form::label('freezer', 'Freezer') !!}--}}
-            {{--{!! Form::text('freezer',null ,['class'=>'form-control']) !!}--}}
-        {{--</div>--}}
-        {{--<div class="form-group">--}}
-            {{--{!! Form::label('compartment', 'Compartment') !!}--}}
-            {{--{!! Form::text('compartment',null ,['class'=>'form-control']) !!}--}}
-        {{--</div>--}}
-        {{--<div class="form-group">--}}
-            {{--{!! Form::label('shelf', 'Shelf') !!}--}}
-            {{--{!! Form::text('shelf',null ,['class'=>'form-control']) !!}--}}
-        {{--</div>--}}
-        {{--{!! Form::submit('Add',['class'=>'btn btn-default']) !!}--}}
-        {{--{!! Form::close() !!}--}}
-
-        {{--<a href="{{ action( 'StorageController@index') }}">--}}
-            {{--Go Back--}}
-        {{--</a>--}}
-
     </div>
 @endsection

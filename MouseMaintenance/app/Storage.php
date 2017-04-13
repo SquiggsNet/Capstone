@@ -9,14 +9,20 @@ class Storage extends Model
     protected $fillable = array('tissue_id', 'type', 'freezer', 'compartment', 'shelf');
 
     //one-to-many relationships
-    //Tissue
-    public function tissues(){
-        return $this->hasMany(Tissue::class);
+    //Box
+    public function boxes(){
+        return $this->hasMany(Box::class);
     }
 
-    //many-to-many relationships
-    //Mouse
-    public function mice(){
-        return $this->belongsToMany(Mouse::class);
-    }
+
+//    //Tissue
+//    public function tissues(){
+//        return $this->hasMany(Tissue::class);
+//    }
+//
+//    //many-to-many relationships
+//    //Mouse
+//    public function mice(){
+//        return $this->belongsToMany(Mouse::class);
+//    }
 }

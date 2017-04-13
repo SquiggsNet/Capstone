@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMouseStoragesTable extends Migration
+class CreateMouseStorageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,15 @@ class CreateMouseStoragesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mouse_storage', function (Blueprint $table){
+        Schema::create('mouse_storages', function (Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('mouse_id');
             $table->foreign('mouse_id')->references('id')->on('mice');
-            $table->unsignedInteger('storage_id');
-            $table->foreign('storage_id')->references('id')->on('storages');
+            $table->unsignedInteger('box_id');
+            $table->foreign('box_id')->references('id')->on('boxes');
+            $table->unsignedInteger('tissue_id');
+            $table->foreign('tissue_id')->references('id')->on('tissues');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +31,6 @@ class CreateMouseStoragesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('mouse_storage');
+        Schema::drop('mouse_storages');
     }
 }

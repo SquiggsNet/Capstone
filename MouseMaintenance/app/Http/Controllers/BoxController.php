@@ -71,7 +71,7 @@ class BoxController extends Controller
             $mouse_list++;
         }
 
-        return redirect()->action('storagesController@index');
+        return redirect()->action('StorageController@index');
     }
 
     /**

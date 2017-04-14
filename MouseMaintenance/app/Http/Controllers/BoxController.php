@@ -115,17 +115,27 @@ class BoxController extends Controller
         $treatment_select = $request['treatment_select'];
 
         if ($tissue_select != 0){
-            $storedTissues = MouseStorage::where('box_id', $id)->where('tissue_id', $tissue_select)->get();
+            $storedTissues = MouseStorage::where('box_id', $id)
+                ->where('tissue_id', $tissue_select)
+                ->get();
         }
         elseif ($strain_select != 0){
-            $storedTissues = MouseStorage::where('box_id', $id)->where('colony_id', $strain_select)->get();
+            $storedTissues = MouseStorage::where('box_id', $id)
+                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                ->where('colony_id', $strain_select)->get();
         }
-        elseif ($geno_select != 0){
-            $storedTissues = MouseStorage::where('box_id', $id)->where('tissue_id', $tissue_select)->get();
-        }
-        elseif ($treatment_select != 0){
-            $storedTissues = MouseStorage::where('box_id', $id)->where('$treatment_select', $treatment_select)->get();
-        }
+//        elseif ($geno_select != 0){
+//            $storedTissues = MouseStorage::where('box_id', $id)
+//                ->where('tissue_id', $tissue_select)
+//                ->get();
+//        }
+//        elseif ($treatment_select != 0){
+//            $storedTissues = MouseStorage::where('box_id', $id)
+//                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+//                ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+//                ->where('$treatment_select', $treatment_select)
+//                ->get();
+//        }
         else{
             $storedTissues = MouseStorage::where('box_id', $id)->get();
         }

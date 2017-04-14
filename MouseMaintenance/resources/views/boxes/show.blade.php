@@ -146,20 +146,3 @@
         </div>
     </div>
 @endsection
-<script>
-    function narrow_results(boxId){
-
-        var selectedTissue = $("#tissue_select")[0].value;
-        var selectedStrain = $("#strain_select")[0].value;
-        var selectedGeno = $("#geno_select")[0].value;
-        var selectedTreatment = $("#treatment_select")[0].value;
-
-        console.log(selectedTissue);
-        console.log(selectedStrain);
-        console.log(selectedGeno);
-        console.log(selectedTreatment);
-
-        window.location.href = '/boxes/'+boxId+'?tis='+selectedTissue;
-
-    }
-</script>

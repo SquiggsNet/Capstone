@@ -41,6 +41,7 @@ Route::resource('storages', 'StorageController');
 
 Route::get('boxes/{mice}/create', 'BoxController@create');
 Route::resource('boxes', 'BoxController');
+Route::post('boxes/{id}', 'BoxController@showFiltered');
 
 Route::post('surgeries/{surgery}/remove', 'SurgeryController@remove');
 Route::get('surgeries/{mice}/create', 'SurgeryController@create');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Colony;
 use App\MouseStorage;
 use App\Tissue;
+use App\Treatment;
 use App\User;
 use Illuminate\Http\Request;
 use App\Box;
@@ -80,22 +82,59 @@ class BoxController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $box = Box::find($id);
 
-//        if($sort_by != "" && $sort_order != ""){
-//            $tissues = MouseStorage::where('box_id', $id)
-//                ->orderBy('tissue', $sort_order)
-//                ->get();
-//        }else{
-            $tissues = MouseStorage::where('box_id', $id)->get();
-//        }
+        $tissues = Tissue::all();
+        $strains = Colony::all();
+        //$genos = Tissue::all();
+        $treatments = Treatment::all();
 
-        return view('boxes.show', compact('box', 'tissues'));
+
+        $storedTissues = MouseStorage::where('box_id', $id)->get();
+
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments'));
+    }
+
+    public function showFiltered($id, Request $request)
+    {
+        $box = Box::find($id);
+
+        $tissues = Tissue::all();
+        $strains = Colony::all();
+        //$genos = Tissue::all();
+        $treatments = Treatment::all();
+
+        $tissue_select = $request['tissue_select'];
+        $strain_select = $request['strain_select'];
+        $geno_select = $request['geno_select'];
+        $treatment_select = $request['treatment_select'];
+
+        if ($tissue_select != 0){
+            $storedTissues = MouseStorage::where('box_id', $id)->where('tissue_id', $tissue_select)->get();
+        }
+        elseif ($strain_select != 0){
+            $storedTissues = MouseStorage::where('box_id', $id)->where('colony_id', $strain_select)->get();
+        }
+        elseif ($geno_select != 0){
+            $storedTissues = MouseStorage::where('box_id', $id)->where('tissue_id', $tissue_select)->get();
+        }
+        elseif ($treatment_select != 0){
+            $storedTissues = MouseStorage::where('box_id', $id)->where('$treatment_select', $treatment_select)->get();
+        }
+        else{
+            $storedTissues = MouseStorage::where('box_id', $id)->get();
+        }
+
+
+
+     //   $tissue->tissue->name
+
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments'));
     }
 
     /**

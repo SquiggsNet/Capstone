@@ -40,7 +40,7 @@
                             <td>Bottom</td>
                         @endif
                         <td>{{$box->column}}-{{$box->row}}</td>
-                        <td>0/{{$box->capacity}}</td>
+                        <td>{{$box->mouse_storages->count()}}/{{$box->capacity}}</td>
                     </tr>
                 @endforeach
                 </tbody>

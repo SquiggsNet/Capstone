@@ -11,9 +11,9 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>Freezer{{$box->storage->freezer}}</td>
+                            <td>Freezer {{$box->storage->freezer}}</td>
                             @if($box->storage->compartment=="1")
-                                <td>Top Section</td>
+                                <td>Top Compartment</td>
                             @else
                                 <td>Bottom Section</td>
                             @endif
@@ -24,7 +24,7 @@
                             @else
                                 <td>Bottom Shelf</td>
                             @endif
-                            <td>0/{{$box->capacity}}</td>
+                            <td>{{$box->mouse_storages->count()}}/{{$box->capacity}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -35,6 +35,70 @@
                 <h3>Contents</h3>
             </div>
             <div class="panel-body">
+                <div class="whole bottom-buffer">
+                    {{ Form::open(['action' => ['BoxController@showFiltered', $box], 'method' => 'POST']) }}
+                    {{--{!! Form::open(['action' => 'BoxController@showFiltered', $box->id ]) !!}--}}
+                    <div class="quarter">
+                        <label class="form-label" >Tissue Region</label>
+                        <select name="tissue_select" id="tissue_select" class="form-control">
+                            <option value="0">All</option>
+                            @foreach($tissues as $tissue)
+                                <option value="{{ $tissue->id }}">
+                                    {{$tissue->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="quarter">
+                        <label class="form-label" >Strain</label>
+                        <select name="strain_select" id="strain_select" class="form-control">
+                            <option value="0">All</option>
+                            @foreach($strains as $strain)
+                                <option value="{{ $strain->id }}">
+                                    {{$strain->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="quarter">
+                        <label class="form-label" >Genotype</label>
+                        <select name="geno_select" id="geno_select" class="form-control">
+                            <option value="0">All</option>
+                            {{--@foreach($genos as $geno)--}}
+                            <option value="1">
+                                (+/+)
+                            </option>
+                            <option value="1">
+                                (+/-)
+                            </option>
+                            <option value="1">
+                                (-/-)
+                            </option>
+                            {{--@endforeach--}}
+                        </select>
+                    </div>
+                    <div class="quarter last">
+                        <label class="form-label" >Treatment</label>
+                        <select name="treatment_select" id="treatment_select" class="form-control">
+                            <option value="0">All</option>
+                            @foreach($treatments as $treatment)
+                                <option value="{{ $treatment->id }}">
+                                    {{$treatment->title}}
+                                </option>
+
+                            @endforeach
+                            <option value="untreated">Untreated</option>
+                        </select>
+                    </div>
+                </div>
+                {{--<button class="btn btn-default pull-right bottom-buffer" id="narrow_results" onclick="narrow_results('{{$box->id}}')" data-href="{{URL::to("boxes/{$box->id}")}}">--}}
+                    {{--Narrow Results--}}
+                {{--</button>--}}
+
+                <div class="form-group col-md-12">
+                    {!! Form::submit('Narrow Results',['class'=>'btn btn-default pull-right bottom-buffer']) !!}
+                </div>
+                {!! Form::close() !!}
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -53,7 +117,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tissues->sortBy('tissue') as $tissue)
+                    {{--@foreach ($tissues->sortByDesc('extraction_date') as $tissue)--}}
+                    @foreach ($storedTissues->sortBy('extraction_date')as $tissue)
                         <tr>
                             <td>
                                 <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $box->id }}"/>
@@ -81,3 +146,20 @@
         </div>
     </div>
 @endsection
+<script>
+    function narrow_results(boxId){
+
+        var selectedTissue = $("#tissue_select")[0].value;
+        var selectedStrain = $("#strain_select")[0].value;
+        var selectedGeno = $("#geno_select")[0].value;
+        var selectedTreatment = $("#treatment_select")[0].value;
+
+        console.log(selectedTissue);
+        console.log(selectedStrain);
+        console.log(selectedGeno);
+        console.log(selectedTreatment);
+
+        window.location.href = '/boxes/'+boxId+'?tis='+selectedTissue;
+
+    }
+</script>

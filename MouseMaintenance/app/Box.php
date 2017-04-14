@@ -23,4 +23,10 @@ class Box extends Model
     public function mice(){
         return $this->belongsToMany(Mouse::class);
     }
+
+    //one-to-many relationships
+    //Tissue
+    public function mouse_storages(){
+        return $this->hasMany(MouseStorage::class);
+    }
 }

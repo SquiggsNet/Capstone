@@ -97,6 +97,7 @@ $(document).ready(function () {
             return false;
         }
     });
+
 });
 
 //    $('#createMice').on('submit', function() {

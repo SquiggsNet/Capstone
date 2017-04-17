@@ -41,9 +41,14 @@
                     <div class="quarter">
                         <label class="form-label" >Tissue Region</label>
                         <select name="tissue_select" id="tissue_select" class="form-control">
+                            {{--<option selected="{{$tissue_select}}"></option>--}}
                             <option value="0">All</option>
                             @foreach($tissues as $tissue)
-                                <option value="{{ $tissue->id }}">
+                                @if($tissue_select == $tissue->id )
+                                   <option selected="selected" value="{{ $tissue->id }}">
+                                @else
+                                    <option value="{{ $tissue->id }}">
+                                @endif
                                     {{$tissue->name}}
                                 </option>
                             @endforeach
@@ -54,7 +59,11 @@
                         <select name="strain_select" id="strain_select" class="form-control">
                             <option value="0">All</option>
                             @foreach($strains as $strain)
-                                <option value="{{ $strain->id }}">
+                                @if($strain_select == $strain->id )
+                                    <option selected="selected" value="{{ $strain->id }}">
+                                @else
+                                    <option value="{{ $strain->id }}">
+                                @endif
                                     {{$strain->name}}
                                 </option>
                             @endforeach
@@ -64,13 +73,25 @@
                         <label class="form-label" >Genotype</label>
                         <select name="geno_select" id="geno_select" class="form-control">
                             <option value="0">All</option>
-                            <option value="1">
+                            @if($geno_select == "1" )
+                                <option selected="selected" value="1">
+                            @else
+                                <option value="1">
+                            @endif
                                 (+/+)
                             </option>
-                            <option value="2">
+                            @if($geno_select == "2" )
+                                <option selected="selected" value="2">
+                            @else
+                                <option value="2">
+                            @endif
                                 (+/-)
                             </option>
-                            <option value="3">
+                            @if($geno_select == "3" )
+                                <option selected="selected" value="3">
+                            @else
+                                <option value="3">
+                            @endif
                                 (-/-)
                             </option>
                         </select>
@@ -80,7 +101,11 @@
                         <select name="treatment_select" id="treatment_select" class="form-control">
                             <option value="0">All</option>
                             @foreach($treatments as $treatment)
-                                <option value="{{ $treatment->id }}">
+                                @if($treatment_select == $treatment->id )
+                                    <option selected="selected" value="{{ $treatment->id }}">
+                                @else
+                                    <option value="{{ $treatment->id }}">
+                                @endif
                                     {{$treatment->title}}
                                 </option>
 
@@ -140,3 +165,12 @@
         </div>
     </div>
 @endsection
+{{--<script>--}}
+    {{--window.onload = function () {--}}
+        {{--document.getElementById("tissue_select").options[{{$tissue_select}}].selected = true;--}}
+        {{--document.getElementById("strain_select").selectedIndex = {{$strain_select}};--}}
+        {{--document.getElementById("geno_select").value = {{$geno_select}};--}}
+        {{--$('#geno_select>option:eq(3)').prop('selected', true);--}}
+        {{--$('#treatment_select').val({{$treatment_select}});--}}
+    {{--}--}}
+{{--</script>--}}

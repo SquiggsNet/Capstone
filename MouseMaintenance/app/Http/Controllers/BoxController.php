@@ -94,10 +94,15 @@ class BoxController extends Controller
         //$genos = Tissue::all();
         $treatments = Treatment::all();
 
+        $tissue_select = 0;
+        $strain_select = 0;
+        $geno_select = 0;
+        $treatment_select = 0;
+
 
         $storedTissues = MouseStorage::where('box_id', $id)->get();
 
-        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments'));
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select'));
     }
 
     public function showFiltered($id, Request $request)
@@ -423,7 +428,7 @@ class BoxController extends Controller
             $storedTissues = MouseStorage::where('box_id', $id)->get();
         }
 
-        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments'));
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select'));
     }
 
     /**

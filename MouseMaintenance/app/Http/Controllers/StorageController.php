@@ -61,8 +61,7 @@ class StorageController extends Controller
     public function show($id)
     {
         $storage = Storage::find($id);
-        $boxes = Box::where('storage_id', $id)->get();
-        return view('storages.show', compact('storage', 'boxes'));
+        return view('storages.show', compact('storage'));
     }
 
     /**

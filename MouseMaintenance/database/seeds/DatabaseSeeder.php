@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TagTableSeeder::class);
         $this->call(TissueTableSeeder::class);
         $this->call(StorageTableSeeder::class);
+        $this->call(CompartmentTableSeeder::class);
+        $this->call(ShelfTableSeeder::class);
         $this->call(MouseTableSeeder::class);
         $this->call(WeightTableSeeder::class);
         $this->call(Blood_PressureTableSeeder::class);
@@ -400,30 +402,39 @@ class StorageTableSeeder extends Seeder
     {
         DB::table('storages')->insert([
             'type' => true,
-            'freezer' => '1',
-            'compartment' => '1',
-            'shelf' => '1',
+            'identifier' => '1'
+        ]);
+    }
+}
+
+class CompartmentTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('compartments')->insert([
+            'description' => 'Top',
+            'storage_id' => 1
         ]);
 
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '1',
-            'compartment' => '1',
-            'shelf' => '2',
+        DB::table('compartments')->insert([
+            'description' => 'Bottom',
+            'storage_id' => 1
+        ]);
+    }
+}
+
+class ShelfTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('shelves')->insert([
+            'description' => 'Top',
+            'compartment_id' => 1,
         ]);
 
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '1',
-            'compartment' => '2',
-            'shelf' => '1',
-        ]);
-
-        DB::table('storages')->insert([
-            'type' => true,
-            'freezer' => '1',
-            'compartment' => '2',
-            'shelf' => '2',
+        DB::table('shelves')->insert([
+            'description' => 'Bottom',
+            'compartment_id' => 1,
         ]);
     }
 }
@@ -436,7 +447,7 @@ class BoxTableSeeder extends Seeder
             'column' => "A",
             'row' =>  1,
             'box' =>  1,
-            'storage_id' => 1,
+            'shelf_id' => 1,
             'capacity' => '81'
         ]);
 
@@ -444,36 +455,9 @@ class BoxTableSeeder extends Seeder
             'column' => "A",
             'row' =>  1,
             'box' =>  2,
-            'storage_id' => 1,
+            'shelf_id' => 1,
             'capacity' => '81'
         ]);
-
-//       for($h = 1; $h < 9; $h++) {
-//          for ($i = 0; $i < 4; $i++) {
-//              for ($j = 1; $j < 6; $j++) {
-//                   for ($k = 1; $k < 4; $k++) {
-//
-//                        if ($i == 0) {
-//                            $l = "A";
-//                        } elseif ($i == 1) {
-//                            $l = "B";
-//                        } elseif ($i == 2) {
-//                            $l = "C";
-//                        }else{
-//                            $l = "D";
-//                        }
-//
-//                        DB::table('boxes')->insert([
-//                            'column' => $l,
-//                            'row' =>  $j,
-//                            'box' =>  $k,
-//                            'storage_id' => $h,
-//                            'capacity' => '81'
-//                        ]);
-//                    }
-//               }
-//            }
-//       }
     }
 }
 

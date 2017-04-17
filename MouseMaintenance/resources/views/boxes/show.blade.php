@@ -11,19 +11,11 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>Freezer {{$box->storage->freezer}}</td>
-                            @if($box->storage->compartment=="1")
-                                <td>Top Compartment</td>
-                            @else
-                                <td>Bottom Section</td>
-                            @endif
+                            <td>Freezer {{$box->shelf->compartment->storage->identifier}}</td>
+                            <td>{{$box->shelf->compartment->description}} Compartment</td>
                         </tr>
                         <tr>
-                            @if($box->storage->shelf=="1")
-                                <td>Top Shelf</td>
-                            @else
-                                <td>Bottom Shelf</td>
-                            @endif
+                            <td>{{$box->shelf->description}} Shelf</td>
                             <td>{{$box->mouse_storages->count()}}/{{$box->capacity}}</td>
                         </tr>
                     </tbody>
@@ -165,12 +157,3 @@
         </div>
     </div>
 @endsection
-{{--<script>--}}
-    {{--window.onload = function () {--}}
-        {{--document.getElementById("tissue_select").options[{{$tissue_select}}].selected = true;--}}
-        {{--document.getElementById("strain_select").selectedIndex = {{$strain_select}};--}}
-        {{--document.getElementById("geno_select").value = {{$geno_select}};--}}
-        {{--$('#geno_select>option:eq(3)').prop('selected', true);--}}
-        {{--$('#treatment_select').val({{$treatment_select}});--}}
-    {{--}--}}
-{{--</script>--}}

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Storage extends Model
 {
-    protected $fillable = array('tissue_id', 'type', 'freezer', 'compartment', 'shelf');
+    protected $fillable = array('tissue_id', 'type', 'freezer',);
 
     //one-to-many relationships
     //Box
-    public function boxes(){
-        return $this->hasMany(Box::class);
+    public function compartments(){
+        return $this->hasMany(Compartment::class);
     }
 
 

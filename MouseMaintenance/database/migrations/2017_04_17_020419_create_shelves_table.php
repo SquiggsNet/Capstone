@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStoragesTable extends Migration
+class CreateShelvesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateStoragesTable extends Migration
      */
     public function up()
     {
-        Schema::create('storages', function (Blueprint $table) {
+        Schema::create('shelves', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('type');
-            $table->string('identifier');
+            $table->string('description');
+            $table->unsignedInteger('compartment_id');
+            $table->foreign('compartment_id')->references('id')->on('compartments');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateStoragesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('storages');
+        Schema::drop('shelves');
     }
 }

@@ -8,8 +8,8 @@ class Box extends Model
 {
     protected $fillable = array('name');
 
-    public function storage(){
-        return $this->belongsTo(Storage::class);
+    public function shelf(){
+        return $this->belongsTo(Shelf::class);
     }
 
     //one-to-many relationships

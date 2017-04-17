@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBoxesTable extends Migration
+class CreateCompartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,9 @@ class CreateBoxesTable extends Migration
      */
     public function up()
     {
-        Schema::create('boxes', function (Blueprint $table) {
+        Schema::create('compartments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('column')->nullable();
-            $table->unsignedInteger('row')->nullable();
-            $table->unsignedInteger('box')->nullable();
-            $table->unsignedInteger('capacity')->nullable();
+            $table->string('description');
             $table->unsignedInteger('storage_id');
             $table->foreign('storage_id')->references('id')->on('storages');
             $table->timestamps();

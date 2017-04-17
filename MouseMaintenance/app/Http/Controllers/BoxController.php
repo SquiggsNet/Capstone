@@ -117,73 +117,16 @@ class BoxController extends Controller
         $strains = Colony::all();
         $treatments = Treatment::all();
 
-        if ($request['sort_clicked'] == null) {
-            $sort_order = "sortBy";
-            $sort_by = "extraction_date";
-        }
-        elseif ($request['sort_clicked'] == "Tissue Region" && $request['sort_by'] == "tissue.name" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'tissue.name';
-        }
-        elseif ($request['sort_clicked'] == "Tissue Region"){
-            $sort_order = "sortBy";
-            $sort_by = 'tissue.name';
-        }
-        elseif ($request['sort_clicked'] == "Strain" && $request['sort_by'] == "mouse.colony.name" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'mouse.colony.name';
-        }
-        elseif ($request['sort_clicked'] == "Strain"){
-            $sort_order = "sortBy";
-            $sort_by = 'mouse.colony.name';
-        }
-        elseif ($request['sort_clicked'] == "Genotype" && $request['sort_by'] == "mouse.genoFormat" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
-        }
-        elseif ($request['sort_clicked'] == "Genotype"){
-            $sort_order = "sortBy";
-            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
-        }
-        elseif ($request['sort_clicked'] == "Treatment" && $request['sort_by'] == "mouse.treatments" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'mouse.treatments';
-        }
-        elseif ($request['sort_clicked'] == "Treatment"){
-            $sort_order = "sortBy";
-            $sort_by = 'mouse.treatments';
-        }
-        elseif ($request['sort_clicked'] == "Tag#" && $request['sort_by'] == "mouse.tags.last().tag_num" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'mouse.tags.last().tag_num';
-        }
-        elseif ($request['sort_clicked'] == "Tag#"){
-            $sort_order = "sortBy";
-            $sort_by = 'mouse.tags.last().tag_num';
-        }
-        elseif ($request['sort_clicked'] == "Isolation Date" && $request['sort_by'] == "extraction_date" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'extraction_date';
-        }
-        elseif ($request['sort_clicked'] == "Isolation Date"){
-            $sort_order = "sortBy";
-            $sort_by = 'extraction_date';
-        }
-        elseif ($request['sort_clicked'] == "Isolated By" && $request['sort_by'] == "user.first_name" && $request['sort_order'] == "sortBy"){
-            $sort_order = "sortByDesc";
-            $sort_by = 'user.first_name';
-        }
-        elseif ($request['sort_clicked'] == "Isolated By"){
-            $sort_order = "sortBy";
-            $sort_by = 'user.first_name';
-        }
-
-
-
+        //view selection
         $tissue_select = $request['tissue_select'];
         $strain_select = $request['strain_select'];
         $geno_select = $request['geno_select'];
         $treatment_select = $request['treatment_select'];
+
+        //sorting selection
+        $s_clicked = $request['sort_clicked'];
+        $s_by = $request['sort_by'];
+        $s_order = $request['sort_order'];
 
         //if Tissue, Strain, Geno, and treatment are selected
         if($tissue_select != "0" && $strain_select != "0" && $geno_select != "0" && $treatment_select != "0"){
@@ -492,6 +435,91 @@ class BoxController extends Controller
 
         else{
             $storedTissues = MouseStorage::where('box_id', $id)->get();
+        }
+
+        //starting sort function
+        if ($s_clicked == null) {
+            $storedTissues = $storedTissues->sortBy("extraction_date");
+            $sort_order = "sortBy";
+            $sort_by = 'extraction_date';
+        }
+        elseif ($s_clicked == "Tissue Region" && $s_by == "tissue.name" && $s_order == "sortBy"){
+            $storedTissues = $storedTissues->sortByDesc("tissue.name");
+            $sort_order = "sortByDesc";
+            $sort_by = 'tissue.name';
+        }
+        elseif ($s_clicked == "Tissue Region"){
+            $storedTissues = $storedTissues->sortBy("tissue.name");
+            $sort_order = "sortBy";
+            $sort_by = 'tissue.name';
+        }
+        elseif ($s_clicked == "Strain" && $s_by == "mouse.colony.name" && $s_order == "sortBy"){
+            $storedTissues = $storedTissues->sortByDesc("mouse.colony.name");
+            $sort_order = "sortByDesc";
+            $sort_by = 'mouse.colony.name';
+        }
+        elseif ($s_clicked == "Strain"){
+            $storedTissues = $storedTissues->sortBy("mouse.colony.name");
+            $sort_order = "sortBy";
+            $sort_by = 'mouse.colony.name';
+        }
+//        elseif ($s_clicked == "Genotype" && $s_by == "mouse.genoFormat" && $s_order == "sortBy"){
+//            $storedTissues = $storedTissues->sortByDesc("mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)");
+//            $sort_order = "sortByDesc";
+//            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
+//        }
+//        elseif ($s_clicked == "Genotype"){
+//            $storedTissues = $storedTissues
+//                ->sortBy("mouse.geno_type_b")
+//                ->sortBy("mouse.geno_type_a")
+//                ;
+//            $storedTissues = $storedTissues->sortBy(function($tissue) {
+//                return count("$tissue.mouse.geno_type_a", "$tissue.mouse.geno_type_b");
+//            });
+//            $sort_order = "sortBy";
+//            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
+//            var_dump($sort_by);
+//        }
+//        elseif ($s_clicked == "Treatment" && $s_by == "mouse.treatments" && $s_order == "sortBy"){
+//            $storedTissues = $storedTissues->sortByDesc("mouse.treatments");
+//            $sort_order = "sortByDesc";
+//            $sort_by = 'mouse.treatments';
+//        }
+//        elseif ($s_clicked == "Treatment"){
+//            $storedTissues = $storedTissues->sortBy("mouse.treatments");
+//            $sort_order = "sortBy";
+//            $sort_by = 'mouse.treatments';
+//        }
+//        elseif ($s_clicked == "Tag#" && $s_by == "mouse.tags.last().tag_num" && $s_order == "sortBy"){
+//            $storedTissues = $storedTissues->sortByDesc("mouse.tags.last().tag_num");
+//            $sort_order = "sortByDesc";
+//            $sort_by = 'mouse.tags.last().tag_num';
+//        }
+//        elseif ($s_clicked == "Tag#"){
+//            $storedTissues = $storedTissues->sortBy("mouse.tagPad(mouse.tags.last().tag_num)");
+//            $sort_order = "sortBy";
+//            $sort_by = 'mouse.tagPad(mouse.tags.last().tag_num)';
+//            var_dump($sort_by);
+//        }
+        elseif ($s_clicked == "Isolation Date" && $s_by == "extraction_date" && $s_order == "sortBy"){
+            $storedTissues = $storedTissues->sortByDesc("extraction_date");
+            $sort_order = "sortByDesc";
+            $sort_by = 'extraction_date';
+        }
+        elseif ($s_clicked == "Isolation Date"){
+            $storedTissues = $storedTissues->sortBy("extraction_date");
+            $sort_order = "sortBy";
+            $sort_by = 'extraction_date';
+        }
+        elseif ($s_clicked == "Isolated By" && $s_by == "user.first_name" && $s_order == "sortBy"){
+            $storedTissues = $storedTissues->sortByDesc("user.first_name");
+            $sort_order = "sortByDesc";
+            $sort_by = 'user.first_name';
+        }
+        elseif ($s_clicked == "Isolated By"){
+            $storedTissues = $storedTissues->sortBy("user.first_name");
+            $sort_order = "sortBy";
+            $sort_by = 'user.first_name';
         }
 
         return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select', 'sort_by', 'sort_order'));

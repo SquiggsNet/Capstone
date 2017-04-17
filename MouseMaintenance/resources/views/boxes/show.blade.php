@@ -122,13 +122,16 @@
                             <input type="submit" name="sort_clicked" value="Strain" class='btn-link'>
                         </th>
                         <th>
-                            <input type="submit" name="sort_clicked" value="Genotype" class='btn-link'>
+                            Genotype
+                            {{--<input type="submit" name="sort_clicked" value="Genotype" class='btn-link'>--}}
                         </th>
                         <th>
-                            <input type="submit" name="sort_clicked" value="Treatment" class='btn-link'>
+                            Treatment
+                            {{--<input type="submit" name="sort_clicked" value="Treatment" class='btn-link'>--}}
                         </th>
                         <th>
-                            <input type="submit" name="sort_clicked" value="Tag#" class='btn-link'>
+                            Tag#
+                            {{--<input type="submit" name="sort_clicked" value="Tag#" class='btn-link'>--}}
                         </th>
                         <th>
                             <input type="submit" name="sort_clicked" value="Isolation Date" class='btn-link'>
@@ -141,7 +144,8 @@
                     {!! Form::close() !!}
                     <tbody>
                     {{--@foreach ($tissues->sortByDesc('extraction_date') as $tissue)--}}
-                    @foreach ($storedTissues->$sort_order($sort_by)as $tissue)
+                    {{--@foreach ($storedTissues->$sort_order($sort_by)as $tissue)--}}
+                        @foreach ($storedTissues as $tissue)
                     {{--@foreach ($storedTissues->$sort_order('tissue.name')as $tissue)--}}
                         <tr>
                             <td>

@@ -184,9 +184,64 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center"><h4>Storage Facility Management</h4></div>
                     <div class="panel-body">
-                        <a href="{{ action( 'StorageController@create') }}">
-                            Add a new Storage Facility (Freezer?)
-                        </a>
+
+                        <div class="panel-body">
+                            <div class="col-lg-6">
+
+                                <table class="table table-bordered table-striped" id="freezer_table" data-toggle="table" >
+                                    <thead>
+                                    <tr>
+                                        <th>Freezer</th>
+                                        <th>Number of Compartments</th>
+                                        <th>Number of Shelves</th>
+                                        <th>Number of Boxes</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($freezers as $freezer)
+                                        <tr>
+                                            <td>
+                                                {{$freezer->identifier}}
+                                            </td>
+                                            <td>
+                                                {{$freezer->number_of_compartments($freezer)}}
+                                            </td>
+                                            <td>
+                                                {{$freezer->number_of_shelves($freezer)}}
+                                            </td>
+                                            <td>
+                                                {{$freezer->number_of_boxes($freezer)}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <a class="btn btn-default" href="{{ action( 'TissueController@index') }}">
+                                    All Freezers
+                                </a>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <table class="table table-bordered table-striped" id="histology_table" data-toggle="table" >
+                                    <thead>
+                                    <tr>
+                                        <th>Histology</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($histologies as $histology)
+                                        <tr>
+                                            <td>
+                                                {{$histology->identifier}}
+                                             </td>
+                                         </tr>
+                                     @endforeach
+                                     </tbody>
+                                 </table>
+                                 <a class="btn btn-default" href="{{ action( 'TreatmentController@index') }}">
+                                    All Histologies
+                                </a>
+                            </div>
                     </div>
                 </div>
             </div>

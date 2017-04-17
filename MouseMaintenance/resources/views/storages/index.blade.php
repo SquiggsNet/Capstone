@@ -11,7 +11,9 @@
                     @foreach ($storages as $storage)
                         <a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
                             @if($storage->type == 1)
-                                (-80&deg;C) Freezer {{$storage->id}}
+                                (-80&deg;C) Freezer {{$storage->identifier}}
+                            @else
+                                Histology {{$storage->identifier}}
                             @endif
                         </a>
                     @endforeach

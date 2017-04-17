@@ -404,6 +404,11 @@ class StorageTableSeeder extends Seeder
             'type' => true,
             'identifier' => '1'
         ]);
+
+        DB::table('storages')->insert([
+            'type' => false,
+            'identifier' => '1'
+        ]);
     }
 }
 
@@ -435,6 +440,16 @@ class ShelfTableSeeder extends Seeder
         DB::table('shelves')->insert([
             'description' => 'Bottom',
             'compartment_id' => 1,
+        ]);
+
+        DB::table('shelves')->insert([
+            'description' => 'Top',
+            'compartment_id' => 2,
+        ]);
+
+        DB::table('shelves')->insert([
+            'description' => 'Bottom',
+            'compartment_id' => 2,
         ]);
     }
 }

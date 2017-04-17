@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Colony;
+use App\Storage;
 use App\Tissue;
 use App\Treatment;
 use App\Experiment;
@@ -26,11 +27,13 @@ class AppManagementController extends Controller
         $tissues = Tissue::where('active', 1)->get();
         $colonies = Colony::with('mice')->get();
         $users = User::all();
+        $freezers = Storage::where('type', 1)->get();
+        $histologies = Storage::where('type', 0)->get();
 
         $total_rows = max(count($experiments), count($treatments), count($tissues));
 
         return view('appManagement.index',
-            compact('users', 'colonies', 'tissues', 'treatments', 'experiments', 'total_rows'));
+            compact('users', 'colonies', 'tissues', 'treatments', 'experiments', 'total_rows', 'freezers', 'histologies'));
     }
 
     /**

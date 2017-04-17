@@ -139,11 +139,11 @@ class BoxController extends Controller
         }
         elseif ($request['sort_clicked'] == "Genotype" && $request['sort_by'] == "mouse.genoFormat" && $request['sort_order'] == "sortBy"){
             $sort_order = "sortByDesc";
-            $sort_by = 'mouse.genoFormat';
+            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
         }
         elseif ($request['sort_clicked'] == "Genotype"){
             $sort_order = "sortBy";
-            $sort_by = 'mouse.genoFormat';
+            $sort_by = 'mouse.genoFormat(mouse.geno_type_a, mouse.geno_type_b)';
         }
         elseif ($request['sort_clicked'] == "Treatment" && $request['sort_by'] == "mouse.treatments" && $request['sort_order'] == "sortBy"){
             $sort_order = "sortByDesc";

@@ -38,6 +38,7 @@ Route::post('mice/export', 'MouseController@excel');
 
 Route::resource('experiments', 'ExperimentController');
 Route::resource('storages', 'StorageController');
+Route::post('storages/export', 'StorageController@excel');
 
 Route::get('boxes/{mice}/create', 'BoxController@create');
 Route::resource('boxes', 'BoxController');

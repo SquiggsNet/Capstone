@@ -28,6 +28,6 @@ class CreateCompartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('boxes');
+        Schema::drop('compartments');
     }
 }

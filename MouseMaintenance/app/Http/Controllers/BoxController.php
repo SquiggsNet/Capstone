@@ -178,6 +178,8 @@ class BoxController extends Controller
             $sort_by = 'user.first_name';
         }
 
+
+
         $tissue_select = $request['tissue_select'];
         $strain_select = $request['strain_select'];
         $geno_select = $request['geno_select'];

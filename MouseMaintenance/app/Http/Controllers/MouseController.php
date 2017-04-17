@@ -453,7 +453,7 @@ class MouseController extends Controller
                 $i = 1;
                 foreach($mouse->treatments as $treatment){
                     $t = 'Treatment ' . $i;
-                    $array[$t] = $treatment->title;
+                    $array[$t] = $treatment->title . ': '. $treatment->pivot->dosage . '(kg/mg/day)';
                     $i++;
                 }
             }

@@ -114,42 +114,314 @@ class BoxController extends Controller
         $geno_select = $request['geno_select'];
         $treatment_select = $request['treatment_select'];
 
-        if($tissue_select != 0 && $strain_select != 0){
+        //if Tissue, Strain, Geno, and treatment are selected
+        if($tissue_select != "0" && $strain_select != "0" && $geno_select != "0" && $treatment_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }
+        }
+
+        //if Tissue, Strain and Geno are selected
+        elseif($tissue_select != "0" && $strain_select != "0" && $geno_select != "0" ){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }
+        }
+
+        //if Tissue, Strain, and treatment are selected
+        elseif($tissue_select != "0" && $strain_select != "0" && $treatment_select != "0"){
+            $storedTissues = MouseStorage::where('box_id', $id)
+                ->where('tissue_id', $tissue_select)
+                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                ->where('colony_id', $strain_select)
+                ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                ->where('treatment_id', $treatment_select)
+                ->get();
+        }
+
+        //if Tissue, Geno, and treatment are selected
+        elseif($tissue_select != "0" && $geno_select != "0" && $treatment_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }
+        }
+
+        //if Strain, Geno, and treatment are selected
+        elseif($strain_select != "0" && $geno_select != "0" && $treatment_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }
+        }
+
+        //if Tissue and Strain are selected
+        elseif($tissue_select != "0" && $strain_select != "0"){
             $storedTissues = MouseStorage::where('box_id', $id)
                 ->where('tissue_id', $tissue_select)
                 ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
                 ->where('colony_id', $strain_select)
                 ->get();
         }
-        elseif ($strain_select != 0){
+
+        //if Tissue and Geno are selected
+        elseif($tissue_select != "0" && $geno_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->where('tissue_id', $tissue_select)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }
+        }
+
+        //if Tissue and Treatment are selected
+        elseif($tissue_select != "0" && $treatment_select != "0"){
+            $storedTissues = MouseStorage::where('box_id', $id)
+                ->where('tissue_id', $tissue_select)
+                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                ->where('treatment_id', $treatment_select)
+                ->get();
+        }
+
+        //if Strain and Geno are selected
+        elseif($geno_select != "0" && $strain_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('colony_id', $strain_select)
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }
+        }
+
+        //if strain and treatment are selected
+        elseif($strain_select != "0" && $treatment_select != "0"){
             $storedTissues = MouseStorage::where('box_id', $id)
                 ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
-                ->where('colony_id', $strain_select)->get();
+                ->where('colony_id', $strain_select)
+                ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                ->where('treatment_id', $treatment_select)
+                ->get();
         }
-        elseif ($tissue_select != 0){
+
+        //geno and treatment
+        elseif($geno_select != "0" && $treatment_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+            }
+        }
+
+        //if just Tissue selected
+        elseif ($tissue_select != "0"){
             $storedTissues = MouseStorage::where('box_id', $id)
                 ->where('tissue_id', $tissue_select)
                 ->get();
         }
-//        elseif ($geno_select != 0){
-//            $storedTissues = MouseStorage::where('box_id', $id)
-//                ->where('tissue_id', $tissue_select)
-//                ->get();
-//        }
-//        elseif ($treatment_select != 0){
-//            $storedTissues = MouseStorage::where('box_id', $id)
-//                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
-//                ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
-//                ->where('$treatment_select', $treatment_select)
-//                ->get();
-//        }
-        else{
-            $storedTissues = MouseStorage::where('box_id', $id)->get();
+
+        //if just strain selected
+        elseif ($strain_select != "0"){
+            $storedTissues = MouseStorage::where('box_id', $id)
+                ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                ->where('colony_id', $strain_select)->get();
         }
 
 
+        //if just geno selected
+        elseif ($geno_select != "0"){
+            if($geno_select == "1"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 1)
+                    ->get();
+            }elseif ($geno_select == "2"){
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 1)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->where('geno_type_a', 0)
+                    ->where('geno_type_b', 0)
+                    ->get();
+            }
+        }
 
-     //   $tissue->tissue->name
+        //if just treatment slected
+        elseif ($treatment_select != "0"){
+//            if($treatment_select == "untreated"){
+//                $storedTissues = MouseStorage::where('box_id', $id)
+//                    ->with('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+//                    ->leftjoin('mouse_treatment', 'mouse_treatment.mouse_id','=','mice.id')
+//                    ->wherenull('mouse_treatment.mouse_id')
+//                    ->get();
+//
+//            }else{
+                $storedTissues = MouseStorage::where('box_id', $id)
+                    ->join('mice', 'mice.id', '=', 'mouse_storages.mouse_id')
+                    ->join('mouse_treatment', 'mice.id','=','mouse_treatment.mouse_id')
+                    ->where('treatment_id', $treatment_select)
+                    ->get();
+//            }
+        }
+
+        else{
+            $storedTissues = MouseStorage::where('box_id', $id)->get();
+        }
 
         return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments'));
     }

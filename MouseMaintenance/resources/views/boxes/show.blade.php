@@ -64,17 +64,15 @@
                         <label class="form-label" >Genotype</label>
                         <select name="geno_select" id="geno_select" class="form-control">
                             <option value="0">All</option>
-                            {{--@foreach($genos as $geno)--}}
                             <option value="1">
                                 (+/+)
                             </option>
-                            <option value="1">
+                            <option value="2">
                                 (+/-)
                             </option>
-                            <option value="1">
+                            <option value="3">
                                 (-/-)
                             </option>
-                            {{--@endforeach--}}
                         </select>
                     </div>
                     <div class="quarter last">
@@ -91,10 +89,6 @@
                         </select>
                     </div>
                 </div>
-                {{--<button class="btn btn-default pull-right bottom-buffer" id="narrow_results" onclick="narrow_results('{{$box->id}}')" data-href="{{URL::to("boxes/{$box->id}")}}">--}}
-                    {{--Narrow Results--}}
-                {{--</button>--}}
-
                 <div class="form-group col-md-12">
                     {!! Form::submit('Narrow Results',['class'=>'btn btn-default pull-right bottom-buffer']) !!}
                 </div>

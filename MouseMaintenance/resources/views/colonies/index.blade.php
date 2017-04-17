@@ -5,7 +5,6 @@
 
     <div class="container">
         <div class="row">
-
             <div class="panel panel-default third-x2">
                 <div class="panel-heading"><h3>Colonies</h3></div>
                 <div class="panel-body">
@@ -23,46 +22,41 @@
             <div class="panel panel-default third last">
                 <div class="panel-heading"><h3>Add Mice</h3></div>
                 <div class="panel-body">
-
-                        {!! Form::open(['action' => 'MouseController@create', 'method' => 'get']) !!}
-
-                            <div class="form-group">
-                                <label>Add Mice</label>
-                                <select class="form-control" name="source" id="source">
-                                    <option value="0">Select source</option>
-                                    <option value="1">In House</option>
-                                    <option value="2">External</option>
-                                </select>
-                            </div>
-                            <div id="selectCage" class="form-group">
-                                <label>Select Breeder Cage:</label>
-                                <select class="form-control" name="cage_id" id="cage_id">
-                                    <option value="0">Select Cage </option>
-
-                                    @foreach($cages as $cage)
-                                        @foreach($mice as $mouse)
-                                            @if($mouse->id == $cage->male)
-                                                <option value="{{ $cage->id }}">
-                                                    #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
-                                                            $mouse->getGender($mouse->sex) . ' (' .
-                                                            $mouse->getGeno($mouse->geno_type_a) . '/' .
-                                                            $mouse->getGeno($mouse->geno_type_b) . ')' }}
-                                                </option>
-                                            @endif
-                                        @endforeach
+                    {!! Form::open(['action' => 'MouseController@create', 'method' => 'get']) !!}
+                        <div class="form-group">
+                            <label>Add Mice</label>
+                            <select class="form-control" name="source" id="source">
+                                <option value="0">Select source</option>
+                                <option value="1">In House</option>
+                                <option value="2">External</option>
+                            </select>
+                        </div>
+                        <div id="selectCage" class="form-group">
+                            <label>Select Breeder Cage:</label>
+                            <select class="form-control" name="cage_id" id="cage_id" onchange="lock()">
+                                <option value="0">Select Cage </option>
+                                @foreach($cages as $cage)
+                                    @foreach($mice as $mouse)
+                                        @if($mouse->id == $cage->male)
+                                            <option value="{{ $cage->id }}">
+                                                #{{ $mouse->tagPad($mouse->tags->last()->tag_num) . ' ' .
+                                                        $mouse->getGender($mouse->sex) . ' (' .
+                                                        $mouse->getGeno($mouse->geno_type_a) . '/' .
+                                                        $mouse->getGeno($mouse->geno_type_b) . ')' }}
+                                            </option>
+                                        @endif
                                     @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group clearfix">
-                                {!! Form::submit('Add',['class'=>'btn btn-block']) !!}
-                            </div>
-
-                        {!! Form::close() !!}
-                    </div>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group clearfix">
+                            <input value="Add" type="submit" class="btn btn-block" id="create_mice_btn">
+                            {{--{!! Form::submit('Add',['class'=>'btn btn-block']) !!}--}}
+                        </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
+        </div>
     </div>
-
-
 @endsection
+

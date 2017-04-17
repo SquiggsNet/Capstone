@@ -128,6 +128,10 @@ class MouseController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validate($request, [
+           'select_source'
+        ]);
+
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();

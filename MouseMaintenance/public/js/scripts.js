@@ -100,6 +100,7 @@ $(document).ready(function () {
 
 });
 
+
 //    $('#createMice').on('submit', function() {
 //        var id = $('#source').val();
 //        var formAction = $('#createMice').attr('action');
@@ -205,15 +206,34 @@ function confirmDelete()
 //edit user reset password
 var cb_reset = document.getElementById('reset_password');
 function hide_password() {
-    if(cb_reset.checked){
-        $("#password").show();
-        $("#password_label").show();
-    }else{
-        $("#password").hide();
-        $("#password_label").hide();
+    if(cb_reset != null) {
+        if (cb_reset.checked) {
+            $("#password").show();
+            $("#password_label").show();
+        } else {
+            $("#password").hide();
+            $("#password_label").hide();
+        }
     }
 }
 
+function lock_out(){
+    if($('#cage_id').val() != 0 && $('#source').val() != 0 || $('#source').val() == 2){
+        $('#create_mice_btn').prop('disabled', false);
+    }else{
+        $('#create_mice_btn').prop('disabled', true);
+    }
+}
+
+$('#cage_id').change(function(){
+    lock_out();
+
+});
+
+$('#source').change(function() {
+    lock_out();
+});
 window.onload = function(){
     hide_password();
+    lock_out();
 };

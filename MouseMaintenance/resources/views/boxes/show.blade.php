@@ -109,27 +109,40 @@
                 <div class="form-group col-md-12">
                     {!! Form::submit('Narrow Results',['class'=>'btn btn-default pull-right bottom-buffer']) !!}
                 </div>
-                {!! Form::close() !!}
+                {{ Form::hidden('sort_order', $sort_order) }}
+                {{ Form::hidden('sort_by', $sort_by) }}
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th></th>
                         <th>
-                            <a href="{{ action( 'BoxController@show', ['id' => $box->id]) }}">
-                                Tissue Region
-                            </a>
+                            <input type="submit" name="sort_clicked" value="Tissue Region" class='btn-link'>
                         </th>
-                        <th>Strain</th>
-                        <th>Genotype</th>
-                        <th>Treatment</th>
-                        <th>Tag#</th>
-                        <th>Isolation Date</th>
-                        <th>Isolated By</th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Strain" class='btn-link'>
+                        </th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Genotype" class='btn-link'>
+                        </th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Treatment" class='btn-link'>
+                        </th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Tag#" class='btn-link'>
+                        </th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Isolation Date" class='btn-link'>
+                        </th>
+                        <th>
+                            <input type="submit" name="sort_clicked" value="Isolated By" class='btn-link'>
+                        </th>
                     </tr>
                     </thead>
+                    {!! Form::close() !!}
                     <tbody>
                     {{--@foreach ($tissues->sortByDesc('extraction_date') as $tissue)--}}
-                    @foreach ($storedTissues->sortBy('extraction_date')as $tissue)
+                    @foreach ($storedTissues->$sort_order($sort_by)as $tissue)
+                    {{--@foreach ($storedTissues->$sort_order('tissue.name')as $tissue)--}}
                         <tr>
                             <td>
                                 <input type="checkbox" id="group_select_cb" name="group_select_cb[]" value="{{ $box->id }}"/>

@@ -34,7 +34,7 @@ class BoxController extends Controller
     {
         $mice_ex = explode(",", $mice_id);
         $mice = Mouse::whereIn('id', $mice_ex)->get();
-        $boxes = Box::where('storage_id', "1")->get(); //orderBy('box')->get();
+        $boxes = Box::all(); //orderBy('box')->get();
         $surgeons = User::all();
         $tissues = Tissue::all();
 
@@ -99,10 +99,14 @@ class BoxController extends Controller
         $geno_select = 0;
         $treatment_select = 0;
 
+        $sort_order = "sortBy";
+        $sort_by = "extraction_date";
+
+
 
         $storedTissues = MouseStorage::where('box_id', $id)->get();
 
-        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select'));
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select', 'sort_by', 'sort_order'));
     }
 
     public function showFiltered($id, Request $request)
@@ -111,8 +115,68 @@ class BoxController extends Controller
 
         $tissues = Tissue::all();
         $strains = Colony::all();
-        //$genos = Tissue::all();
         $treatments = Treatment::all();
+
+        if ($request['sort_clicked'] == null) {
+            $sort_order = "sortBy";
+            $sort_by = "extraction_date";
+        }
+        elseif ($request['sort_clicked'] == "Tissue Region" && $request['sort_by'] == "tissue.name" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'tissue.name';
+        }
+        elseif ($request['sort_clicked'] == "Tissue Region"){
+            $sort_order = "sortBy";
+            $sort_by = 'tissue.name';
+        }
+        elseif ($request['sort_clicked'] == "Strain" && $request['sort_by'] == "mouse.colony.name" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'mouse.colony.name';
+        }
+        elseif ($request['sort_clicked'] == "Strain"){
+            $sort_order = "sortBy";
+            $sort_by = 'mouse.colony.name';
+        }
+        elseif ($request['sort_clicked'] == "Genotype" && $request['sort_by'] == "mouse.genoFormat" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'mouse.genoFormat';
+        }
+        elseif ($request['sort_clicked'] == "Genotype"){
+            $sort_order = "sortBy";
+            $sort_by = 'mouse.genoFormat';
+        }
+        elseif ($request['sort_clicked'] == "Treatment" && $request['sort_by'] == "mouse.treatments" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'mouse.treatments';
+        }
+        elseif ($request['sort_clicked'] == "Treatment"){
+            $sort_order = "sortBy";
+            $sort_by = 'mouse.treatments';
+        }
+        elseif ($request['sort_clicked'] == "Tag#" && $request['sort_by'] == "mouse.tags.last().tag_num" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'mouse.tags.last().tag_num';
+        }
+        elseif ($request['sort_clicked'] == "Tag#"){
+            $sort_order = "sortBy";
+            $sort_by = 'mouse.tags.last().tag_num';
+        }
+        elseif ($request['sort_clicked'] == "Isolation Date" && $request['sort_by'] == "extraction_date" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'extraction_date';
+        }
+        elseif ($request['sort_clicked'] == "Isolation Date"){
+            $sort_order = "sortBy";
+            $sort_by = 'extraction_date';
+        }
+        elseif ($request['sort_clicked'] == "Isolated By" && $request['sort_by'] == "user.first_name" && $request['sort_order'] == "sortBy"){
+            $sort_order = "sortByDesc";
+            $sort_by = 'user.first_name';
+        }
+        elseif ($request['sort_clicked'] == "Isolated By"){
+            $sort_order = "sortBy";
+            $sort_by = 'user.first_name';
+        }
 
         $tissue_select = $request['tissue_select'];
         $strain_select = $request['strain_select'];
@@ -428,7 +492,7 @@ class BoxController extends Controller
             $storedTissues = MouseStorage::where('box_id', $id)->get();
         }
 
-        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select'));
+        return view('boxes.show', compact('box', 'storedTissues', 'tissues', 'strains', 'treatments', 'tissue_select', 'strain_select', 'geno_select', 'treatment_select', 'sort_by', 'sort_order'));
     }
 
     /**

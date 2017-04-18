@@ -35,7 +35,6 @@ class CreateMiceTable extends Migration
             $table->date('end_date')->nullable();
             $table->boolean('is_alive');
             $table->boolean('sick_report');
-            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

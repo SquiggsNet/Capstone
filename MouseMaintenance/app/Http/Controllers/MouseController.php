@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BloodPressure;
 use App\Cage;
 use App\Colony;
+use App\Comment;
 use App\Tag;
 use App\User;
 use App\Weight;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Mouse;
 use App\Http\Requests;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 use Maatwebsite\Excel\Facades\Excel;
@@ -120,8 +122,8 @@ class MouseController extends Controller
         if($pep){
             $active_tags[] = 0;
         }
-
-        return view('mice.index', compact('mice', 'active_tags', 'pep'));
+        $comments = Comment::where('mouse_id', $mice)->get();
+        return view('mice.index', compact('mice', 'active_tags', 'pep', 'comments'));
     }
 
     /**
@@ -187,9 +189,16 @@ class MouseController extends Controller
                         'birth_date' => $request['date_of_birth'],
                         'wean_date' => $wean_date,
                         'is_alive' => '1',
-                        'comments' => $request['comments'],
                     ]);
                     $mouse->save();
+                    $user = Auth::user();
+                    $comment = Comment::create([
+                        'mouse_id' => $mouse->id,
+                        'user_id' => $user->id,
+                        'comment' => $request['comments']
+                    ]);
+                    $comment->save();
+
                 }
         }else{
             for($i = 0; $i < $mice_total; $i++) {
@@ -209,9 +218,17 @@ class MouseController extends Controller
                     'end_date' => 'null',
                     'is_alive' => 1,
                     'sick_report' => false,
-                    'comments' => 'null'
                 ]);
                 $mouse->save();
+
+                $user = Auth::user();
+                $comment = Comment::create([
+                    'mouse_id' => $mouse->id,
+                    'user_id' => $user->id,
+                    'comment' => $request['comments']
+                ]);
+                $comment->save();
+
             }
 
             for($i = 0; $i < $females; $i++) {
@@ -231,11 +248,21 @@ class MouseController extends Controller
                     'end_date' => 'null',
                     'is_alive' => 1,
                     'sick_report' => false,
-                    'comments' => 'null'
                 ]);
                 $mouse->save();
+                $user = Auth::user();
+                $comment = Comment::create([
+                    'mouse_id' => $mouse->id,
+                    'user_id' => $user->id,
+                    'comment' => $request['comments']
+                ]);
+                $comment->save();
+
             }
+
         }
+
+
         return redirect()->action('MouseController@index');
     }
 
@@ -333,9 +360,15 @@ class MouseController extends Controller
             $mouse->end_date = $request['end_date'];
         }
         $mouse->sick_report = $isSick;
-        $mouse->comments = $request['comments'];
         $mouse->save();
 
+        $user = Auth::user();
+        $comment = Comment::create([
+            'mouse_id' => $mouse->id,
+            'user_id' => $user->id,
+            'comment' => $request['comments']
+        ]);
+        $comment->save();
 
         if (!empty($request['weight'])) {
             if(isset($mouse->weights->last()->weighed_on)){

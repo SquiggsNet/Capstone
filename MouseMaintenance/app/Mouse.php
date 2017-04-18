@@ -10,7 +10,7 @@ use DateTime;
 class Mouse extends Model
 {
     protected $fillable = array('colony_id', 'reserved_for', 'source', 'sex', 'geno_type_a', 'geno_type_b', 'father', 'mother_one',
-                                'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'is_alive', 'sick_report', 'comments');
+                                'mother_two', 'mother_three', 'birth_date', 'wean_date', 'end_date', 'is_alive', 'sick_report');
 
     public function genoFormat($geno_a, $geno_b){
 
@@ -132,6 +132,10 @@ class Mouse extends Model
     //User
     public function users(){
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 
     //many-to-many relationships

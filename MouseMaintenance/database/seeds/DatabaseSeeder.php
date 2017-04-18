@@ -495,8 +495,7 @@ class MouseTableSeeder extends Seeder
             'wean_date' => '2012-01-29',
             'end_date' => '2012-02-28',
             'is_alive' => 1,
-            'sick_report' => false,
-            'comments' => ""
+            'sick_report' => false
         ]);
 
         DB::table('mice')->insert([
@@ -514,8 +513,7 @@ class MouseTableSeeder extends Seeder
             'wean_date' => '2012-01-29',
             'end_date' => null,
             'is_alive' => 1,
-            'sick_report' => false,
-            'comments' => ""
+            'sick_report' => false
         ]);
 
         DB::table('mice')->insert([
@@ -533,8 +531,7 @@ class MouseTableSeeder extends Seeder
             'wean_date' => '2012-01-29',
             'end_date' => null,
             'is_alive' => 1,
-            'sick_report' => false,
-            'comments' => ""
+            'sick_report' => false
         ]);
 
         DB::table('mice')->insert([
@@ -552,8 +549,7 @@ class MouseTableSeeder extends Seeder
             'wean_date' => '2012-01-29',
             'end_date' => null,
             'is_alive' => 1,
-            'sick_report' => true,
-            'comments' => ""
+            'sick_report' => true
         ]);
 
         $mouse = Mouse::find(1);

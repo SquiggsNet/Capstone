@@ -4,7 +4,6 @@
     <div class="container">
         <h1>Mouse # {{ $mouse->tagPad($mouse->tags->last()->tag_num) }}</h1>
         <a href="{{ action( 'MouseController@edit', ['id' => $mouse->id]) }}">
-            Edit Mouse
             </a>
         <p><strong>Colony:</strong> {{ $colony->name }}</p>
         <p><strong>Sex:</strong> {{ $mouse->getGender($mouse->sex) }}</p>
@@ -55,7 +54,11 @@
         <p><strong>Wean Date:</strong> {{$mouse->wean_date}}</p>
         <p><strong>End Date:</strong> {{$mouse->end_date}}</p>
         <p><strong>Sick Report:</strong> @if($mouse->sick_report) Yes @else No @endif</p>
-        <p><strong>Comments:</strong> {{$mouse->comments}}</p>
+        <p><strong>Comments:</strong>
+            <br/>
+            @foreach($mouse->comments as $comments)
+                <br/> {{ $comments->comment . ' - ' . $mouse->getUserName($comments->user_id) . ' @ ' . $comments->created_at}}
+            @endforeach</p>
         <a href="{{ action( 'MouseController@index') }}">
             Go Back
         </a>

@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Privilege::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
     public function isActive(){
         if($this->active){
             return true;

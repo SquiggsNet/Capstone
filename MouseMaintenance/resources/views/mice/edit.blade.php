@@ -115,7 +115,7 @@
                 <select name="father" id="father" class="form-control">
                     <option value="0">Select Male Parent..</option>
                     @foreach($mice as $mouse)
-                        @if($mouse->getGender($mouse->sex) == 'M' and isset($mouse->tags->last()->tag_num))
+                        @if($mouse->sex == 1 and isset($mouse->tags->last()->tag_num))
                             <option value="{{ $mouse->id }}"
                                 @if($editMouse->father == $mouse->id) selected="selected" @endif>
                                 @foreach($mouse->tags as $tag)
@@ -136,7 +136,7 @@
                 <select name="mother_one" id="mother_one" class="form-control">
                     <option value="null">Select Female Parent..</option>
                     @foreach($mice as $mouse)
-                        @if($mouse->getGender($mouse->sex) == 'F' && isset($mouse->tags->last()->tag_num))
+                        @if($mouse->sex == 0 && isset($mouse->tags->last()->tag_num))
                             <option value="{{ $mouse->id }}"
                                 @if($mouse->id == $editMouse->mother_one) selected="selected" @endif>
                                 @foreach($mouse->tags as $tag)

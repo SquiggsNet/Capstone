@@ -81,7 +81,15 @@
                                             {{ $mouse->getUserName($mouse->reserved_for) }}
                                         @endif
                                     </td>
-                                    <td>{{$mouse->comments}}  </td>
+                                    <td>
+                                        <?php $i=1; $len = count($mouse->comments); ?>
+                                        @foreach($mouse->comments as $comments)
+                                            @if($i == $len)
+                                                {{ $comments->comment }}
+                                            @endif
+                                            <?php $i++; ?>
+                                        @endforeach
+                                    </td>
                                     <td>
                                     {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                                     <button type="submit" >
@@ -246,13 +254,15 @@
 
                                     <td>{{$mouse->showDate($mouse->birth_date)}}</td>
                                     <td>{{$mouse->showDate($mouse->wean_date)}}</td>
-                                    <td>{{$mouse->comments}}  </td>
-
-                                        {{--{{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}--}}
-                                        {{--<button type="submit" >--}}
-                                            {{--<span class="glyphicon glyphicon-tags"></span>--}}
-                                        {{--</button>--}}
-                                        {{--{{ Form::close() }}--}}
+                                    <td>
+                                        <?php $i=1; $len = count($mouse->comments); ?>
+                                        @foreach($mouse->comments as $comments)
+                                            @if($i == $len)
+                                                {{ $comments->comment }}
+                                            @endif
+                                            <?php $i++; ?>
+                                        @endforeach
+                                    </td>
 
                                 </tr>
                             @endif

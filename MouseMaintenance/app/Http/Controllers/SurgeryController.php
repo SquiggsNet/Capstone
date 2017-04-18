@@ -13,7 +13,6 @@ use Illuminate\Pagination\Paginator;
 
 class SurgeryController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -122,7 +121,10 @@ class SurgeryController extends Controller
     public function show($id)
     {
         $surgery = Surgery::with('user', 'mice')->find($id);
-        return view('surgeries.show', compact('surgery', 'user', 'mice'));
+        $surgeons = User::all();
+        $treatments = Treatment::all();
+        $experiments = Experiment::all();
+        return view('surgeries.show', compact('surgery', 'user', 'mice', 'treatments', 'experiments', 'surgeons'));
     }
 
     /**

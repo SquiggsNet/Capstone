@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BloodPressure;
 use App\Cage;
 use App\Colony;
+use App\Storage;
 use App\Tag;
 use App\User;
 use App\Weight;
@@ -35,11 +36,13 @@ class MouseController extends Controller
         $mice = implode(",",$mice_for_surgery);
 
 
+
+
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
 //            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
         }else if($request->input('submit') == 'euthanize'){
-            return redirect('boxes/'.$mice.'/create');
+            return redirect('boxes/'.$mice.'/create/'.$request['storage']);
         }else{
             return redirect()->action('TissueController@index');
         }
@@ -102,6 +105,7 @@ class MouseController extends Controller
 
     public function index(Request $request)
     {
+        $storages = Storage::all();
 
         if(isset($request['pep_mice'])){
             $mice = Mouse::where('is_alive', 0)->get();
@@ -117,7 +121,7 @@ class MouseController extends Controller
             }
         }
 
-        return view('mice.index', compact('mice', 'active_tags', 'pep'));
+        return view('mice.index', compact('mice', 'active_tags', 'pep', 'storages'));
     }
 
     /**

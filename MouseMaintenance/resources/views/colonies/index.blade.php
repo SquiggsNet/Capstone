@@ -55,7 +55,8 @@
                             </div>
 
                             <div class="form-group clearfix">
-                                {!! Form::submit('Add',['class'=>'btn btn-block']) !!}
+                                <input value="Add" type="submit" class="btn btn-block" id="create_mice_btn">
+                                {{--{!! Form::submit('Add',['class'=>'btn btn-block']) !!}--}}
                             </div>
 
                         {!! Form::close() !!}

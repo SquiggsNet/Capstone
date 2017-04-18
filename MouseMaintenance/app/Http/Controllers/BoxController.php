@@ -30,11 +30,21 @@ class BoxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($mice_id)
+    public function create($mice_id, $storage_info)
     {
+        $storage = explode(",", $storage_info);
         $mice_ex = explode(",", $mice_id);
         $mice = Mouse::whereIn('id', $mice_ex)->get();
-        $boxes = Box::all(); //orderBy('box')->get();
+        if($storage[0]==1){
+            $boxes = Box::
+                    join('shelves', 'shelves.id', '=', 'boxes.shelf_id')
+                    ->join('compartments', 'compartments.id', '=', 'shelves.compartment_id')
+                    ->where('compartments.storage_id', $storage[1])->get();
+        }else{
+//            $boxes =
+        }
+        //orderBy('box')->get();
+
         $surgeons = User::all();
         $tissues = Tissue::all();
 

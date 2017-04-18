@@ -234,66 +234,17 @@ class MouseController extends Controller
                         'comment' => $request['comments']
                     ]);
                     $comment->save();
-
                 }
         }else{
             for($i = 0; $i < $mice_total; $i++) {
                 $mouse = Mouse::create([
                     'colony_id' => $request['colony_id'],
-                    'sex' => true,
                     'source' => $source,
-                    'reserved_for' => false,
-                    'father' => 'null',
-                    'geno_type_a' => 'null',
-                    'geno_type_b' => 'null',
-                    'mother_one' => 'null',
-                    'mother_two' => 'null',
-                    'mother_three' => 'null',
                     'birth_date' => $request['date_received'],
-                    'wean_date' => 'null',
-                    'end_date' => 'null',
                     'is_alive' => 1,
                     'sick_report' => false,
                 ]);
                 $mouse->save();
-
-                $user = Auth::user();
-                $comment = Comment::create([
-                    'mouse_id' => $mouse->id,
-                    'user_id' => $user->id,
-                    'comment' => $request['comments']
-                ]);
-                $comment->save();
-
-            }
-
-            for($i = 0; $i < $females; $i++) {
-                $mouse = Mouse::create([
-                    'colony_id' => $request['colony_id'],
-                    'sex' => false,
-                    'source' => $source,
-                    'reserved_for' => false,
-                    'father' => 'null',
-                    'geno_type_a' => 'null',
-                    'geno_type_b' => 'null',
-                    'mother_one' => 'null',
-                    'mother_two' => 'null',
-                    'mother_three' => 'null',
-                    'birth_date' => $request['date_received'],
-                    'wean_date' => 'null',
-                    'end_date' => 'null',
-                    'is_alive' => 1,
-                    'sick_report' => false,
-                ]);
-                $mouse->save();
-                $user = Auth::user();
-                $comment = Comment::create([
-                    'mouse_id' => $mouse->id,
-                    'user_id' => $user->id,
-                    'comment' => $request['comments']
-                ]);
-                $comment->save();
-
             }
 
         }

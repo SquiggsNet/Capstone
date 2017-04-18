@@ -38,7 +38,6 @@ class MouseController extends Controller
         $mice_for_surgery = $request['group_select_cb'];
         $mice = implode(",",$mice_for_surgery);
 
-
         if($request['purpose']=="3"){
             $mice = Mouse::whereIn('id', $mice_for_surgery)->get();
             foreach($mice as $mouse) {
@@ -54,6 +53,13 @@ class MouseController extends Controller
         }
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
+        }
+        if($request->input('submit') == 'edit'){
+            if(sizeof($mice_for_surgery)==1){
+                return redirect('mice/'.$mice.'/edit');
+            }else{
+                return redirect('mice/'.$mice.'/bulk_edit');
+            }
         }
         return redirect()->action('MouseController@index');
 
@@ -310,6 +316,27 @@ class MouseController extends Controller
 
         $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
                                 orWhere('end_date', '')->orWhere('end_date', null)->get();
+
+        foreach($active_mice as $a_m){
+            if(isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
+            }
+        }
+
+        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
+    }
+
+    public function bulk_edit($mice_id)
+    {
+        $mice_ex = explode(",", $mice_id);
+        $editMice = Mouse::whereIn('id', $mice_ex)->get();
+        $colonies = Colony::all();
+        $editMouse = Mouse::find($id);
+        $mice = Mouse::all();
+        $users = User::all();
+
+        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
+        orWhere('end_date', '')->orWhere('end_date', null)->get();
 
         foreach($active_mice as $a_m){
             if(isset($a_m->tags->last()->tag_num)) {

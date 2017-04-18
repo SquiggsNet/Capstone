@@ -79,9 +79,6 @@ class MouseController extends Controller
             }
         }
 
-
-        return($new_tags);
-
         //determine which action the user wanted to perform
         $action = $request->input('submit');
 

@@ -44,15 +44,17 @@ class MouseController extends Controller
             return redirect()->action('MouseController@index');
         }
 
+        if($request['purpose']=="2"){
+            return redirect('boxes/'.$mice.'/create/'.$request['storage']);
+        }
+
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
 //            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
-        }else if($request->input('submit') == 'euthanize'){
-            return redirect('boxes/'.$mice.'/create/'.$request['storage']);
         }
-        else{
-            return redirect()->action('TissueController@index');
-        }
+
+        return redirect()->action('MouseController@index');
+
     }
 
     public function groupUntagged(Request $request){

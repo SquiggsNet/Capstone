@@ -113,7 +113,14 @@
 
                     <input type="button" value="Euthanize" id="btn_euthanize" class="btn btn-default pull-left sixth show_btn"/>
                 </div>
+                    {{ Form::close() }}
 
+                    {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
+                    <button type="submit" class="btn btn-default pull-right btn-block sixth last">
+                        <input type="hidden" name="pep_mice"/>
+                        View Archived mice
+                    </button>
+                    {{ Form::close() }}
                 <div id="euthOptions" class="top-buffer">
                     <div id="euthPurpose" class="form-group quarter">
                         <label>Purpose:</label>
@@ -151,15 +158,10 @@
                     <button type="submit" name="submit" value="euthanize" id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                         Next
                     </button>
-                    {{ Form::close() }}
+
                 </div>
 
-                    {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
-                    <button type="submit" class="btn btn-default pull-right btn-block sixth last">
-                        <input type="hidden" name="pep_mice"/>
-                        View Archived mice
-                    </button>
-                    {{ Form::close() }}
+
             </div>
         </div>
 

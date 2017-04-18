@@ -22,8 +22,10 @@ class StorageController extends Controller
 
     public function index()
     {
-        $storages = Storage::all();
-        return view('storages.index', compact('storages'));
+        $storages = Storage::all()->groupBy('type');
+        $histologies = $storages[0];
+        $freezers = $storages[1];
+        return view('storages.index', compact('histologies', 'freezers'));
     }
 
     /**

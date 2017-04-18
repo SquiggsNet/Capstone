@@ -104,17 +104,21 @@ class MouseController extends Controller
     {
 
         if(isset($request['pep_mice'])){
-            $mice = Mouse::where('is_alive', 0)->get();
+            $mice = Mouse::where('is_alive', 0)->paginate(15);
             $pep = true;
         }else {
             $mice = Mouse::where('is_alive', 1)->get();
             $pep = false;
         }
 
+
         foreach ($mice as $a_m) {
             if (isset($a_m->tags->last()->tag_num)) {
                 $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
             }
+        }
+        if($pep){
+            $active_tags[] = 0;
         }
 
         return view('mice.index', compact('mice', 'active_tags', 'pep'));

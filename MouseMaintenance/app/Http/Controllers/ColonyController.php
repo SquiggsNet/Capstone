@@ -22,6 +22,7 @@ class ColonyController extends Controller
         $mice = Mouse::all();
         $colonies = Colony::all();
         $cages = Cage::all();
+
         return view('colonies.index', compact('mice', 'colonies', 'cages'));
     }
 
@@ -62,7 +63,12 @@ class ColonyController extends Controller
     {
         $colony = Colony::with('mice.tags')->find($id);
 
-        return view('colonies.show', compact('colony', 'mice'));
+        foreach ($colony->mice as $a_m) {
+            if (isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
+            }
+        }
+        return view('colonies.show', compact('colony', 'active_tags', 'mice'));
     }
 
     /**

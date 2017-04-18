@@ -109,12 +109,10 @@
                         @endforeach
                     </tbody>
                 </table>
-
                 <div>
                     <button type="submit" name="submit" value="edit" id="submit_edit" class="btn btn-default pull-left btn-block sixth">
                         Edit
                     </button>
-
                     <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
                         Create Surgery
                     </button>
@@ -166,10 +164,7 @@
                     <button type="submit" name="submit" value="euthanize" id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                         Next
                     </button>
-
                 </div>
-
-
             </div>
         </div>
 
@@ -181,8 +176,6 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            {{--<th>Strain</th>--}}
-                            {{--<th>Source</th>--}}
                             <th>Remove</th>
                             <th>Tag</th>
                             <th>Set Sex</th>
@@ -219,8 +212,6 @@
                                         <input type="text" id="new_tag_id" maxlength="3" minlength="3"
                                                class="form-control col-md-1" oninput="checkTag()" name="new_tag_id[]"/>
                                     </td>
-                                    {{--<td>{{ $mouse->colony->name }}</td>--}}
-                                    {{--<td>{{ $mouse->source }}</td>--}}
                                     <td>
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-default" for="sex">
@@ -445,6 +436,21 @@
                 new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
             }
 
+
+            //check new tag values against duplicates in themselves
+            var new_tag_check = tag_num;
+            for (var t = 0; t < tag_num.length ; t++){
+                for( var x = 0; x < new_tag_check.length; x++){
+                    if(x != t) {
+                        if (new_tag_check[x] == tag_num[t] && tag_num[t] != "") {
+                            new_tag_array[t].style.backgroundColor = "yellow";
+                            duplicate.push(t);
+                            btn_submit_tag.disabled = true;
+                        }
+                    }
+                }
+            }
+
             //if no duplicates ensure button is enabled
             if (duplicate.length < 1) {
                 btn_submit_tag.disabled = false;
@@ -527,8 +533,6 @@
         btn_submit_tag.disabled = false;
         btn_submit_remove.disabled = false;
     }
-
-
 
 </script>
 <style type="text/css">

@@ -108,17 +108,21 @@ class MouseController extends Controller
         $storages = Storage::all();
 
         if(isset($request['pep_mice'])){
-            $mice = Mouse::where('is_alive', 0)->get();
+            $mice = Mouse::where('is_alive', 0)->paginate(15);
             $pep = true;
         }else {
             $mice = Mouse::where('is_alive', 1)->get();
             $pep = false;
         }
 
+
         foreach ($mice as $a_m) {
             if (isset($a_m->tags->last()->tag_num)) {
                 $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
             }
+        }
+        if($pep){
+            $active_tags[] = 0;
         }
 
         return view('mice.index', compact('mice', 'active_tags', 'pep', 'storages'));
@@ -132,6 +136,10 @@ class MouseController extends Controller
      */
     public function create(Request $request)
     {
+        $this->validate($request, [
+           'select_source'
+        ]);
+
         $mice = Mouse::all();
         $colonies = Colony::all();
         $users = User::all();

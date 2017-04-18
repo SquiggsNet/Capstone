@@ -266,6 +266,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="text-center">
+{{--                    {!! $mice->appends(array('active_tags' => $active_tags))->links() !!}--}}
+                </div>
                 <button type="submit" name="submit" value="remove" id="submit_remove" class="btn btn-default pull-left btn-block sixth">
                     Remove
                 </button>
@@ -387,6 +390,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="text-center">
+            {{ $mice->appends(['pep_mice' => 'true'])->links() }}
+        </div>
     </div>
 
 @endif
@@ -399,55 +405,56 @@
     var new_tag_array = document.getElementsByName('new_tag_id[]');
     var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
 
-    function checkTag(){
-        var tagArray = <?php echo json_encode($active_tags) ?>;
-        var tag_str;
-        var tag_num = [];
-        var duplicate = [];
+        function checkTag() {
+            var tagArray = <?php echo json_encode($active_tags) ?>;
+            var tag_str;
+            var tag_num = [];
+            var duplicate = [];
 
-        //place each new_tag_input into one array
-        for(i=0; i < new_tag_array.length; i++){
-            tag_num.push(new_tag_array[i].value);
-        }
+            //place each new_tag_input into one array
+            for (i = 0; i < new_tag_array.length; i++) {
+                tag_num.push(new_tag_array[i].value);
+            }
 
-        //loop array of current tags and new tags for duplicates and disable submit
-        for(var i = 0; i < tagArray.length; i++) {
-            for (var j = 0; j < tag_num.length; j++) {
-                if (tagArray[i] == tag_num[j]) {
-                    duplicate.push(j);
-                    btn_submit_tag.disabled = true;
-                } else {
-                    new_tag_array[j].style.backgroundColor = "white";
+            //loop array of current tags and new tags for duplicates and disable submit
+            for (var i = 0; i < tagArray.length; i++) {
+                for (var j = 0; j < tag_num.length; j++) {
+                    if (tagArray[i] == tag_num[j]) {
+                        duplicate.push(j);
+                        btn_submit_tag.disabled = true;
+                    } else {
+                        new_tag_array[j].style.backgroundColor = "white";
+                    }
                 }
+            }
+
+            //if duplicate set input to yellow
+            for (var i = 0; i < duplicate.length; i++) {
+                new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
+            }
+
+            //if no duplicates ensure button is enabled
+            if (duplicate.length < 1) {
+                btn_submit_tag.disabled = false;
+            }
+
+            //if any inputs hold value, disable submit for sex and delete
+            tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
+            if (isNaN(tag_str)) {
+                btn_submit_sex.disabled = false;
+                btn_submit_remove.disabled = false;
+                btn_clear_sex.disabled = false;
+                $(".btn-group label").attr("disabled", false);
+                $("[name='group_select_untagged_cb[]']").attr('disabled', false);
+            } else {
+                $(".btn-group label").attr("disabled", true);
+                btn_submit_sex.disabled = true;
+                btn_submit_remove.disabled = true;
+                btn_clear_sex.disabled = true;
+                $("[name='group_select_untagged_cb[]']").attr('disabled', true);
             }
         }
 
-        //if duplicate set input to yellow
-        for(var i = 0; i < duplicate.length; i++){
-            new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
-        }
-
-        //if no duplicates ensure button is enabled
-        if(duplicate.length < 1){
-            btn_submit_tag.disabled = false;
-        }
-
-        //if any inputs hold value, disable submit for sex and delete
-        tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
-        if(isNaN(tag_str)){
-            btn_submit_sex.disabled = false;
-            btn_submit_remove.disabled = false;
-            btn_clear_sex.disabled = false;
-            $(".btn-group label").attr("disabled", false);
-            $("[name='group_select_untagged_cb[]']").attr('disabled', false);
-        }else{
-            $(".btn-group label").attr("disabled", true);
-            btn_submit_sex.disabled = true;
-            btn_submit_remove.disabled = true;
-            btn_clear_sex.disabled = true;
-            $("[name='group_select_untagged_cb[]']").attr('disabled', true);
-        }
-    }
 
     document.on('change', '[type=input]', function (e) {
         alert('This is the ' + $(this).index('[type=input]') + ' checkbox');

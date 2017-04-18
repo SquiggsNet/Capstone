@@ -120,6 +120,17 @@ class UserTableSeeder extends Seeder
             'phone' => "9024418780",
             'password' => Hash::make("password"),
         ]);
+        DB::table('users')->insert([
+            'first_name' => "Traverse",
+            'last_name' => "Davies",
+            'email' => "traverse.davies@nscc.ca",
+            'admin' => true,
+            'active' => true,
+            'new_password' => false,
+            'student_id' => "w0297372",
+            'phone' => "9025551234",
+            'password' => Hash::make("!Summer2"),
+        ]);
     }
 }
 

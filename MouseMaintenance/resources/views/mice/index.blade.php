@@ -100,12 +100,8 @@
                     <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
                         Create Surgery
                     </button>
-
                     <input type="button" value="Euthanize" id="btn_euthanize" class="btn btn-default pull-left sixth show_btn"/>
                 </div>
-
-
-
                 <div id="euthOptions" class="top-buffer">
                     <div id="euthPurpose" class="form-group quarter">
                         <label>Purpose:</label>

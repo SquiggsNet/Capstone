@@ -129,13 +129,25 @@ class StorageController extends Controller
             $compartment = Compartment::find($shelf->compartment_id);
             $storage_type = Storage::find($compartment->storage_id);
 
+            $father = 'N/A';
+            $mother_one = 'N/A';
             $mother_two = 'N/A';
             $mother_three = 'N/A';
+            $tag = 'N/A';
+            if(!is_null($storage->mouse->father_record)){
+                $father = $storage->mouse->tagPad($storage->mouse->father_record->tags->last()->tag_num);
+            }
+            if(!is_null($storage->mouse->mother_one)){
+                $mother_one = $storage->mouse->tagPad($storage->mouse->mother_one_record->tags->last()->tag_num);
+            }
             if(!is_null($storage->mouse->mother_two)){
                 $mother_two = $storage->mouse->tagPad($storage->mouse->mother_two_record->tags->last()->tag_num);
             }
             if(!is_null($storage->mouse->mother_three)){
                 $mother_three = $storage->mouse->tagPad($storage->mouse->mother_three_record->tags->last()->tag_num);
+            }
+            if(isset($storage->mouse->tags->last()->tag_num)){
+                $tag = $storage->mouse->tagPad($storage->mouse->tags->last()->tag_num);
             }
             if($storage->mouse->sick_report){
                 $sr = 'True';
@@ -159,14 +171,13 @@ class StorageController extends Controller
                 'Location' => $store,
                 'Compartment' => $comp,
                 'Shelf' => $sh,
-                'Mouse Tag #' => $storage->mouse->tagPad($storage->mouse->tags->last()->tag_num),
-                'Tag #' => $storage->mouse->tagPad($storage->mouse->tags->last()->tag_num),
+                'Mouse Tag #' => $tag,
                 'Colony' => $storage->mouse->colony->name,
                 'Sex' => $storage->mouse->getGender($storage->mouse->sex),
                 'Birth Date' => $storage->mouse->birth_date,
                 'Wean Date' => $storage->mouse->wean_date,
-                'Father Tag#' => $storage->mouse->tagPad($storage->mouse->father_record->tags->last()->tag_num),
-                'Mother One Tag#' => $storage->mouse->tagPad($storage->mouse->mother_one_record->tags->last()->tag_num),
+                'Father Tag#' => $father,
+                'Mother One Tag#' => $mother_one,
                 'Mother Two Tag#' => $mother_two,
                 'Mother Three Tag#' => $mother_three,
                 'Sick Report' => $sr,

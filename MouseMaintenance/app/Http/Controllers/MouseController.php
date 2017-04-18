@@ -473,30 +473,44 @@ class MouseController extends Controller
         //loop through query and set all key value pairs
         foreach ($mice as $mouse){
 
+            $father = 'N/A';
+            $mother_one = 'N/A';
             $mother_two = 'N/A';
             $mother_three = 'N/A';
+            $tag = 'N/A';
+            if(!is_null($mouse->father_record)){
+                $father = $mouse->tagPad($mouse->father_record->tags->last()->tag_num);
+            }
+            if(!is_null($mouse->mother_one)){
+                $mother_one = $mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num);
+            }
             if(!is_null($mouse->mother_two)){
                 $mother_two = $mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num);
             }
             if(!is_null($mouse->mother_three)){
                 $mother_three = $mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num);
             }
+            if(isset($mouse->tags->last()->tag_num)){
+                $tag = $mouse->tagPad($mouse->tags->last()->tag_num);
+            }
 
             $array = array(
                 'ID' => $mouse->id,
-                'Tag #' => $mouse->tagPad($mouse->tags->last()->tag_num),
+                'Tag #' => $tag,
                 'Colony' => $mouse->colony->name,
                 'Sex' => $mouse->getGender($mouse->sex),
                 'Birth Date' => $mouse->birth_date,
                 'Wean Date' => $mouse->wean_date,
-                'Father Tag#' => $mouse->tagPad($mouse->father_record->tags->last()->tag_num),
-                'Mother One Tag#' => $mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num),
+                'Father Tag#' => $father,
+                'Mother One Tag#' => $mother_one,
                 'Mother Two Tag#' => $mother_two,
                 'Mother Three Tag#' => $mother_three,
                 'Alive' => $mouse->is_alive,
                 'Sick Report' => $mouse->sick_report,
                 'End Date' => $mouse->end_date,
                 );
+
+
 
             if(!is_null($mouse->treatments)){
                 $i = 1;

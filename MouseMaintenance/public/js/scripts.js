@@ -17,6 +17,7 @@ $(document).on('click','.value-control',function(){
 $(document).ready(function () {
 
     //colony index create mouse source display
+
     if($("#source").val() == "1"){
         $("#selectCage").show();
     }
@@ -46,47 +47,47 @@ $(document).ready(function () {
     });
 
     //select Euthanize options
-    //$("#euthPurpose").hide();
+    $("#euthPurpose").hide();
     $("#euthExperiment").hide();
     $("#euthStorage").hide();
-    $("#submit_Euthanization").hide();
-    $("#submit_euthanize").click(function(){
+    $("#submit_euthanize").hide();
+    $("#btn_euthanize").click(function(){
         $("#euthPurpose").show();
     });
     $("#purpose").change(function() {
         if($("#purpose").val() == "1"){
             $("#euthStorage").hide();
             $("#euthExperiment").show();
-            $("#submit_Euthanization").hide();
+            $("#submit_euthanize").hide();
         }
         else if($("#purpose").val() == "2"){
             $("#euthStorage").show();
             $("#euthExperiment").hide();
-            $("#submit_Euthanization").hide();
+            $("#submit_euthanize").hide();
         }
         else if($("#purpose").val() == "3"){
             $("#euthExperiment").hide();
             $("#euthStorage").hide();
-            $("#submit_Euthanization").show();
+            $("#submit_euthanize").show();
         }else{
             $("#euthStorage").hide();
             $("#euthExperiment").hide();
-            $("#submit_Euthanization").hide();
+            $("#submit_euthanize").hide();
         }
 
     });
     $("#experiment").change(function() {
         if($("#experiment").val() != "0"){
-            $("#submit_Euthanization").show();
+            $("#submit_euthanize").show();
         }else{
-            $("#submit_Euthanization").hide();
+            $("#submit_euthanize").hide();
         }
     });
     $("#storage").change(function() {
         if($("#storage").val() != "0"){
-            $("#submit_Euthanization").show();
+            $("#submit_euthanize").show();
         }else{
-            $("#submit_Euthanization").hide();
+            $("#submit_euthanize").hide();
         }
     });
 

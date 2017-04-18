@@ -110,25 +110,25 @@
                     </tbody>
                 </table>
 
-                <button type="submit" name="submit" value="edit" id="submit_edit" class="btn btn-default pull-left btn-block sixth">
-                    Edit
-                </button>
+                <div>
+                    <button type="submit" name="submit" value="edit" id="submit_edit" class="btn btn-default pull-left btn-block sixth">
+                        Edit
+                    </button>
 
-                <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
-                    Create Surgery
-                </button>
+                    <button type="submit" name="submit" value="surgery" id="submit_surgery" class="btn btn-default pull-left btn-block sixth show_btn">
+                        Create Surgery
+                    </button>
 
-                <button type="submit" name="submit" value="euthanize"  id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
-                    Eunthanize
-                </button>
-                {{ Form::close() }}
+                    <input type="button" value="Euthanize" id="btn_euthanize" class="btn btn-default pull-left sixth show_btn"/>
+                </div>
+                    {{ Form::close() }}
 
-                {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
-                <button type="submit" class="btn btn-default pull-right btn-block sixth last">
-                    <input type="hidden" name="pep_mice"/>
-                    View Archived mice
-                </button>
-                {{ Form::close() }}
+                    {{ Form::open(['action' => ['MouseController@index'], 'method' => 'get']) }}
+                    <button type="submit" class="btn btn-default pull-right btn-block sixth last">
+                        <input type="hidden" name="pep_mice"/>
+                        View Archived mice
+                    </button>
+                    {{ Form::close() }}
                 <div id="euthOptions" class="top-buffer">
                     <div id="euthPurpose" class="form-group quarter">
                         <label>Purpose:</label>
@@ -152,15 +152,24 @@
                         <label>Storage Type:</label>
                         <select class="form-control" name="storage" id="storage">
                             <option value="0">Select Storage</option>
-                            <option value="1">-80 Freezer #1</option>
-                            <option value="2">-80 Freezer #2</option>
-                            <option value="2">Paraffin Embedding (Histology)</option>
+                            @foreach($storages as $storage)
+                                <option value="{{$storage->type}},{{$storage->id}}">
+                                    @if($storage->type == 1)
+                                        (-80&deg;C) Freezer {{$storage->identifier}}
+                                    @else
+                                        Histology {{$storage->identifier}}
+                                    @endif
+                                </option>
+                                @endforeach
                         </select>
                     </div>
-                    <button type="submit" name="submit" value="euthNext" id="submit_Euthanization" class="btn btn-default pull-left btn-block sixth show_btn">
+                    <button type="submit" name="submit" value="euthanize" id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
                         Next
                     </button>
+
                 </div>
+
+
             </div>
         </div>
 
@@ -518,6 +527,8 @@
         btn_submit_tag.disabled = false;
         btn_submit_remove.disabled = false;
     }
+
+
 
 </script>
 <style type="text/css">

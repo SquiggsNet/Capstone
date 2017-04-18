@@ -201,6 +201,14 @@ table th, td{
     max-width: 60px;
 }
 
+#colony_mice_table td{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 60px;
+}
+
+
 .panel{
     margin-bottom: 25px;
     border-radius: 10px;

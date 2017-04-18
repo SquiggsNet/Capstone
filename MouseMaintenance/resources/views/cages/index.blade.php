@@ -75,7 +75,15 @@
                                         @endif
                                     </td>
                                     <td>{{$mouse->users}}</td>
-                                    <td>{{$mouse->comments}}  </td>
+                                    <td>
+                                        <?php $i=1; $len = count($mouse->comments); ?>
+                                        @foreach($mouse->comments as $comments)
+                                            @if($i == $len)
+                                                {{ $comments->comment }}
+                                            @endif
+                                            <?php $i++; ?>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                                         <button type="submit" >

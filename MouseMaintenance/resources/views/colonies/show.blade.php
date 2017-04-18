@@ -7,13 +7,12 @@
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Tagged Mice</h3></div>
             <div class="panel-body">
-
-                <button type="submit" name="submit" value="breeders" id="submit_breeders" class="btn btn-default pull-right btn-block sixth bottom-buffer last">
+                <a id="breeders_link" class="btn btn-default pull-right btn-block sixth bottom-buffer last"
+                   href="{{ action( 'CageController@index') }}">
                     Breeders
-                </button>
-
+                </a>
                 {{ Form::open(array('url' => 'mice/group')) }}
-                <table class="table table-bordered table-striped" id="mice_table" data-toggle="table" >
+                <table class="table table-bordered table-striped" id="colony_mice_table" data-toggle="table" >
                     <thead>
                     <tr>
                         <th></th>
@@ -67,7 +66,15 @@
                                     @endif
                                 </td>
                                 <td>{{$mouse->users}}</td>
-                                <td>{{$mouse->comments}}  </td>
+                                <td>
+                                    <?php $i=1; $len = count($mouse->comments); ?>
+                                    @foreach($mouse->comments as $comments)
+                                        @if($i == $len)
+                                            {{ $comments->comment }}
+                                        @endif
+                                        <?php $i++; ?>
+                                    @endforeach
+                                </td>
                                 <td>
                                     {{ Form::open(['action' => ['MouseController@edit', $mouse], 'method' => 'get']) }}
                                     <button type="submit" >

@@ -19,7 +19,6 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
-use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MouseController extends Controller
@@ -344,26 +343,26 @@ class MouseController extends Controller
         return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
     }
 
-    public function bulk_edit($mice_id)
-    {
-        $mice_ex = explode(",", $mice_id);
-        $editMice = Mouse::whereIn('id', $mice_ex)->get();
-        $colonies = Colony::all();
-        $editMouse = Mouse::find($id);
-        $mice = Mouse::all();
-        $users = User::all();
-
-        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
-        orWhere('end_date', '')->orWhere('end_date', null)->get();
-
-        foreach($active_mice as $a_m){
-            if(isset($a_m->tags->last()->tag_num)) {
-                $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
-            }
-        }
-
-        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
-    }
+//    public function bulk_edit($mice_id)
+//    {
+//        $mice_ex = explode(",", $mice_id);
+//        $editMice = Mouse::whereIn('id', $mice_ex)->get();
+//        $colonies = Colony::all();
+//        $editMouse = Mouse::find($id);
+//        $mice = Mouse::all();
+//        $users = User::all();
+//
+//        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
+//        orWhere('end_date', '')->orWhere('end_date', null)->get();
+//
+//        foreach($active_mice as $a_m){
+//            if(isset($a_m->tags->last()->tag_num)) {
+//                $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
+//            }
+//        }
+//
+//        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
+//    }
 
     /**
      * Update the specified resource in storage.

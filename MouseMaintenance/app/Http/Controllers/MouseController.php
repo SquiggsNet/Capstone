@@ -6,6 +6,8 @@ use App\BloodPressure;
 use App\Cage;
 use App\Colony;
 use App\Comment;
+use App\Storage;
+use App\Surgery;
 use App\Tag;
 use App\User;
 use App\Weight;
@@ -104,6 +106,7 @@ class MouseController extends Controller
 
     public function index(Request $request)
     {
+        $storages = Storage::all();
 
         if(isset($request['pep_mice'])){
             $mice = Mouse::where('is_alive', 0)->paginate(15);
@@ -122,8 +125,8 @@ class MouseController extends Controller
         if($pep){
             $active_tags[] = 0;
         }
-        $comments = Comment::where('mouse_id', $mice)->get();
-        return view('mice.index', compact('mice', 'active_tags', 'pep', 'comments'));
+
+        return view('mice.index', compact('mice', 'active_tags', 'pep', 'storages'));
     }
 
     /**
@@ -277,8 +280,9 @@ class MouseController extends Controller
         $mouse = Mouse::find($id);
         $user = User::where('id', $mouse->reserved_for)->get()->first();
         $colony = Colony::find($mouse->colony_id);
+        $surgeries = Surgery::with('mice')->get();
 
-        return view('mice.show', compact('mouse', 'user', 'colony'));
+        return view('mice.show', compact('mouse', 'user', 'colony', 'surgeries'));
     }
 
     /**

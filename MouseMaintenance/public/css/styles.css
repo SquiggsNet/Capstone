@@ -194,6 +194,13 @@ table th, td{
     align: center;
 }
 
+#mice_table td{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 60px;
+}
+
 .panel{
     margin-bottom: 25px;
     border-radius: 10px;
@@ -242,4 +249,8 @@ table th, td{
     .third-x2, .third{
         width: 100%;
     }
+}
+
+#mouse_comment_table{
+    text-align: left;
 }

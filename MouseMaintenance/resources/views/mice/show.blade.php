@@ -15,11 +15,13 @@
                             <td>{{ $colony->name }}</td>
                             <th>Father</th>
                             <td>
-                                <a href="{{ action( 'MouseController@show', ['id' => $mouse->father]) }}">
-                                    {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
-                                    {{$mouse->getGender($mouse->father_record->sex)}}
-                                    ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})
-                                </a>
+                                @if(!is_null($mouse->father))
+                                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->father]) }}">
+                                        {{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
+                                        {{$mouse->getGender($mouse->father_record->sex)}}
+                                        ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/{{$mouse->getGeno($mouse->father_record->geno_type_b)}})
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -31,11 +33,13 @@
                             </td>
                             <th>Mother One</th>
                             <td>
-                                <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_one]) }}">
-                                    {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
-                                    {{$mouse->getGender($mouse->mother_one_record->sex)}}
-                                    ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
-                                </a>
+                                @if(!is_null($mouse->mother_one))
+                                    <a href="{{ action( 'MouseController@show', ['id' => $mouse->mother_one]) }}">
+                                        {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
+                                        {{$mouse->getGender($mouse->mother_one_record->sex)}}
+                                        ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/{{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +55,6 @@
                                     </a>
                                 @endif
                             </td>
-
                         </tr>
                         <tr>
                             <th>Genotype</th>
@@ -71,11 +74,19 @@
                                 @endif
                             </td>
                         </tr>
-                        <tr>
+                        {{--<tr>--}}
                             <th>Birth Date</th>
-                            <td>{{$mouse->birth_date}}</td>
+                            <td>
+                                @if(!is_null($mouse->birth_date))
+                                    {{$mouse->birth_date}}
+                                @endif
+                            </td>
                             <th>Wean Date</th>
-                            <td>{{$mouse->wean_date}}</td>
+                            <td>
+                                @if(!is_null($mouse->wean_date))
+                                    {{$mouse->wean_date}}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <th>End Date</th>

@@ -52,7 +52,7 @@ $(document).ready(function () {
     $("#euthStorage").hide();
     $("#submit_euthanize").hide();
     $("#btn_euthanize").click(function(){
-        $("#euthPurpose").show();
+        $("#euthStorage").show();
     });
     $("#purpose").change(function() {
         if($("#purpose").val() == "1"){
@@ -88,6 +88,19 @@ $(document).ready(function () {
             $("#submit_euthanize").show();
         }else{
             $("#submit_euthanize").hide();
+        }
+    });
+
+    $(".euthStorage").hide();
+    $(".submit_euthanize").hide();
+    $(".btn_euthanize").click(function(){
+        $("."+this.id).show();
+    });
+    $(".storage").change(function() {
+        if(this.selectedIndex != "0"){
+            $("."+this.id).show();
+        }else{
+            $("."+this.id).hide();
         }
     });
 

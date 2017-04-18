@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mouse;
+use App\Storage;
 use App\Treatment;
 use App\Experiment;
 use App\User;
@@ -19,8 +20,9 @@ class SurgeryController extends Controller
 
     public function index()
     {
+        $storages = Storage::all();
         $surgeries = Surgery::with('user', 'mice')->get();
-        return view('surgeries.index', compact('surgeries', 'user', 'mice'));
+        return view('surgeries.index', compact('surgeries', 'user', 'mice', 'storages'));
     }
 
     /**

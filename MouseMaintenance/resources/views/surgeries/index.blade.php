@@ -42,7 +42,7 @@
                         <th>End Date</th>
                         <th>Experimental Use</th>
                         <th>End User</th>
-                        <th></th>
+                        {{--<th></th>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -98,22 +98,40 @@
                                             {{ $mouse->getUserName($mouse->reserved_for) }}
                                         @endif
                                     </td>
-                                    <td>
-                                        {!! Form::open(['action' => ['SurgeryController@remove', $surgery],
-                                         'method' => 'post', 'onsubmit' => 'return confirmRemove()']) !!} {{--<- Doesn't confirm for some unknown reason--}}
-                                        <input type="hidden" name="mouse" value="{{ $mouse->id }}" />
-                                        <button type="submit" >
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                        {{ Form::close() }}
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--{!! Form::open(['action' => ['SurgeryController@remove', $surgery],--}}
+                                         {{--'method' => 'post', 'onsubmit' => 'return confirmRemove()']) !!} --}}{{--<- Doesn't confirm for some unknown reason--}}
+                                        {{--<input type="hidden" name="mouse" value="{{ $mouse->id }}" />--}}
+                                        {{--<button type="submit" >--}}
+                                            {{--<span class="glyphicon glyphicon-trash"></span>--}}
+                                        {{--</button>--}}
+                                        {{--{{ Form::close() }}--}}
+                                    {{--</td>--}}
                                 </tr>
                             @endif
                     @endforeach
                     </tbody>
                 </table>
-                <button type="submit" name="submit" value="euthanize"  id="submit_euthanize" class="btn btn-default pull-left btn-block sixth show_btn">
-                    Eunthanize
+
+                <input type="button" value="Euthanize" id="euthStorage{{$surgery->id}}" class="btn_euthanize btn btn-default pull-left sixth show_btn"/>
+
+                <div class="euthStorage form-group quarter euthStorage{{$surgery->id}}">
+                    <label>Storage Type:</label>
+                    <select class="form-control storage" name="storage" id="submit_euthanize{{$surgery->id}}">
+                        <option value="0">Select Storage</option>
+                        @foreach($storages as $storage)
+                            <option value="{{$storage->type}},{{$storage->id}}">
+                                @if($storage->type == 1)
+                                    (-80&deg;C) Freezer {{$storage->identifier}}
+                                @else
+                                    Histology {{$storage->identifier}}
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" name="submit" value="euthanize" id="submit_euthanize{{$surgery->id}}" class="submit_euthanize{{$surgery->id}} submit_euthanize btn btn-default pull-left btn-block sixth show_btn">
+                    Next
                 </button>
 
                 {{ Form::close() }}

@@ -41,14 +41,14 @@
             <div class="panel panel-default half last">
                 <div class="panel-heading"><a href="{{ url('/storages') }}"><h3>Storage</h3></a></div>
                 <div class="panel-body">
-
-                    @foreach ($storages as $storage)
-                        <a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $storage->id]) }}" role="button">
-                            @if($storage->type == 1)
-                                (-80&deg;C) Freezer {{$storage->identifier}}
-                            @else
-                                Histology {{$storage->identifier}}
-                            @endif
+                    @foreach ($freezers as $feezer)
+                        <a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $feezer->id]) }}" role="button">
+                                (-80&deg;C) Freezer {{$feezer->identifier}}
+                        </a>
+                    @endforeach
+                    @foreach ($histologies as $histologie)
+                        <a class="btn btn-lg btn-block" href="{{ action( 'StorageController@show', ['id' => $histologie->id]) }}" role="button">
+                            Histology {{$histologie->identifier}}
                         </a>
                     @endforeach
                 </div>

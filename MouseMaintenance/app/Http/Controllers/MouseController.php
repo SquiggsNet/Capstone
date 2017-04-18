@@ -40,14 +40,24 @@ class MouseController extends Controller
         $mice = implode(",",$mice_for_surgery);
 
 
+        if($request['purpose']=="3"){
+            $mice = Mouse::whereIn('id', $mice_for_surgery)->get();
+            foreach($mice as $mouse) {
+                Mouse::where('id', $mouse->id)->update(['is_alive' => false]);
+            }
+            return redirect()->action('MouseController@index');
+        }
+        if($request['purpose']=="2"){
+            return redirect('boxes/'.$mice.'/create/'.$request['storage']);
+        }
+        if($request['purpose']=="1"){
+            return redirect('boxes/'.$mice.'/create/1,1');
+        }
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
-//            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
-        }else if($request->input('submit') == 'euthanize'){
-            return redirect('boxes/'.$mice.'/create');
-        }else{
-            return redirect()->action('TissueController@index');
         }
+        return redirect()->action('MouseController@index');
+
     }
 
     public function groupUntagged(Request $request){

@@ -26,8 +26,11 @@ class HomeController extends Controller
     {
 
         $colonies = Colony::all();
-        $storages = Storage::all();
+        $storages = Storage::all()->groupBy('type');
+        $histologies = $storages[0];
+        $freezers = $storages[1];
         $surgeries = Surgery::all();
-        return view('home', compact('colonies', 'storages', 'surgeries'));
+
+        return view('home', compact('colonies', 'surgeries', 'histologies', 'freezers'));
     }
 }

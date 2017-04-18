@@ -45,7 +45,7 @@ class MouseController extends Controller
             }
             return redirect()->action('MouseController@index');
         }
-        if($request['purpose']=="2"){
+        if($request['purpose']=="2" || $request->input('submit') == 'euthanize'){
             return redirect('boxes/'.$mice.'/create/'.$request['storage']);
         }
         if($request['purpose']=="1"){
@@ -343,26 +343,25 @@ class MouseController extends Controller
         return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
     }
 
-//    public function bulk_edit($mice_id)
-//    {
-//        $mice_ex = explode(",", $mice_id);
-//        $editMice = Mouse::whereIn('id', $mice_ex)->get();
-//        $colonies = Colony::all();
-//        $editMouse = Mouse::find($id);
-//        $mice = Mouse::all();
-//        $users = User::all();
-//
-//        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
-//        orWhere('end_date', '')->orWhere('end_date', null)->get();
-//
-//        foreach($active_mice as $a_m){
-//            if(isset($a_m->tags->last()->tag_num)) {
-//                $active_tags[] = $editMouse->tagPad($a_m->tags->last()->tag_num);
-//            }
-//        }
-//
-//        return view('mice.edit', compact('editMouse', 'colonies', 'users', 'mice', 'active_tags'));
-//    }
+    public function bulk_edit($mice_id)
+    {
+        $mice_ex = explode(",", $mice_id);
+        $editMice = Mouse::whereIn('id', $mice_ex)->get();
+        $colonies = Colony::all();
+        $mice = Mouse::all();
+        $users = User::all();
+
+        $active_mice = Mouse::whereDate('end_date', '>=', date('Y-m-d'))->
+        orWhere('end_date', '')->orWhere('end_date', null)->get();
+
+        foreach($active_mice as $a_m){
+            if(isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $editMice->tagPad($a_m->tags->last()->tag_num);
+            }
+        }
+
+        return view('mice.edit', compact('editMice', 'colonies', 'users', 'mice', 'active_tags'));
+    }
 
     /**
      * Update the specified resource in storage.

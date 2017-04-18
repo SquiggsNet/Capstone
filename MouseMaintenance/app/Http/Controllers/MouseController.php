@@ -35,15 +35,22 @@ class MouseController extends Controller
         $mice_for_surgery = $request['group_select_cb'];
         $mice = implode(",",$mice_for_surgery);
 
+        if($request['purpose']=="3"){
+            $mice = Mouse::whereIn('id', $mice_for_surgery)->get();
 
-
+            foreach($mice as $mouse) {
+                Mouse::where('id', $mouse->id)->update(['is_alive' => false]);
+            }
+            return redirect()->action('MouseController@index');
+        }
 
         if($request->input('submit') == 'surgery'){
             return redirect('surgeries/'.$mice.'/create');
 //            return redirect()->action('SurgeryController@create')->with('mice', $mice_for_surgery);
         }else if($request->input('submit') == 'euthanize'){
             return redirect('boxes/'.$mice.'/create/'.$request['storage']);
-        }else{
+        }
+        else{
             return redirect()->action('TissueController@index');
         }
     }

@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        @foreach($errors->all() as $error)
+            <li style="color: red;">{{$error}}</li>
+        @endforeach
         <div class="panel panel-default whole">
             <div class="panel-heading text-center">
                 <h2>Edit User Information</h2>

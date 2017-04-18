@@ -151,103 +151,104 @@
         </div>
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Untagged Mice</h3></div>
-            <div class="panel-body">
-
+            <div class="panel-body" >
                 {{ Form::open(array('url' => 'mice/groupUntagged')) }}
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Remove</th>
-                            <th>Tag</th>
-                            <th>Set Sex</th>
-                            <th>Sex</th>
-                            <th>Pedigree</th>
-                            <th>DOB</th>
-                            <th>Wean Date</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($mice as $mouse)
-                            @if(!isset($mouse->tags->last()->tag_num))
-                                @if($mouse->sex == "1")
-                                        <?php $class = "info" ?>
-                                    @elseif($mouse->sex == "0")
-                                        <?php $class = "danger" ?>
-                                    @else
-                                        <?php $class = "" ?>
-                                    @endif
-                                @if($mouse->sick_report)
-                                        <?php $id = "report" ?>
-                                    @else
-                                        <?php $id = "no_report" ?>
-                                    @endif
-                                <tr class="{{ $class }}" id="{{ $id }}">
-                                    <td>
-                                        <input type="hidden" name="mice[]" id="mice" value="{{ $mouse->id }}"/>
-                                        <input type="checkbox" class="untaggedChk" value="{{ $mouse->id }}" id="group_select_untagged_cb"
-                                               name="group_select_untagged_cb[]" onchange="checkRemove()"/>
-                                    </td>
-                                    <td class="col-sm-2 col-md-1">
-                                        <input type="text" id="new_tag_id" maxlength="3" minlength="3"
-                                               class="form-control col-md-1" oninput="checkTag()" name="new_tag_id[]"/>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default" for="sex">
-                                                <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="1" onchange="checkSex()" />M
-                                            </label>
-                                            <label class="btn btn-default" for="sex">
-                                                <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="0" onchange="checkSex()" />F
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        @if(isset($mouse->sex))
-                                            {{ $mouse->getGender($mouse->sex) }}
+                <div style="height: 400px; overflow: auto;">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Remove</th>
+                                <th>Tag</th>
+                                <th>Set Sex</th>
+                                <th>Sex</th>
+                                <th>Pedigree</th>
+                                <th>DOB</th>
+                                <th>Wean Date</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($mice as $mouse)
+                                @if(!isset($mouse->tags->last()->tag_num))
+                                    @if($mouse->sex == "1")
+                                            <?php $class = "info" ?>
+                                        @elseif($mouse->sex == "0")
+                                            <?php $class = "danger" ?>
+                                        @else
+                                            <?php $class = "" ?>
                                         @endif
-                                    </td>
-                                    @if($mouse->source == 'In house')
-                                        <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
-                                            {{$mouse->getGender($mouse->father_record->sex)}}
-                                            ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/
-                                            {{$mouse->getGeno($mouse->father_record->geno_type_b)}}) x
-                                            {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
-                                            {{$mouse->getGender($mouse->mother_one_record->sex)}}
-                                            ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/
-                                            {{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
-                                            @if(isset($mouse->mother_two_record->sex))
-                                                ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
-                                                {{$mouse->getGender($mouse->mother_two_record->sex)}}
-                                                ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
-                                                /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                                    @if($mouse->sick_report)
+                                            <?php $id = "report" ?>
+                                        @else
+                                            <?php $id = "no_report" ?>
+                                        @endif
+                                    <tr class="{{ $class }}" id="{{ $id }}">
+                                        <td>
+                                            <input type="hidden" name="mice[]" id="mice" value="{{ $mouse->id }}"/>
+                                            <input type="checkbox" class="untaggedChk" value="{{ $mouse->id }}" id="group_select_untagged_cb"
+                                                   name="group_select_untagged_cb[]" onchange="checkRemove()"/>
+                                        </td>
+                                        <td class="col-sm-2 col-md-1">
+                                            <input type="text" id="new_tag_id" maxlength="3" minlength="3"
+                                                   class="form-control col-md-1" oninput="checkTag()" name="new_tag_id[]"/>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-default" for="sex">
+                                                    <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="1" onchange="checkSex()" />M
+                                                </label>
+                                                <label class="btn btn-default" for="sex">
+                                                    <input type="radio" name="sex[{{ $mouse->id }}]" id="sex" value="0" onchange="checkSex()" />F
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if(isset($mouse->sex))
+                                                {{ $mouse->getGender($mouse->sex) }}
                                             @endif
-                                            @if(isset($mouse->mother_three_record->sex))
-                                                ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
-                                                {{$mouse->getGender($mouse->mother_three_record->sex)}}
-                                                ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
-                                                /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
-                                            @endif</td>
-                                    @else
-                                        <td>N/A</td>
-                                    @endif
-                                    <td>{{$mouse->showDate($mouse->birth_date)}}</td>
-                                    <td>{{$mouse->showDate($mouse->wean_date)}}</td>
-                                    <td>
-                                        <?php $i=1; $len = count($mouse->comments); ?>
-                                        @foreach($mouse->comments as $comments)
-                                            @if($i == $len)
-                                                {{ $comments->comment }}
-                                            @endif
-                                            <?php $i++; ?>
-                                        @endforeach
-                                    </td>
+                                        </td>
+                                        @if($mouse->source == 'In house')
+                                            <td>{{$mouse->tagPad($mouse->father_record->tags->last()->tag_num)}}
+                                                {{$mouse->getGender($mouse->father_record->sex)}}
+                                                ({{$mouse->getGeno($mouse->father_record->geno_type_a)}}/
+                                                {{$mouse->getGeno($mouse->father_record->geno_type_b)}}) x
+                                                {{$mouse->tagPad($mouse->mother_one_record->tags->last()->tag_num)}}
+                                                {{$mouse->getGender($mouse->mother_one_record->sex)}}
+                                                ({{$mouse->getGeno($mouse->mother_one_record->geno_type_a)}}/
+                                                {{$mouse->getGeno($mouse->mother_one_record->geno_type_b)}})
+                                                @if(isset($mouse->mother_two_record->sex))
+                                                    ,{{$mouse->tagPad($mouse->mother_two_record->tags->last()->tag_num)}}
+                                                    {{$mouse->getGender($mouse->mother_two_record->sex)}}
+                                                    ({{$mouse->getGeno($mouse->mother_two_record->geno_type_a)}}
+                                                    /{{$mouse->getGeno($mouse->mother_two_record->geno_type_b)}})
+                                                @endif
+                                                @if(isset($mouse->mother_three_record->sex))
+                                                    ,{{$mouse->tagPad($mouse->mother_three_record->tags->last()->tag_num)}}
+                                                    {{$mouse->getGender($mouse->mother_three_record->sex)}}
+                                                    ({{$mouse->getGeno($mouse->mother_three_record->geno_type_a)}}
+                                                    /{{$mouse->getGeno($mouse->mother_three_record->geno_type_b)}})
+                                                @endif</td>
+                                        @else
+                                            <td>N/A</td>
+                                        @endif
+                                        <td>{{$mouse->showDate($mouse->birth_date)}}</td>
+                                        <td>{{$mouse->showDate($mouse->wean_date)}}</td>
+                                        <td>
+                                            <?php $i=1; $len = count($mouse->comments); ?>
+                                            @foreach($mouse->comments as $comments)
+                                                @if($i == $len)
+                                                    {{ $comments->comment }}
+                                                @endif
+                                                <?php $i++; ?>
+                                            @endforeach
+                                        </td>
 
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
                 <div class="text-center">
 {{--                    {!! $mice->links() !!}--}}
                 </div>

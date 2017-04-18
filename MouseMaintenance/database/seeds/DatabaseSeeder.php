@@ -196,22 +196,32 @@ class ColonyTableSeeder extends Seeder
     {
         DB::table('colonies')->insert([
             'name' => 'NPR-C',
+            'external' => false,
             'active' => true
         ]);
 
         DB::table('colonies')->insert([
             'name' => 'Akita',
+            'external' => false,
             'active' => true
         ]);
 
         DB::table('colonies')->insert([
             'name' => 'NPR-B',
+            'external' => false,
             'active' => true
         ]);
 
         DB::table('colonies')->insert([
             'name' => 'GFP',
+            'external' => false,
             'active' => false
+        ]);
+
+        DB::table('colonies')->insert([
+            'name' => 'Jackson River',
+            'external' => true,
+            'active' => true
         ]);
     }
 }

@@ -10,10 +10,8 @@
 @if($source == "1")
     <div class="container">
         <h1 class="row-centered">Add Mice</h1>
-
         {!! Form::open((array('route' => 'mice.store'))) !!}
         <input type="hidden" name="source" id="source" value="In house"/>
-
         <div class="panel panel-default quarter">
             <div class="panel-heading">Quantity</div>
             <div class="panel-body">
@@ -48,7 +46,9 @@
                     <select class="form-control" name="colony_id">
                         <option value="0">Select Strain...</option>
                         @foreach($colonies as $colony)
-                            <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                            @if(!$colony->external)
+                                <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -158,7 +158,9 @@
                             <select class="form-control" name="colony_id">
                                 <option value="0">Select Strain...</option>
                                 @foreach($colonies as $colony)
-                                    <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                                    @if($colony->external)
+                                        <option value="{{ $colony->id }}">{{ $colony->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

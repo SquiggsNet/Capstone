@@ -11,6 +11,7 @@
                         <thead>
                         <tr>
                             <th>Colony</th>
+                            <th>In House</th>
                             <th>Active Mice</th>
                             <th>Males</th>
                             <th>Females</th>
@@ -33,6 +34,10 @@
                                     {{--Colony Name--}}
                                     <td>
                                         {{ $colony->name }}
+                                    </td>
+                                    {{--In House--}}
+                                    <td>
+                                        @if($colony->external) No @else Yes @endif
                                     </td>
                                     {{--Active Mice--}}
                                     <td>

@@ -19,6 +19,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MouseController extends Controller
@@ -50,6 +51,26 @@ class MouseController extends Controller
     }
 
     public function groupUntagged(Request $request){
+
+        //get all active tags
+        $mice = Mouse::where('is_alive', 1)->get();
+        foreach ($mice as $a_m) {
+            if (isset($a_m->tags->last()->tag_num)) {
+                $active_tags[] = $a_m->tagPad($a_m->tags->last()->tag_num);
+            }
+        }
+        $new_tags = array_filter($request['new_tag_id']);
+
+        foreach($new_tags as $nt){
+            foreach($active_tags as $at){
+                if($at == $nt){
+                    return Redirect::back()->withErrors(['Tag ' .$at . ' is already active']);
+                }
+            }
+        }
+
+
+        return($new_tags);
 
         //determine which action the user wanted to perform
         $action = $request->input('submit');

@@ -3,21 +3,21 @@
 @section('content')
 @if(!$pep)
     <div class="container">
+        @if(count($errors))
+            <ul>
+                @foreach($errors->all() as $error)
+                    @if($error == 'The group select cb field is required.')
+                        <li>Please select mice to process.</li>
+                    @else
+                        <h4 style="color: red;" >{{ $error }}</h4>
+                    @endif
+                @endforeach
+            </ul>
+        @endif
         <h1 class="row-centered">All Mice</h1>
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Tagged Mice</h3></div>
             <div class="panel-body">
-                @if(count($errors))
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            @if($error == 'The group select cb field is required.')
-                                <li>Please select mice to process.</li>
-                            @else
-                                <li>{{ $error }}</li>
-                            @endif
-                        @endforeach
-                    </ul>
-                @endif
                     <a id="breeders_link" class="btn btn-default pull-right btn-block sixth bottom-buffer last"
                        href="{{ action( 'CageController@index') }}">
                         Breeders
@@ -149,7 +149,6 @@
                     {{ Form::close() }}
             </div>
         </div>
-
         <div class="panel panel-default whole">
             <div class="panel-heading"><h3>Untagged Mice</h3></div>
             <div class="panel-body">
@@ -188,7 +187,6 @@
                                         <input type="hidden" name="mice[]" id="mice" value="{{ $mouse->id }}"/>
                                         <input type="checkbox" class="untaggedChk" value="{{ $mouse->id }}" id="group_select_untagged_cb"
                                                name="group_select_untagged_cb[]" onchange="checkRemove()"/>
-
                                     </td>
                                     <td class="col-sm-2 col-md-1">
                                         <input type="text" id="new_tag_id" maxlength="3" minlength="3"
@@ -233,7 +231,6 @@
                                     @else
                                         <td>N/A</td>
                                     @endif
-
                                     <td>{{$mouse->showDate($mouse->birth_date)}}</td>
                                     <td>{{$mouse->showDate($mouse->wean_date)}}</td>
                                     <td>
@@ -391,33 +388,14 @@
     var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
 
         function checkTag() {
-            var tagArray = <?php echo json_encode($active_tags) ?>;
-            var tag_str;
+
             var tag_num = [];
             var duplicate = [];
 
             //place each new_tag_input into one array
-            for (i = 0; i < new_tag_array.length; i++) {
+            for (var i = 0; i < new_tag_array.length; i++) {
                 tag_num.push(new_tag_array[i].value);
             }
-
-            //loop array of current tags and new tags for duplicates and disable submit
-            for (var i = 0; i < tagArray.length; i++) {
-                for (var j = 0; j < tag_num.length; j++) {
-                    if (tagArray[i] == tag_num[j]) {
-                        duplicate.push(j);
-                        btn_submit_tag.disabled = true;
-                    } else {
-                        new_tag_array[j].style.backgroundColor = "white";
-                    }
-                }
-            }
-
-            //if duplicate set input to yellow
-            for (var i = 0; i < duplicate.length; i++) {
-                new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
-            }
-
 
             //check new tag values against duplicates in themselves
             var new_tag_check = tag_num;
@@ -436,10 +414,13 @@
             //if no duplicates ensure button is enabled
             if (duplicate.length < 1) {
                 btn_submit_tag.disabled = false;
+                for (var y = 0; y < tag_num.length ; y++) {
+                    new_tag_array[y].style.backgroundColor = "white";
+                }
             }
 
             //if any inputs hold value, disable submit for sex and delete
-            tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
+            var tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
             if (isNaN(tag_str)) {
                 btn_submit_sex.disabled = false;
                 btn_submit_remove.disabled = false;
@@ -454,7 +435,6 @@
                 $("[name='group_select_untagged_cb[]']").attr('disabled', true);
             }
         }
-
 
     document.on('change', '[type=input]', function (e) {
         alert('This is the ' + $(this).index('[type=input]') + ' checkbox');

@@ -11,7 +11,7 @@
                    href="{{ action( 'CageController@index') }}">
                     Breeders
                 </a>
-                {{ Form::open(array('url' => 'mice/group')) }}
+                {{ Form::open(array('url' => 'mice/groupTagged')) }}
                 <table class="table table-bordered table-striped" id="colony_mice_table" data-toggle="table" >
                     <thead>
                     <tr>
@@ -205,7 +205,15 @@
 
                                 <td>{{$mouse->showDate($mouse->birth_date)}}</td>
                                 <td>{{$mouse->showDate($mouse->wean_date)}}</td>
-                                <td>{{$mouse->comments}}  </td>
+                                <td>
+                                    <?php $i=1; $len = count($mouse->comments); ?>
+                                    @foreach($mouse->comments as $comments)
+                                        @if($i == $len)
+                                            {{ $comments->comment }}
+                                        @endif
+                                        <?php $i++; ?>
+                                    @endforeach
+                                </td>
                             </tr>
                         @endif
                     @endforeach
@@ -231,126 +239,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        var btn_submit_tag = document.getElementById('submit_tag');
-        var btn_submit_sex = document.getElementById('submit_sex');
-        var btn_clear_sex = document.getElementById('clear_sex');
-        var btn_submit_remove = document.getElementById('submit_remove');
-        var new_tag_array = document.getElementsByName('new_tag_id[]');
-        var remove_cbk_array = document.getElementsByName('group_select_untagged_cb[]');
-
-        function checkTag() {
-            var tagArray = <?php echo json_encode($active_tags) ?>;
-            var tag_str;
-            var tag_num = [];
-            var duplicate = [];
-
-            //place each new_tag_input into one array
-            for (i = 0; i < new_tag_array.length; i++) {
-                tag_num.push(new_tag_array[i].value);
-            }
-
-            //loop array of current tags and new tags for duplicates and disable submit
-            for (var i = 0; i < tagArray.length; i++) {
-                for (var j = 0; j < tag_num.length; j++) {
-                    if (tagArray[i] == tag_num[j]) {
-                        duplicate.push(j);
-                        btn_submit_tag.disabled = true;
-                    } else {
-                        new_tag_array[j].style.backgroundColor = "white";
-                    }
-                }
-            }
-
-            //if duplicate set input to yellow
-            for (var i = 0; i < duplicate.length; i++) {
-                new_tag_array[duplicate[i]].style.backgroundColor = "yellow";
-            }
-
-            //if no duplicates ensure button is enabled
-            if (duplicate.length < 1) {
-                btn_submit_tag.disabled = false;
-            }
-
-            //if any inputs hold value, disable submit for sex and delete
-            tag_str = parseFloat((tag_num.join()).replace(/,/g, ''));
-            if (isNaN(tag_str)) {
-                btn_submit_sex.disabled = false;
-                btn_submit_remove.disabled = false;
-                btn_clear_sex.disabled = false;
-                $(".btn-group label").attr("disabled", false);
-                $("[name='group_select_untagged_cb[]']").attr('disabled', false);
-            } else {
-                $(".btn-group label").attr("disabled", true);
-                btn_submit_sex.disabled = true;
-                btn_submit_remove.disabled = true;
-                btn_clear_sex.disabled = true;
-                $("[name='group_select_untagged_cb[]']").attr('disabled', true);
-            }
-        }
-
-
-        document.on('change', '[type=input]', function (e) {
-            alert('This is the ' + $(this).index('[type=input]') + ' checkbox');
-        });
-
-        function checkRemove() {
-            var total_cbks = $('.untaggedChk').length;
-            var remove_array = [];
-
-            for (var i = 0; i < total_cbks; i++) {
-                if (remove_cbk_array[i].checked) {
-                    remove_array.push(i);
-                }
-            }
-            //check boxes not selected enable other form elements
-            if (remove_array.length < 1) {
-                btn_submit_sex.disabled = false;
-                btn_submit_tag.disabled = false;
-                btn_clear_sex.disabled = false;
-                $(".btn-group label").attr("disabled", false);
-                $("[name='new_tag_id[]']").attr('readOnly', false);
-            } else { //check boxes selected, disable and clear other form elements
-                btn_submit_sex.disabled = true;
-                btn_submit_tag.disabled = true;
-                btn_clear_sex.disabled = true;
-                $(".btn-group label").attr("disabled", true);
-                $(".btn-group label").removeClass('active').end()
-                        .find('[type="radio"]').prop('checked', false);
-                $("[name='new_tag_id[]']").val('');
-                $("[name='new_tag_id[]']").attr('readOnly', true);
-            }
-        }
-
-        function checkSex(){
-            //determine if any checkbox is checked
-            if(($(".btn-group label").find('[type="radio"]')).length > 0){
-                //disable other form controls
-                $("[name='new_tag_id[]']").attr('readOnly', true);
-                $("[name='group_select_untagged_cb[]']").attr('disabled', true);
-                btn_submit_tag.disabled = true;
-                btn_submit_remove.disabled = true;
-            }else{//enable other form controls when no radio checked
-                $("[name='new_tag_id[]']").attr('readOnly', false);
-                $("[name='group_select_untagged_cb[]']").attr('disabled', false);
-                $(".btn-group label").find('[type="radio"]').data('waschecked', false);
-                $(".btn-group label").find('[type="radio"]').prop('checked', false);
-                btn_submit_tag.disabled = false;
-                btn_submit_remove.disabled = false;
-            }
-        }
-
-        //clear the sex option if one or more have been clicked
-        function clearSex(){
-            $(".btn-group label").removeClass('active').end()
-                    .find('[type="radio"]').prop('checked', false);
-            $("[name='new_tag_id[]']").attr('readOnly', false);
-            $("[name='group_select_untagged_cb[]']").attr('disabled', false);
-            btn_submit_tag.disabled = false;
-            btn_submit_remove.disabled = false;
-        }
-
-    </script>
     <style type="text/css">
         /*Prevent disabled radios from being clicked*/
         label[disabled]{

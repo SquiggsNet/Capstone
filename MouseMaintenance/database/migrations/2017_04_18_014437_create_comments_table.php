@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->string('comment');
             $table->unsignedInteger('mouse_id')->nullable();
-            $table->foreign('mouse_id')->references('id')->on('mice');
+            $table->foreign('mouse_id')->references('id')->on('mice')->onDelete('cascade');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
